@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace CoraCorpCM.Models.ManageViewModels
+namespace CoraCorpCM.ViewModels.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

@@ -1,6 +1,4 @@
-using System;
-
-namespace CoraCorpCM.Models
+namespace CoraCorpCM.ViewModels
 {
     public class ErrorViewModel
     {
