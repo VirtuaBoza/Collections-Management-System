@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using CoraCorpCM.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.ViewModels;
 
@@ -6,22 +8,33 @@ namespace CoraCorpCM.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IEmailSender emailSender;
+
+        public HomeController(IEmailSender emailSender)
+        {
+            this.emailSender = emailSender;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpGet]
+        public IActionResult Contact()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
-        public IActionResult Contact()
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel model)
         {
-            ViewData["Message"] = "Your contact page.";
-
+            if (ModelState.IsValid)
+            {
+                // TODO rig up real emailer in StartUp and indlude name here
+                emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
+                ModelState.Clear();
+            }
             return View();
         }
 

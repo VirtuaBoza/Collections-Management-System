@@ -1,17 +1,44 @@
-﻿@{
+﻿@model ContactViewModel
+@{
     ViewData["Title"] = "Contact";
+    ViewData["Message"] = "Comments? Concerns? Leave it here.";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="col-md-6">
+    <div class="well">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            <div class="form-group">
+                <label asp-for="Name">Your Name:</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email:</label>
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject">Subject:</label>
+                <input type="text" asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message">Message:</label>
+                <textarea rows="4" asp-for="Message" class="form-control"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">@*<i class="fa fa-envelope"></i> *@Send Message</button>
+                @*<div class="text-success">@ViewBag.UserMessage</div>*@
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

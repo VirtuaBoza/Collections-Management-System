@@ -34,7 +34,8 @@ namespace CoraCorpCM
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
+            // TODO setup real EmailSender and use that here
+            services.AddTransient<IEmailSender, NullEmailSender>();
 
             services.AddMvc();
         }
