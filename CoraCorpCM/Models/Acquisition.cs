@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CoraCorpCM.Models
 {
     public class Acquisition
     {
+        public Acquisition()
+        {
+            Pieces = new HashSet<Piece>();
+        }
+
         public int Id { get; set; }
         public Museum Museum { get; set; }
         public DateTime Date { get; set; }
@@ -13,5 +19,6 @@ namespace CoraCorpCM.Models
         public FundingSource FundingSource { get; set; }
         public File PurchaseReceipt { get; set; }
         public PieceSource PieceSource { get; set; }
+        public ICollection<Piece> Pieces { get; set; }
     }
 }

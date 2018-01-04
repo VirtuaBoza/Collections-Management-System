@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoraCorpCM.Models
 {
     public class Loan
     {
-        
+        public int Id { get; set; }
+        public Museum Museum { get; set; }
+        public Location FromLocation { get; set; }
+        public Location ToLocation { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public Exhibition Exhibition { get; set; }
+        public File LoanAgreement { get; set; }
+        public string Terms { get; set; }
     }
 }

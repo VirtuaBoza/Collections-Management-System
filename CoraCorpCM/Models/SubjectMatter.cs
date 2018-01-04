@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CoraCorpCM.Models
 {
@@ -11,13 +7,13 @@ namespace CoraCorpCM.Models
         public SubjectMatter()
         {
             ArtistSubjectMatters = new HashSet<ArtistSubjectMatter>();
-            PieceSubjectMatters = new HashSet<PieceSubjectMatter>();
+            Pieces = new HashSet<Piece>();
         }
 
         public int Id { get; set; }
         public Museum Museum { get; set; }
         public string Name { get; set; }
         public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
-        public ICollection<PieceSubjectMatter> PieceSubjectMatters { get; set; }
+        public ICollection<Piece> Pieces { get; set; }
     }
 }
