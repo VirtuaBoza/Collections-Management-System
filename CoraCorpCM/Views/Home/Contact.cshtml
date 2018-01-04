@@ -1,16 +1,16 @@
 ﻿@model ContactViewModel
 @{
     ViewData["Title"] = "Contact";
-    ViewData["Message"] = "Comments? Concerns? Leave it here.";
 }
+
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<div class="col-md-6">
-    <div class="well">
+<div class="row">
+    <div class="col-md-4">
         <form method="post">
+            <h4>"Comments? Concerns? Leave it here."</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly"></div>
-
             <div class="form-group">
                 <label asp-for="Name">Your Name:</label>
                 <input asp-for="Name" class="form-control" />
