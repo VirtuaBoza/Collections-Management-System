@@ -24,16 +24,16 @@ gulp.task("minify", function ()
 
 var deps = {
     "jquery": {
-        "dist/*": ""
+        "dist/*": "dist"
     },
     "jquery-validation": {
-        "dist/*": ""
+        "dist/*": "dist"
     },
     "jquery-validation-unobtrusive": {
         "*.js": ""
     },
     "bootstrap": {
-        "dist/**/*": ""
+        "dist/**/*": "dist"
     },
     "font-awesome": {
         "css/*": "css",
