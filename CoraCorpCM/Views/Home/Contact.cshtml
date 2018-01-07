@@ -1,6 +1,6 @@
 ﻿@model ContactViewModel
 @{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = "Contact Support";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <h4>Comments? Concerns? Leave it here.</h4>
+            <h4>Issues? Questions? Comments? Concerns? Leave them here.</h4>
             <hr />
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
@@ -33,7 +33,6 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-envelope"></i> Send Message</button>
-                @*<div class="text-success">@ViewBag.UserMessage</div>*@
             </div>
         </form>
     </div>
