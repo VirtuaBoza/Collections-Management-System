@@ -17,7 +17,7 @@ namespace CoraCorpCM.Models
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public string Country { get; set; }
+        public Country Country { get; set; }
         public ICollection<LocationTag> LocationTags { get; set; }
     }
 }

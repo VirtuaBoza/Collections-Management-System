@@ -11,6 +11,9 @@ namespace CoraCorpCM.Data
         {
         }
 
+        public DbSet<Museum> Museums { get; set; }
+        public DbSet<Country> Countries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

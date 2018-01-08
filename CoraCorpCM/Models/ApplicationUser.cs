@@ -6,5 +6,7 @@ namespace CoraCorpCM.Models
     public class ApplicationUser : IdentityUser
     {
         public Museum Museum { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace CoraCorpCM.Models
         public int RecordNumber { get; set; }
         public string AccessionNumber { get; set; }
         public string Title { get; set; }
-        public File Photo { get; set; }
+        public Upload Photo { get; set; }
         public DateTime CreationDate { get; set; }
         public Origin CreationOrigin { get; set; }
         public double Height { get; set; }

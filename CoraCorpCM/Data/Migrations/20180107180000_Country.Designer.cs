@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180107180000_Country")]
+    partial class Country
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -524,7 +525,7 @@ namespace CoraCorpCM.Data.Migrations
                         .IsUnique()
                         .HasFilter("[LogoId] IS NOT NULL");
 
-                    b.ToTable("Museums");
+                    b.ToTable("Museum");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Origin", b =>

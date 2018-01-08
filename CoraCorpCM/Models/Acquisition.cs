@@ -17,7 +17,7 @@ namespace CoraCorpCM.Models
         public decimal Cost { get; set; }
         public string Terms { get; set; }
         public FundingSource FundingSource { get; set; }
-        public File PurchaseReceipt { get; set; }
+        public Upload PurchaseReceipt { get; set; }
         public PieceSource PieceSource { get; set; }
         public ICollection<Piece> Pieces { get; set; }
     }

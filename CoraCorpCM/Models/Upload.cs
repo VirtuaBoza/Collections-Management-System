@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoraCorpCM.Models
 {
-    public class File
+    public class Upload
     {
         public int Id { get; set; }
         public Museum Museum { get; set; }

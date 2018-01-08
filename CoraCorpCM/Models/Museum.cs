@@ -28,7 +28,7 @@ namespace CoraCorpCM.Models
         public string Name { get; set; }
         public string ShortName { get; set; }
         public Location Location { get; set; }
-        public File Logo { get; set; }
+        public Upload Logo { get; set; }
         public ICollection<Acquisition> Acquisitions { get; set; }
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
         public ICollection<Artist> Artists { get; set; }

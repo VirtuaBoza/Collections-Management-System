@@ -10,6 +10,8 @@
     <Compile Remove="Data\Migrations\20180103135056_AppUserDbSetAdded.Designer.cs" />
     <Compile Remove="Data\Migrations\20180103135428_test.cs" />
     <Compile Remove="Data\Migrations\20180103135428_test.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180107175658_Country.cs" />
+    <Compile Remove="Data\Migrations\20180107175658_Country.Designer.cs" />
   </ItemGroup>
 
 

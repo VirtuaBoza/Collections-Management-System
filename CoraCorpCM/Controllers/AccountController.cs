@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 using CoraCorpCM.Models;
 using CoraCorpCM.Services;
 using CoraCorpCM.ViewModels.AccountViewModels;
+using CoraCorpCM.Data;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace CoraCorpCM.Controllers
 {
@@ -20,17 +24,23 @@ namespace CoraCorpCM.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
         private readonly ILogger logger;
+        private readonly ApplicationDbContext context;
+        private readonly IMuseumRepository museumRepository;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context,
+            IMuseumRepository museumRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.logger = logger;
+            this.context = context;
+            this.museumRepository = museumRepository;
         }
 
         [TempData]
@@ -205,7 +215,12 @@ namespace CoraCorpCM.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+
+            var model = new RegisterViewModel();
+            var countries = context.Countries.Select(c => new SelectListItem { Text = c.Name, Value = c.Name });
+            model.Countries = countries;
+
+            return View(model);
         }
 
         [HttpPost]
@@ -228,6 +243,12 @@ namespace CoraCorpCM.Controllers
 
                     await signInManager.SignInAsync(user, isPersistent: false);
                     logger.LogInformation("User created a new account with password.");
+                    
+                    // TODO asign the user First and Last Name
+                    var country = museumRepository.GetCountryByName(model.Country);
+                    var location = museumRepository.CreateLocation(model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, country);
+                    museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName, location, user);
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

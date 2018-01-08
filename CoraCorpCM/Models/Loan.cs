@@ -11,7 +11,7 @@ namespace CoraCorpCM.Models
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public Exhibition Exhibition { get; set; }
-        public File LoanAgreement { get; set; }
+        public Upload LoanAgreement { get; set; }
         public string Terms { get; set; }
     }
 }
