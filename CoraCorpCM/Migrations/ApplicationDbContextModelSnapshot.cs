@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace CoraCorpCM.Data.Migrations
+namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180104040135_AddsDomainModels")]
-    partial class AddsDomainModels
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,6 +70,10 @@ namespace CoraCorpCM.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -239,6 +242,19 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Condition");
                 });
 
+            modelBuilder.Entity("CoraCorpCM.Models.Country", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Genc2A");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("CoraCorpCM.Models.Exhibition", b =>
                 {
                     b.Property<int>("Id")
@@ -278,20 +294,6 @@ namespace CoraCorpCM.Data.Migrations
                     b.HasIndex("PieceId");
 
                     b.ToTable("ExhibitionPiece");
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Models.File", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("Data");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.FundingSource", b =>
@@ -454,7 +456,7 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("Country");
+                    b.Property<int?>("CountryId");
 
                     b.Property<string>("Name");
 
@@ -463,6 +465,8 @@ namespace CoraCorpCM.Data.Migrations
                     b.Property<string>("ZipCode");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Location");
                 });
@@ -519,7 +523,7 @@ namespace CoraCorpCM.Data.Migrations
                         .IsUnique()
                         .HasFilter("[LogoId] IS NOT NULL");
 
-                    b.ToTable("Museum");
+                    b.ToTable("Museums");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Origin", b =>
@@ -529,13 +533,15 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("Country");
+                    b.Property<int?>("CountryId");
 
                     b.Property<int?>("MuseumId");
 
                     b.Property<string>("State");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("MuseumId");
 
@@ -730,6 +736,20 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("CoraCorpCM.Models.Upload", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Data");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Upload");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -856,7 +876,7 @@ namespace CoraCorpCM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PieceSourceId");
 
-                    b.HasOne("CoraCorpCM.Models.File", "PurchaseReceipt")
+                    b.HasOne("CoraCorpCM.Models.Upload", "PurchaseReceipt")
                         .WithMany()
                         .HasForeignKey("PurchaseReceiptId");
                 });
@@ -1032,7 +1052,7 @@ namespace CoraCorpCM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("FromLocationId");
 
-                    b.HasOne("CoraCorpCM.Models.File", "LoanAgreement")
+                    b.HasOne("CoraCorpCM.Models.Upload", "LoanAgreement")
                         .WithMany()
                         .HasForeignKey("LoanAgreementId");
 
@@ -1056,6 +1076,13 @@ namespace CoraCorpCM.Data.Migrations
                         .WithMany("LoanPieces")
                         .HasForeignKey("PieceId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Models.Location", b =>
+                {
+                    b.HasOne("CoraCorpCM.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.LocationTag", b =>
@@ -1084,13 +1111,17 @@ namespace CoraCorpCM.Data.Migrations
                         .WithOne("Museum")
                         .HasForeignKey("CoraCorpCM.Models.Museum", "LocationId");
 
-                    b.HasOne("CoraCorpCM.Models.File", "Logo")
+                    b.HasOne("CoraCorpCM.Models.Upload", "Logo")
                         .WithOne("Museum")
                         .HasForeignKey("CoraCorpCM.Models.Museum", "LogoId");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Origin", b =>
                 {
+                    b.HasOne("CoraCorpCM.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
                     b.HasOne("CoraCorpCM.Models.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId");
@@ -1146,7 +1177,7 @@ namespace CoraCorpCM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PermanentLocationId");
 
-                    b.HasOne("CoraCorpCM.Models.File", "Photo")
+                    b.HasOne("CoraCorpCM.Models.Upload", "Photo")
                         .WithMany()
                         .HasForeignKey("PhotoId");
 

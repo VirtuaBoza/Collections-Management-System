@@ -34,7 +34,7 @@ var deps = {
         "css/*": "css",
         "fonts/*": "fonts"
     }
-}
+};
 
 gulp.task("clean", function (cb)
 {

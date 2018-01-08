@@ -1,1122 +1,1252 @@
 ﻿[
   {
-    "Name": "UNITED STATES",
-    "Genc3A": "USA"
+    "Id": 0,
+    "Name": "United States",
+    "Genc2A": "US"
   },
   {
-    "Name": "AFGHANISTAN",
-    "Genc3A": "AFG"
+    "Id": 1,
+    "Name": "Afghanistan",
+    "Genc2A": "AF"
   },
   {
-    "Name": "AKROTIRI",
-    "Genc3A": "XQZ"
+    "Id": 2,
+    "Name": "Albania",
+    "Genc2A": "AL"
   },
   {
-    "Name": "ALBANIA",
-    "Genc3A": "ALB"
+    "Id": 3,
+    "Name": "Algeria",
+    "Genc2A": "DZ"
   },
   {
-    "Name": "ALGERIA",
-    "Genc3A": "DZA"
+    "Id": 4,
+    "Name": "American Samoa",
+    "Genc2A": "AS"
   },
   {
-    "Name": "AMERICAN SAMOA",
-    "Genc3A": "ASM"
+    "Id": 5,
+    "Name": "Andorra",
+    "Genc2A": "AD"
   },
   {
-    "Name": "ANDORRA",
-    "Genc3A": "AND"
+    "Id": 6,
+    "Name": "Angola",
+    "Genc2A": "AO"
   },
   {
-    "Name": "ANGOLA",
-    "Genc3A": "AGO"
+    "Id": 7,
+    "Name": "Anguilla",
+    "Genc2A": "AI"
   },
   {
-    "Name": "ANGUILLA",
-    "Genc3A": "AIA"
+    "Id": 8,
+    "Name": "Antarctica",
+    "Genc2A": "AQ"
   },
   {
-    "Name": "ANTARCTICA",
-    "Genc3A": "ATA"
+    "Id": 9,
+    "Name": "Antigua and Barbuda",
+    "Genc2A": "AG"
   },
   {
-    "Name": "ANTIGUA AND BARBUDA",
-    "Genc3A": "ATG"
+    "Id": 10,
+    "Name": "Argentina",
+    "Genc2A": "AR"
   },
   {
-    "Name": "ARGENTINA",
-    "Genc3A": "ARG"
+    "Id": 11,
+    "Name": "Armenia",
+    "Genc2A": "AM"
   },
   {
-    "Name": "ARMENIA",
-    "Genc3A": "ARM"
+    "Id": 12,
+    "Name": "Aruba",
+    "Genc2A": "AW"
   },
   {
-    "Name": "ARUBA",
-    "Genc3A": "ABW"
+    "Id": 13,
+    "Name": "Australia",
+    "Genc2A": "AU"
   },
   {
-    "Name": "ASHMORE AND CARTIER ISLANDS",
-    "Genc3A": "XAC"
+    "Id": 14,
+    "Name": "Austria",
+    "Genc2A": "AT"
   },
   {
-    "Name": "AUSTRALIA",
-    "Genc3A": "AUS"
+    "Id": 15,
+    "Name": "Azerbaijan",
+    "Genc2A": "AZ"
   },
   {
-    "Name": "AUSTRIA",
-    "Genc3A": "AUT"
+    "Id": 16,
+    "Name": "Bahamas, The",
+    "Genc2A": "BS"
   },
   {
-    "Name": "AZERBAIJAN",
-    "Genc3A": "AZE"
+    "Id": 17,
+    "Name": "Bahrain",
+    "Genc2A": "BH"
   },
   {
-    "Name": "BAHAMAS, THE",
-    "Genc3A": "BHS"
+    "Id": 18,
+    "Name": "Bangladesh",
+    "Genc2A": "BD"
   },
   {
-    "Name": "BAHRAIN",
-    "Genc3A": "BHR"
+    "Id": 19,
+    "Name": "Barbados",
+    "Genc2A": "BB"
   },
   {
-    "Name": "BAKER ISLAND",
-    "Genc3A": "XBK"
+    "Id": 20,
+    "Name": "Belarus",
+    "Genc2A": "BY"
   },
   {
-    "Name": "BANGLADESH",
-    "Genc3A": "BGD"
+    "Id": 21,
+    "Name": "Belgium",
+    "Genc2A": "BE"
   },
   {
-    "Name": "BARBADOS",
-    "Genc3A": "BRB"
+    "Id": 22,
+    "Name": "Belize",
+    "Genc2A": "BZ"
   },
   {
-    "Name": "BASSAS DA INDIA",
-    "Genc3A": "XBI"
+    "Id": 23,
+    "Name": "Benin",
+    "Genc2A": "BJ"
   },
   {
-    "Name": "BELARUS",
-    "Genc3A": "BLR"
+    "Id": 24,
+    "Name": "Bermuda",
+    "Genc2A": "BM"
   },
   {
-    "Name": "BELGIUM",
-    "Genc3A": "BEL"
+    "Id": 25,
+    "Name": "Bhutan",
+    "Genc2A": "BT"
   },
   {
-    "Name": "BELIZE",
-    "Genc3A": "BLZ"
+    "Id": 26,
+    "Name": "Bolivia",
+    "Genc2A": "BO"
   },
   {
-    "Name": "BENIN",
-    "Genc3A": "BEN"
+    "Id": 27,
+    "Name": "Bosnia and Herzegovina",
+    "Genc2A": "BA"
   },
   {
-    "Name": "BERMUDA",
-    "Genc3A": "BMU"
+    "Id": 28,
+    "Name": "Botswana",
+    "Genc2A": "BW"
   },
   {
-    "Name": "BHUTAN",
-    "Genc3A": "BTN"
+    "Id": 29,
+    "Name": "Bouvet Island",
+    "Genc2A": "BV"
   },
   {
-    "Name": "BOLIVIA",
-    "Genc3A": "BOL"
+    "Id": 30,
+    "Name": "Brazil",
+    "Genc2A": "BR"
   },
   {
-    "Name": "BONAIRE, SINT EUSTATIUS, AND SABA",
-    "Genc3A": "BES"
+    "Id": 31,
+    "Name": "British Indian Ocean Territory",
+    "Genc2A": "IO"
   },
   {
-    "Name": "BOSNIA AND HERZEGOVINA",
-    "Genc3A": "BIH"
+    "Id": 32,
+    "Name": "British Virgin Islands",
+    "Genc2A": "VG"
   },
   {
-    "Name": "BOTSWANA",
-    "Genc3A": "BWA"
+    "Id": 33,
+    "Name": "Brunei",
+    "Genc2A": "BN"
   },
   {
-    "Name": "BOUVET ISLAND",
-    "Genc3A": "BVT"
+    "Id": 34,
+    "Name": "Bulgaria",
+    "Genc2A": "BG"
   },
   {
-    "Name": "BRAZIL",
-    "Genc3A": "BRA"
+    "Id": 35,
+    "Name": "Burkina Faso",
+    "Genc2A": "BF"
   },
   {
-    "Name": "BRITISH INDIAN OCEAN TERRITORY",
-    "Genc3A": "IOT"
+    "Id": 36,
+    "Name": "Burma",
+    "Genc2A": "MM"
   },
   {
-    "Name": "BRUNEI",
-    "Genc3A": "BRN"
+    "Id": 37,
+    "Name": "Burundi",
+    "Genc2A": "BI"
   },
   {
-    "Name": "BULGARIA",
-    "Genc3A": "BGR"
+    "Id": 38,
+    "Name": "Cambodia",
+    "Genc2A": "KH"
   },
   {
-    "Name": "BURKINA FASO",
-    "Genc3A": "BFA"
+    "Id": 39,
+    "Name": "Cameroon",
+    "Genc2A": "CM"
   },
   {
-    "Name": "BURMA",
-    "Genc3A": "MMR"
+    "Id": 40,
+    "Name": "Canada",
+    "Genc2A": "CA"
   },
   {
-    "Name": "BURUNDI",
-    "Genc3A": "BDI"
+    "Id": 41,
+    "Name": "Cape Verde",
+    "Genc2A": "CV"
   },
   {
-    "Name": "CABO VERDE",
-    "Genc3A": "CPV"
+    "Id": 42,
+    "Name": "Cayman Islands",
+    "Genc2A": "KY"
   },
   {
-    "Name": "CAMBODIA",
-    "Genc3A": "KHM"
+    "Id": 43,
+    "Name": "Central African Republic",
+    "Genc2A": "CF"
   },
   {
-    "Name": "CAMEROON",
-    "Genc3A": "CMR"
+    "Id": 44,
+    "Name": "Chad",
+    "Genc2A": "TD"
   },
   {
-    "Name": "CANADA",
-    "Genc3A": "CAN"
+    "Id": 45,
+    "Name": "Chile",
+    "Genc2A": "CL"
   },
   {
-    "Name": "CAYMAN ISLANDS",
-    "Genc3A": "CYM"
+    "Id": 46,
+    "Name": "China",
+    "Genc2A": "CN"
   },
   {
-    "Name": "CENTRAL AFRICAN REPUBLIC",
-    "Genc3A": "CAF"
+    "Id": 47,
+    "Name": "Christmas Island",
+    "Genc2A": "CX"
   },
   {
-    "Name": "CHAD",
-    "Genc3A": "TCD"
+    "Id": 48,
+    "Name": "Cocos (Keeling) Islands",
+    "Genc2A": "CC"
   },
   {
-    "Name": "CHILE",
-    "Genc3A": "CHL"
+    "Id": 49,
+    "Name": "Colombia",
+    "Genc2A": "CO"
   },
   {
-    "Name": "CHINA",
-    "Genc3A": "CHN"
+    "Id": 50,
+    "Name": "Comoros",
+    "Genc2A": "KM"
   },
   {
-    "Name": "CHRISTMAS ISLAND",
-    "Genc3A": "CXR"
+    "Id": 51,
+    "Name": "Congo, Democratic Republic of the",
+    "Genc2A": "CD"
   },
   {
-    "Name": "CLIPPERTON ISLAND",
-    "Genc3A": "CPT"
+    "Id": 52,
+    "Name": "Congo, Republic of the",
+    "Genc2A": "CG"
   },
   {
-    "Name": "COCOS (KEELING) ISLANDS",
-    "Genc3A": "CCK"
+    "Id": 53,
+    "Name": "Cook Islands",
+    "Genc2A": "CK"
   },
   {
-    "Name": "COLOMBIA",
-    "Genc3A": "COL"
+    "Id": 54,
+    "Name": "Costa Rica",
+    "Genc2A": "CR"
   },
   {
-    "Name": "COMOROS",
-    "Genc3A": "COM"
+    "Id": 55,
+    "Name": "Cote d'Ivoire",
+    "Genc2A": "CI"
   },
   {
-    "Name": "CONGO (BRAZZAVILLE)",
-    "Genc3A": "COG"
+    "Id": 56,
+    "Name": "Croatia",
+    "Genc2A": "HR"
   },
   {
-    "Name": "CONGO (KINSHASA)",
-    "Genc3A": "COD"
+    "Id": 57,
+    "Name": "Cuba",
+    "Genc2A": "CU"
   },
   {
-    "Name": "COOK ISLANDS",
-    "Genc3A": "COK"
+    "Id": 58,
+    "Name": "Curacao",
+    "Genc2A": "CW"
   },
   {
-    "Name": "CORAL SEA ISLANDS",
-    "Genc3A": "XCS"
+    "Id": 59,
+    "Name": "Cyprus",
+    "Genc2A": "CY"
   },
   {
-    "Name": "COSTA RICA",
-    "Genc3A": "CRI"
+    "Id": 60,
+    "Name": "Czech Republic",
+    "Genc2A": "CZ"
   },
   {
-    "Name": "C�TE D�IVOIRE",
-    "Genc3A": "CIV"
+    "Id": 61,
+    "Name": "Denmark",
+    "Genc2A": "DK"
   },
   {
-    "Name": "CROATIA",
-    "Genc3A": "HRV"
+    "Id": 62,
+    "Name": "Djibouti",
+    "Genc2A": "DJ"
   },
   {
-    "Name": "CUBA",
-    "Genc3A": "CUB"
+    "Id": 63,
+    "Name": "Dominica",
+    "Genc2A": "DM"
   },
   {
-    "Name": "CURA�AO",
-    "Genc3A": "CUW"
+    "Id": 64,
+    "Name": "Dominican Republic",
+    "Genc2A": "DO"
   },
   {
-    "Name": "CYPRUS",
-    "Genc3A": "CYP"
+    "Id": 65,
+    "Name": "Ecuador",
+    "Genc2A": "EC"
   },
   {
-    "Name": "CZECHIA",
-    "Genc3A": "CZE"
+    "Id": 66,
+    "Name": "Egypt",
+    "Genc2A": "EG"
   },
   {
-    "Name": "DENMARK",
-    "Genc3A": "DNK"
+    "Id": 67,
+    "Name": "El Salvador",
+    "Genc2A": "SV"
   },
   {
-    "Name": "DHEKELIA",
-    "Genc3A": "XXD"
+    "Id": 68,
+    "Name": "Equatorial Guinea",
+    "Genc2A": "GQ"
   },
   {
-    "Name": "DIEGO GARCIA",
-    "Genc3A": "DGA"
+    "Id": 69,
+    "Name": "Eritrea",
+    "Genc2A": "ER"
   },
   {
-    "Name": "DJIBOUTI",
-    "Genc3A": "DJI"
+    "Id": 70,
+    "Name": "Estonia",
+    "Genc2A": "EE"
   },
   {
-    "Name": "DOMINICA",
-    "Genc3A": "DMA"
+    "Id": 71,
+    "Name": "Ethiopia",
+    "Genc2A": "ET"
   },
   {
-    "Name": "DOMINICAN REPUBLIC",
-    "Genc3A": "DOM"
+    "Id": 72,
+    "Name": "Falkland Islands (Islas Malvinas)",
+    "Genc2A": "FK"
   },
   {
-    "Name": "ECUADOR",
-    "Genc3A": "ECU"
+    "Id": 73,
+    "Name": "Faroe Islands",
+    "Genc2A": "FO"
   },
   {
-    "Name": "EGYPT",
-    "Genc3A": "EGY"
+    "Id": 74,
+    "Name": "Fiji",
+    "Genc2A": "FJ"
   },
   {
-    "Name": "EL SALVADOR",
-    "Genc3A": "SLV"
+    "Id": 75,
+    "Name": "Finland",
+    "Genc2A": "FI"
   },
   {
-    "Name": "ENTITY 1",
-    "Genc3A": "XAZ"
+    "Id": 76,
+    "Name": "France",
+    "Genc2A": "FR"
   },
   {
-    "Name": "ENTITY 2",
-    "Genc3A": "XCR"
+    "Id": 77,
+    "Name": "France, Metropolitan",
+    "Genc2A": "FX"
   },
   {
-    "Name": "ENTITY 3",
-    "Genc3A": "XCY"
+    "Id": 78,
+    "Name": "French Guiana",
+    "Genc2A": "GF"
   },
   {
-    "Name": "ENTITY 4",
-    "Genc3A": "XKM"
+    "Id": 79,
+    "Name": "French Polynesia",
+    "Genc2A": "PF"
   },
   {
-    "Name": "ENTITY 5",
-    "Genc3A": "XKN"
+    "Id": 80,
+    "Name": "French Southern and Antarctic Lands",
+    "Genc2A": "TF"
   },
   {
-    "Name": "ENTITY 6",
-    "Genc3A": "AX3"
+    "Id": 81,
+    "Name": "Gabon",
+    "Genc2A": "GA"
   },
   {
-    "Name": "EQUATORIAL GUINEA",
-    "Genc3A": "GNQ"
+    "Id": 82,
+    "Name": "Gambia, The",
+    "Genc2A": "GM"
   },
   {
-    "Name": "ERITREA",
-    "Genc3A": "ERI"
+    "Id": 83,
+    "Name": "Gaza Strip",
+    "Genc2A": "PS"
   },
   {
-    "Name": "ESTONIA",
-    "Genc3A": "EST"
+    "Id": 84,
+    "Name": "Georgia",
+    "Genc2A": "GE"
   },
   {
-    "Name": "ETHIOPIA",
-    "Genc3A": "ETH"
+    "Id": 85,
+    "Name": "Germany",
+    "Genc2A": "DE"
   },
   {
-    "Name": "EUROPA ISLAND",
-    "Genc3A": "XEU"
+    "Id": 86,
+    "Name": "Ghana",
+    "Genc2A": "GH"
   },
   {
-    "Name": "FALKLAND ISLANDS (ISLAS MALVINAS)",
-    "Genc3A": "FLK"
+    "Id": 87,
+    "Name": "Gibraltar",
+    "Genc2A": "GI"
   },
   {
-    "Name": "FAROE ISLANDS",
-    "Genc3A": "FRO"
+    "Id": 88,
+    "Name": "Greece",
+    "Genc2A": "GR"
   },
   {
-    "Name": "FIJI",
-    "Genc3A": "FJI"
+    "Id": 89,
+    "Name": "Greenland",
+    "Genc2A": "GL"
   },
   {
-    "Name": "FINLAND",
-    "Genc3A": "FIN"
+    "Id": 90,
+    "Name": "Grenada",
+    "Genc2A": "GD"
   },
   {
-    "Name": "FRANCE",
-    "Genc3A": "FRA"
+    "Id": 91,
+    "Name": "Guadeloupe",
+    "Genc2A": "GP"
   },
   {
-    "Name": "FRENCH GUIANA",
-    "Genc3A": "GUF"
+    "Id": 92,
+    "Name": "Guam",
+    "Genc2A": "GU"
   },
   {
-    "Name": "FRENCH POLYNESIA",
-    "Genc3A": "PYF"
+    "Id": 93,
+    "Name": "Guatemala",
+    "Genc2A": "GT"
   },
   {
-    "Name": "FRENCH SOUTHERN AND ANTARCTIC LANDS",
-    "Genc3A": "ATF"
+    "Id": 94,
+    "Name": "Guernsey",
+    "Genc2A": "GG"
   },
   {
-    "Name": "GABON",
-    "Genc3A": "GAB"
+    "Id": 95,
+    "Name": "Guinea",
+    "Genc2A": "GN"
   },
   {
-    "Name": "GAMBIA, THE",
-    "Genc3A": "GMB"
+    "Id": 96,
+    "Name": "Guinea-Bissau",
+    "Genc2A": "GW"
   },
   {
-    "Name": "GAZA STRIP",
-    "Genc3A": "XGZ"
+    "Id": 97,
+    "Name": "Guyana",
+    "Genc2A": "GY"
   },
   {
-    "Name": "GEORGIA",
-    "Genc3A": "GEO"
+    "Id": 98,
+    "Name": "Haiti",
+    "Genc2A": "HT"
   },
   {
-    "Name": "GERMANY",
-    "Genc3A": "DEU"
+    "Id": 99,
+    "Name": "Heard Island and McDonald Islands",
+    "Genc2A": "HM"
   },
   {
-    "Name": "GHANA",
-    "Genc3A": "GHA"
+    "Id": 100,
+    "Name": "Holy See (Vatican City)",
+    "Genc2A": "VA"
   },
   {
-    "Name": "GIBRALTAR",
-    "Genc3A": "GIB"
+    "Id": 101,
+    "Name": "Honduras",
+    "Genc2A": "HN"
   },
   {
-    "Name": "GLORIOSO ISLANDS",
-    "Genc3A": "XGL"
+    "Id": 102,
+    "Name": "Hong Kong",
+    "Genc2A": "HK"
   },
   {
-    "Name": "GREECE",
-    "Genc3A": "GRC"
+    "Id": 103,
+    "Name": "Hungary",
+    "Genc2A": "HU"
   },
   {
-    "Name": "GREENLAND",
-    "Genc3A": "GRL"
+    "Id": 104,
+    "Name": "Iceland",
+    "Genc2A": "IS"
   },
   {
-    "Name": "GRENADA",
-    "Genc3A": "GRD"
+    "Id": 105,
+    "Name": "India",
+    "Genc2A": "IN"
   },
   {
-    "Name": "GUADELOUPE",
-    "Genc3A": "GLP"
+    "Id": 106,
+    "Name": "Indonesia",
+    "Genc2A": "ID"
   },
   {
-    "Name": "GUAM",
-    "Genc3A": "GUM"
+    "Id": 107,
+    "Name": "Iran",
+    "Genc2A": "IR"
   },
   {
-    "Name": "GUANTANAMO BAY NAVAL BASE",
-    "Genc3A": "AX2"
+    "Id": 108,
+    "Name": "Iraq",
+    "Genc2A": "IQ"
   },
   {
-    "Name": "GUATEMALA",
-    "Genc3A": "GTM"
+    "Id": 109,
+    "Name": "Ireland",
+    "Genc2A": "IE"
   },
   {
-    "Name": "GUERNSEY",
-    "Genc3A": "GGY"
+    "Id": 110,
+    "Name": "Isle of Man",
+    "Genc2A": "IM"
   },
   {
-    "Name": "GUINEA",
-    "Genc3A": "GIN"
+    "Id": 111,
+    "Name": "Israel",
+    "Genc2A": "IL"
   },
   {
-    "Name": "GUINEA-BISSAU",
-    "Genc3A": "GNB"
+    "Id": 112,
+    "Name": "Italy",
+    "Genc2A": "IT"
   },
   {
-    "Name": "GUYANA",
-    "Genc3A": "GUY"
+    "Id": 113,
+    "Name": "Jamaica",
+    "Genc2A": "JM"
   },
   {
-    "Name": "HAITI",
-    "Genc3A": "HTI"
+    "Id": 114,
+    "Name": "Japan",
+    "Genc2A": "JP"
   },
   {
-    "Name": "HEARD ISLAND AND MCDONALD ISLANDS",
-    "Genc3A": "HMD"
+    "Id": 115,
+    "Name": "Jersey",
+    "Genc2A": "JE"
   },
   {
-    "Name": "HONDURAS",
-    "Genc3A": "HND"
+    "Id": 116,
+    "Name": "Jordan",
+    "Genc2A": "JO"
   },
   {
-    "Name": "HONG KONG",
-    "Genc3A": "HKG"
+    "Id": 117,
+    "Name": "Kazakhstan",
+    "Genc2A": "KZ"
   },
   {
-    "Name": "HOWLAND ISLAND",
-    "Genc3A": "XHO"
+    "Id": 118,
+    "Name": "Kenya",
+    "Genc2A": "KE"
   },
   {
-    "Name": "HUNGARY",
-    "Genc3A": "HUN"
+    "Id": 119,
+    "Name": "Kiribati",
+    "Genc2A": "KI"
   },
   {
-    "Name": "ICELAND",
-    "Genc3A": "ISL"
+    "Id": 120,
+    "Name": "Korea, North",
+    "Genc2A": "KP"
   },
   {
-    "Name": "INDIA",
-    "Genc3A": "IND"
+    "Id": 121,
+    "Name": "Korea, South",
+    "Genc2A": "KR"
   },
   {
-    "Name": "INDONESIA",
-    "Genc3A": "IDN"
+    "Id": 122,
+    "Name": "Kosovo",
+    "Genc2A": "XK"
   },
   {
-    "Name": "IRAN",
-    "Genc3A": "IRN"
+    "Id": 123,
+    "Name": "Kuwait",
+    "Genc2A": "KW"
   },
   {
-    "Name": "IRAQ",
-    "Genc3A": "IRQ"
+    "Id": 124,
+    "Name": "Kyrgyzstan",
+    "Genc2A": "KG"
   },
   {
-    "Name": "IRELAND",
-    "Genc3A": "IRL"
+    "Id": 125,
+    "Name": "Laos",
+    "Genc2A": "LA"
   },
   {
-    "Name": "ISLE OF MAN",
-    "Genc3A": "IMN"
+    "Id": 126,
+    "Name": "Latvia",
+    "Genc2A": "LV"
   },
   {
-    "Name": "ISRAEL",
-    "Genc3A": "ISR"
+    "Id": 127,
+    "Name": "Lebanon",
+    "Genc2A": "LB"
   },
   {
-    "Name": "ITALY",
-    "Genc3A": "ITA"
+    "Id": 128,
+    "Name": "Lesotho",
+    "Genc2A": "LS"
   },
   {
-    "Name": "JAMAICA",
-    "Genc3A": "JAM"
+    "Id": 129,
+    "Name": "Liberia",
+    "Genc2A": "LR"
   },
   {
-    "Name": "JAN MAYEN",
-    "Genc3A": "XJM"
+    "Id": 130,
+    "Name": "Libya",
+    "Genc2A": "LY"
   },
   {
-    "Name": "JAPAN",
-    "Genc3A": "JPN"
+    "Id": 131,
+    "Name": "Liechtenstein",
+    "Genc2A": "LI"
   },
   {
-    "Name": "JARVIS ISLAND",
-    "Genc3A": "XJV"
+    "Id": 132,
+    "Name": "Lithuania",
+    "Genc2A": "LT"
   },
   {
-    "Name": "JERSEY",
-    "Genc3A": "JEY"
+    "Id": 133,
+    "Name": "Luxembourg",
+    "Genc2A": "LU"
   },
   {
-    "Name": "JOHNSTON ATOLL",
-    "Genc3A": "XJA"
+    "Id": 134,
+    "Name": "Macau",
+    "Genc2A": "MO"
   },
   {
-    "Name": "JORDAN",
-    "Genc3A": "JOR"
+    "Id": 135,
+    "Name": "Macedonia",
+    "Genc2A": "MK"
   },
   {
-    "Name": "JUAN DE NOVA ISLAND",
-    "Genc3A": "XJN"
+    "Id": 136,
+    "Name": "Madagascar",
+    "Genc2A": "MG"
   },
   {
-    "Name": "KAZAKHSTAN",
-    "Genc3A": "KAZ"
+    "Id": 137,
+    "Name": "Malawi",
+    "Genc2A": "MW"
   },
   {
-    "Name": "KENYA",
-    "Genc3A": "KEN"
+    "Id": 138,
+    "Name": "Malaysia",
+    "Genc2A": "MY"
   },
   {
-    "Name": "KINGMAN REEF",
-    "Genc3A": "XKR"
+    "Id": 139,
+    "Name": "Maldives",
+    "Genc2A": "MV"
   },
   {
-    "Name": "KIRIBATI",
-    "Genc3A": "KIR"
+    "Id": 140,
+    "Name": "Mali",
+    "Genc2A": "ML"
   },
   {
-    "Name": "KOREA, NORTH",
-    "Genc3A": "PRK"
+    "Id": 141,
+    "Name": "Malta",
+    "Genc2A": "MT"
   },
   {
-    "Name": "KOREA, SOUTH",
-    "Genc3A": "KOR"
+    "Id": 142,
+    "Name": "Marshall Islands",
+    "Genc2A": "MH"
   },
   {
-    "Name": "KOSOVO",
-    "Genc3A": "XKS"
+    "Id": 143,
+    "Name": "Martinique",
+    "Genc2A": "MQ"
   },
   {
-    "Name": "KUWAIT",
-    "Genc3A": "KWT"
+    "Id": 144,
+    "Name": "Mauritania",
+    "Genc2A": "MR"
   },
   {
-    "Name": "KYRGYZSTAN",
-    "Genc3A": "KGZ"
+    "Id": 145,
+    "Name": "Mauritius",
+    "Genc2A": "MU"
   },
   {
-    "Name": "LAOS",
-    "Genc3A": "LAO"
+    "Id": 146,
+    "Name": "Mayotte",
+    "Genc2A": "YT"
   },
   {
-    "Name": "LATVIA",
-    "Genc3A": "LVA"
+    "Id": 147,
+    "Name": "Mexico",
+    "Genc2A": "MX"
   },
   {
-    "Name": "LEBANON",
-    "Genc3A": "LBN"
+    "Id": 148,
+    "Name": "Micronesia, Federated States of",
+    "Genc2A": "FM"
   },
   {
-    "Name": "LESOTHO",
-    "Genc3A": "LSO"
+    "Id": 149,
+    "Name": "Moldova",
+    "Genc2A": "MD"
   },
   {
-    "Name": "LIBERIA",
-    "Genc3A": "LBR"
+    "Id": 150,
+    "Name": "Monaco",
+    "Genc2A": "MC"
   },
   {
-    "Name": "LIBYA",
-    "Genc3A": "LBY"
+    "Id": 151,
+    "Name": "Mongolia",
+    "Genc2A": "MN"
   },
   {
-    "Name": "LIECHTENSTEIN",
-    "Genc3A": "LIE"
+    "Id": 152,
+    "Name": "Montenegro",
+    "Genc2A": "ME"
   },
   {
-    "Name": "LITHUANIA",
-    "Genc3A": "LTU"
+    "Id": 153,
+    "Name": "Montserrat",
+    "Genc2A": "MS"
   },
   {
-    "Name": "LUXEMBOURG",
-    "Genc3A": "LUX"
+    "Id": 154,
+    "Name": "Morocco",
+    "Genc2A": "MA"
   },
   {
-    "Name": "MACAU",
-    "Genc3A": "MAC"
+    "Id": 155,
+    "Name": "Mozambique",
+    "Genc2A": "MZ"
   },
   {
-    "Name": "MACEDONIA",
-    "Genc3A": "MKD"
+    "Id": 156,
+    "Name": "Namibia",
+    "Genc2A": "NA"
   },
   {
-    "Name": "MADAGASCAR",
-    "Genc3A": "MDG"
+    "Id": 157,
+    "Name": "Nauru",
+    "Genc2A": "NR"
   },
   {
-    "Name": "MALAWI",
-    "Genc3A": "MWI"
+    "Id": 158,
+    "Name": "Nepal",
+    "Genc2A": "NP"
   },
   {
-    "Name": "MALAYSIA",
-    "Genc3A": "MYS"
+    "Id": 159,
+    "Name": "Netherlands",
+    "Genc2A": "NL"
   },
   {
-    "Name": "MALDIVES",
-    "Genc3A": "MDV"
+    "Id": 160,
+    "Name": "New Caledonia",
+    "Genc2A": "NC"
   },
   {
-    "Name": "MALI",
-    "Genc3A": "MLI"
+    "Id": 161,
+    "Name": "New Zealand",
+    "Genc2A": "NZ"
   },
   {
-    "Name": "MALTA",
-    "Genc3A": "MLT"
+    "Id": 162,
+    "Name": "Nicaragua",
+    "Genc2A": "NI"
   },
   {
-    "Name": "MARSHALL ISLANDS",
-    "Genc3A": "MHL"
+    "Id": 163,
+    "Name": "Niger",
+    "Genc2A": "NE"
   },
   {
-    "Name": "MARTINIQUE",
-    "Genc3A": "MTQ"
+    "Id": 164,
+    "Name": "Nigeria",
+    "Genc2A": "NG"
   },
   {
-    "Name": "MAURITANIA",
-    "Genc3A": "MRT"
+    "Id": 165,
+    "Name": "Niue",
+    "Genc2A": "NU"
   },
   {
-    "Name": "MAURITIUS",
-    "Genc3A": "MUS"
+    "Id": 166,
+    "Name": "Norfolk Island",
+    "Genc2A": "NF"
   },
   {
-    "Name": "MAYOTTE",
-    "Genc3A": "MYT"
+    "Id": 167,
+    "Name": "Northern Mariana Islands",
+    "Genc2A": "MP"
   },
   {
-    "Name": "MEXICO",
-    "Genc3A": "MEX"
+    "Id": 168,
+    "Name": "Norway",
+    "Genc2A": "NO"
   },
   {
-    "Name": "MICRONESIA, FEDERATED STATES OF",
-    "Genc3A": "FSM"
+    "Id": 169,
+    "Name": "Oman",
+    "Genc2A": "OM"
   },
   {
-    "Name": "MIDWAY ISLANDS",
-    "Genc3A": "XMW"
+    "Id": 170,
+    "Name": "Pakistan",
+    "Genc2A": "PK"
   },
   {
-    "Name": "MOLDOVA",
-    "Genc3A": "MDA"
+    "Id": 171,
+    "Name": "Palau",
+    "Genc2A": "PW"
   },
   {
-    "Name": "MONACO",
-    "Genc3A": "MCO"
+    "Id": 172,
+    "Name": "Panama",
+    "Genc2A": "PA"
   },
   {
-    "Name": "MONGOLIA",
-    "Genc3A": "MNG"
+    "Id": 173,
+    "Name": "Papua New Guinea",
+    "Genc2A": "PG"
   },
   {
-    "Name": "MONTENEGRO",
-    "Genc3A": "MNE"
+    "Id": 174,
+    "Name": "Paraguay",
+    "Genc2A": "PY"
   },
   {
-    "Name": "MONTSERRAT",
-    "Genc3A": "MSR"
+    "Id": 175,
+    "Name": "Peru",
+    "Genc2A": "PE"
   },
   {
-    "Name": "MOROCCO",
-    "Genc3A": "MAR"
+    "Id": 176,
+    "Name": "Philippines",
+    "Genc2A": "PH"
   },
   {
-    "Name": "MOZAMBIQUE",
-    "Genc3A": "MOZ"
+    "Id": 177,
+    "Name": "Pitcairn Islands",
+    "Genc2A": "PN"
   },
   {
-    "Name": "NAMIBIA",
-    "Genc3A": "NAM"
+    "Id": 178,
+    "Name": "Poland",
+    "Genc2A": "PL"
   },
   {
-    "Name": "NAURU",
-    "Genc3A": "NRU"
+    "Id": 179,
+    "Name": "Portugal",
+    "Genc2A": "PT"
   },
   {
-    "Name": "NAVASSA ISLAND",
-    "Genc3A": "XNV"
+    "Id": 180,
+    "Name": "Puerto Rico",
+    "Genc2A": "PR"
   },
   {
-    "Name": "NEPAL",
-    "Genc3A": "NPL"
+    "Id": 181,
+    "Name": "Qatar",
+    "Genc2A": "QA"
   },
   {
-    "Name": "NETHERLANDS",
-    "Genc3A": "NLD"
+    "Id": 182,
+    "Name": "Reunion",
+    "Genc2A": "RE"
   },
   {
-    "Name": "NEW CALEDONIA",
-    "Genc3A": "NCL"
+    "Id": 183,
+    "Name": "Romania",
+    "Genc2A": "RO"
   },
   {
-    "Name": "NEW ZEALAND",
-    "Genc3A": "NZL"
+    "Id": 184,
+    "Name": "Russia",
+    "Genc2A": "RU"
   },
   {
-    "Name": "NICARAGUA",
-    "Genc3A": "NIC"
+    "Id": 185,
+    "Name": "Rwanda",
+    "Genc2A": "RW"
   },
   {
-    "Name": "NIGER",
-    "Genc3A": "NER"
+    "Id": 186,
+    "Name": "Saint Barthelemy",
+    "Genc2A": "BL"
   },
   {
-    "Name": "NIGERIA",
-    "Genc3A": "NGA"
+    "Id": 187,
+    "Name": "Saint Helena, Ascension, and Tristan da Cunha",
+    "Genc2A": "SH"
   },
   {
-    "Name": "NIUE",
-    "Genc3A": "NIU"
+    "Id": 188,
+    "Name": "Saint Kitts and Nevis",
+    "Genc2A": "KN"
   },
   {
-    "Name": "NORFOLK ISLAND",
-    "Genc3A": "NFK"
+    "Id": 189,
+    "Name": "Saint Lucia",
+    "Genc2A": "LC"
   },
   {
-    "Name": "NORTHERN MARIANA ISLANDS",
-    "Genc3A": "MNP"
+    "Id": 190,
+    "Name": "Saint Martin",
+    "Genc2A": "MF"
   },
   {
-    "Name": "NORWAY",
-    "Genc3A": "NOR"
+    "Id": 191,
+    "Name": "Saint Pierre and Miquelon",
+    "Genc2A": "PM"
   },
   {
-    "Name": "OMAN",
-    "Genc3A": "OMN"
+    "Id": 192,
+    "Name": "Saint Vincent and the Grenadines",
+    "Genc2A": "VC"
   },
   {
-    "Name": "PAKISTAN",
-    "Genc3A": "PAK"
+    "Id": 193,
+    "Name": "Samoa",
+    "Genc2A": "WS"
   },
   {
-    "Name": "PALAU",
-    "Genc3A": "PLW"
+    "Id": 194,
+    "Name": "San Marino",
+    "Genc2A": "SM"
   },
   {
-    "Name": "PALMYRA ATOLL",
-    "Genc3A": "XPL"
+    "Id": 195,
+    "Name": "Sao Tome and Principe",
+    "Genc2A": "ST"
   },
   {
-    "Name": "PANAMA",
-    "Genc3A": "PAN"
+    "Id": 196,
+    "Name": "Saudi Arabia",
+    "Genc2A": "SA"
   },
   {
-    "Name": "PAPUA NEW GUINEA",
-    "Genc3A": "PNG"
+    "Id": 197,
+    "Name": "Senegal",
+    "Genc2A": "SN"
   },
   {
-    "Name": "PARACEL ISLANDS",
-    "Genc3A": "XPR"
+    "Id": 198,
+    "Name": "Serbia",
+    "Genc2A": "RS"
   },
   {
-    "Name": "PARAGUAY",
-    "Genc3A": "PRY"
+    "Id": 199,
+    "Name": "Seychelles",
+    "Genc2A": "SC"
   },
   {
-    "Name": "PERU",
-    "Genc3A": "PER"
+    "Id": 200,
+    "Name": "Sierra Leone",
+    "Genc2A": "SL"
   },
   {
-    "Name": "PHILIPPINES",
-    "Genc3A": "PHL"
+    "Id": 201,
+    "Name": "Singapore",
+    "Genc2A": "SG"
   },
   {
-    "Name": "PITCAIRN ISLANDS",
-    "Genc3A": "PCN"
+    "Id": 202,
+    "Name": "Sint Maarten",
+    "Genc2A": "SX"
   },
   {
-    "Name": "POLAND",
-    "Genc3A": "POL"
+    "Id": 203,
+    "Name": "Slovakia",
+    "Genc2A": "SK"
   },
   {
-    "Name": "PORTUGAL",
-    "Genc3A": "PRT"
+    "Id": 204,
+    "Name": "Slovenia",
+    "Genc2A": "SI"
   },
   {
-    "Name": "PUERTO RICO",
-    "Genc3A": "PRI"
+    "Id": 205,
+    "Name": "Solomon Islands",
+    "Genc2A": "SB"
   },
   {
-    "Name": "QATAR",
-    "Genc3A": "QAT"
+    "Id": 206,
+    "Name": "Somalia",
+    "Genc2A": "SO"
   },
   {
-    "Name": "REUNION",
-    "Genc3A": "REU"
+    "Id": 207,
+    "Name": "South Africa",
+    "Genc2A": "ZA"
   },
   {
-    "Name": "ROMANIA",
-    "Genc3A": "ROU"
+    "Id": 208,
+    "Name": "South Georgia and the Islands",
+    "Genc2A": "GS"
   },
   {
-    "Name": "RUSSIA",
-    "Genc3A": "RUS"
+    "Id": 209,
+    "Name": "South Sudan",
+    "Genc2A": "SS"
   },
   {
-    "Name": "RWANDA",
-    "Genc3A": "RWA"
+    "Id": 210,
+    "Name": "Spain",
+    "Genc2A": "ES"
   },
   {
-    "Name": "SAINT BARTHELEMY",
-    "Genc3A": "BLM"
+    "Id": 211,
+    "Name": "Sri Lanka",
+    "Genc2A": "LK"
   },
   {
-    "Name": "SAINT HELENA, ASCENSION, AND TRISTAN DA CUNHA",
-    "Genc3A": "SHN"
+    "Id": 212,
+    "Name": "Sudan",
+    "Genc2A": "SD"
   },
   {
-    "Name": "SAINT KITTS AND NEVIS",
-    "Genc3A": "KNA"
+    "Id": 213,
+    "Name": "Suriname",
+    "Genc2A": "SR"
   },
   {
-    "Name": "SAINT LUCIA",
-    "Genc3A": "LCA"
+    "Id": 214,
+    "Name": "Svalbard",
+    "Genc2A": "SJ"
   },
   {
-    "Name": "SAINT MARTIN",
-    "Genc3A": "MAF"
+    "Id": 215,
+    "Name": "Swaziland",
+    "Genc2A": "SZ"
   },
   {
-    "Name": "SAINT PIERRE AND MIQUELON",
-    "Genc3A": "SPM"
+    "Id": 216,
+    "Name": "Sweden",
+    "Genc2A": "SE"
   },
   {
-    "Name": "SAINT VINCENT AND THE GRENADINES",
-    "Genc3A": "VCT"
+    "Id": 217,
+    "Name": "Switzerland",
+    "Genc2A": "CH"
   },
   {
-    "Name": "SAMOA",
-    "Genc3A": "WSM"
+    "Id": 218,
+    "Name": "Syria",
+    "Genc2A": "SY"
   },
   {
-    "Name": "SAN MARINO",
-    "Genc3A": "SMR"
+    "Id": 219,
+    "Name": "Taiwan",
+    "Genc2A": "TW"
   },
   {
-    "Name": "SAO TOME AND PRINCIPE",
-    "Genc3A": "STP"
+    "Id": 220,
+    "Name": "Tajikistan",
+    "Genc2A": "TJ"
   },
   {
-    "Name": "SAUDI ARABIA",
-    "Genc3A": "SAU"
+    "Id": 221,
+    "Name": "Tanzania",
+    "Genc2A": "TZ"
   },
   {
-    "Name": "SENEGAL",
-    "Genc3A": "SEN"
+    "Id": 222,
+    "Name": "Thailand",
+    "Genc2A": "TH"
   },
   {
-    "Name": "SERBIA",
-    "Genc3A": "SRB"
+    "Id": 223,
+    "Name": "Timor-Leste",
+    "Genc2A": "TL"
   },
   {
-    "Name": "SEYCHELLES",
-    "Genc3A": "SYC"
+    "Id": 224,
+    "Name": "Togo",
+    "Genc2A": "TG"
   },
   {
-    "Name": "SIERRA LEONE",
-    "Genc3A": "SLE"
+    "Id": 225,
+    "Name": "Tokelau",
+    "Genc2A": "TK"
   },
   {
-    "Name": "SINGAPORE",
-    "Genc3A": "SGP"
+    "Id": 226,
+    "Name": "Tonga",
+    "Genc2A": "TO"
   },
   {
-    "Name": "SINT MAARTEN",
-    "Genc3A": "SXM"
+    "Id": 227,
+    "Name": "Trinidad and Tobago",
+    "Genc2A": "TT"
   },
   {
-    "Name": "SLOVAKIA",
-    "Genc3A": "SVK"
+    "Id": 228,
+    "Name": "Tunisia",
+    "Genc2A": "TN"
   },
   {
-    "Name": "SLOVENIA",
-    "Genc3A": "SVN"
+    "Id": 229,
+    "Name": "Turkey",
+    "Genc2A": "TR"
   },
   {
-    "Name": "SOLOMON ISLANDS",
-    "Genc3A": "SLB"
+    "Id": 230,
+    "Name": "Turkmenistan",
+    "Genc2A": "TM"
   },
   {
-    "Name": "SOMALIA",
-    "Genc3A": "SOM"
+    "Id": 231,
+    "Name": "Turks and Caicos Islands",
+    "Genc2A": "TC"
   },
   {
-    "Name": "SOUTH AFRICA",
-    "Genc3A": "ZAF"
+    "Id": 232,
+    "Name": "Tuvalu",
+    "Genc2A": "TV"
   },
   {
-    "Name": "SOUTH GEORGIA AND SOUTH SANDWICH ISLANDS",
-    "Genc3A": "SGS"
+    "Id": 233,
+    "Name": "Uganda",
+    "Genc2A": "UG"
   },
   {
-    "Name": "SOUTH SUDAN",
-    "Genc3A": "SSD"
+    "Id": 234,
+    "Name": "Ukraine",
+    "Genc2A": "UA"
   },
   {
-    "Name": "SPAIN",
-    "Genc3A": "ESP"
+    "Id": 235,
+    "Name": "United Arab Emirates",
+    "Genc2A": "AE"
   },
   {
-    "Name": "SPRATLY ISLANDS",
-    "Genc3A": "XSP"
+    "Id": 236,
+    "Name": "United Kingdom",
+    "Genc2A": "GB"
   },
   {
-    "Name": "SRI LANKA",
-    "Genc3A": "LKA"
+    "Id": 237,
+    "Name": "United States Minor Outlying Islands",
+    "Genc2A": "UM"
   },
   {
-    "Name": "SUDAN",
-    "Genc3A": "SDN"
+    "Id": 238,
+    "Name": "Uruguay",
+    "Genc2A": "UY"
   },
   {
-    "Name": "SURINAME",
-    "Genc3A": "SUR"
+    "Id": 239,
+    "Name": "Uzbekistan",
+    "Genc2A": "UZ"
   },
   {
-    "Name": "SVALBARD",
-    "Genc3A": "XSV"
+    "Id": 240,
+    "Name": "Vanuatu",
+    "Genc2A": "VU"
   },
   {
-    "Name": "SWAZILAND",
-    "Genc3A": "SWZ"
+    "Id": 241,
+    "Name": "Venezuela",
+    "Genc2A": "VE"
   },
   {
-    "Name": "SWEDEN",
-    "Genc3A": "SWE"
+    "Id": 242,
+    "Name": "Vietnam",
+    "Genc2A": "VN"
   },
   {
-    "Name": "SWITZERLAND",
-    "Genc3A": "CHE"
+    "Id": 243,
+    "Name": "Virgin Islands",
+    "Genc2A": "VI"
   },
   {
-    "Name": "SYRIA",
-    "Genc3A": "SYR"
+    "Id": 244,
+    "Name": "Wallis and Futuna",
+    "Genc2A": "WF"
   },
   {
-    "Name": "TAIWAN",
-    "Genc3A": "TWN"
+    "Id": 245,
+    "Name": "West Bank",
+    "Genc2A": "PS"
   },
   {
-    "Name": "TAJIKISTAN",
-    "Genc3A": "TJK"
+    "Id": 246,
+    "Name": "Western Sahara",
+    "Genc2A": "EH"
   },
   {
-    "Name": "TANZANIA",
-    "Genc3A": "TZA"
+    "Id": 247,
+    "Name": "Yemen",
+    "Genc2A": "YE"
   },
   {
-    "Name": "THAILAND",
-    "Genc3A": "THA"
+    "Id": 248,
+    "Name": "Zambia",
+    "Genc2A": "ZM"
   },
   {
-    "Name": "TIMOR-LESTE",
-    "Genc3A": "TLS"
-  },
-  {
-    "Name": "TOGO",
-    "Genc3A": "TGO"
-  },
-  {
-    "Name": "TOKELAU",
-    "Genc3A": "TKL"
-  },
-  {
-    "Name": "TONGA",
-    "Genc3A": "TON"
-  },
-  {
-    "Name": "TRINIDAD AND TOBAGO",
-    "Genc3A": "TTO"
-  },
-  {
-    "Name": "TROMELIN ISLAND",
-    "Genc3A": "XTR"
-  },
-  {
-    "Name": "TUNISIA",
-    "Genc3A": "TUN"
-  },
-  {
-    "Name": "TURKEY",
-    "Genc3A": "TUR"
-  },
-  {
-    "Name": "TURKMENISTAN",
-    "Genc3A": "TKM"
-  },
-  {
-    "Name": "TURKS AND CAICOS ISLANDS",
-    "Genc3A": "TCA"
-  },
-  {
-    "Name": "TUVALU",
-    "Genc3A": "TUV"
-  },
-  {
-    "Name": "UGANDA",
-    "Genc3A": "UGA"
-  },
-  {
-    "Name": "UKRAINE",
-    "Genc3A": "UKR"
-  },
-  {
-    "Name": "UNITED ARAB EMIRATES",
-    "Genc3A": "ARE"
-  },
-  {
-    "Name": "UNITED KINGDOM",
-    "Genc3A": "GBR"
-  },
-  {
-    "Name": "UNKNOWN",
-    "Genc3A": "AX1"
-  },
-  {
-    "Name": "URUGUAY",
-    "Genc3A": "URY"
-  },
-  {
-    "Name": "UZBEKISTAN",
-    "Genc3A": "UZB"
-  },
-  {
-    "Name": "VANUATU",
-    "Genc3A": "VUT"
-  },
-  {
-    "Name": "VATICAN CITY",
-    "Genc3A": "VAT"
-  },
-  {
-    "Name": "VENEZUELA",
-    "Genc3A": "VEN"
-  },
-  {
-    "Name": "VIETNAM",
-    "Genc3A": "VNM"
-  },
-  {
-    "Name": "VIRGIN ISLANDS, BRITISH",
-    "Genc3A": "VGB"
-  },
-  {
-    "Name": "VIRGIN ISLANDS, U.S.",
-    "Genc3A": "VIR"
-  },
-  {
-    "Name": "WAKE ISLAND",
-    "Genc3A": "XWK"
-  },
-  {
-    "Name": "WALLIS AND FUTUNA",
-    "Genc3A": "WLF"
-  },
-  {
-    "Name": "WEST BANK",
-    "Genc3A": "XWB"
-  },
-  {
-    "Name": "WESTERN SAHARA",
-    "Genc3A": "ESH"
-  },
-  {
-    "Name": "YEMEN",
-    "Genc3A": "YEM"
-  },
-  {
-    "Name": "ZAMBIA",
-    "Genc3A": "ZMB"
-  },
-  {
-    "Name": "ZIMBABWE",
-    "Genc3A": "ZWE"
+    "Id": 249,
+    "Name": "Zimbabwe",
+    "Genc2A": "ZW"
   }
 ]

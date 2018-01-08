@@ -5,15 +5,6 @@
     <UserSecretsId>aspnet-CoraCorpCM-70299E71-9398-47EA-AB35-3FAD25CF44E5</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Data\Migrations\20180103135056_AppUserDbSetAdded.cs" />
-    <Compile Remove="Data\Migrations\20180103135056_AppUserDbSetAdded.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180103135428_test.cs" />
-    <Compile Remove="Data\Migrations\20180103135428_test.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180107175658_Country.cs" />
-    <Compile Remove="Data\Migrations\20180107175658_Country.Designer.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />

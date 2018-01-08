@@ -41,7 +41,6 @@ namespace CoraCorpCM
             // Add application services.
             // TODO setup real EmailSender and use that here
             services.AddTransient<IEmailSender, NullEmailSender>();
-            services.AddTransient<CountrySeeder>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
 
             services.AddMvc();
@@ -71,15 +70,6 @@ namespace CoraCorpCM
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            if (env.IsDevelopment())
-            {
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var seeder = scope.ServiceProvider.GetService<CountrySeeder>();
-                    seeder.Seed();
-                }
-            }
         }
     }
 }

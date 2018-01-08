@@ -12,7 +12,6 @@ using CoraCorpCM.ViewModels.AccountViewModels;
 using CoraCorpCM.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 
 namespace CoraCorpCM.Controllers
 {
@@ -243,7 +242,7 @@ namespace CoraCorpCM.Controllers
 
                     await signInManager.SignInAsync(user, isPersistent: false);
                     logger.LogInformation("User created a new account with password.");
-                    
+
                     // TODO asign the user First and Last Name
                     var country = museumRepository.GetCountryByName(model.Country);
                     var location = museumRepository.CreateLocation(model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, country);
