@@ -18,9 +18,12 @@ namespace CoraCorpCM
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
                     var environment = services.GetRequiredService<IHostingEnvironment>();
-                    CountrySeeder.Seed(context, environment);
+                    if (environment.IsDevelopment())
+                    {
+                        var context = services.GetRequiredService<ApplicationDbContext>();
+                        CountrySeeder.Seed(context, environment);
+                    }
                 }
                 catch (Exception ex)
                 {
