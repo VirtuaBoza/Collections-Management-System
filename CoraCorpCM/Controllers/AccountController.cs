@@ -230,20 +230,26 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
+                };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     logger.LogInformation("User created a new account with password.");
 
-                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    // TODO rig up EmailSender and use this template code
+                    //var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    //await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    logger.LogInformation("User created a new account with password.");
-
-                    // TODO asign the user First and Last Name
+                    
+                    // My code
                     var country = museumRepository.GetCountryByName(model.Country);
                     var location = museumRepository.CreateLocation(model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, country);
                     museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName, location, user);
