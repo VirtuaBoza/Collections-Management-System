@@ -31,7 +31,7 @@ namespace CoraCorpCM.Data
 
         public Location CreateLocation(string name, string address1, string address2, string city, string state, Country country)
         {
-            var location = new Location()
+            var location = new Location
             {
                 Name = name,
                 Address1 = address1,
@@ -41,6 +41,12 @@ namespace CoraCorpCM.Data
                 Country = country
             };
             return location;
+        }
+
+        public Museum GetMuseumByUser(ApplicationUser user)
+        {
+            context.Entry(user).Reference(u => u.Museum).Load();
+            return user.Museum;
         }
 
         public Country GetCountryByName(string name)

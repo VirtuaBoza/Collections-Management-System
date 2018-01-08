@@ -8,6 +8,8 @@ namespace CoraCorpCM.Data
 
         Location CreateLocation(string name, string address1, string address2, string city, string state, Country country);
 
+        Museum GetMuseumByUser(ApplicationUser user);
+
         Country GetCountryByName(string name);
     }
 }
