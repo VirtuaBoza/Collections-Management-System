@@ -9,11 +9,6 @@ var concat = require('gulp-concat');
 var rimraf = require('rimraf');
 var merge = require('merge-stream');
 
-gulp.task("clean", function (cb)
-{
-    return rimraf("wwwroot/lib/", cb);
-});
-
 gulp.task("minify", function ()
 {
     gulp.src("wwwroot/js/*.js")
@@ -41,6 +36,11 @@ var deps = {
     }
 }
 
+gulp.task("clean", function (cb)
+{
+    return rimraf("wwwroot/lib/", cb);
+});
+
 gulp.task("scripts", function ()
 {
     var streams = [];
@@ -64,5 +64,3 @@ gulp.task("scripts", function ()
 
     return merge(streams);
 });
-
-gulp.task('default', ['clean', 'minify', 'scripts']);
