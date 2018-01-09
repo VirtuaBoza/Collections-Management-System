@@ -17,6 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 To get a development environment running:
 
+
 1. Install dependencies. 
 
 NuGet dependencies should restore automatically when you open the project with Visual Studio. To restore them manually, execute the following using a command prompt from the project directory:
@@ -33,6 +34,7 @@ npm install
 
 Alternatively, you can right-click on the npm folder under Dependencies within the project in Visual Studio and select 'Restore Packages'.
 
+
 2. Create the database.
 
 This can be accomplished via entity framework's cli tool from the project directory:
@@ -47,6 +49,7 @@ Alternatively, you can use the Package Manager Console in Visual Studio to execu
 Update-Database
 ```
 
+
 3. Load scripts into wwwroot.
 
 This can be accomplished with gulp by executing the following using a command prompt from the project directory:
@@ -54,6 +57,7 @@ This can be accomplished with gulp by executing the following using a command pr
 ```
 gulp
 ```
+
 
 4. Configure SendGrid.
 

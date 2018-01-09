@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CoraCorpCM.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace CoraCorpCM.Data
@@ -29,8 +30,8 @@ namespace CoraCorpCM.Data
 
             if (!context.Roles.Any())
             {
-                await roleManager.CreateAsync(new IdentityRole("Administrator"));
-                await roleManager.CreateAsync(new IdentityRole("Contributor"));
+                await roleManager.CreateAsync(new IdentityRole(Role.Admin));
+                await roleManager.CreateAsync(new IdentityRole(Role.Contributor));
             }
         }
     }

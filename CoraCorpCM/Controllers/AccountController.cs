@@ -11,6 +11,7 @@ using CoraCorpCM.Services;
 using CoraCorpCM.ViewModels.AccountViewModels;
 using CoraCorpCM.Data;
 using System.Linq;
+using CoraCorpCM.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoraCorpCM.Controllers
@@ -242,8 +243,11 @@ namespace CoraCorpCM.Controllers
                 {
                     logger.LogInformation("User created a new account with password.");
 
-                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await userManager.AddToRoleAsync(user, Role.Admin);
+                    await userManager.AddToRoleAsync(user, Role.Contributor);
+
+                    var confirmationCode = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, confirmationCode, Request.Scheme);
                     await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // Uncomment the following line to login users automatically after registration
