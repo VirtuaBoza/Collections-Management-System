@@ -2,6 +2,7 @@
 using CoraCorpCM.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -18,12 +19,10 @@ namespace CoraCorpCM
                 var services = scope.ServiceProvider;
                 try
                 {
+                    var context = services.GetRequiredService<ApplicationDbContext>();
                     var environment = services.GetRequiredService<IHostingEnvironment>();
-                    if (environment.IsDevelopment())
-                    {
-                        var context = services.GetRequiredService<ApplicationDbContext>();
-                        CountrySeeder.Seed(context, environment);
-                    }
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    DbInitializer.Seed(context, environment, roleManager).Wait();
                 }
                 catch (Exception ex)
                 {

@@ -242,25 +242,31 @@ namespace CoraCorpCM.Controllers
                 {
                     logger.LogInformation("User created a new account with password.");
 
-                    // TODO rig up EmailSender and use this template code
-                    //var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    //await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    
-                    // My code
+                    // Uncomment the following line to login users automatically after registration
+                    //await signInManager.SignInAsync(user, isPersistent: false);
+
                     var country = museumRepository.GetCountryByName(model.Country);
-                    var location = museumRepository.CreateLocation(model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, country);
-                    museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName, location, user);
+                    museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
+                        model.Address1, model.Address2, model.City, model.State, country, user);
 
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(RegisterConfirmation));
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterConfirmation()
+        {
+            return View();
         }
 
         [HttpPost]

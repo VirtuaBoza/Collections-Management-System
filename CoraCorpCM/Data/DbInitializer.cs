@@ -4,12 +4,17 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace CoraCorpCM.Data
 {
-    public static class CountrySeeder
+    public static class DbInitializer
     {
-        public static void Seed(ApplicationDbContext context, IHostingEnvironment environment)
+        public static async Task Seed(
+            ApplicationDbContext context,
+            IHostingEnvironment environment,
+            RoleManager<IdentityRole> roleManager)
         {
             context.Database.EnsureCreated();
             
@@ -20,6 +25,12 @@ namespace CoraCorpCM.Data
                 var countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(json);
                 context.Countries.AddRange(countries);
                 context.SaveChanges();
+            }
+
+            if (!context.Roles.Any())
+            {
+                await roleManager.CreateAsync(new IdentityRole("Administrator"));
+                await roleManager.CreateAsync(new IdentityRole("Contributor"));
             }
         }
     }

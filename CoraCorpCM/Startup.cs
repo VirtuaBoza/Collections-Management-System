@@ -34,16 +34,20 @@ namespace CoraCorpCM
                     options.Password.RequireUppercase = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequiredUniqueChars = 0;
+
+                    options.SignIn.RequireConfirmedEmail = true;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
             // TODO setup real EmailSender and use that here
-            services.AddTransient<IEmailSender, NullEmailSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
 
             services.AddMvc();
+
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,6 +17,7 @@ namespace CoraCorpCM.Models
             Inspectors = new HashSet<Inspector>();
             InsurancePolicies = new HashSet<InsurancePolicy>();
             Loans = new HashSet<Loan>();
+            Locations = new HashSet<Location>();
             Media = new HashSet<Medium>();
             Pieces = new HashSet<Piece>();
             Subgenres = new HashSet<Subgenre>();
@@ -27,7 +28,12 @@ namespace CoraCorpCM.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
-        public Location Location { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public Country Country { get; set; }
         public Upload Logo { get; set; }
         public ICollection<Acquisition> Acquisitions { get; set; }
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
@@ -40,6 +46,7 @@ namespace CoraCorpCM.Models
         public ICollection<Inspector> Inspectors { get; set; }
         public ICollection<InsurancePolicy> InsurancePolicies { get; set; }
         public ICollection<Loan> Loans { get; set; }
+        public ICollection<Location> Locations { get; set; }
         public ICollection<Medium> Media { get; set; }
         public ICollection<Piece> Pieces { get; set; }
         public ICollection<Subgenre> Subgenres { get; set; }
