@@ -231,7 +231,7 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var country = museumRepository.GetCountryByName(model.Country);
+                var country = museumRepository.GetCountry(model.Country);
                 var museum = museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
                     model.Address1, model.Address2, model.City, model.State, model.ZipCode, country);
 

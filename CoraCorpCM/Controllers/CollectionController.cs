@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CoraCorpCM.Data;
+using CoraCorpCM.Identity;
 using CoraCorpCM.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoraCorpCM.Controllers
 {
+    [Authorize]
     public class CollectionController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMuseumRepository museumRepository;
 
-        public CollectionController(ApplicationDbContext context)
+        public CollectionController(IMuseumRepository museumRepository)
         {
-            _context = context;
+            this.museumRepository = museumRepository;
         }
 
-        // GET: Collection
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pieces.ToListAsync());
+            var userMuseum = museumRepository.GetMuseum(User);
+            var pieces = await museumRepository.GetAllPiecesForMuseum(userMuseum);
+            return View(pieces);
         }
 
-        // GET: Collection/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,8 +32,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Pieces
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var piece = await museumRepository.GetPiece(id);
             if (piece == null)
             {
                 return NotFound();
@@ -43,29 +41,29 @@ namespace CoraCorpCM.Controllers
             return View(piece);
         }
 
-        // GET: Collection/Create
+        [Authorize(Roles = Role.Contributor)]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Collection/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> Create([Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(piece);
-                await _context.SaveChangesAsync();
+                var userMuseum = museumRepository.GetMuseum(User);
+                await museumRepository.CreatePieceForMuseum(piece, userMuseum);
                 return RedirectToAction(nameof(Index));
             }
             return View(piece);
         }
 
-        // GET: Collection/Edit/5
+        [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,7 +71,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
+            var piece = await museumRepository.GetPiece(id);
             if (piece == null)
             {
                 return NotFound();
@@ -81,11 +79,11 @@ namespace CoraCorpCM.Controllers
             return View(piece);
         }
 
-        // POST: Collection/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> Edit(int id, [Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
         {
             if (id != piece.Id)
@@ -97,12 +95,11 @@ namespace CoraCorpCM.Controllers
             {
                 try
                 {
-                    _context.Update(piece);
-                    await _context.SaveChangesAsync();
+                    await museumRepository.UpdatePiece(piece);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PieceExists(piece.Id))
+                    if (!museumRepository.PieceExists(piece.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +113,7 @@ namespace CoraCorpCM.Controllers
             return View(piece);
         }
 
-        // GET: Collection/Delete/5
+        [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,8 +121,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Pieces
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var piece = await museumRepository.GetPiece(id);
             if (piece == null)
             {
                 return NotFound();
@@ -134,20 +130,13 @@ namespace CoraCorpCM.Controllers
             return View(piece);
         }
 
-        // POST: Collection/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var piece = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Pieces.Remove(piece);
-            await _context.SaveChangesAsync();
+            await museumRepository.DeletePiece(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool PieceExists(int id)
-        {
-            return _context.Pieces.Any(e => e.Id == id);
         }
     }
 }

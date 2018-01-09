@@ -10,16 +10,13 @@ namespace CoraCorpCM.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IEmailSender emailSender;
         private readonly IMuseumRepository museumRepository;
 
         public HomeController(
-            UserManager<ApplicationUser> userManager, 
             IEmailSender emailSender, 
             IMuseumRepository museumRepository)
         {
-            this.userManager = userManager;
             this.emailSender = emailSender;
             this.museumRepository = museumRepository;
         }
@@ -28,8 +25,7 @@ namespace CoraCorpCM.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var user = userManager.GetUserAsync(User).Result;
-                var museum = museumRepository.GetMuseumByUser(user);
+                var museum = museumRepository.GetMuseum(User);
                 ViewData["Title"] = museum.ShortName;
                 ViewData["MuseumName"] = museum.Name;
             }
