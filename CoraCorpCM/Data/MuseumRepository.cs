@@ -13,8 +13,8 @@ namespace CoraCorpCM.Data
             this.context = context;
         }
         
-        public void CreateMuseum(string name, string shortname, string address1, string address2, string city, string state,
-            Country country, ApplicationUser creator)
+        public Museum CreateMuseum(string name, string shortname, string address1, string address2, string city, string state, string zipCode,
+            Country country)
         {
             var museum = new Museum()
             {
@@ -24,14 +24,12 @@ namespace CoraCorpCM.Data
                 Address2 = address2,
                 City = city,
                 State = state,
+                ZipCode = zipCode,
                 Country = country,
-                ApplicationUsers = new List<ApplicationUser>
-                {
-                    creator
-                }
             };
             context.Museums.Add(museum);
             context.SaveChanges();
+            return museum;
         }
 
         public Museum GetMuseumByUser(ApplicationUser user)
@@ -43,6 +41,11 @@ namespace CoraCorpCM.Data
         public Country GetCountryByName(string name)
         {
             return context.Countries.FirstOrDefault(c => c.Name == name);
+        }
+
+        public Country GetFirstCountry()
+        {
+            return context.Countries.FirstOrDefault();
         }
     }
 }

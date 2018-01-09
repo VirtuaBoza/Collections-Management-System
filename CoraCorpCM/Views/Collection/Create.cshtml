@@ -1,0 +1,100 @@
+﻿@model CoraCorpCM.Models.Piece
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Piece</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RecordNumber" class="control-label"></label>
+                <input asp-for="RecordNumber" class="form-control" />
+                <span asp-validation-for="RecordNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccessionNumber" class="control-label"></label>
+                <input asp-for="AccessionNumber" class="form-control" />
+                <span asp-validation-for="AccessionNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate" class="form-control" />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Width" class="control-label"></label>
+                <input asp-for="Width" class="form-control" />
+                <span asp-validation-for="Width" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Depth" class="control-label"></label>
+                <input asp-for="Depth" class="form-control" />
+                <span asp-validation-for="Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstimatedValue" class="control-label"></label>
+                <input asp-for="EstimatedValue" class="form-control" />
+                <span asp-validation-for="EstimatedValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CopyrightYear" class="control-label"></label>
+                <input asp-for="CopyrightYear" class="form-control" />
+                <span asp-validation-for="CopyrightYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CopyrightOwner" class="control-label"></label>
+                <input asp-for="CopyrightOwner" class="form-control" />
+                <span asp-validation-for="CopyrightOwner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsFramed" /> @Html.DisplayNameFor(model => model.IsFramed)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModified" class="control-label"></label>
+                <input asp-for="LastModified" class="form-control" />
+                <span asp-validation-for="LastModified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

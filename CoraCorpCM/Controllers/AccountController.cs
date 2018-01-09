@@ -231,12 +231,17 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                var country = museumRepository.GetCountryByName(model.Country);
+                var museum = museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
+                    model.Address1, model.Address2, model.City, model.State, model.ZipCode, country);
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    Museum = museum
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -252,10 +257,6 @@ namespace CoraCorpCM.Controllers
 
                     // Uncomment the following line to login users automatically after registration
                     //await signInManager.SignInAsync(user, isPersistent: false);
-
-                    var country = museumRepository.GetCountryByName(model.Country);
-                    museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
-                        model.Address1, model.Address2, model.City, model.State, country, user);
 
                     return RedirectToAction(nameof(RegisterConfirmation));
                 }

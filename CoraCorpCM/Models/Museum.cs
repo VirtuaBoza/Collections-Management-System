@@ -7,7 +7,7 @@ namespace CoraCorpCM.Models
         public Museum()
         {
             Acquisitions = new HashSet<Acquisition>();
-            ApplicationUsers = new HashSet<ApplicationUser>();
+            Users = new HashSet<ApplicationUser>();
             Artists = new HashSet<Artist>();
             Collections = new HashSet<Collection>();
             Conditions = new HashSet<Condition>();
@@ -36,7 +36,7 @@ namespace CoraCorpCM.Models
         public Country Country { get; set; }
         public Upload Logo { get; set; }
         public ICollection<Acquisition> Acquisitions { get; set; }
-        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
         public ICollection<Artist> Artists { get; set; }
         public ICollection<Collection> Collections { get; set; }
         public ICollection<Condition> Conditions { get; set; }
