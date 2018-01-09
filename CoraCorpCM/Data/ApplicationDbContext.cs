@@ -13,6 +13,7 @@ namespace CoraCorpCM.Data
 
         public DbSet<Museum> Museums { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Piece> Pieces { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,7 +44,5 @@ namespace CoraCorpCM.Data
             builder.Entity<PieceTag>()
                 .HasKey(pieceTag => new { pieceTag.PieceId, pieceTag.TagId });
         }
-
-        public DbSet<CoraCorpCM.Models.Piece> Piece { get; set; }
     }
 }

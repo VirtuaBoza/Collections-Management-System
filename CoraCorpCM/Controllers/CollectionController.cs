@@ -22,7 +22,7 @@ namespace CoraCorpCM.Controllers
         // GET: Collection
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Piece.ToListAsync());
+            return View(await _context.Pieces.ToListAsync());
         }
 
         // GET: Collection/Details/5
@@ -33,7 +33,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Piece
+            var piece = await _context.Pieces
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (piece == null)
             {
@@ -73,7 +73,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Piece.SingleOrDefaultAsync(m => m.Id == id);
+            var piece = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
             if (piece == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace CoraCorpCM.Controllers
                 return NotFound();
             }
 
-            var piece = await _context.Piece
+            var piece = await _context.Pieces
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (piece == null)
             {
@@ -139,15 +139,15 @@ namespace CoraCorpCM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var piece = await _context.Piece.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Piece.Remove(piece);
+            var piece = await _context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Pieces.Remove(piece);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PieceExists(int id)
         {
-            return _context.Piece.Any(e => e.Id == id);
+            return _context.Pieces.Any(e => e.Id == id);
         }
     }
 }

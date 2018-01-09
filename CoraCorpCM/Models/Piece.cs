@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace CoraCorpCM.Models
 {
@@ -31,7 +33,10 @@ namespace CoraCorpCM.Models
         public Subgenre Subgenre { get; set; }
         public string Subject { get; set; }
         public SubjectMatter SubjectMatter { get; set; }
+
+        [Column(TypeName = "date")]
         public DateTime CopyrightYear { get; set; }
+
         public string CopyrightOwner { get; set; }
         public Acquisition Acquisition { get; set; }
         public InsurancePolicy InsurancePolicy { get; set; }
