@@ -64,3 +64,5 @@ gulp.task("scripts", function ()
 
     return merge(streams);
 });
+
+gulp.task('default', ['minify', 'scripts']);
