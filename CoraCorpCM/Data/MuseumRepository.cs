@@ -34,6 +34,7 @@ namespace CoraCorpCM.Data
                 State = state,
                 ZipCode = zipCode,
                 Country = country,
+                RecordCount = 0
             };
             context.Museums.Add(museum);
             context.SaveChanges();
@@ -57,6 +58,7 @@ namespace CoraCorpCM.Data
         public async Task<int> CreatePieceForMuseum(Piece piece, Museum museum)
         {
             piece.Museum = museum;
+            piece.RecordNumber = ++museum.RecordCount;
             context.Add(piece);
             return await context.SaveChangesAsync();
         }

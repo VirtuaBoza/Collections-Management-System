@@ -35,6 +35,7 @@ namespace CoraCorpCM.Models
         public string ZipCode { get; set; }
         public Country Country { get; set; }
         public Upload Logo { get; set; }
+        public int RecordCount { get; set; }
         public ICollection<Acquisition> Acquisitions { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
         public ICollection<Artist> Artists { get; set; }

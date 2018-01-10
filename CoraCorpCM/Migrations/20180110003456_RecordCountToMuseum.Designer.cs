@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180110003456_RecordCountToMuseum")]
+    partial class RecordCountToMuseum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -584,8 +585,11 @@ namespace CoraCorpCM.Migrations
                     b.Property<DateTime>("CopyrightYear")
                         .HasColumnType("date");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CreatedById");
+
+                    b.Property<DateTime>("CreationDate");
 
                     b.Property<int?>("CreationOriginId");
 
@@ -634,6 +638,8 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("AcquisitionId");
 
                     b.HasIndex("CollectionId");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CreationOriginId");
 
@@ -1156,6 +1162,10 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.Collection", "Collection")
                         .WithMany()
                         .HasForeignKey("CollectionId");
+
+                    b.HasOne("CoraCorpCM.Models.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("CoraCorpCM.Models.Origin", "CreationOrigin")
                         .WithMany()
