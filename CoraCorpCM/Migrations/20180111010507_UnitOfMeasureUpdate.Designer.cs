@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180111010507_UnitOfMeasureUpdate")]
+    partial class UnitOfMeasureUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -767,7 +768,7 @@ namespace CoraCorpCM.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitsOfMeasure");
+                    b.ToTable("UnitOfMeasure");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Upload", b =>

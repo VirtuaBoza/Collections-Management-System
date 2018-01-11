@@ -30,6 +30,17 @@ namespace CoraCorpCM.Data
                 context.SaveChanges();
             }
 
+            if (!context.UnitsOfMeasure.Any())
+            {
+                context.Add(new UnitOfMeasure { Abbreviation = "mm", UnitOfMeasurement = "millimeter" });
+                context.Add(new UnitOfMeasure { Abbreviation = "cm", UnitOfMeasurement = "centimeter" });
+                context.Add(new UnitOfMeasure { Abbreviation = "dm", UnitOfMeasurement = "decimeter" });
+                context.Add(new UnitOfMeasure { Abbreviation = "m", UnitOfMeasurement = "meter" });
+                context.Add(new UnitOfMeasure { Abbreviation = "in", UnitOfMeasurement = "inch" });
+                context.Add(new UnitOfMeasure { Abbreviation = "ft", UnitOfMeasurement = "foot" });
+                context.SaveChanges();
+            }
+
             if (!context.Roles.Any())
             {
                 await roleManager.CreateAsync(new IdentityRole(Role.Admin));

@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180111004910_UnitOfMeasure")]
+    partial class UnitOfMeasure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -627,7 +628,7 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int?>("UnitOfMeasureId");
+                    b.Property<string>("UnitOfMeasure");
 
                     b.Property<double>("Width");
 
@@ -660,8 +661,6 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("SubgenreId");
 
                     b.HasIndex("SubjectMatterId");
-
-                    b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("Pieces");
                 });
@@ -754,20 +753,6 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("MuseumId");
 
                     b.ToTable("Tag");
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Models.UnitOfMeasure", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Abbreviation");
-
-                    b.Property<string>("UnitOfMeasurement");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnitsOfMeasure");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Upload", b =>
@@ -1222,10 +1207,6 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.SubjectMatter", "SubjectMatter")
                         .WithMany("Pieces")
                         .HasForeignKey("SubjectMatterId");
-
-                    b.HasOne("CoraCorpCM.Models.UnitOfMeasure", "UnitOfMeasure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeasureId");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.PieceArtist", b =>

@@ -11,9 +11,10 @@ namespace CoraCorpCM.Data
         {
         }
 
-        public DbSet<Museum> Museums { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Museum> Museums { get; set; }
         public DbSet<Piece> Pieces { get; set; }
+        public DbSet<UnitOfMeasure> UnitsOfMeasure { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -18,8 +18,13 @@ namespace CoraCorpCM.Models
 
         public int Id { get; set; }
         public Museum Museum { get; set; }
+
+        [Display(Name = "Record Number")]
         public int RecordNumber { get; set; }
+
+        [Display(Name = "Accession Number")]
         public string AccessionNumber { get; set; }
+
         public string Title { get; set; }
         public Upload Photo { get; set; }
 
@@ -29,10 +34,10 @@ namespace CoraCorpCM.Models
         public DateTime CreationDate { get; set; }
 
         public Origin CreationOrigin { get; set; }
-
         public double Height { get; set; }
         public double Width { get; set; }
         public double Depth { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
 
         [Display(Name = "Estimated Value")]
         [DataType(DataType.Currency)]
@@ -55,11 +60,17 @@ namespace CoraCorpCM.Models
 
         public Acquisition Acquisition { get; set; }
         public InsurancePolicy InsurancePolicy { get; set; }
+
+        [Display(Name = "Framed")]
         public bool IsFramed { get; set; }
+
         public Location CurrentLocation { get; set; }
         public Location PermanentLocation { get; set; }
         public Collection Collection { get; set; }
+
+        [Display(Name = "Last Modified")]
         public DateTime LastModified { get; set; }
+
         public ApplicationUser LastModifiedBy { get; set; }
         public ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
         public ICollection<Inspection> Inspections { get; set; }
