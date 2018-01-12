@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Models
 {
@@ -18,59 +17,34 @@ namespace CoraCorpCM.Models
 
         public int Id { get; set; }
         public Museum Museum { get; set; }
-
-        [Display(Name = "Record Number")]
         public int RecordNumber { get; set; }
-
-        [Display(Name = "Accession Number")]
         public string AccessionNumber { get; set; }
-
         public string Title { get; set; }
         public Upload Photo { get; set; }
-
-        [Column(TypeName = "date")]
-        [Display(Name = "Creation Date")]
-        [DataType(DataType.Date)]
-        public DateTime CreationDate { get; set; }
-
+        public int CreationDay { get; set; }
+        public int CreationMonth { get; set; }
+        public int CreationYear { get; set; }
         public Origin CreationOrigin { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
         public double Depth { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
-
-        [Display(Name = "Estimated Value")]
-        [DataType(DataType.Currency)]
         public decimal EstimatedValue { get; set; }
-
         public Medium Medium { get; set; }
         public Genre Genre { get; set; }
         public Subgenre Subgenre { get; set; }
         public string Subject { get; set; }
         public SubjectMatter SubjectMatter { get; set; }
-
-        [Column(TypeName = "date")]
-        [Display(Name = "Copyright Year")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime CopyrightYear { get; set; }
-
-        [Display(Name = "Copyright Owner")]
+        public int CopyrightYear { get; set; }
         public string CopyrightOwner { get; set; }
-
         public Acquisition Acquisition { get; set; }
         public InsurancePolicy InsurancePolicy { get; set; }
-
-        [Display(Name = "Framed")]
         public bool IsFramed { get; set; }
-
+        public bool IsArchived { get; set; }
         public Location CurrentLocation { get; set; }
         public Location PermanentLocation { get; set; }
         public Collection Collection { get; set; }
-
-        [Display(Name = "Last Modified")]
         public DateTime LastModified { get; set; }
-
         public ApplicationUser LastModifiedBy { get; set; }
         public ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
         public ICollection<Inspection> Inspections { get; set; }

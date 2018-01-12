@@ -581,13 +581,15 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<string>("CopyrightOwner");
 
-                    b.Property<DateTime>("CopyrightYear")
-                        .HasColumnType("date");
+                    b.Property<int>("CopyrightYear");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("date");
+                    b.Property<int>("CreationDay");
+
+                    b.Property<int>("CreationMonth");
 
                     b.Property<int?>("CreationOriginId");
+
+                    b.Property<int>("CreationYear");
 
                     b.Property<int?>("CurrentLocationId");
 
@@ -602,6 +604,8 @@ namespace CoraCorpCM.Migrations
                     b.Property<double>("Height");
 
                     b.Property<int?>("InsurancePolicyId");
+
+                    b.Property<bool>("IsArchived");
 
                     b.Property<bool>("IsFramed");
 

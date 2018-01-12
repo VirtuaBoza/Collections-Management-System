@@ -11,8 +11,8 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180108174142_Initial")]
-    partial class Initial
+    [Migration("20180112005617_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<decimal>("Cost");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int?>("FundingSourceId");
 
@@ -121,9 +122,11 @@ namespace CoraCorpCM.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Birthdate");
+                    b.Property<DateTime>("Birthdate")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("Deathdate");
+                    b.Property<DateTime>("Deathdate")
+                        .HasColumnType("date");
 
                     b.Property<string>("FirstName");
 
@@ -247,7 +250,8 @@ namespace CoraCorpCM.Migrations
                 {
                     b.Property<int>("Id");
 
-                    b.Property<string>("Genc2A");
+                    b.Property<string>("Genc2A")
+                        .HasMaxLength(2);
 
                     b.Property<string>("Name");
 
@@ -332,7 +336,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<int?>("ConditionId");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int?>("InspectorId");
 
@@ -384,7 +389,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<string>("Carrier");
 
-                    b.Property<DateTime>("ExpirationDate");
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("date");
 
                     b.Property<int?>("MuseumId");
 
@@ -459,6 +465,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<int?>("CountryId");
 
+                    b.Property<int?>("MuseumId");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("State");
@@ -468,6 +476,8 @@ namespace CoraCorpCM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("MuseumId");
 
                     b.ToTable("Location");
                 });
@@ -506,19 +516,29 @@ namespace CoraCorpCM.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("LocationId");
+                    b.Property<string>("Address1");
+
+                    b.Property<string>("Address2");
+
+                    b.Property<string>("City");
+
+                    b.Property<int?>("CountryId");
 
                     b.Property<int?>("LogoId");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("RecordCount");
+
                     b.Property<string>("ShortName");
+
+                    b.Property<string>("State");
+
+                    b.Property<string>("ZipCode");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId")
-                        .IsUnique()
-                        .HasFilter("[LocationId] IS NOT NULL");
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("LogoId")
                         .IsUnique()
@@ -562,15 +582,15 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<string>("CopyrightOwner");
 
-                    b.Property<DateTime>("CopyrightYear");
+                    b.Property<int>("CopyrightYear");
 
-                    b.Property<DateTime>("Created");
+                    b.Property<int>("CreationDay");
 
-                    b.Property<string>("CreatedById");
-
-                    b.Property<DateTime>("CreationDate");
+                    b.Property<int>("CreationMonth");
 
                     b.Property<int?>("CreationOriginId");
+
+                    b.Property<int>("CreationYear");
 
                     b.Property<int?>("CurrentLocationId");
 
@@ -585,6 +605,8 @@ namespace CoraCorpCM.Migrations
                     b.Property<double>("Height");
 
                     b.Property<int?>("InsurancePolicyId");
+
+                    b.Property<bool>("IsArchived");
 
                     b.Property<bool>("IsFramed");
 
@@ -610,6 +632,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<int?>("UnitOfMeasureId");
+
                     b.Property<double>("Width");
 
                     b.HasKey("Id");
@@ -617,8 +641,6 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("AcquisitionId");
 
                     b.HasIndex("CollectionId");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CreationOriginId");
 
@@ -644,7 +666,9 @@ namespace CoraCorpCM.Migrations
 
                     b.HasIndex("SubjectMatterId");
 
-                    b.ToTable("Piece");
+                    b.HasIndex("UnitOfMeasureId");
+
+                    b.ToTable("Pieces");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.PieceArtist", b =>
@@ -735,6 +759,20 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("MuseumId");
 
                     b.ToTable("Tag");
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Models.UnitOfMeasure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Abbreviation");
+
+                    b.Property<string>("UnitOfMeasurement");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnitsOfMeasure");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.Upload", b =>
@@ -885,7 +923,7 @@ namespace CoraCorpCM.Migrations
             modelBuilder.Entity("CoraCorpCM.Models.ApplicationUser", b =>
                 {
                     b.HasOne("CoraCorpCM.Models.Museum", "Museum")
-                        .WithMany("ApplicationUsers")
+                        .WithMany("Users")
                         .HasForeignKey("MuseumId");
                 });
 
@@ -1084,6 +1122,10 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
+
+                    b.HasOne("CoraCorpCM.Models.Museum", "Museum")
+                        .WithMany("Locations")
+                        .HasForeignKey("MuseumId");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.LocationTag", b =>
@@ -1108,9 +1150,9 @@ namespace CoraCorpCM.Migrations
 
             modelBuilder.Entity("CoraCorpCM.Models.Museum", b =>
                 {
-                    b.HasOne("CoraCorpCM.Models.Location", "Location")
-                        .WithOne("Museum")
-                        .HasForeignKey("CoraCorpCM.Models.Museum", "LocationId");
+                    b.HasOne("CoraCorpCM.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
 
                     b.HasOne("CoraCorpCM.Models.Upload", "Logo")
                         .WithOne("Museum")
@@ -1137,10 +1179,6 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.Collection", "Collection")
                         .WithMany()
                         .HasForeignKey("CollectionId");
-
-                    b.HasOne("CoraCorpCM.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
 
                     b.HasOne("CoraCorpCM.Models.Origin", "CreationOrigin")
                         .WithMany()
@@ -1189,6 +1227,10 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.SubjectMatter", "SubjectMatter")
                         .WithMany("Pieces")
                         .HasForeignKey("SubjectMatterId");
+
+                    b.HasOne("CoraCorpCM.Models.UnitOfMeasure", "UnitOfMeasure")
+                        .WithMany()
+                        .HasForeignKey("UnitOfMeasureId");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.PieceArtist", b =>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CoraCorpCM.Migrations
 {
-    public partial class Initial : Migration
+    public partial class NewInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace CoraCorpCM.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    Genc2A = table.Column<string>(nullable: true),
+                    Genc2A = table.Column<string>(maxLength: 2, nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -47,6 +47,20 @@ namespace CoraCorpCM.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FundingSource", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnitsOfMeasure",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Abbreviation = table.Column<string>(nullable: true),
+                    UnitOfMeasurement = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnitsOfMeasure", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +99,7 @@ namespace CoraCorpCM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Museums",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -94,39 +108,20 @@ namespace CoraCorpCM.Migrations
                     Address2 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     CountryId = table.Column<int>(nullable: true),
+                    LogoId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    RecordCount = table.Column<int>(nullable: false),
+                    ShortName = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Location_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Museums",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LocationId = table.Column<int>(nullable: true),
-                    LogoId = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    ShortName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
                     table.PrimaryKey("PK_Museums", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Museums_Location_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Location",
+                        name: "FK_Museums_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -213,37 +208,6 @@ namespace CoraCorpCM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exhibition",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Curator = table.Column<string>(nullable: true),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true),
-                    MuseumId = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    Theme = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Exhibition", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Exhibition_Location_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Location",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Exhibition_Museums_MuseumId",
-                        column: x => x.MuseumId,
-                        principalTable: "Museums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Genre",
                 columns: table => new
                 {
@@ -293,7 +257,7 @@ namespace CoraCorpCM.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AmountInsured = table.Column<decimal>(nullable: false),
                     Carrier = table.Column<string>(nullable: true),
-                    ExpirationDate = table.Column<DateTime>(nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "date", nullable: false),
                     MuseumId = table.Column<int>(nullable: true),
                     PolicyNumber = table.Column<string>(nullable: true)
                 },
@@ -302,6 +266,38 @@ namespace CoraCorpCM.Migrations
                     table.PrimaryKey("PK_InsurancePolicy", x => x.Id);
                     table.ForeignKey(
                         name: "FK_InsurancePolicy_Museums_MuseumId",
+                        column: x => x.MuseumId,
+                        principalTable: "Museums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Location",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address1 = table.Column<string>(nullable: true),
+                    Address2 = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    CountryId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Location_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Location_Museums_MuseumId",
                         column: x => x.MuseumId,
                         principalTable: "Museums",
                         principalColumn: "Id",
@@ -522,51 +518,32 @@ namespace CoraCorpCM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Loan",
+                name: "Exhibition",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ExhibitionId = table.Column<int>(nullable: true),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    FromLocationId = table.Column<int>(nullable: true),
-                    LoanAgreementId = table.Column<int>(nullable: true),
+                    Curator = table.Column<string>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    LocationId = table.Column<int>(nullable: true),
                     MuseumId = table.Column<int>(nullable: true),
-                    Terms = table.Column<string>(nullable: true),
-                    ToDate = table.Column<DateTime>(nullable: false),
-                    ToLocationId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    Theme = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Loan", x => x.Id);
+                    table.PrimaryKey("PK_Exhibition", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Loan_Exhibition_ExhibitionId",
-                        column: x => x.ExhibitionId,
-                        principalTable: "Exhibition",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Loan_Location_FromLocationId",
-                        column: x => x.FromLocationId,
+                        name: "FK_Exhibition_Location_LocationId",
+                        column: x => x.LocationId,
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Loan_Upload_LoanAgreementId",
-                        column: x => x.LoanAgreementId,
-                        principalTable: "Upload",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Loan_Museums_MuseumId",
+                        name: "FK_Exhibition_Museums_MuseumId",
                         column: x => x.MuseumId,
                         principalTable: "Museums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Loan_Location_ToLocationId",
-                        column: x => x.ToLocationId,
-                        principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -577,8 +554,8 @@ namespace CoraCorpCM.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Birthdate = table.Column<DateTime>(nullable: false),
-                    Deathdate = table.Column<DateTime>(nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "date", nullable: false),
+                    Deathdate = table.Column<DateTime>(type: "date", nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     KnownAs = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -609,7 +586,7 @@ namespace CoraCorpCM.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Cost = table.Column<decimal>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
                     FundingSourceId = table.Column<int>(nullable: true),
                     LocationId = table.Column<int>(nullable: true),
                     MuseumId = table.Column<int>(nullable: true),
@@ -674,6 +651,56 @@ namespace CoraCorpCM.Migrations
                         principalTable: "Tag",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Loan",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ExhibitionId = table.Column<int>(nullable: true),
+                    FromDate = table.Column<DateTime>(nullable: false),
+                    FromLocationId = table.Column<int>(nullable: true),
+                    LoanAgreementId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: true),
+                    Terms = table.Column<string>(nullable: true),
+                    ToDate = table.Column<DateTime>(nullable: false),
+                    ToLocationId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Loan", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Loan_Exhibition_ExhibitionId",
+                        column: x => x.ExhibitionId,
+                        principalTable: "Exhibition",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Loan_Location_FromLocationId",
+                        column: x => x.FromLocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Loan_Upload_LoanAgreementId",
+                        column: x => x.LoanAgreementId,
+                        principalTable: "Upload",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Loan_Museums_MuseumId",
+                        column: x => x.MuseumId,
+                        principalTable: "Museums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Loan_Location_ToLocationId",
+                        column: x => x.ToLocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -797,7 +824,7 @@ namespace CoraCorpCM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piece",
+                name: "Pieces",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -806,11 +833,11 @@ namespace CoraCorpCM.Migrations
                     AcquisitionId = table.Column<int>(nullable: true),
                     CollectionId = table.Column<int>(nullable: true),
                     CopyrightOwner = table.Column<string>(nullable: true),
-                    CopyrightYear = table.Column<DateTime>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    CreatedById = table.Column<string>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CopyrightYear = table.Column<int>(nullable: false),
+                    CreationDay = table.Column<int>(nullable: false),
+                    CreationMonth = table.Column<int>(nullable: false),
                     CreationOriginId = table.Column<int>(nullable: true),
+                    CreationYear = table.Column<int>(nullable: false),
                     CurrentLocationId = table.Column<int>(nullable: true),
                     Depth = table.Column<double>(nullable: false),
                     EstimatedValue = table.Column<decimal>(nullable: false),
@@ -818,6 +845,7 @@ namespace CoraCorpCM.Migrations
                     GenreId = table.Column<int>(nullable: true),
                     Height = table.Column<double>(nullable: false),
                     InsurancePolicyId = table.Column<int>(nullable: true),
+                    IsArchived = table.Column<bool>(nullable: false),
                     IsFramed = table.Column<bool>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     LastModifiedById = table.Column<string>(nullable: true),
@@ -830,99 +858,100 @@ namespace CoraCorpCM.Migrations
                     Subject = table.Column<string>(nullable: true),
                     SubjectMatterId = table.Column<int>(nullable: true),
                     Title = table.Column<string>(nullable: true),
+                    UnitOfMeasureId = table.Column<int>(nullable: true),
                     Width = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Piece", x => x.Id);
+                    table.PrimaryKey("PK_Pieces", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piece_Acquisition_AcquisitionId",
+                        name: "FK_Pieces_Acquisition_AcquisitionId",
                         column: x => x.AcquisitionId,
                         principalTable: "Acquisition",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Collection_CollectionId",
+                        name: "FK_Pieces_Collection_CollectionId",
                         column: x => x.CollectionId,
                         principalTable: "Collection",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_AspNetUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Piece_Origin_CreationOriginId",
+                        name: "FK_Pieces_Origin_CreationOriginId",
                         column: x => x.CreationOriginId,
                         principalTable: "Origin",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Location_CurrentLocationId",
+                        name: "FK_Pieces_Location_CurrentLocationId",
                         column: x => x.CurrentLocationId,
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Exhibition_ExhibitionId",
+                        name: "FK_Pieces_Exhibition_ExhibitionId",
                         column: x => x.ExhibitionId,
                         principalTable: "Exhibition",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Genre_GenreId",
+                        name: "FK_Pieces_Genre_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_InsurancePolicy_InsurancePolicyId",
+                        name: "FK_Pieces_InsurancePolicy_InsurancePolicyId",
                         column: x => x.InsurancePolicyId,
                         principalTable: "InsurancePolicy",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_AspNetUsers_LastModifiedById",
+                        name: "FK_Pieces_AspNetUsers_LastModifiedById",
                         column: x => x.LastModifiedById,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Medium_MediumId",
+                        name: "FK_Pieces_Medium_MediumId",
                         column: x => x.MediumId,
                         principalTable: "Medium",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Museums_MuseumId",
+                        name: "FK_Pieces_Museums_MuseumId",
                         column: x => x.MuseumId,
                         principalTable: "Museums",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Location_PermanentLocationId",
+                        name: "FK_Pieces_Location_PermanentLocationId",
                         column: x => x.PermanentLocationId,
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Upload_PhotoId",
+                        name: "FK_Pieces_Upload_PhotoId",
                         column: x => x.PhotoId,
                         principalTable: "Upload",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_Subgenre_SubgenreId",
+                        name: "FK_Pieces_Subgenre_SubgenreId",
                         column: x => x.SubgenreId,
                         principalTable: "Subgenre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piece_SubjectMatter_SubjectMatterId",
+                        name: "FK_Pieces_SubjectMatter_SubjectMatterId",
                         column: x => x.SubjectMatterId,
                         principalTable: "SubjectMatter",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pieces_UnitsOfMeasure_UnitOfMeasureId",
+                        column: x => x.UnitOfMeasureId,
+                        principalTable: "UnitsOfMeasure",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -944,9 +973,9 @@ namespace CoraCorpCM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExhibitionPiece_Piece_PieceId",
+                        name: "FK_ExhibitionPiece_Pieces_PieceId",
                         column: x => x.PieceId,
-                        principalTable: "Piece",
+                        principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -958,7 +987,7 @@ namespace CoraCorpCM.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ConditionId = table.Column<int>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
                     InspectorId = table.Column<int>(nullable: true),
                     MuseumId = table.Column<int>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
@@ -986,9 +1015,9 @@ namespace CoraCorpCM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Inspection_Piece_PieceId",
+                        name: "FK_Inspection_Pieces_PieceId",
                         column: x => x.PieceId,
-                        principalTable: "Piece",
+                        principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1010,9 +1039,9 @@ namespace CoraCorpCM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LoanPiece_Piece_PieceId",
+                        name: "FK_LoanPiece_Pieces_PieceId",
                         column: x => x.PieceId,
-                        principalTable: "Piece",
+                        principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1034,9 +1063,9 @@ namespace CoraCorpCM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PieceArtist_Piece_PieceId",
+                        name: "FK_PieceArtist_Pieces_PieceId",
                         column: x => x.PieceId,
-                        principalTable: "Piece",
+                        principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1052,9 +1081,9 @@ namespace CoraCorpCM.Migrations
                 {
                     table.PrimaryKey("PK_PieceTag", x => new { x.PieceId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_PieceTag_Piece_PieceId",
+                        name: "FK_PieceTag_Pieces_PieceId",
                         column: x => x.PieceId,
-                        principalTable: "Piece",
+                        principalTable: "Pieces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1265,6 +1294,11 @@ namespace CoraCorpCM.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Location_MuseumId",
+                table: "Location",
+                column: "MuseumId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LocationTag_TagId",
                 table: "LocationTag",
                 column: "TagId");
@@ -1275,11 +1309,9 @@ namespace CoraCorpCM.Migrations
                 column: "MuseumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Museums_LocationId",
+                name: "IX_Museums_CountryId",
                 table: "Museums",
-                column: "LocationId",
-                unique: true,
-                filter: "[LocationId] IS NOT NULL");
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Museums_LogoId",
@@ -1299,84 +1331,84 @@ namespace CoraCorpCM.Migrations
                 column: "MuseumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piece_AcquisitionId",
-                table: "Piece",
-                column: "AcquisitionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_CollectionId",
-                table: "Piece",
-                column: "CollectionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_CreatedById",
-                table: "Piece",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_CreationOriginId",
-                table: "Piece",
-                column: "CreationOriginId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_CurrentLocationId",
-                table: "Piece",
-                column: "CurrentLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_ExhibitionId",
-                table: "Piece",
-                column: "ExhibitionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_GenreId",
-                table: "Piece",
-                column: "GenreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_InsurancePolicyId",
-                table: "Piece",
-                column: "InsurancePolicyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_LastModifiedById",
-                table: "Piece",
-                column: "LastModifiedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_MediumId",
-                table: "Piece",
-                column: "MediumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_MuseumId",
-                table: "Piece",
-                column: "MuseumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_PermanentLocationId",
-                table: "Piece",
-                column: "PermanentLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_PhotoId",
-                table: "Piece",
-                column: "PhotoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_SubgenreId",
-                table: "Piece",
-                column: "SubgenreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Piece_SubjectMatterId",
-                table: "Piece",
-                column: "SubjectMatterId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PieceArtist_ArtistId",
                 table: "PieceArtist",
                 column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_AcquisitionId",
+                table: "Pieces",
+                column: "AcquisitionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_CollectionId",
+                table: "Pieces",
+                column: "CollectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_CreationOriginId",
+                table: "Pieces",
+                column: "CreationOriginId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_CurrentLocationId",
+                table: "Pieces",
+                column: "CurrentLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_ExhibitionId",
+                table: "Pieces",
+                column: "ExhibitionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_GenreId",
+                table: "Pieces",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_InsurancePolicyId",
+                table: "Pieces",
+                column: "InsurancePolicyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_LastModifiedById",
+                table: "Pieces",
+                column: "LastModifiedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_MediumId",
+                table: "Pieces",
+                column: "MediumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_MuseumId",
+                table: "Pieces",
+                column: "MuseumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_PermanentLocationId",
+                table: "Pieces",
+                column: "PermanentLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_PhotoId",
+                table: "Pieces",
+                column: "PhotoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_SubgenreId",
+                table: "Pieces",
+                column: "SubgenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_SubjectMatterId",
+                table: "Pieces",
+                column: "SubjectMatterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pieces_UnitOfMeasureId",
+                table: "Pieces",
+                column: "UnitOfMeasureId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PieceSource_MuseumId",
@@ -1470,7 +1502,7 @@ namespace CoraCorpCM.Migrations
                 name: "Artist");
 
             migrationBuilder.DropTable(
-                name: "Piece");
+                name: "Pieces");
 
             migrationBuilder.DropTable(
                 name: "Tag");
@@ -1480,9 +1512,6 @@ namespace CoraCorpCM.Migrations
 
             migrationBuilder.DropTable(
                 name: "Collection");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Origin");
@@ -1497,6 +1526,9 @@ namespace CoraCorpCM.Migrations
                 name: "InsurancePolicy");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Medium");
 
             migrationBuilder.DropTable(
@@ -1506,22 +1538,25 @@ namespace CoraCorpCM.Migrations
                 name: "SubjectMatter");
 
             migrationBuilder.DropTable(
+                name: "UnitsOfMeasure");
+
+            migrationBuilder.DropTable(
                 name: "FundingSource");
 
             migrationBuilder.DropTable(
                 name: "PieceSource");
 
             migrationBuilder.DropTable(
-                name: "Museums");
-
-            migrationBuilder.DropTable(
                 name: "Location");
 
             migrationBuilder.DropTable(
-                name: "Upload");
+                name: "Museums");
 
             migrationBuilder.DropTable(
                 name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "Upload");
         }
     }
 }
