@@ -8,7 +8,8 @@ namespace CoraCorpCM.Data
     public interface IMuseumRepository
     {
         Museum CreateMuseum(string name, string shortname, 
-            string address1, string address2, string city, string state, string zipCode, Country country);
+            string address1, string address2, string city, string state, string zipCode, Country country,
+            ApplicationUser creator);
         Museum GetMuseum(ApplicationUser user);
         Museum GetMuseum(ClaimsPrincipal principal);
 

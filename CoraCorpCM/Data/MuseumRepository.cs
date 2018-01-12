@@ -21,8 +21,9 @@ namespace CoraCorpCM.Data
         }
 
         #region Museum
-        public Museum CreateMuseum(string name, string shortname, string address1, string address2, string city, string state, string zipCode,
-            Country country)
+        public Museum CreateMuseum(string name, string shortname, 
+            string address1, string address2, string city, string state, string zipCode, Country country,
+            ApplicationUser creator)
         {
             var museum = new Museum()
             {
@@ -34,7 +35,11 @@ namespace CoraCorpCM.Data
                 State = state,
                 ZipCode = zipCode,
                 Country = country,
-                RecordCount = 0
+                RecordCount = 0,
+                Users = new List<ApplicationUser>
+                {
+                    creator
+                }
             };
             context.Museums.Add(museum);
             context.SaveChanges();
