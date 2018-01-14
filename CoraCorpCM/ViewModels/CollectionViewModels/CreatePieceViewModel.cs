@@ -46,7 +46,8 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public IEnumerable<SelectListItem> UnitsOfMeasure { get; set; }
 
         [Display(Name = "Estimated Value")]
-        public decimal EstimatedValue { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal? EstimatedValue { get; set; }
 
         // Medium - Existing
         [Display(Name = "Medium")]
@@ -100,6 +101,8 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public IEnumerable<SelectListItem> Acquisitions { get; set; }
 
         #region Acquisition - New
+        [Display(Name = "Acquisition Date")]
+        [DataType(DataType.Date)]
         public DateTime AcquisitionDate { get; set; }
 
         // Acquisition Location - Existing
@@ -110,20 +113,27 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         // Acquisition Location - New
         [Display(Name = "Name")]
         public string AcquisitionLocationName { get; set; }
+
         [Display(Name = "Address Line 1")]
         public string AcquisitionAddress1 { get; set; }
+
         [Display(Name = "Address Line 2")]
         public string AcquisitionAddress2 { get; set; }
+
         [Display(Name = "City")]
         public string AcquisitionCity { get; set; }
+
         [Display(Name = "State")]
         public string AcquisitionState { get; set; }
+
         [Display(Name = "Zip Code")]
         public string AcquisitionZipCode { get; set; }
+
         [Display(Name = "Country")]
         public string AcquisitionCountryId { get; set; }
 
-        public decimal Cost { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal? Cost { get; set; }
 
         public string Terms { get; set; }
 
@@ -133,7 +143,7 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public IEnumerable<SelectListItem> FundingSources { get; set; }
 
         // Acquisition Funding Source - New
-        [Display(Name = "New Funding Source")]
+        [Display(Name = "Funding Source")]
         public string FundingSourceName { get; set; }
 
         // Acquisition Piece Source - Existing
@@ -142,7 +152,7 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public IEnumerable<SelectListItem> PieceSources { get; set; }
 
         // Acquisition Piece Source - New
-        [Display(Name = "New Source")]
+        [Display(Name = "Source")]
         public string PieceSourceName { get; set; }
         #endregion
 
