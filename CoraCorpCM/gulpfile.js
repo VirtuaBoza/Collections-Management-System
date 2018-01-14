@@ -33,6 +33,9 @@ var deps = {
     "font-awesome": {
         "css/*": "css",
         "fonts/*": "fonts"
+    },
+    "bootstrap-datepicker": {
+        "dist/**/*": "dist"
     }
 };
 

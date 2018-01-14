@@ -17,13 +17,13 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public string AccessionNumber { get; set; }
 
         [Display(Name = "Year")]
-        public int CreationYear { get; set; }
+        public int? CreationYear { get; set; }
 
         [Display(Name = "Month")]
-        public int CreationMonth { get; set; }
+        public int? CreationMonth { get; set; }
 
         [Display(Name = "Day")]
-        public int CreationDay { get; set; }
+        public int? CreationDay { get; set; }
 
         [Display(Name = "City")]
         public string OriginCity { get; set; }
