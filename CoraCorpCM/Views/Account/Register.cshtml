@@ -55,8 +55,10 @@
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Country"></label>
-                <select asp-for="Country" asp-items="Model.Countries" class="form-control" ></select>
+                <label asp-for="CountryId"></label>
+                <select asp-for="CountryId" asp-items="Model.Countries" class="form-control" >
+                    <option value="-1">- Select a Country -</option>
+                </select>
             </div>
         </div>
         <div class="col-md-4">

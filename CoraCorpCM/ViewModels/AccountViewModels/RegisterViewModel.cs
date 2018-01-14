@@ -31,7 +31,7 @@ namespace CoraCorpCM.ViewModels.AccountViewModels
         public string ZipCode { get; set; }
 
         [Display(Name = "Country")]
-        public string Country { get; set; }
+        public string CountryId { get; set; }
         public IEnumerable<SelectListItem> Countries { get; set; }
 
         [Required]

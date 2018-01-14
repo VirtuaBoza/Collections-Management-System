@@ -217,8 +217,7 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 
             var model = new RegisterViewModel();
-            var countries = context.Countries.Select(c => new SelectListItem { Text = c.Name, Value = c.Name });
-            model.Countries = countries;
+            model.Countries = museumRepository.GetCountrySelections();
 
             return View(model);
         }
@@ -241,7 +240,11 @@ namespace CoraCorpCM.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var country = museumRepository.GetCountry(model.Country);
+                    Country country = null;
+                    if (int.TryParse(model.CountryId, out int countryId))
+                    {
+                        country = museumRepository.GetCountry(countryId);
+                    }
                     museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
                         model.Address1, model.Address2, model.City, model.State, model.ZipCode, country,
                         user);
@@ -261,7 +264,6 @@ namespace CoraCorpCM.Controllers
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 

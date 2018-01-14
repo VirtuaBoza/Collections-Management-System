@@ -1,4 +1,4 @@
-﻿@model CoraCorpCM.Models.Piece
+﻿@model CoraCorpCM.ViewModels.CollectionViewModels.CreatePieceViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -14,19 +14,55 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="AccessionNumber" class="control-label"></label>
-                <input asp-for="AccessionNumber" class="form-control" />
-                <span asp-validation-for="AccessionNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AccessionNumber" class="control-label"></label>
+                <input asp-for="AccessionNumber" class="form-control" />
+                <span asp-validation-for="AccessionNumber" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CreationYear" class="control-label"></label>
+                        <input asp-for="CreationYear" class="form-control" />
+                        <span asp-validation-for="CreationYear" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CreationMonth" class="control-label"></label>
+                        <input asp-for="CreationMonth" class="form-control" />
+                        <span asp-validation-for="CreationMonth" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CreationDay" class="control-label"></label>
+                        <input asp-for="CreationDay" class="form-control" />
+                        <span asp-validation-for="CreationDay" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginCity" class="control-label"></label>
+                <input asp-for="OriginCity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginState" class="control-label"></label>
+                <input asp-for="OriginState" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginCountryId"></label>
+                <select asp-for="OriginCountryId" asp-items="Model.Countries" class="form-control">
+                    <option value="-1">- Select a Country -</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-md-3">
@@ -52,8 +88,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="UnitOfMeasure.Abbreviation" class="control-label"></label>
-                        <select asp-for="UnitOfMeasure.Abbreviation" class="form-control" ></select>
+                        <label asp-for="UnitOfMeasureId" class="control-label"></label>
+                        <select asp-for="UnitOfMeasureId" asp-items="Model.UnitsOfMeasure" class="form-control"></select>
                     </div>
                 </div>
             </div>
@@ -62,11 +98,43 @@
                 <input asp-for="EstimatedValue" class="form-control" />
                 <span asp-validation-for="EstimatedValue" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
+                <label asp-for="MediumId" class="control-label"></label>
+                <select asp-for="MediumId" asp-items="Model.Media" class="form-control"></select>
             </div>
+            <div class="form-group">
+                <label asp-for="MediumName" class="control-label"></label>
+                <input asp-for="MediumName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GenreId" class="control-label"></label>
+                <select asp-for="GenreId" asp-items="Model.Genres" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenreName" class="control-label"></label>
+                <input asp-for="GenreName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SubgenreId" class="control-label"></label>
+                <select asp-for="SubgenreId" asp-items="Model.Subgenres" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubgenreName" class="control-label"></label>
+                <input asp-for="SubgenreName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SubjectMatterId" class="control-label"></label>
+                <select asp-for="SubjectMatterId" asp-items="Model.SubjectMatters" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectMatterName" class="control-label"></label>
+                <input asp-for="SubjectMatterName" class="form-control" />
+            </div>
+
             <div class="form-group">
                 <label asp-for="CopyrightYear" class="control-label"></label>
                 <input asp-for="CopyrightYear" class="form-control" />
@@ -75,7 +143,75 @@
             <div class="form-group">
                 <label asp-for="CopyrightOwner" class="control-label"></label>
                 <input asp-for="CopyrightOwner" class="form-control" />
-                <span asp-validation-for="CopyrightOwner" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Acquisition" class="control-label"></label>
+                <select asp-for="Acquisition" asp-items="Model.Acquisitions" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionDate" class="control-label"></label>
+                <input asp-for="AcquisitionDate" class="form-control" />
+                <span asp-validation-for="AcquisitionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionLocationId" class="control-label"></label>
+                <select asp-for="AcquisitionLocationId" asp-items="Model.Locations" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionLocationName"></label>
+                <input asp-for="AcquisitionLocationName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionAddress1"></label>
+                <input asp-for="AcquisitionAddress1" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionAddress2"></label>
+                <input asp-for="AcquisitionAddress2" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionCity"></label>
+                <input asp-for="AcquisitionCity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionState"></label>
+                <input asp-for="AcquisitionState" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionZipCode"></label>
+                <input asp-for="AcquisitionZipCode" class="form-control" />
+                <span asp-validation-for="AcquisitionZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcquisitionCountryId"></label>
+                <select asp-for="AcquisitionCountryId" asp-items="Model.Countries" class="form-control">
+                    <option value="-1">- Select a Country -</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost"></label>
+                <input asp-for="Cost" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Terms"></label>
+                <textarea rows="6" asp-for="Terms" class="form-control" ></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="FundingSourceId" class="control-label"></label>
+                <select asp-for="FundingSourceId" asp-items="Model.FundingSources" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FundingSourceName" class="control-label"></label>
+                <input asp-for="FundingSourceName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PieceSourceId" class="control-label"></label>
+                <select asp-for="PieceSourceId" asp-items="Model.PieceSources" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PieceSourceName" class="control-label"></label>
+                <input asp-for="PieceSourceName" class="form-control" />
             </div>
             <div class="form-group">
                 <div class="checkbox">

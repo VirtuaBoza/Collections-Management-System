@@ -52,18 +52,13 @@ namespace CoraCorpCM.Data
 
                 if (!context.Users.Any() && !context.Museums.Any())
                 {
-                    var country = museumRepository.GetFirstCountry();
-                    var museum = museumRepository.CreateMuseum("Example Museum", "ExMPL",
-                        "1 Street", "A Suite", "Anytown", "FL", "12345", country);
-
                     var fullControlUser = new ApplicationUser
                     {
                         UserName = "fullcontrol@email.com",
                         Email = "fullcontrol@email.com",
                         FirstName = "AndrewFC",
                         LastName = "Boza",
-                        EmailConfirmed = true,
-                        Museum = museum
+                        EmailConfirmed = true
                     };
                     var fullControlUserResult = await userManager.CreateAsync(fullControlUser, "password");
                     if (fullControlUserResult.Succeeded)
@@ -71,6 +66,11 @@ namespace CoraCorpCM.Data
                         await userManager.AddToRoleAsync(fullControlUser, Role.Admin);
                         await userManager.AddToRoleAsync(fullControlUser, Role.Contributor);
                     }
+
+                    var country = museumRepository.GetFirstCountry();
+                    var museum = museumRepository.CreateMuseum("Example Museum", "ExMPL",
+                        "1 Street", "A Suite", "Anytown", "FL", "12345", country,
+                        fullControlUser);
 
                     var adminUser = new ApplicationUser
                     {

@@ -5,6 +5,7 @@ using CoraCorpCM.Data;
 using CoraCorpCM.Identity;
 using CoraCorpCM.Models;
 using Microsoft.AspNetCore.Authorization;
+using CoraCorpCM.ViewModels.CollectionViewModels;
 
 namespace CoraCorpCM.Controllers
 {
@@ -44,7 +45,25 @@ namespace CoraCorpCM.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create()
         {
-            return View();
+            var userMuseum = museumRepository.GetMuseum(User);
+            var model = new CreatePieceViewModel
+            {
+                Countries = museumRepository.GetCountrySelections(),
+                UnitsOfMeasure = museumRepository.GetUnitOfMeasureSelections(),
+
+                Media = museumRepository.GetMediumSelections(userMuseum),
+                Genres = museumRepository.GetGenreSelections(userMuseum),
+                Subgenres = museumRepository.GetSubgenreSelections(userMuseum),
+                SubjectMatters = museumRepository.GetSubjectMatterSelections(userMuseum),
+                KnownArtists = museumRepository.GetArtistSelections(userMuseum),
+                Acquisitions = museumRepository.GetAcquisitionSelections(userMuseum),
+                Locations = museumRepository.GetLocationSelections(userMuseum),
+                FundingSources = museumRepository.GetFundingSourceSelections(userMuseum),
+                PieceSources = museumRepository.GetPieceSourceSelections(userMuseum),
+                InsurancePolicies = museumRepository.GetInsurancePolicySelections(userMuseum)
+            };
+
+            return View(model);
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
