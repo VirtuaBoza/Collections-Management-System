@@ -43,6 +43,8 @@
     });
 
     // Utilizing jquery-mask-plugin
-    $('.money').mask("#,##0.00", { reverse: true });
-
+    $('.year-mask').mask('0000');
+    $('.month-mask').mask('00');
+    $('.day-mask').mask('00');
+    $('.money-mask').mask("#,##0.00", { reverse: true });
 });

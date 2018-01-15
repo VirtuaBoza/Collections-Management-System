@@ -80,7 +80,7 @@
                 <label asp-for="EstimatedValue" class="control-label"></label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input asp-for="EstimatedValue" class="form-control text-right money">
+                    <input asp-for="EstimatedValue" class="form-control text-right money-mask">
                 </div>
                 <span asp-validation-for="EstimatedValue" class="text-danger"></span>
             </div>
@@ -134,23 +134,25 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="CreationYear" class="control-label"></label>
-                        <input asp-for="CreationYear" class="form-control year-picker" />
-                        <span asp-validation-for="CreationYear" class="text-danger"></span>
+                        <input asp-for="CreationYear" class="form-control year-picker year-mask" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="CreationMonth" class="control-label"></label>
-                        <input asp-for="CreationMonth" class="form-control month-picker" />
-                        <span asp-validation-for="CreationMonth" class="text-danger"></span>
+                        <input asp-for="CreationMonth" class="form-control month-picker month-mask" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="CreationDay" class="control-label"></label>
-                        <input asp-for="CreationDay" class="form-control" />
-                        <span asp-validation-for="CreationDay" class="text-danger"></span>
+                        <input asp-for="CreationDay" class="form-control day-mask" />
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <span asp-validation-for="CreationYear" class="text-danger"></span>
+                    <span asp-validation-for="CreationMonth" class="text-danger"></span>
+                    <span asp-validation-for="CreationDay" class="text-danger"></span>
                 </div>
             </div>
             <hr />
@@ -210,7 +212,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CopyrightYear" class="control-label"></label>
-                <input asp-for="CopyrightYear" class="form-control year-picker" />
+                <input asp-for="CopyrightYear" class="form-control year-picker year-mask" />
                 <span asp-validation-for="CopyrightYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -236,7 +238,7 @@
                 <label asp-for="Cost"></label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input asp-for="Cost" class="form-control text-right money" />
+                    <input asp-for="Cost" class="form-control text-right money-mask" />
                 </div>
                 <span asp-validation-for="Cost" class="text-danger"></span>
             </div>

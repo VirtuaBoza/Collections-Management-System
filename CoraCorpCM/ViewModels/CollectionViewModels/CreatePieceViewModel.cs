@@ -55,14 +55,15 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
 
         // Creation Date
         [Display(Name = "Year")]
-        public int? CreationYear { get; set; }
+        public string CreationYear { get; set; }
 
         [Display(Name = "Month")]
-        public int? CreationMonth { get; set; }
+        [Range(1, 12)]
+        public string CreationMonth { get; set; }
 
         [Display(Name = "Day")]
         [Range(1,31)]
-        public int? CreationDay { get; set; }
+        public string CreationDay { get; set; }
 
         // Origin
         [Display(Name = "City")]
@@ -90,7 +91,7 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         public IEnumerable<SelectListItem> UnitsOfMeasure { get; set; }
 
         [Display(Name = "Year")]
-        public int? CopyrightYear { get; set; }
+        public string CopyrightYear { get; set; }
 
         [Display(Name = "Owner")]
         public string CopyrightOwner { get; set; }
