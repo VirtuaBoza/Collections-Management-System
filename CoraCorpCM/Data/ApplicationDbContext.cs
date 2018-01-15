@@ -47,8 +47,6 @@ namespace CoraCorpCM.Data
                 .HasKey(loanPiece => new { loanPiece.LoanId, loanPiece.PieceId });
             builder.Entity<LocationTag>()
                 .HasKey(locationTag => new { locationTag.LocationId, locationTag.TagId });
-            builder.Entity<PieceArtist>()
-                .HasKey(pieceArtist => new { pieceArtist.PieceId, pieceArtist.ArtistId });
             builder.Entity<PieceTag>()
                 .HasKey(pieceTag => new { pieceTag.PieceId, pieceTag.TagId });
         }

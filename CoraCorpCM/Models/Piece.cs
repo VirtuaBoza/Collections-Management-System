@@ -11,7 +11,6 @@ namespace CoraCorpCM.Models
             ExhibitionPieces = new HashSet<ExhibitionPiece>();
             Inspections = new HashSet<Inspection>();
             LoanPieces = new HashSet<LoanPiece>();
-            PieceArtists = new HashSet<PieceArtist>();
             PieceTags = new HashSet<PieceTag>();
         }
 
@@ -19,12 +18,15 @@ namespace CoraCorpCM.Models
         public Museum Museum { get; set; }
         public int RecordNumber { get; set; }
         public string AccessionNumber { get; set; }
+        public Artist Artist { get; set; }
         public string Title { get; set; }
         public Upload Photo { get; set; }
         public int CreationDay { get; set; }
         public int CreationMonth { get; set; }
         public int CreationYear { get; set; }
-        public Origin CreationOrigin { get; set; }
+        public Country CountryOfOrigin { get; set; }
+        public string StateOfOrigin { get; set; }
+        public string CityOfOrigin { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
         public double Depth { get; set; }
@@ -49,7 +51,6 @@ namespace CoraCorpCM.Models
         public ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
         public ICollection<Inspection> Inspections { get; set; }
         public ICollection<LoanPiece> LoanPieces { get; set; }
-        public ICollection<PieceArtist> PieceArtists { get; set; }
         public ICollection<PieceTag> PieceTags { get; set; }
     }
 }

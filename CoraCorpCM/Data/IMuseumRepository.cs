@@ -35,10 +35,18 @@ namespace CoraCorpCM.Data
         #endregion
 
         #region Location
+        // Create
+        Location CreateLocation(string name, string address1, string address2, string city, string state, string zipCode, Country country, Museum museum);
+        
+        // Read
         IEnumerable<SelectListItem> GetLocationSelections(Museum museum);
         #endregion
 
         #region Medium
+        // Create
+        Medium CreateMedium(string name, Museum museum);
+
+        // Read
         IEnumerable<SelectListItem> GetMediumSelections(Museum museum);
         #endregion
 

@@ -72,6 +72,14 @@ namespace CoraCorpCM.Data
                         "1 Street", "A Suite", "Anytown", "FL", "12345", country,
                         fullControlUser);
 
+                    museumRepository.CreateMedium("Medium1", museum);
+                    museumRepository.CreateMedium("Medium2", museum);
+                    museumRepository.CreateMedium("Medium3", museum);
+
+                    museumRepository.CreateLocation("Location1", "street1", "suite1", "city1", "state1", "12345", country, museum);
+                    museumRepository.CreateLocation("Location2", "street2", "suite2", "city2", "state2", "23456", country, museum);
+                    museumRepository.CreateLocation("Location3", "street3", "suite3", "city3", "state3", "34567", country, museum);
+
                     var adminUser = new ApplicationUser
                     {
                         UserName = "admin@email.com",

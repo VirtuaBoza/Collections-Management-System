@@ -39,7 +39,7 @@ namespace CoraCorpCM.Data
         {
             return context.Artists
                 .Where(a => a.Museum == museum)
-                .Select(a => new SelectListItem { Text = a.KnownAs, Value = a.Id.ToString() });
+                .Select(a => new SelectListItem { Text = a.Name, Value = a.Id.ToString() });
         }
         #endregion
 
@@ -92,6 +92,26 @@ namespace CoraCorpCM.Data
         #endregion
 
         #region Location
+        // Create
+        public Location CreateLocation(string name, string address1, string address2, string city, string state, string zipCode, Country country, Museum museum)
+        {
+            var location = new Location
+            {
+                Name = name,
+                Address1 = address1,
+                Address2 = address2,
+                City = city,
+                State = state,
+                ZipCode = zipCode,
+                Country = country,
+                Museum = museum
+            };
+            context.Locations.Add(location);
+            context.SaveChanges();
+            return location;
+        }
+
+        // Read
         public IEnumerable<SelectListItem> GetLocationSelections(Museum museum)
         {
             return context.Locations
@@ -101,6 +121,18 @@ namespace CoraCorpCM.Data
         #endregion
 
         #region Medium
+        public Medium CreateMedium(string name, Museum museum)
+        {
+            var medium = new Medium
+            {
+                Name = name,
+                Museum = museum
+            };
+            context.Media.Add(medium);
+            context.SaveChanges();
+            return medium;
+        }
+
         public IEnumerable<SelectListItem> GetMediumSelections(Museum museum)
         {
             return context.Media
@@ -115,7 +147,7 @@ namespace CoraCorpCM.Data
             string address1, string address2, string city, string state, string zipCode, Country country,
             ApplicationUser creator)
         {
-            var museum = new Museum()
+            var museum = new Museum
             {
                 Name = name,
                 ShortName = shortname,

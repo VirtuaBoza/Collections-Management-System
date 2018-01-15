@@ -13,20 +13,22 @@ namespace CoraCorpCM.Models
             ArtistSubgenres = new HashSet<ArtistSubgenre>();
             ArtistSubjectMatters = new HashSet<ArtistSubjectMatter>();
             ArtistTags = new HashSet<ArtistTag>();
-            PieceArtists = new HashSet<PieceArtist>();
+            Pieces = new HashSet<Piece>();
         }
 
         public int Id { get; set; }
 
         public Museum Museum { get; set; }
 
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-        public string LastName { get; set; }
+        public string AlsoKnownAs { get; set; }
 
-        public string KnownAs { get; set; }
+        public Country CountryOfOrigin { get; set; }
 
-        public Origin Origin { get; set; }
+        public string StateOfOrigin { get; set; }
+
+        public string CityOfOrigin { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
@@ -44,6 +46,6 @@ namespace CoraCorpCM.Models
 
         public ICollection<ArtistTag> ArtistTags { get; set; }
 
-        public ICollection<PieceArtist> PieceArtists { get; set; }
+        public ICollection<Piece> Pieces { get; set; }
     }
 }

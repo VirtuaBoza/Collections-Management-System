@@ -18,8 +18,6 @@ namespace CoraCorpCM.Models
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
 
-        public Location Location { get; set; }
-
         public decimal Cost { get; set; }
 
         public string Terms { get; set; }

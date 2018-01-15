@@ -36,6 +36,9 @@ var deps = {
     },
     "bootstrap-datepicker": {
         "dist/**/*": "dist"
+    },
+    "jquery-mask-plugin": {
+        "dist/*": "dist"
     }
 };
 

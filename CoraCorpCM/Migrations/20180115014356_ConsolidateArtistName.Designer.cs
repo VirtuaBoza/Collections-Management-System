@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180115014356_ConsolidateArtistName")]
+    partial class ConsolidateArtistName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +33,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<int?>("FundingSourceId");
 
+                    b.Property<int?>("LocationId");
+
                     b.Property<int?>("MuseumId");
 
                     b.Property<int?>("PieceSourceId");
@@ -43,6 +46,8 @@ namespace CoraCorpCM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FundingSourceId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("MuseumId");
 
@@ -876,6 +881,10 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.FundingSource", "FundingSource")
                         .WithMany("Acquisitions")
                         .HasForeignKey("FundingSourceId");
+
+                    b.HasOne("CoraCorpCM.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("CoraCorpCM.Models.Museum", "Museum")
                         .WithMany("Acquisitions")

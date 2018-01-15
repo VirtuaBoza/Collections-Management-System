@@ -11,9 +11,10 @@ using System;
 namespace CoraCorpCM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180115003437_RemoveOrigin")]
+    partial class RemoveOrigin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +33,8 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<int?>("FundingSourceId");
 
+                    b.Property<int?>("LocationId");
+
                     b.Property<int?>("MuseumId");
 
                     b.Property<int?>("PieceSourceId");
@@ -43,6 +46,8 @@ namespace CoraCorpCM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FundingSourceId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("MuseumId");
 
@@ -117,8 +122,6 @@ namespace CoraCorpCM.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AlsoKnownAs");
-
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("date");
 
@@ -129,9 +132,13 @@ namespace CoraCorpCM.Migrations
                     b.Property<DateTime>("Deathdate")
                         .HasColumnType("date");
 
-                    b.Property<int?>("MuseumId");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("KnownAs");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<int?>("MuseumId");
 
                     b.Property<string>("StateOfOrigin");
 
@@ -557,8 +564,6 @@ namespace CoraCorpCM.Migrations
 
                     b.Property<int?>("AcquisitionId");
 
-                    b.Property<int?>("ArtistId");
-
                     b.Property<string>("CityOfOrigin");
 
                     b.Property<int?>("CollectionId");
@@ -625,8 +630,6 @@ namespace CoraCorpCM.Migrations
 
                     b.HasIndex("AcquisitionId");
 
-                    b.HasIndex("ArtistId");
-
                     b.HasIndex("CollectionId");
 
                     b.HasIndex("CountryOfOriginId");
@@ -656,6 +659,19 @@ namespace CoraCorpCM.Migrations
                     b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("Pieces");
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Models.PieceArtist", b =>
+                {
+                    b.Property<int>("PieceId");
+
+                    b.Property<int>("ArtistId");
+
+                    b.HasKey("PieceId", "ArtistId");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("PieceArtist");
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.PieceSource", b =>
@@ -876,6 +892,10 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.FundingSource", "FundingSource")
                         .WithMany("Acquisitions")
                         .HasForeignKey("FundingSourceId");
+
+                    b.HasOne("CoraCorpCM.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("CoraCorpCM.Models.Museum", "Museum")
                         .WithMany("Acquisitions")
@@ -1142,10 +1162,6 @@ namespace CoraCorpCM.Migrations
                         .WithMany("Pieces")
                         .HasForeignKey("AcquisitionId");
 
-                    b.HasOne("CoraCorpCM.Models.Artist", "Artist")
-                        .WithMany("Pieces")
-                        .HasForeignKey("ArtistId");
-
                     b.HasOne("CoraCorpCM.Models.Collection", "Collection")
                         .WithMany()
                         .HasForeignKey("CollectionId");
@@ -1201,6 +1217,19 @@ namespace CoraCorpCM.Migrations
                     b.HasOne("CoraCorpCM.Models.UnitOfMeasure", "UnitOfMeasure")
                         .WithMany()
                         .HasForeignKey("UnitOfMeasureId");
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Models.PieceArtist", b =>
+                {
+                    b.HasOne("CoraCorpCM.Models.Artist", "Artist")
+                        .WithMany("PieceArtists")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CoraCorpCM.Models.Piece", "Piece")
+                        .WithMany("PieceArtists")
+                        .HasForeignKey("PieceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CoraCorpCM.Models.PieceSource", b =>
