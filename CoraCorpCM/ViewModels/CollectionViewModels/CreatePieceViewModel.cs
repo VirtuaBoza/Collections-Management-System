@@ -105,7 +105,7 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         [Display(Name = "Name")]
         public string ArtistName { get; set; }
 
-        [Display(Name = "AlsoKnownAs")]
+        [Display(Name = "Also Known As")]
         public string ArtistAlsoKnownAs { get; set; }
 
         [Display(Name = "City")]
@@ -164,22 +164,18 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
 
         public string Terms { get; set; }
 
-        // Acquisition Funding Source - Existing
         [Display(Name = "Funding Source")]
         public string FundingSourceId { get; set; }
         public IEnumerable<SelectListItem> FundingSources { get; set; }
 
-        // Acquisition Funding Source - New
-        [Display(Name = "Funding Source")]
+        [Display(Name = "New Funding Source")]
         public string FundingSourceName { get; set; }
 
-        // Acquisition Piece Source - Existing
         [Display(Name = "Source")]
         public string PieceSourceId { get; set; }
         public IEnumerable<SelectListItem> PieceSources { get; set; }
 
-        // Acquisition Piece Source - New
-        [Display(Name = "Source")]
+        [Display(Name = "New Source")]
         public string PieceSourceName { get; set; }
         #endregion
 

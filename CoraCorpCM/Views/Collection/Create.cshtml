@@ -182,21 +182,18 @@
                     <div class="form-group">
                         <label asp-for="Height" class="control-label"></label>
                         <input asp-for="Height" class="form-control text-right" />
-                        <span asp-validation-for="Height" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="Width" class="control-label"></label>
                         <input asp-for="Width" class="form-control text-right" />
-                        <span asp-validation-for="Width" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="Depth" class="control-label"></label>
                         <input asp-for="Depth" class="form-control text-right" />
-                        <span asp-validation-for="Depth" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -204,6 +201,11 @@
                         <label asp-for="UnitOfMeasureId" class="control-label"></label>
                         <select asp-for="UnitOfMeasureId" asp-items="Model.UnitsOfMeasure" class="form-control"></select>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <div><span asp-validation-for="Height" class="text-danger"></span></div>
+                    <div><span asp-validation-for="Width" class="text-danger"></span></div>
+                    <div><span asp-validation-for="Depth" class="text-danger"></span></div>
                 </div>
             </div>
             <hr />
@@ -249,7 +251,7 @@
             <div class="form-group acquisition-toggle-target">
                 <label asp-for="FundingSourceId" class="control-label"></label>
                 <select asp-for="FundingSourceId" asp-items="Model.FundingSources" class="form-control toggle" id="fundingSouce-toggle">
-                    <option value="-1">- N/A -</option>
+                    <option value="-1">- Select a Funding Source (Optional) -</option>
                     <option value="-2">- Create New -</option>
                 </select>
             </div>
@@ -259,7 +261,7 @@
             </div>
             <div class="form-group acquisition-toggle-target">
                 <label asp-for="PieceSourceId" class="control-label"></label>
-                <select asp-for="PieceSourceId" asp-items="Model.PieceSources" class="form-control" id="pieceSource-toggle">
+                <select asp-for="PieceSourceId" asp-items="Model.PieceSources" class="form-control toggle" id="pieceSource-toggle">
                     <option value="-1">- Select a Source (Optional) -</option>
                     <option value="-2">- Create New -</option>
                 </select>

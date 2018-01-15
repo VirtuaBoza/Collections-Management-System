@@ -11,8 +11,9 @@
         toggle.change(function () {
             if (toggle.val() == -2) {
                 toggleTarget.slideDown();
-                if (toggleTarget.has('select.toggle')) {
-                    toggleTarget.val(-2);
+                var toggleWithin = toggleTarget.find('.toggle')
+                if (toggleWithin !== 'undefined') {
+                    toggleWithin.val(-2);
                 }
             } else {
                 toggleTarget.slideUp();
