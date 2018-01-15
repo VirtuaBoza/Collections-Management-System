@@ -39,10 +39,6 @@ var deps = {
     },
     "jquery-mask-plugin": {
         "dist/*": "dist"
-    },
-    "jquery-ui-dist": {
-        "*.js": "",
-        "*.css": ""
     }
 };
 
