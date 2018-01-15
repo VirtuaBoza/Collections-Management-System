@@ -19,7 +19,8 @@
     "bootstrap": "3.3.7",
     "font-awesome": "4.7.0",
     "bootstrap-datepicker": "1.7.1",
-    "jquery-mask-plugin": "1.14.13"
+    "jquery-mask-plugin": "1.14.13",
+    "jquery-ui-dist": "1.12.1"
   },
   "devDependencies": {
     "gulp": "3.9.1",
