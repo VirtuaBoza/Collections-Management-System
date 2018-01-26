@@ -85,24 +85,115 @@ namespace CoraCorpCM.Controllers
                     ModelState.AddModelError("ArtistName", "New Artist must have a name.");
                     return View(model);
                 }
+
                 if (!ValidateAcquisition(model))
+                {
+                    ModelState.AddModelError("AcquisitionDate", "New Acquisition must have either date or source.");
+                    ModelState.AddModelError("PieceSourceId", "New Acquisition must have either date or source.");
+                    return View(model);
+                }
+
+                ResolveCreatePieceViewModelToPieceModel(model);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
 
+        private async void ResolveCreatePieceViewModelToPieceModel(CreatePieceViewModel model)
+        {
+            var user = userManager.GetUserAsync(User).Result;
+            var userMuseum = museumRepository.GetMuseum(user);
+
+            Artist artist;
+            if (int.TryParse(model.ArtistId, out int artistId))
+            {
+                if (artistId == -1)
+                {
+                    artist = new Artist
+                    {
+                        Name = model.ArtistName,
+                        AlsoKnownAs = model.ArtistAlsoKnownAs,
+                        CityOfOrigin = model.ArtistCity,
+                        StateOfOrigin = model.ArtistState,
+                    };
+
+                    if (int.TryParse(model.ArtistCountryId, out int countryId))
+                    {
+                        artist.CountryOfOrigin = museumRepository.GetCountry(countryId);
+                    }
+                    
+                    if (DateTime.TryParse(model.ArtistBirthdate, out DateTime birthdate))
+                    {
+                        artist.Birthdate = birthdate;
+                    }
+
+                    if (DateTime.TryParse(model.ArtistDeathdate, out DateTime deathdate))
+                    {
+                        artist.Deathdate = deathdate;
+                    }
+                }
+                else
+                {
+                    artist = await museumRepository.GetArtist(artistId);
+                }
+            }
+
+            Acquisition acquisition;
+            if (int.TryParse(model.AcquisitionId, out int acquisitionId))
+            {
+                if (acquisitionId == -1)
+                {
+                    acquisition = new Acquisition
+                    {
+                        Cost = model.Cost,
+                        Terms = model.Terms
+                    };
+
+                    if (DateTime.TryParse(model.AcquisitionDate, out DateTime acquisitionDate))
+                    {
+                        acquisition.Date = acquisitionDate;
+                    }
+
+                    if (int.TryParse(model.PieceSourceId, out int pieceSourceId))
+                    {
+                        if (pieceSourceId == -1 && !string.IsNullOrWhiteSpace(model.PieceSourceName))
+                        {
+                            acquisition.PieceSource = new PieceSource
+                            {
+                                Name = model.PieceSourceName,
+                                Museum = userMuseum
+                            };
+                        }
+                        else
+                        {
+                            acquisition.PieceSource = museumRepository.GetPieceSource
+                        }
+                    }
+                }
+            }
+        }
+
         private bool ValidateArtist(CreatePieceViewModel model)
         {
-            if (model.ArtistId == "-1" && string.IsNullOrEmpty(model.ArtistName))
+            if (model.ArtistId == "-1" && string.IsNullOrWhiteSpace(model.ArtistName))
             {
                 return false;
             }
+
             return true;
         }
 
         private bool ValidateAcquisition(CreatePieceViewModel model)
         {
-            if ()
+            if (model.AcquisitionId == "-1" && string.IsNullOrWhiteSpace(model.AcquisitionDate) && 
+                (string.IsNullOrWhiteSpace(model.PieceSourceId) ||
+                 model.PieceSourceId == "-1" && string.IsNullOrWhiteSpace(model.PieceSourceName)))
+            {
+                return false;
+            }
+
+            return true;
         }
                 
         [Authorize(Roles = Role.Contributor)]
