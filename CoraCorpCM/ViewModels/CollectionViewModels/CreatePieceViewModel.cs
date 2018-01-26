@@ -46,12 +46,40 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         [Display(Name = "New Subject Matter")]
         public string SubjectMatterName { get; set; }
 
-        [Display(Name = "Framed")]
-        public bool IsFramed { get; set; }
-
         [Display(Name = "Estimated Value")]
         [DataType(DataType.Currency)]
         public decimal? EstimatedValue { get; set; }
+
+        [Display(Name = "Framed")]
+        public bool IsFramed { get; set; }
+
+        // Artist Info
+        [Display(Name = "Artist")]
+        public string ArtistId { get; set; }
+        public IEnumerable<SelectListItem> KnownArtists { get; set; }
+
+        #region Artist - New
+        [Display(Name = "Name")]
+        public string ArtistName { get; set; }
+
+        [Display(Name = "Also Known As")]
+        public string ArtistAlsoKnownAs { get; set; }
+
+        [Display(Name = "City")]
+        public string ArtistCity { get; set; }
+
+        [Display(Name = "State")]
+        public string ArtistState { get; set; }
+
+        [Display(Name = "Country")]
+        public string ArtistCountryId { get; set; }
+
+        [Display(Name = "Birth Date")]
+        public string ArtistBirthdate { get; set; }
+
+        [Display(Name = "Death Date")]
+        public string ArtistDeathdate { get; set; }
+        #endregion
 
         // Creation Date
         [Display(Name = "Year")]
@@ -96,73 +124,35 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         [Display(Name = "Owner")]
         public string CopyrightOwner { get; set; }
 
-        // Artist Info
-        [Display(Name = "Artist")]
-        public string Artist { get; set; }
-        public IEnumerable<SelectListItem> KnownArtists { get; set; }
+        // Insurance Info
+        [Display(Name = "Policy Number")]
+        public string PolicyNumber { get; set; }
 
-        #region Artist - New
-        [Display(Name = "Name")]
-        public string ArtistName { get; set; }
+        [Display(Name = "Amount Insured")]
+        public decimal? AmountInsured { get; set; }
 
-        [Display(Name = "Also Known As")]
-        public string ArtistAlsoKnownAs { get; set; }
+        [Display(Name = "Expiration Date")]
+        public string ExpirationDate { get; set; }
 
-        [Display(Name = "City")]
-        public string ArtistCity { get; set; }
-
-        [Display(Name = "State")]
-        public string ArtistState { get; set; }
-
-        [Display(Name = "Country")]
-        public string ArtistCountryId { get; set; }
-
-        [Display(Name = "Birth Date")]
-        public string ArtistBirthdate { get; set; }
-
-        [Display(Name = "Death Date")]
-        public string ArtistDeathdate { get; set; }
-        #endregion
+        public string Carrier { get; set; }
 
         // Acquisition - Existing
-        public string Acquisition { get; set; }
+        public string AcquisitionId { get; set; }
         public IEnumerable<SelectListItem> Acquisitions { get; set; }
 
         #region Acquisition - New
         [Display(Name = "Acquisition Date")]
         public string AcquisitionDate { get; set; }
 
-        // Acquisition Location - Existing
-        [Display(Name = "Location")]
-        public string AcquisitionLocationId { get; set; }
-        public IEnumerable<SelectListItem> Locations { get; set; }
+        [Display(Name = "Source")]
+        public string PieceSourceId { get; set; }
+        public IEnumerable<SelectListItem> PieceSources { get; set; }
 
-        // Acquisition Location - New
-        [Display(Name = "Name")]
-        public string AcquisitionLocationName { get; set; }
-
-        [Display(Name = "Address Line 1")]
-        public string AcquisitionAddress1 { get; set; }
-
-        [Display(Name = "Address Line 2")]
-        public string AcquisitionAddress2 { get; set; }
-
-        [Display(Name = "City")]
-        public string AcquisitionCity { get; set; }
-
-        [Display(Name = "State")]
-        public string AcquisitionState { get; set; }
-
-        [Display(Name = "Zip Code")]
-        public string AcquisitionZipCode { get; set; }
-
-        [Display(Name = "Country")]
-        public string AcquisitionCountryId { get; set; }
+        [Display(Name = "New Source")]
+        public string PieceSourceName { get; set; }
 
         [DataType(DataType.Currency)]
         public decimal? Cost { get; set; }
-
-        public string Terms { get; set; }
 
         [Display(Name = "Funding Source")]
         public string FundingSourceId { get; set; }
@@ -171,25 +161,7 @@ namespace CoraCorpCM.ViewModels.CollectionViewModels
         [Display(Name = "New Funding Source")]
         public string FundingSourceName { get; set; }
 
-        [Display(Name = "Source")]
-        public string PieceSourceId { get; set; }
-        public IEnumerable<SelectListItem> PieceSources { get; set; }
-
-        [Display(Name = "New Source")]
-        public string PieceSourceName { get; set; }
+        public string Terms { get; set; }
         #endregion
-
-        // Insurance - Existing
-        [Display(Name = "Policy Number")]
-        public string InsurancePolicyId { get; set; }
-        public IEnumerable<SelectListItem> InsurancePolicies { get; set; }
-
-        // Insurance - New
-        public string PolicyNumber { get; set; }
-        [Display(Name = "Expiration Date")]
-        public DateTime ExpirationDate { get; set; }
-        [Display(Name = "Amount Insured")]
-        public decimal AmountInsured { get; set; }
-        public string Carrier { get; set; }
     }
 }

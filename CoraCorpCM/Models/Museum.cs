@@ -15,7 +15,6 @@ namespace CoraCorpCM.Models
             Genres = new HashSet<Genre>();
             Inspections = new HashSet<Inspection>();
             Inspectors = new HashSet<Inspector>();
-            InsurancePolicies = new HashSet<InsurancePolicy>();
             Loans = new HashSet<Loan>();
             Locations = new HashSet<Location>();
             Media = new HashSet<Medium>();
@@ -45,7 +44,6 @@ namespace CoraCorpCM.Models
         public ICollection<Genre> Genres { get; set; }
         public ICollection<Inspection> Inspections { get; set; }
         public ICollection<Inspector> Inspectors { get; set; }
-        public ICollection<InsurancePolicy> InsurancePolicies { get; set; }
         public ICollection<Loan> Loans { get; set; }
         public ICollection<Location> Locations { get; set; }
         public ICollection<Medium> Media { get; set; }

@@ -16,7 +16,6 @@ namespace CoraCorpCM.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<FundingSource> FundingSources { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<InsurancePolicy> InsurancePolicies { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Medium> Media { get; set; }
         public DbSet<Museum> Museums { get; set; }

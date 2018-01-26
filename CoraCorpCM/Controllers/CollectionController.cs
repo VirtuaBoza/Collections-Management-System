@@ -6,6 +6,8 @@ using CoraCorpCM.Identity;
 using CoraCorpCM.Models;
 using Microsoft.AspNetCore.Authorization;
 using CoraCorpCM.ViewModels.CollectionViewModels;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CoraCorpCM.Controllers
 {
@@ -13,15 +15,19 @@ namespace CoraCorpCM.Controllers
     public class CollectionController : Controller
     {
         private readonly IMuseumRepository museumRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CollectionController(IMuseumRepository museumRepository)
+        public CollectionController(IMuseumRepository museumRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.museumRepository = museumRepository;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var userMuseum = museumRepository.GetMuseum(User);
+            var user = userManager.GetUserAsync(User).Result;
+            var userMuseum = museumRepository.GetMuseum(user);
             var pieces = await museumRepository.GetAllPiecesForMuseum(userMuseum);
             return View(pieces);
         }
@@ -45,7 +51,8 @@ namespace CoraCorpCM.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create()
         {
-            var userMuseum = museumRepository.GetMuseum(User);
+            var user = userManager.GetUserAsync(User).Result;
+            var userMuseum = museumRepository.GetMuseum(user);
             var model = new CreatePieceViewModel
             {
                 Countries = museumRepository.GetCountrySelections(),
@@ -57,10 +64,8 @@ namespace CoraCorpCM.Controllers
                 SubjectMatters = museumRepository.GetSubjectMatterSelections(userMuseum),
                 KnownArtists = museumRepository.GetArtistSelections(userMuseum),
                 Acquisitions = museumRepository.GetAcquisitionSelections(userMuseum),
-                Locations = museumRepository.GetLocationSelections(userMuseum),
                 FundingSources = museumRepository.GetFundingSourceSelections(userMuseum),
-                PieceSources = museumRepository.GetPieceSourceSelections(userMuseum),
-                InsurancePolicies = museumRepository.GetInsurancePolicySelections(userMuseum)
+                PieceSources = museumRepository.GetPieceSourceSelections(userMuseum)
             };
 
             return View(model);
@@ -71,17 +76,35 @@ namespace CoraCorpCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public async Task<IActionResult> Create([Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
+        public async Task<IActionResult> Create(CreatePieceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var userMuseum = museumRepository.GetMuseum(User);
-                await museumRepository.CreatePieceForMuseum(piece, userMuseum);
+                if(!ValidateArtist(model))
+                {
+                    ModelState.AddModelError("ArtistName", "New Artist must have a name.");
+                    return View(model);
+                }
+                if (!ValidateAcquisition(model))
                 return RedirectToAction(nameof(Index));
             }
-            return View(piece);
+            return View(model);
         }
 
+        private bool ValidateArtist(CreatePieceViewModel model)
+        {
+            if (model.ArtistId == "-1" && string.IsNullOrEmpty(model.ArtistName))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateAcquisition(CreatePieceViewModel model)
+        {
+            if ()
+        }
+                
         [Authorize(Roles = Role.Contributor)]
         public async Task<IActionResult> Edit(int? id)
         {

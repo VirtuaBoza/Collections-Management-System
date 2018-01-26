@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Models
 {
@@ -40,7 +40,11 @@ namespace CoraCorpCM.Models
         public int CopyrightYear { get; set; }
         public string CopyrightOwner { get; set; }
         public Acquisition Acquisition { get; set; }
-        public InsurancePolicy InsurancePolicy { get; set; }
+        public string InsurancePolicyNumber { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime InsuranceExpirationDate { get; set; }
+        public decimal InsuranceAmount { get; set; }
+        public string InsuranceCarrier { get; set; }
         public bool IsFramed { get; set; }
         public bool IsArchived { get; set; }
         public Location CurrentLocation { get; set; }

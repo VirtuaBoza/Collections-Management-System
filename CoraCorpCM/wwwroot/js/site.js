@@ -5,15 +5,15 @@
     toggles.forEach(function (toggleName) {
         var toggle = $('#' + toggleName);
         var toggleTarget = $('.' + toggleName + '-target');
-        if (toggle.val() == -1) {
+        if (toggle.val() == "") {
             toggleTarget.hide();
         }
         toggle.change(function () {
-            if (toggle.val() == -2) {
+            if (toggle.val() == -1) {
                 toggleTarget.slideDown();
                 var toggleWithin = toggleTarget.find('.toggle')
                 if (toggleWithin !== 'undefined') {
-                    toggleWithin.val(-2);
+                    toggleWithin.val(-1);
                 }
             } else {
                 toggleTarget.slideUp();

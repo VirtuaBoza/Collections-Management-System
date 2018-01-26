@@ -1,24 +1,20 @@
 ﻿using CoraCorpCM.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace CoraCorpCM.Data
 {
     public class MuseumRepository : IMuseumRepository
     {
         private readonly ApplicationDbContext context;
-        private readonly UserManager<ApplicationUser> userManager;
 
-        public MuseumRepository(ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+        public MuseumRepository(ApplicationDbContext context)
         {
             this.context = context;
-            this.userManager = userManager;
         }
 
         #region Acquisition
@@ -35,6 +31,11 @@ namespace CoraCorpCM.Data
         #endregion
 
         #region Artist
+        public async Task<Artist> GetArtist(int id)
+        {
+            return await context.Artists.SingleOrDefaultAsync<Artist>(p => p.Id == id);
+        }
+
         public IEnumerable<SelectListItem> GetArtistSelections(Museum museum)
         {
             return context.Artists
@@ -75,19 +76,6 @@ namespace CoraCorpCM.Data
             return context.Genres
                 .Where(g => g.Museum == museum)
                 .Select(g => new SelectListItem { Text = g.Name, Value = g.Id.ToString() });
-        }
-        #endregion
-
-        #region Insurance Policy
-        public IEnumerable<SelectListItem> GetInsurancePolicySelections(Museum museum)
-        {
-            return context.InsurancePolicies
-                .Where(p => p.Museum == museum)
-                .Select(p => new SelectListItem
-                {
-                    Text = p.PolicyNumber + " " + p.Carrier,
-                    Value = p.Id.ToString()
-                });
         }
         #endregion
 
@@ -175,20 +163,86 @@ namespace CoraCorpCM.Data
             context.Entry(user).Reference(u => u.Museum).Load();
             return user.Museum;
         }
-
-        public Museum GetMuseum(ClaimsPrincipal principal)
-        {
-            var user = userManager.GetUserAsync(principal).Result;
-            return GetMuseum(user);
-        }
         #endregion
 
         #region Piece
         // Create
-        public async Task<int> CreatePieceForMuseum(Piece piece, Museum museum)
+        public async Task<int> CreatePiece(
+            string accessionNumber,
+            Artist artist,
+            string title,
+            int creationDay,
+            int creationMonth,
+            int creationYear,
+            Country countryOfOrigin,
+            string stateOfOrigin,
+            string cityOfOrigin,
+            double height,
+            double width,
+            double depth,
+            UnitOfMeasure unitOfMeasure,
+            decimal estimatedValue,
+            Medium medium,
+            Genre genre,
+            Subgenre subgenre,
+            string subject,
+            SubjectMatter subjectMatter,
+            int copyrightYear,
+            string copyrightOwner,
+            Acquisition acquisition,
+            string policyNumber,
+            DateTime expiration,
+            decimal amountInsured,
+            string carrier,
+            bool isFramed,
+            Location currentLocation,
+            Location permanentLocation,
+            Collection collection,
+            ApplicationUser user, Museum museum)
         {
-            piece.Museum = museum;
-            piece.RecordNumber = ++museum.RecordCount;
+            var piece = new Piece
+            {
+                AccessionNumber = accessionNumber,
+                Artist = artist,
+                Title = title,
+                CreationDay = creationDay,
+                CreationMonth = creationMonth,
+                CreationYear = creationYear,
+                CountryOfOrigin = countryOfOrigin,
+                StateOfOrigin = stateOfOrigin,
+                CityOfOrigin = cityOfOrigin,
+                Height = height,
+                Width = width,
+                Depth = depth,
+                UnitOfMeasure = unitOfMeasure,
+                EstimatedValue = estimatedValue,
+                Medium = medium,
+                Genre = genre,
+                Subgenre = subgenre,
+                Subject = subject,
+                SubjectMatter = subjectMatter,
+                CopyrightYear = copyrightYear,
+                CopyrightOwner = copyrightOwner,
+                Acquisition = acquisition,
+                InsurancePolicyNumber = policyNumber,
+                InsuranceExpirationDate = expiration,
+                InsuranceAmount = amountInsured,
+                InsuranceCarrier = carrier,
+                IsFramed = isFramed,
+                CurrentLocation = currentLocation,
+                PermanentLocation = permanentLocation,
+                Collection = collection,
+                LastModifiedBy = user,
+                Museum = museum,
+                RecordNumber = ++museum.RecordCount
+            };
+            context.Add(piece);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<int> CreatePiece(Piece piece)
+        {
+            piece.RecordNumber = ++piece.Museum.RecordCount;
             context.Add(piece);
             return await context.SaveChangesAsync();
         }
@@ -206,7 +260,7 @@ namespace CoraCorpCM.Data
 
         public async Task<Piece> GetPiece(int? id)
         {
-            return await context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
+            return await context.Pieces.SingleOrDefaultAsync(p => p.Id == id);
         }
 
         // Update
@@ -219,7 +273,7 @@ namespace CoraCorpCM.Data
         // Delete
         public async Task<int> DeletePiece(int id)
         {
-            var piece = await context.Pieces.SingleOrDefaultAsync(m => m.Id == id);
+            var piece = await context.Pieces.SingleOrDefaultAsync(p => p.Id == id);
             context.Pieces.Remove(piece);
             return await context.SaveChangesAsync();
         }

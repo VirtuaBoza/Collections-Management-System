@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CoraCorpCM.Models;
@@ -13,6 +14,8 @@ namespace CoraCorpCM.Data
         #endregion
 
         #region Artist
+        Task<Artist> GetArtist(int id);
+
         IEnumerable<SelectListItem> GetArtistSelections(Museum museum);
         #endregion
 
@@ -28,10 +31,6 @@ namespace CoraCorpCM.Data
 
         #region Genre
         IEnumerable<SelectListItem> GetGenreSelections(Museum museum);
-        #endregion
-
-        #region Insurance Policy
-        IEnumerable<SelectListItem> GetInsurancePolicySelections(Museum museum);
         #endregion
 
         #region Location
@@ -58,12 +57,45 @@ namespace CoraCorpCM.Data
 
         // Read
         Museum GetMuseum(ApplicationUser user);
-        Museum GetMuseum(ClaimsPrincipal principal);
         #endregion
 
         #region Piece
         // Create
-        Task<int> CreatePieceForMuseum(Piece piece, Museum museum);
+        Task<int> CreatePiece(
+            string accessionNumber,
+            Artist artist,
+            string title,
+            int creationDay,
+            int creationMonth,
+            int creationYear,
+            Country countryOfOrigin,
+            string stateOfOrigin,
+            string cityOfOrigin,
+            double height,
+            double width,
+            double depth,
+            UnitOfMeasure unitOfMeasure,
+            decimal estimatedValue,
+            Medium medium,
+            Genre genre,
+            Subgenre subgenre,
+            string subject,
+            SubjectMatter subjectMatter,
+            int copyrightYear,
+            string copyrightOwner,
+            Acquisition acquisition,
+            string policyNumber,
+            DateTime expiration,
+            decimal amountInsured,
+            string carrier,
+            bool isFramed,
+            Location currentLocation,
+            Location permanentLocation,
+            Collection collection,
+            ApplicationUser user,
+            Museum museum);
+
+        Task<int> CreatePiece(Piece piece);
 
         // Read
         Task<List<Piece>> GetAllPiecesForMuseum(Museum museum);
