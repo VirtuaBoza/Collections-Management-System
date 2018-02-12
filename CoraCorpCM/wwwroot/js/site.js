@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    var toggles = ['medium-toggle', 'genre-toggle', 'subgenre-toggle', 'subjectMatter-toggle', 'artist-toggle', 'acquisition-toggle', 'fundingSouce-toggle', 'pieceSource-toggle'];
+    var toggles = ['medium-toggle', 'genre-toggle', 'subgenre-toggle', 'subjectMatter-toggle', 'artist-toggle', 'acquisition-toggle', 'fundingSouce-toggle', 'pieceSource-toggle', 'permanentLocation-toggle', 'currentLocation-toggle'];
 
     toggles.forEach(function (toggleName) {
         var toggle = $('#' + toggleName);

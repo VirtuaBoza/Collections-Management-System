@@ -1,6 +1,6 @@
 ﻿using System;
 using CoraCorpCM.Data;
-using CoraCorpCM.Models;
+using CoraCorpCM.Domain;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

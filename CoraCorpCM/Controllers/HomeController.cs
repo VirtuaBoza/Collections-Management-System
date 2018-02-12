@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using CoraCorpCM.Data;
-using CoraCorpCM.Models;
+using CoraCorpCM.Domain;
 using CoraCorpCM.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.ViewModels;
@@ -12,20 +12,24 @@ namespace CoraCorpCM.Controllers
     {
         private readonly IEmailSender emailSender;
         private readonly IMuseumRepository museumRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(
             IEmailSender emailSender, 
-            IMuseumRepository museumRepository)
+            IMuseumRepository museumRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.emailSender = emailSender;
             this.museumRepository = museumRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var museum = museumRepository.GetMuseum(User);
+                var user = userManager.GetUserAsync(User).Result;
+                var museum = museumRepository.GetMuseum(user);
                 ViewData["Title"] = museum.ShortName;
                 ViewData["MuseumName"] = museum.Name;
             }

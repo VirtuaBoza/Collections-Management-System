@@ -1,4 +1,4 @@
-﻿@model CoraCorpCM.ViewModels.CollectionViewModels.CreatePieceViewModel
+﻿@model CoraCorpCM.ViewModels.CollectionViewModels.PieceViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -80,8 +80,86 @@
                 </div>
                 <span asp-validation-for="EstimatedValue" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="PermanentLocationId" class="control-label"></label>
+                <select asp-for="PermanentLocationId" asp-items="Model.Locations" class="form-control" id="permanentLocation-toggle">
+                    <option value=""></option>
+                    <option value="-1">- Create New -</option>
+                </select>
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentLocationName" class="control-label"></label>
+                <input asp-for="PermanentLocationName" class="form-control" placeholder="Required" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentAddress1" class="control-label"></label>
+                <input asp-for="PermanentAddress1" class="form-control" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentAddress2" class="control-label"></label>
+                <input asp-for="PermanentAddress2" class="form-control" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentCity" class="control-label"></label>
+                <input asp-for="PermanentCity" class="form-control" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentState" class="control-label"></label>
+                <input asp-for="PermanentState" class="form-control" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentZipCode" class="control-label"></label>
+                <input asp-for="PermanentZipCode" class="form-control" />
+            </div>
+            <div class="form-group permanentLocation-toggle-target">
+                <label asp-for="PermanentCountryId"></label>
+                <select asp-for="PermanentCountryId" asp-items="Model.Countries" class="form-control">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CurrentLocationId" class="control-label"></label>
+                <select asp-for="CurrentLocationId" asp-items="Model.Locations" class="form-control" id="currentLocation-toggle">
+                    <option value=""></option>
+                    <option value="-1">- Create New -</option>
+                    <option value="-2">- Same as Permanent Location -</option>
+                </select>
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentLocationName" class="control-label"></label>
+                <input asp-for="CurrentLocationName" class="form-control" placeholder="Required" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentAddress1" class="control-label"></label>
+                <input asp-for="CurrentAddress1" class="form-control" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentAddress2" class="control-label"></label>
+                <input asp-for="CurrentAddress2" class="form-control" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentCity" class="control-label"></label>
+                <input asp-for="CurrentCity" class="form-control" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentState" class="control-label"></label>
+                <input asp-for="CurrentState" class="form-control" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentZipCode" class="control-label"></label>
+                <input asp-for="CurrentZipCode" class="form-control" />
+            </div>
+            <div class="form-group currentLocation-toggle-target">
+                <label asp-for="CurrentCountryId"></label>
+                <select asp-for="CurrentCountryId" asp-items="Model.Countries" class="form-control">
+                    <option value=""></option>
+                </select>
+            </div>
+
             <hr />
-            
+
             <div>
                 <h4>Insurance</h4>
             </div>

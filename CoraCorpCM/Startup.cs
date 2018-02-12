@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CoraCorpCM.Data;
-using CoraCorpCM.Models;
+using CoraCorpCM.Domain;
 using CoraCorpCM.Services;
+using CoraCorpCM.Utilities;
 
 namespace CoraCorpCM
 {
@@ -41,8 +42,8 @@ namespace CoraCorpCM
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            // TODO setup real EmailSender and use that here
             services.AddTransient<IEmailSender, SendGridEmailSender>();
+            services.AddScoped<IModelMapper, ModelMapper>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
 
             services.AddMvc();

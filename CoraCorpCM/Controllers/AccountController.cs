@@ -6,13 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CoraCorpCM.Models;
+using CoraCorpCM.Domain;
 using CoraCorpCM.Services;
 using CoraCorpCM.ViewModels.AccountViewModels;
 using CoraCorpCM.Data;
-using System.Linq;
-using CoraCorpCM.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using CoraCorpCM.Web.Utilities;
 
 namespace CoraCorpCM.Controllers
 {
@@ -217,7 +215,7 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 
             var model = new RegisterViewModel();
-            model.Countries = museumRepository.GetCountrySelections();
+            model.Countries = SelectListMaker.GetCountrySelections(museumRepository);
 
             return View(model);
         }
@@ -245,9 +243,20 @@ namespace CoraCorpCM.Controllers
                     {
                         country = museumRepository.GetCountry(countryId);
                     }
-                    museumRepository.CreateMuseum(model.MuseumName, model.MuseumShortName,
-                        model.Address1, model.Address2, model.City, model.State, model.ZipCode, country,
-                        user);
+
+                    var museum = new Museum
+                    {
+                        Name = model.MuseumName,
+                        ShortName = model.MuseumShortName,
+                        Address1 = model.Address1,
+                        Address2 = model.Address2,
+                        City = model.City,
+                        State = model.State,
+                        ZipCode = model.ZipCode,
+                        Country = country
+                    };
+                    museum.Users.Add(user);
+                    museumRepository.AddMuseum(museum);
 
                     await userManager.AddToRoleAsync(user, Role.Admin);
                     await userManager.AddToRoleAsync(user, Role.Contributor);
