@@ -20,7 +20,7 @@ namespace CoraCorpCM.Data
         public IEnumerable<Acquisition> GetAcquisitions(Museum museum)
         {
             return context.Acquisitions
-                .Where(a => a.Museum == museum);
+                .Where(a => a.Museum == museum).ToList();
         }
         #endregion
 

@@ -1,16 +1,13 @@
 ﻿using CoraCorpCM.Data;
 using CoraCorpCM.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoraCorpCM.Web.Utilities
 {
     public static class SelectListMaker
     {
-        public static IEnumerable<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
+        public static List<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
         {
             var acquisitions = repository.GetAcquisitions(museum);
             var selectList = new List<SelectListItem>();
