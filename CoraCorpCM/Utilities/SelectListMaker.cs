@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace CoraCorpCM.Web.Utilities
 {
-    public static class SelectListMaker
+    public class SelectListMaker : ISelectListMaker
     {
-        public static List<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
         {
             var acquisitions = repository.GetAcquisitions(museum);
             var selectList = new List<SelectListItem>();
@@ -18,7 +18,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetArtistSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetArtistSelections(IMuseumRepository repository, Museum museum)
         {
             var artists = repository.GetArtists(museum);
             var selectList = new List<SelectListItem>();
@@ -29,7 +29,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetCollectionSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetCollectionSelections(IMuseumRepository repository, Museum museum)
         {
             var collections = repository.GetCollections(museum);
             var selectList = new List<SelectListItem>();
@@ -40,7 +40,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetCountrySelections(IMuseumRepository repository)
+        public IEnumerable<SelectListItem> GetCountrySelections(IMuseumRepository repository)
         {
             var countries = repository.GetCountries();
             var selectList = new List<SelectListItem>();
@@ -51,7 +51,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetGenreSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetGenreSelections(IMuseumRepository repository, Museum museum)
         {
             var genres = repository.GetGenres(museum);
             var selectList = new List<SelectListItem>();
@@ -62,7 +62,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetFundingSourceSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetFundingSourceSelections(IMuseumRepository repository, Museum museum)
         {
             var fundingSources = repository.GetFundingSources(museum);
             var selectList = new List<SelectListItem>();
@@ -73,7 +73,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        internal static IEnumerable<SelectListItem> GetLocationSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetLocationSelections(IMuseumRepository repository, Museum museum)
         {
             var locations = repository.GetLocations(museum);
             var selectList = new List<SelectListItem>();
@@ -84,7 +84,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetMediumSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetMediumSelections(IMuseumRepository repository, Museum museum)
         {
             var media = repository.GetMedia(museum);
             var selectList = new List<SelectListItem>();
@@ -95,7 +95,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetPieceSourceSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetPieceSourceSelections(IMuseumRepository repository, Museum museum)
         {
             var sources = repository.GetPieceSources(museum);
             var selectList = new List<SelectListItem>();
@@ -106,7 +106,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetUnitOfMeasureSelections(IMuseumRepository repository)
+        public IEnumerable<SelectListItem> GetUnitOfMeasureSelections(IMuseumRepository repository)
         {
             var units = repository.GetUnitsOfMeasure();
             var selectList = new List<SelectListItem>();
@@ -117,7 +117,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetSubgenreSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetSubgenreSelections(IMuseumRepository repository, Museum museum)
         {
             var subgenres = repository.GetSubgenres(museum);
             var selectList = new List<SelectListItem>();
@@ -128,7 +128,7 @@ namespace CoraCorpCM.Web.Utilities
             return selectList;
         }
 
-        public static IEnumerable<SelectListItem> GetSubjectMatterSelections(IMuseumRepository repository, Museum museum)
+        public IEnumerable<SelectListItem> GetSubjectMatterSelections(IMuseumRepository repository, Museum museum)
         {
             var subjectMatters = repository.GetSubjectMatters(museum);
             var selectList = new List<SelectListItem>();

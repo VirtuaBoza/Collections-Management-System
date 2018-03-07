@@ -1,10 +1,9 @@
 ﻿using CoraCorpCM.Data;
 using CoraCorpCM.Domain;
-using CoraCorpCM.ViewModels.CollectionViewModels;
+using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System;
-using System.Threading.Tasks;
 
-namespace CoraCorpCM.Utilities
+namespace CoraCorpCM.Web.Utilities
 {
     public class ModelMapper : IModelMapper
     {
@@ -56,6 +55,7 @@ namespace CoraCorpCM.Utilities
                 piece.CreationYear = creationYear;
             }
 
+            // Country of Origin
             if (int.TryParse(model.OriginCountryId, out int originCountryId))
             {
                 piece.CountryOfOrigin = museumRepository.GetCountry(originCountryId);

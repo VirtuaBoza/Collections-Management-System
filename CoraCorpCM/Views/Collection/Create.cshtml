@@ -1,4 +1,4 @@
-﻿@model CoraCorpCM.ViewModels.CollectionViewModels.PieceViewModel
+﻿@model CoraCorpCM.Web.ViewModels.CollectionViewModels.PieceViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -21,6 +21,7 @@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" placeholder="Required" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
@@ -91,6 +92,7 @@
             <div class="form-group permanentLocation-toggle-target">
                 <label asp-for="PermanentLocationName" class="control-label"></label>
                 <input asp-for="PermanentLocationName" class="form-control" placeholder="Required" />
+                <span asp-validation-for="PermanentLocationName" class="text-danger"></span>
             </div>
             <div class="form-group permanentLocation-toggle-target">
                 <label asp-for="PermanentAddress1" class="control-label"></label>
@@ -130,6 +132,7 @@
             <div class="form-group currentLocation-toggle-target">
                 <label asp-for="CurrentLocationName" class="control-label"></label>
                 <input asp-for="CurrentLocationName" class="form-control" placeholder="Required" />
+                <span asp-validation-for="CurrentLocationName" class="text-danger"></span>
             </div>
             <div class="form-group currentLocation-toggle-target">
                 <label asp-for="CurrentAddress1" class="control-label"></label>
@@ -192,6 +195,7 @@
             <div class="form-group artist-toggle-target">
                 <label asp-for="ArtistName" class="control-label"></label>
                 <input asp-for="ArtistName" class="form-control" placeholder="Required" />
+                <span asp-validation-for="ArtistName" class="text-danger"></span>
             </div>
             <div class="form-group artist-toggle-target">
                 <label asp-for="ArtistAlsoKnownAs" class="control-label"></label>
@@ -342,6 +346,7 @@
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
+                <span asp-validation-for="PieceSourceId" class="text-danger"></span>
             </div>
             <div class="form-group acquisition-toggle-target pieceSource-toggle-target">
                 <label asp-for="PieceSourceName" class="control-label"></label>

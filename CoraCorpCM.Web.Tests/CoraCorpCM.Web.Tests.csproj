@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoraCorpCM.Data\CoraCorpCM.Data.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Domain\CoraCorpCM.Domain.csproj" />
+    <ProjectReference Include="..\CoraCorpCM\CoraCorpCM.Web.csproj" />
   </ItemGroup>
 
 </Project>

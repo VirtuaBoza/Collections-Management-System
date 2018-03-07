@@ -1,7 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace CoraCorpCM.Services
+namespace CoraCorpCM.Web.Services
 {
     public static class EmailSenderExtensions
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoraCorpCM.ViewModels.CollectionViewModels
+namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
 {
     public class PieceViewModel
     {

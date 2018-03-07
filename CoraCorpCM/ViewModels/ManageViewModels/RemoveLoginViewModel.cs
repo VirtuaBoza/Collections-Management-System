@@ -1,4 +1,4 @@
-﻿namespace CoraCorpCM.ViewModels.ManageViewModels
+﻿namespace CoraCorpCM.Web.ViewModels.ManageViewModels
 {
     public class RemoveLoginViewModel
     {

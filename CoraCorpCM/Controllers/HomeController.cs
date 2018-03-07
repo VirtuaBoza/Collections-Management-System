@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using CoraCorpCM.Data;
 using CoraCorpCM.Domain;
-using CoraCorpCM.Services;
+using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using CoraCorpCM.ViewModels;
+using CoraCorpCM.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
-namespace CoraCorpCM.Controllers
+namespace CoraCorpCM.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -51,7 +51,6 @@ namespace CoraCorpCM.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO rig up real emailer in StartUp and indlude name here
                 emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
                 ModelState.Clear();
             }

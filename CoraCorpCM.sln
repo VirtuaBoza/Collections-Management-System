@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Web", "CoraCorpCM\CoraCorpCM.Web.csproj", "{D3DE9B42-260B-4448-A9A2-53FA369B2816}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Domain", "CoraCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Data", "CoraCorpCM.Data\CoraCorpCM.Data.csproj", "{15B7B207-77DC-4E03-B14D-1139FC44DE7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoraCorpCM.Web.Tests", "CoraCorpCM.Web.Tests\CoraCorpCM.Web.Tests.csproj", "{683CE7C0-9E29-4997-835D-A97254717C38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Web.Tests", "CoraCorpCM.Web.Tests\CoraCorpCM.Web.Tests.csproj", "{683CE7C0-9E29-4997-835D-A97254717C38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

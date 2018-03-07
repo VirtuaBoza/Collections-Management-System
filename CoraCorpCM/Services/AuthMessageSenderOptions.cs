@@ -1,4 +1,4 @@
-﻿namespace CoraCorpCM.Services
+﻿namespace CoraCorpCM.Web.Services
 {
     public class AuthMessageSenderOptions
     {

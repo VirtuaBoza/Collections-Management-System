@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoraCorpCM.ViewModels.ManageViewModels
+namespace CoraCorpCM.Web.ViewModels.ManageViewModels
 {
     public class EnableAuthenticatorViewModel
     {

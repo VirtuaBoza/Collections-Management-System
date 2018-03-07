@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CoraCorpCM.ViewModels.AccountViewModels
+namespace CoraCorpCM.Web.ViewModels.AccountViewModels
 {
     public class ExternalLoginViewModel
     {

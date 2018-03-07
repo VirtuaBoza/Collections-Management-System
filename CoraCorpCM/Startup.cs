@@ -6,10 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CoraCorpCM.Data;
 using CoraCorpCM.Domain;
-using CoraCorpCM.Services;
-using CoraCorpCM.Utilities;
+using CoraCorpCM.Web.Services;
+using CoraCorpCM.Web.Utilities;
 
-namespace CoraCorpCM
+namespace CoraCorpCM.Web
 {
     public class Startup
     {
@@ -43,7 +43,10 @@ namespace CoraCorpCM
 
             // Add application services.
             services.AddTransient<IEmailSender, SendGridEmailSender>();
+            services.AddTransient<IModelValidator, ModelValidator>();
+
             services.AddScoped<IModelMapper, ModelMapper>();
+            services.AddScoped<ISelectListMaker, SelectListMaker>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
 
             services.AddMvc();

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoraCorpCM.ViewModels
+namespace CoraCorpCM.Web.ViewModels
 {
     public class ContactViewModel
     {

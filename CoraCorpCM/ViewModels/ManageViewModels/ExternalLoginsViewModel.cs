@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace CoraCorpCM.ViewModels.ManageViewModels
+namespace CoraCorpCM.Web.ViewModels.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

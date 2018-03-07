@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoraCorpCM.ViewModels.ManageViewModels
+namespace CoraCorpCM.Web.ViewModels.ManageViewModels
 {
     public class IndexViewModel
     {

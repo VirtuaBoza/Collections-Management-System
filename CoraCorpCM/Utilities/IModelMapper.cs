@@ -1,8 +1,7 @@
-﻿using System.Threading.Tasks;
-using CoraCorpCM.Domain;
-using CoraCorpCM.ViewModels.CollectionViewModels;
+﻿using CoraCorpCM.Domain;
+using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 
-namespace CoraCorpCM.Utilities
+namespace CoraCorpCM.Web.Utilities
 {
     public interface IModelMapper
     {

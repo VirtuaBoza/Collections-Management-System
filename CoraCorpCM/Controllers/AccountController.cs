@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoraCorpCM.Domain;
-using CoraCorpCM.Services;
-using CoraCorpCM.ViewModels.AccountViewModels;
+using CoraCorpCM.Web.Services;
+using CoraCorpCM.Web.ViewModels.AccountViewModels;
 using CoraCorpCM.Data;
 using CoraCorpCM.Web.Utilities;
 
-namespace CoraCorpCM.Controllers
+namespace CoraCorpCM.Web.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -24,6 +24,7 @@ namespace CoraCorpCM.Controllers
         private readonly ILogger logger;
         private readonly ApplicationDbContext context;
         private readonly IMuseumRepository museumRepository;
+        private readonly ISelectListMaker selectListMaker;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -31,7 +32,8 @@ namespace CoraCorpCM.Controllers
             IEmailSender emailSender,
             ILogger<AccountController> logger,
             ApplicationDbContext context,
-            IMuseumRepository museumRepository)
+            IMuseumRepository museumRepository,
+            ISelectListMaker selectListMaker)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -39,6 +41,7 @@ namespace CoraCorpCM.Controllers
             this.logger = logger;
             this.context = context;
             this.museumRepository = museumRepository;
+            this.selectListMaker = selectListMaker;
         }
 
         [TempData]
@@ -215,7 +218,7 @@ namespace CoraCorpCM.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 
             var model = new RegisterViewModel();
-            model.Countries = SelectListMaker.GetCountrySelections(museumRepository);
+            model.Countries = selectListMaker.GetCountrySelections(museumRepository);
 
             return View(model);
         }

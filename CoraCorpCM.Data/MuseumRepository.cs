@@ -170,7 +170,7 @@ namespace CoraCorpCM.Data
         }
 
         // Read
-        public IEnumerable<Piece> GetAllPiecesForMuseum(Museum museum)
+        public IEnumerable<Piece> GetPieces(Museum museum)
         {
             return context.Pieces.Where(p => p.Museum == museum).ToList();
         }

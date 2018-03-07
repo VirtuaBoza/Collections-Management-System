@@ -45,7 +45,7 @@ namespace CoraCorpCM.Domain
         public Acquisition Acquisition { get; set; }
         public string InsurancePolicyNumber { get; set; }
         [Column(TypeName = "date")]
-        public DateTime InsuranceExpirationDate { get; set; }
+        public DateTime? InsuranceExpirationDate { get; set; }
         public decimal? InsuranceAmount { get; set; }
         public string InsuranceCarrier { get; set; }
         public bool IsFramed { get; set; }

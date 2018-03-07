@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoraCorpCM.Domain;
-using CoraCorpCM.Services;
-using CoraCorpCM.ViewModels.ManageViewModels;
+using CoraCorpCM.Web.Services;
+using CoraCorpCM.Web.ViewModels.ManageViewModels;
 
-namespace CoraCorpCM.Controllers
+namespace CoraCorpCM.Web.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

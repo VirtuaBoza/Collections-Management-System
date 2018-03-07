@@ -69,7 +69,7 @@ namespace CoraCorpCM.Data
         int AddPiece(Piece piece);
 
         // Read
-        IEnumerable<Piece> GetAllPiecesForMuseum(Museum museum);
+        IEnumerable<Piece> GetPieces(Museum museum);
         bool PieceExists(int id);
         Piece GetPiece(int? id);
 
