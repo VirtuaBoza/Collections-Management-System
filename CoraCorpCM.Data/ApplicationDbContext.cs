@@ -51,57 +51,6 @@ namespace CoraCorpCM.Data
                 .HasKey(pieceTag => new { pieceTag.PieceId, pieceTag.TagId });
 
             // Define one-to-many relationships
-            builder.Entity<Acquisition>()
-                .HasOne(a => a.Museum)
-                .WithMany(m => m.Acquisitions);
-            builder.Entity<ApplicationUser>()
-                .HasOne(u => u.Museum)
-                .WithMany(m => m.Users);
-            builder.Entity<Artist>()
-                .HasOne(a => a.Museum)
-                .WithMany(m => m.Artists);
-            builder.Entity<Collection>()
-                .HasOne(c => c.Museum)
-                .WithMany(m => m.Collections);
-            builder.Entity<Condition>()
-                .HasOne(c => c.Museum)
-                .WithMany(m => m.Conditions);
-            builder.Entity<Exhibition>()
-                .HasOne(e => e.Museum)
-                .WithMany(m => m.Exhibitions);
-            builder.Entity<FundingSource>()
-                .HasOne(e => e.Museum)
-                .WithMany(m => m.FundingSources);
-            builder.Entity<Genre>()
-                .HasOne(g => g.Museum)
-                .WithMany(m => m.Genres);
-            builder.Entity<Inspection>()
-                .HasOne(i => i.Museum)
-                .WithMany(m => m.Inspections);
-            builder.Entity<Inspector>()
-                .HasOne(i => i.Museum)
-                .WithMany(m => m.Inspectors);
-            builder.Entity<Loan>()
-                .HasOne(l => l.Museum)
-                .WithMany(m => m.Loans);
-            builder.Entity<Location>()
-                .HasOne(l => l.Museum)
-                .WithMany(m => m.Locations);
-            builder.Entity<Medium>()
-                .HasOne(m => m.Museum)
-                .WithMany(m => m.Media);
-            builder.Entity<Piece>()
-                .HasOne(p => p.Museum)
-                .WithMany(m => m.Pieces);
-            builder.Entity<Subgenre>()
-                .HasOne(s => s.Museum)
-                .WithMany(m => m.Subgenres);
-            builder.Entity<SubjectMatter>()
-                .HasOne(s => s.Museum)
-                .WithMany(m => m.SubjectMatters);
-            builder.Entity<Tag>()
-                .HasOne(t => t.Museum)
-                .WithMany(m => m.Tags);
             builder.Entity<Upload>()
                 .HasOne(u => u.Museum)
                 .WithMany(m => m.Uploads);
