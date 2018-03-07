@@ -16,6 +16,11 @@ namespace CoraCorpCM.Data
             this.context = context;
         }
 
+        public TEntity GetEntity<TEntity>(int id) where TEntity : class, IEntity
+        {
+            return context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
+        }
+
         #region Acquisition
         public IEnumerable<Acquisition> GetAcquisitions(Museum museum)
         {
