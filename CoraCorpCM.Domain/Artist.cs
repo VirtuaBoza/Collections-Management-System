@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Domain
@@ -20,6 +21,7 @@ namespace CoraCorpCM.Domain
 
         public Museum Museum { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string AlsoKnownAs { get; set; }
@@ -31,10 +33,10 @@ namespace CoraCorpCM.Domain
         public string CityOfOrigin { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime Deathdate { get; set; }
+        public DateTime? Deathdate { get; set; }
 
         public ICollection<ArtistGenre> ArtistGenres { get; set; }
 
