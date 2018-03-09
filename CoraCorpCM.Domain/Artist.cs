@@ -20,16 +20,12 @@ namespace CoraCorpCM.Domain
         public int Id { get; set; }
 
         public Museum Museum { get; set; }
+        public int MuseumId { get; set; }
 
         [Required]
         public string Name { get; set; }
-
         public string AlsoKnownAs { get; set; }
-
-        public Country CountryOfOrigin { get; set; }
-
         public string StateOfOrigin { get; set; }
-
         public string CityOfOrigin { get; set; }
 
         [Column(TypeName = "date")]
@@ -38,16 +34,13 @@ namespace CoraCorpCM.Domain
         [Column(TypeName = "date")]
         public DateTime? Deathdate { get; set; }
 
+        public Country CountryOfOrigin { get; set; }
+
         public ICollection<ArtistGenre> ArtistGenres { get; set; }
-
         public ICollection<ArtistMedium> ArtistMedia { get; set; }
-
         public ICollection<ArtistSubgenre> ArtistSubgenres { get; set; }
-
         public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
-
         public ICollection<ArtistTag> ArtistTags { get; set; }
-
         public ICollection<Piece> Pieces { get; set; }
     }
 }
