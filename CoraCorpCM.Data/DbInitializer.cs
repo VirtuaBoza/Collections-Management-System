@@ -23,7 +23,6 @@ namespace CoraCorpCM.Data
             
             if (!context.Countries.Any())
             {
-                //var filepath = Path.Combine(environment.ContentRootPath, "countries.json");
                 var filepath = Path.Combine(Directory.GetParent(environment.ContentRootPath).ToString(), "CoraCorpCM.Data","countries.json");
                 var json = File.ReadAllText(filepath);
                 var countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(json);
@@ -53,21 +52,6 @@ namespace CoraCorpCM.Data
 
                 if (!context.Users.Any() && !context.Museums.Any())
                 {
-                    var fullControlUser = new ApplicationUser
-                    {
-                        UserName = "fullcontrol@email.com",
-                        Email = "fullcontrol@email.com",
-                        FirstName = "AndrewFC",
-                        LastName = "Boza",
-                        EmailConfirmed = true
-                    };
-                    var fullControlUserResult = await userManager.CreateAsync(fullControlUser, "password");
-                    if (fullControlUserResult.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(fullControlUser, Role.Admin);
-                        await userManager.AddToRoleAsync(fullControlUser, Role.Contributor);
-                    }
-
                     var country = museumRepository.GetFirstCountry();
                     var museum = new Museum
                     {
@@ -80,16 +64,38 @@ namespace CoraCorpCM.Data
                         ZipCode = "12345",
                         Country = country
                     };
-                    museum.Users.Add(fullControlUser);
                     museumRepository.AddMuseum(museum);
 
-                    museumRepository.AddMedium(new Medium { Name = "Medium1", Museum = museum });
-                    museumRepository.AddMedium(new Medium { Name = "Medium2", Museum = museum });
-                    museumRepository.AddMedium(new Medium { Name = "Medium3", Museum = museum });
+                    if (!context.Media.Any())
+                    {
+                        museumRepository.AddMedium(new Medium {Name = "Medium1", Museum = museum});
+                        museumRepository.AddMedium(new Medium {Name = "Medium2", Museum = museum});
+                        museumRepository.AddMedium(new Medium {Name = "Medium3", Museum = museum});
+                    }
 
-                    museumRepository.AddLocation(new Location { Name = "Location1", Address1 = "street1", Address2 = "suite1", City = "city1", State = "state1", ZipCode = "12345", Country = country, Museum = museum });
-                    museumRepository.AddLocation(new Location { Name = "Location2", Address1 = "street2", Address2 = "suite2", City = "city2", State = "state2", ZipCode = "23456", Country = country, Museum = museum });
-                    museumRepository.AddLocation(new Location { Name = "Location3", Address1 = "street3", Address2 = "suite3", City = "city3", State = "state3", ZipCode = "34567", Country = country, Museum = museum });
+                    if (!context.Locations.Any())
+                    {
+                        museumRepository.AddLocation(new Location { Name = "Location1", Address1 = "street1", Address2 = "suite1", City = "city1", State = "state1", ZipCode = "12345", Country = country, Museum = museum });
+                        museumRepository.AddLocation(new Location { Name = "Location2", Address1 = "street2", Address2 = "suite2", City = "city2", State = "state2", ZipCode = "23456", Country = country, Museum = museum });
+                        museumRepository.AddLocation(new Location { Name = "Location3", Address1 = "street3", Address2 = "suite3", City = "city3", State = "state3", ZipCode = "34567", Country = country, Museum = museum });
+
+                    }
+
+                    var fullControlUser = new ApplicationUser
+                    {
+                        UserName = "fullcontrol@email.com",
+                        Email = "fullcontrol@email.com",
+                        FirstName = "AndrewFC",
+                        LastName = "Boza",
+                        EmailConfirmed = true,
+                        Museum = museum
+                    };
+                    var fullControlUserResult = await userManager.CreateAsync(fullControlUser, "password");
+                    if (fullControlUserResult.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(fullControlUser, Role.Admin);
+                        await userManager.AddToRoleAsync(fullControlUser, Role.Contributor);
+                    }
 
                     var adminUser = new ApplicationUser
                     {
