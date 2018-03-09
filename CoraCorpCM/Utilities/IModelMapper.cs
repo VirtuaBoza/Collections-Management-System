@@ -5,6 +5,6 @@ namespace CoraCorpCM.Web.Utilities
 {
     public interface IModelMapper
     {
-        Piece ResolveToPieceModel(PieceViewModel model, ApplicationUser user);
+        Piece ResolveToPieceModel(PieceViewModel pieceViewModel, ApplicationUser user);
     }
 }
