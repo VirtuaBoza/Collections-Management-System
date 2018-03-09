@@ -16,6 +16,9 @@ namespace CoraCorpCM.Web.Utilities
 
         public Piece ResolveToPieceModel(PieceViewModel pieceViewModel, ApplicationUser user)
         {
+            if (pieceViewModel == null) throw new ArgumentNullException();
+            if (user == null) throw new ArgumentNullException();
+
             var userMuseum = museumRepository.GetMuseum(user);
 
             var piece = new Piece();
