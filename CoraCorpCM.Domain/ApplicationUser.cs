@@ -11,6 +11,8 @@ namespace CoraCorpCM.Domain
         }
 
         public Museum Museum { get; set; }
+        public int MuseumId { get; set; }
+
         [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }

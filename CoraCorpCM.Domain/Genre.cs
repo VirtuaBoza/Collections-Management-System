@@ -7,6 +7,8 @@ namespace CoraCorpCM.Domain
     {
         public Genre()
         {
+            Pieces = new HashSet<Piece>();
+
             ArtistGenres = new HashSet<ArtistGenre>();
         }
 
@@ -17,6 +19,8 @@ namespace CoraCorpCM.Domain
 
         [Required]
         public string Name { get; set; }
+
+        public ICollection<Piece> Pieces { get; set; }
 
         public ICollection<ArtistGenre> ArtistGenres { get; set; }
     }

@@ -15,11 +15,8 @@ namespace CoraCorpCM.Domain
 
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
-
         public Inspector Inspector { get; set; }
-
         public Condition Condition { get; set; }
-
         public string Notes { get; set; }
     }
 }

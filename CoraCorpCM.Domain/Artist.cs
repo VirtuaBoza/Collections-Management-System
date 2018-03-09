@@ -36,11 +36,12 @@ namespace CoraCorpCM.Domain
 
         public Country CountryOfOrigin { get; set; }
 
+        public ICollection<Piece> Pieces { get; set; }
+
         public ICollection<ArtistGenre> ArtistGenres { get; set; }
         public ICollection<ArtistMedium> ArtistMedia { get; set; }
         public ICollection<ArtistSubgenre> ArtistSubgenres { get; set; }
         public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
         public ICollection<ArtistTag> ArtistTags { get; set; }
-        public ICollection<Piece> Pieces { get; set; }
     }
 }

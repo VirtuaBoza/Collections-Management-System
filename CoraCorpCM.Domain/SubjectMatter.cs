@@ -7,15 +7,21 @@ namespace CoraCorpCM.Domain
     {
         public SubjectMatter()
         {
-            ArtistSubjectMatters = new HashSet<ArtistSubjectMatter>();
             Pieces = new HashSet<Piece>();
+
+            ArtistSubjectMatters = new HashSet<ArtistSubjectMatter>();
         }
 
         public int Id { get; set; }
+
         public Museum Museum { get; set; }
+        public int MuseumId { get; set; }
+
         [Required]
         public string Name { get; set; }
-        public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
+
         public ICollection<Piece> Pieces { get; set; }
+
+        public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
     }
 }

@@ -11,7 +11,10 @@ namespace CoraCorpCM.Domain
         }
 
         public int Id { get; set; }
+
         public Museum Museum { get; set; }
+        public int MuseumId { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string Address1 { get; set; }
@@ -20,6 +23,7 @@ namespace CoraCorpCM.Domain
         public string State { get; set; }
         public string ZipCode { get; set; }
         public Country Country { get; set; }
+
         public ICollection<LocationTag> LocationTags { get; set; }
     }
 }
