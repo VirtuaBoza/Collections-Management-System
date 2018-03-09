@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Domain.Models
 {
-    public class Piece : IMuseumEntity
+    public class Piece : IEntity, IMuseumEntity
     {
         public Piece()
         {

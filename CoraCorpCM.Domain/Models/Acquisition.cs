@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Domain.Models
 {
-    public class Acquisition : IMuseumEntity
+    public class Acquisition : IEntity, IMuseumEntity
     {
         public Acquisition()
         {

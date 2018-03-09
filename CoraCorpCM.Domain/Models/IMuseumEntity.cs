@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Models
 {
-    public interface IMuseumEntity : IEntity
+    public interface IMuseumEntity
     {
         Museum Museum { get; set; }
     }
