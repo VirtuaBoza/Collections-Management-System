@@ -38,7 +38,7 @@ namespace CoraCorpCM.Web.Controllers
         {
             var user = userManager.GetUserAsync(User).Result;
             var userMuseum = museumRepository.GetMuseum(user);
-            var pieces = museumRepository.GetPieces(userMuseum);
+            var pieces = museumRepository.GetEntities<Piece>(userMuseum);
             return View(pieces);
         }
 

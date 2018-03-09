@@ -21,6 +21,11 @@ namespace CoraCorpCM.Data
             return context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
         }
 
+        public IEnumerable<TEntity> GetEntities<TEntity>(Museum museum) where TEntity : class, IEntity
+        {
+            return context.Set<TEntity>().Where(x => x.Museum == museum).ToList();
+        }
+
         #region Acquisition
         public IEnumerable<Acquisition> GetAcquisitions(Museum museum)
         {
@@ -175,11 +180,6 @@ namespace CoraCorpCM.Data
         }
 
         // Read
-        public IEnumerable<Piece> GetPieces(Museum museum)
-        {
-            return context.Pieces.Where(p => p.Museum == museum).ToList();
-        }
-
         public bool PieceExists(int id)
         {
             return context.Pieces.Any(e => e.Id == id);

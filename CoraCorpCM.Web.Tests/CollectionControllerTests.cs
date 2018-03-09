@@ -33,7 +33,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetPieces(null)).Returns(MockHelper.GetTestPieces());
+            mockRepo.Setup(r => r.GetEntities<Piece>(null)).Returns(MockHelper.GetTestPieces());
             var mockUserManager = MockHelper.GetMockUserManager();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null);
 
