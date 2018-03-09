@@ -188,7 +188,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    collection = museumRepository.GetCollection(collId);
+                    collection = museumRepository.GetEntity<Collection>(collId);
                 }
             }
 
@@ -308,7 +308,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    artist = museumRepository.GetArtist(artistId);
+                    artist = museumRepository.GetEntity<Artist>(artistId);
                 }
             }
 

@@ -7,23 +7,7 @@ namespace CoraCorpCM.Data
     public interface IMuseumRepository
     {
         TEntity GetEntity<TEntity>(int id) where TEntity : class, IEntity;
-        IEnumerable<TEntity> GetEntities<TEntity>(Museum museum) where TEntity : class, IEntity;
-
-            #region Acquisition
-        IEnumerable<Acquisition> GetAcquisitions(Museum museum);
-        #endregion
-
-        #region Artist
-        Artist GetArtist(int id);
-        IEnumerable<Artist> GetArtists(Museum museum);
-        #endregion
-
-        #region Collection
-        int AddCollection(Collection collection);
-
-        Collection GetCollection(int id);
-        IEnumerable<Collection> GetCollections(Museum museum);
-        #endregion
+        IEnumerable<TMuseumEntity> GetEntities<TMuseumEntity>(Museum museum) where TMuseumEntity : class, IMuseumEntity;
 
         #region Country
         Country GetCountry(int id);

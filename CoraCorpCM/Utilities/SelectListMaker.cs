@@ -9,7 +9,7 @@ namespace CoraCorpCM.Web.Utilities
     {
         public IEnumerable<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
         {
-            var acquisitions = repository.GetAcquisitions(museum);
+            var acquisitions = repository.GetEntities<Acquisition>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var acquisition in acquisitions)
             {
@@ -20,7 +20,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetArtistSelections(IMuseumRepository repository, Museum museum)
         {
-            var artists = repository.GetArtists(museum);
+            var artists = repository.GetEntities<Artist>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var artist in artists)
             {
@@ -31,7 +31,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetCollectionSelections(IMuseumRepository repository, Museum museum)
         {
-            var collections = repository.GetCollections(museum);
+            var collections = repository.GetEntities<Collection>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var collection in collections)
             {

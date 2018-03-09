@@ -3,6 +3,5 @@
     public interface IEntity
     {
         int Id { get; set; }
-        Museum  Museum { get; set; }
     }
 }

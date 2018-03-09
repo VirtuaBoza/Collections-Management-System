@@ -21,50 +21,10 @@ namespace CoraCorpCM.Data
             return context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<TEntity> GetEntities<TEntity>(Museum museum) where TEntity : class, IEntity
+        public IEnumerable<TMuseumEntity> GetEntities<TMuseumEntity>(Museum museum) where TMuseumEntity : class, IMuseumEntity
         {
-            return context.Set<TEntity>().Where(x => x.Museum == museum).ToList();
+            return context.Set<TMuseumEntity>().Where(x => x.Museum == museum).ToList();
         }
-
-        #region Acquisition
-        public IEnumerable<Acquisition> GetAcquisitions(Museum museum)
-        {
-            return context.Acquisitions
-                .Where(a => a.Museum == museum).ToList();
-        }
-        #endregion
-
-        #region Artist
-        public Artist GetArtist(int id)
-        {
-            return context.Artists.SingleOrDefault(a => a.Id == id);
-        }
-
-        public IEnumerable<Artist> GetArtists(Museum museum)
-        {
-            return context.Artists
-                .Where(a => a.Museum == museum);
-        }
-        #endregion
-
-        #region Collection
-        public int AddCollection(Collection collection)
-        {
-            context.Add(collection);
-            return context.SaveChanges();
-        }
-
-        public Collection GetCollection(int id)
-        {
-            return context.Collections.SingleOrDefault(c => c.Id == id);
-        }
-
-        public IEnumerable<Collection> GetCollections(Museum museum)
-        {
-            return context.Collections
-                .Where(c => c.Museum == museum);
-        }
-        #endregion
 
         #region Country
         public Country GetCountry(int id)
