@@ -54,6 +54,16 @@ namespace CoraCorpCM.Data
             builder.Entity<Upload>()
                 .HasOne(u => u.Museum)
                 .WithMany(m => m.Uploads);
+
+            builder.Entity<ArtistGenre>()
+                .HasOne(a => a.Artist)
+                .WithMany(m => m.ArtistGenres)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ArtistGenre>()
+                .HasOne(a => a.Genre)
+                .WithMany(g => g.ArtistGenres)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

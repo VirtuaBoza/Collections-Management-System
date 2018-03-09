@@ -6,5 +6,8 @@
         public Artist Artist { get; set; }
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
+
+        public int MuseumId { get; set; }
+        public Museum Museum { get; set; }
     }
 }
