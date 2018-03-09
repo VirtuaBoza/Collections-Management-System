@@ -1,5 +1,5 @@
 ﻿using CoraCorpCM.Data;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 

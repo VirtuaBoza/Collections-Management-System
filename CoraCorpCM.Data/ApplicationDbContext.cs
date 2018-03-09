@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 
 namespace CoraCorpCM.Data
 {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using CoraCorpCM.Data;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.Web.ViewModels;

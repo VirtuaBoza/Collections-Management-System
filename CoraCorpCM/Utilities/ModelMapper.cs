@@ -1,5 +1,5 @@
 ﻿using CoraCorpCM.Data;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System;
 

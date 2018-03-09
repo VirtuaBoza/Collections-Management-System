@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CoraCorpCM.Data;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.Utilities;
 

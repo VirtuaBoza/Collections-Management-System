@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoraCorpCM.Data;
 using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;

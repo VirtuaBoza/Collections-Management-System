@@ -1,4 +1,5 @@
 ﻿using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -6,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using System;
 
 namespace CoraCorpCM.Data
 {

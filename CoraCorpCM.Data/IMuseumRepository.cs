@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 
 namespace CoraCorpCM.Data
 {

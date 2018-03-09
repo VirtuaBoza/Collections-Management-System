@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CoraCorpCM.Data;
-using CoraCorpCM.Domain;
+using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoraCorpCM.Web.Utilities

@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.Domain;
+﻿using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using System.Collections.Generic;
