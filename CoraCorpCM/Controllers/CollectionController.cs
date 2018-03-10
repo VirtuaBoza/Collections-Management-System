@@ -49,7 +49,7 @@ namespace CoraCorpCM.Web.Controllers
                 return NotFound();
             }
 
-            var piece = museumRepository.GetPiece(id);
+            var piece = museumRepository.GetEntity<Piece>(id.Value);
             if (piece == null)
             {
                 return NotFound();
@@ -93,7 +93,7 @@ namespace CoraCorpCM.Web.Controllers
             {
                 var user = userManager.GetUserAsync(User).Result;
                 var piece = modelMapper.ResolveToPieceModel(viewModel, user);
-                museumRepository.AddPiece(piece);
+                museumRepository.Add(piece);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -108,7 +108,7 @@ namespace CoraCorpCM.Web.Controllers
                 return NotFound();
             }
 
-            var piece = museumRepository.GetPiece(id);
+            var piece = museumRepository.GetEntity<Piece>(id.Value);
             if (piece == null)
             {
                 return NotFound();
@@ -121,7 +121,7 @@ namespace CoraCorpCM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
+        public IActionResult Edit(int id, [Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
         {
             if (id != piece.Id)
             {
@@ -132,11 +132,11 @@ namespace CoraCorpCM.Web.Controllers
             {
                 try
                 {
-                    await museumRepository.UpdatePiece(piece);
+                    museumRepository.Update(piece);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!museumRepository.PieceExists(piece.Id))
+                    if (!museumRepository.EntityExists<Piece>(piece.Id))
                     {
                         return NotFound();
                     }
@@ -158,7 +158,7 @@ namespace CoraCorpCM.Web.Controllers
                 return NotFound();
             }
 
-            var piece = museumRepository.GetPiece(id);
+            var piece = museumRepository.GetPiece(id.Value);
             if (piece == null)
             {
                 return NotFound();
@@ -170,9 +170,9 @@ namespace CoraCorpCM.Web.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            await museumRepository.DeletePiece(id);
+            museumRepository.Delete<Piece>(id);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -9,7 +9,7 @@ namespace CoraCorpCM.Web.Utilities
     {
         public IEnumerable<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum)
         {
-            var acquisitions = repository.GetEntities<Acquisition>(museum);
+            var acquisitions = repository.GetEntitiesAsNoTracking<Acquisition>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var acquisition in acquisitions)
             {
@@ -20,7 +20,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetArtistSelections(IMuseumRepository repository, Museum museum)
         {
-            var artists = repository.GetEntities<Artist>(museum);
+            var artists = repository.GetEntitiesAsNoTracking<Artist>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var artist in artists)
             {
@@ -31,7 +31,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetCollectionSelections(IMuseumRepository repository, Museum museum)
         {
-            var collections = repository.GetEntities<Collection>(museum);
+            var collections = repository.GetEntitiesAsNoTracking<Collection>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var collection in collections)
             {
@@ -42,7 +42,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetCountrySelections(IMuseumRepository repository)
         {
-            var countries = repository.GetCountries();
+            var countries = repository.GetEntitiesAsNoTracking<Country>();
             var selectList = new List<SelectListItem>();
             foreach (var country in countries)
             {
@@ -53,7 +53,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetGenreSelections(IMuseumRepository repository, Museum museum)
         {
-            var genres = repository.GetGenres(museum);
+            var genres = repository.GetEntitiesAsNoTracking<Genre>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var genre in genres)
             {
@@ -64,7 +64,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetFundingSourceSelections(IMuseumRepository repository, Museum museum)
         {
-            var fundingSources = repository.GetFundingSources(museum);
+            var fundingSources = repository.GetEntitiesAsNoTracking<FundingSource>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var fundingSource in fundingSources)
             {
@@ -75,7 +75,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetLocationSelections(IMuseumRepository repository, Museum museum)
         {
-            var locations = repository.GetLocations(museum);
+            var locations = repository.GetEntitiesAsNoTracking<Location>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var location in locations)
             {
@@ -86,7 +86,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetMediumSelections(IMuseumRepository repository, Museum museum)
         {
-            var media = repository.GetMedia(museum);
+            var media = repository.GetEntitiesAsNoTracking<Medium>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var medium in media)
             {
@@ -97,7 +97,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetPieceSourceSelections(IMuseumRepository repository, Museum museum)
         {
-            var sources = repository.GetPieceSources(museum);
+            var sources = repository.GetEntitiesAsNoTracking<PieceSource>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var source in sources)
             {
@@ -108,7 +108,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetUnitOfMeasureSelections(IMuseumRepository repository)
         {
-            var units = repository.GetUnitsOfMeasure();
+            var units = repository.GetEntitiesAsNoTracking<UnitOfMeasure>();
             var selectList = new List<SelectListItem>();
             foreach (var unit in units)
             {
@@ -119,7 +119,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetSubgenreSelections(IMuseumRepository repository, Museum museum)
         {
-            var subgenres = repository.GetSubgenres(museum);
+            var subgenres = repository.GetEntitiesAsNoTracking<Subgenre>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var subgenre in subgenres)
             {
@@ -130,7 +130,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetSubjectMatterSelections(IMuseumRepository repository, Museum museum)
         {
-            var subjectMatters = repository.GetSubjectMatters(museum);
+            var subjectMatters = repository.GetEntitiesAsNoTracking<SubjectMatter>(museum);
             var selectList = new List<SelectListItem>();
             foreach (var subjectMatter in subjectMatters)
             {

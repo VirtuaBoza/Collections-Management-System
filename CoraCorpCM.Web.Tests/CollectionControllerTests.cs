@@ -49,7 +49,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetPiece(1)).Returns(new Piece());
+            mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
             var controller = new CollectionController(mockRepo.Object, null, null, null, null);
 
             // Act
@@ -64,7 +64,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetPiece(1)).Returns(new Piece());
+            mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
             var controller = new CollectionController(mockRepo.Object, null, null, null, null);
 
             // Act
@@ -79,7 +79,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetPiece(1)).Returns(new Piece());
+            mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
             var controller = new CollectionController(mockRepo.Object, null, null, null, null);
 
             // Act
@@ -94,7 +94,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetPiece(1)).Returns<Piece>(null);
+            mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns<Piece>(null);
             var controller = new CollectionController(mockRepo.Object, null, null, null, null);
 
             // Act

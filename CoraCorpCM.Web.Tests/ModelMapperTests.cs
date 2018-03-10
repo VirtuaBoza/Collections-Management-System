@@ -93,7 +93,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetMedium(1)).Returns(new Medium());
+            mockRepo.Setup(r => r.GetEntity<Medium>(1)).Returns(new Medium());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { MediumId = "1" };
             var user = new ApplicationUser();
@@ -127,7 +127,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetGenre(1)).Returns(new Genre());
+            mockRepo.Setup(r => r.GetEntity<Genre>(1)).Returns(new Genre());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { GenreId = "1" };
             var user = new ApplicationUser();
@@ -161,7 +161,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetSubgenre(1)).Returns(new Subgenre());
+            mockRepo.Setup(r => r.GetEntity<Subgenre>(1)).Returns(new Subgenre());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { SubgenreId = "1" };
             var user = new ApplicationUser();
@@ -195,7 +195,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
-            mockRepo.Setup(r => r.GetSubjectMatter(1)).Returns(new SubjectMatter());
+            mockRepo.Setup(r => r.GetEntity<SubjectMatter>(1)).Returns(new SubjectMatter());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { SubjectMatterId = "1" };
             var user = new ApplicationUser();

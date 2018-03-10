@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoraCorpCM.Domain.Models
 {
-    public class Museum
+    public class Museum : IEntity
     {
         public Museum()
         {

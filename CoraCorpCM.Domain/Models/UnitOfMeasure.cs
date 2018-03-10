@@ -2,7 +2,7 @@
 
 namespace CoraCorpCM.Domain.Models
 {
-    public class UnitOfMeasure
+    public class UnitOfMeasure : IEntity
     {
         public int Id { get; set; }
 

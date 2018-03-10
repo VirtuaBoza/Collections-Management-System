@@ -232,36 +232,36 @@ namespace CoraCorpCM.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                Country country = null;
+                if (int.TryParse(model.CountryId, out int countryId))
+                {
+                    country = museumRepository.GetEntity<Country>(countryId);
+                }
+
+                var museum = new Museum
+                {
+                    Name = model.MuseumName,
+                    ShortName = model.MuseumShortName,
+                    Address1 = model.Address1,
+                    Address2 = model.Address2,
+                    City = model.City,
+                    State = model.State,
+                    ZipCode = model.ZipCode,
+                    Country = country
+                };
+                museumRepository.Add(museum);
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    Museum = museum
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Country country = null;
-                    if (int.TryParse(model.CountryId, out int countryId))
-                    {
-                        country = museumRepository.GetCountry(countryId);
-                    }
-
-                    var museum = new Museum
-                    {
-                        Name = model.MuseumName,
-                        ShortName = model.MuseumShortName,
-                        Address1 = model.Address1,
-                        Address2 = model.Address2,
-                        City = model.City,
-                        State = model.State,
-                        ZipCode = model.ZipCode,
-                        Country = country
-                    };
-                    museum.Users.Add(user);
-                    museumRepository.AddMuseum(museum);
-
                     await userManager.AddToRoleAsync(user, Role.Admin);
                     await userManager.AddToRoleAsync(user, Role.Contributor);
 
@@ -273,6 +273,10 @@ namespace CoraCorpCM.Web.Controllers
                     //await signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction(nameof(RegisterConfirmation));
+                }
+                else
+                {
+                    museumRepository.Delete(museum);
                 }
                 AddErrors(result);
             }

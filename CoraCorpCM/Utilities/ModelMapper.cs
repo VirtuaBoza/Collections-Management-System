@@ -60,12 +60,12 @@ namespace CoraCorpCM.Web.Utilities
                     };
                     if (int.TryParse(pieceViewModel.CurrentCountryId, out int currCountry))
                     {
-                        currentLocation.Country = museumRepository.GetCountry(currCountry);
+                        currentLocation.Country = museumRepository.GetEntity<Country>(currCountry);
                     }
                 }
                 else
                 {
-                    currentLocation = museumRepository.GetLocation(currLocId);
+                    currentLocation = museumRepository.GetEntity<Location>(currLocId);
                 }
             }
 
@@ -90,12 +90,12 @@ namespace CoraCorpCM.Web.Utilities
                     };
                     if (int.TryParse(pieceViewModel.PermanentCountryId, out int permCountry))
                     {
-                        permanentLocation.Country = museumRepository.GetCountry(permCountry);
+                        permanentLocation.Country = museumRepository.GetEntity<Country>(permCountry);
                     }
                 }
                 else
                 {
-                    permanentLocation = museumRepository.GetLocation(permLocId);
+                    permanentLocation = museumRepository.GetEntity<Location>(permLocId);
                 }
             }
 
@@ -122,7 +122,7 @@ namespace CoraCorpCM.Web.Utilities
         {
             if (int.TryParse(model.UnitOfMeasureId, out int unitOfMeasureId))
             {
-                piece.UnitOfMeasure = museumRepository.GetUnitOfMeasure(unitOfMeasureId);
+                piece.UnitOfMeasure = museumRepository.GetEntity<UnitOfMeasure>(unitOfMeasureId);
             }
         }
 
@@ -130,7 +130,7 @@ namespace CoraCorpCM.Web.Utilities
         {
             if (int.TryParse(model.OriginCountryId, out int originCountryId))
             {
-                piece.CountryOfOrigin = museumRepository.GetCountry(originCountryId);
+                piece.CountryOfOrigin = museumRepository.GetEntity<Country>(originCountryId);
             }
         }
 
@@ -210,7 +210,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    medium = museumRepository.GetMedium(mediumId);
+                    medium = museumRepository.GetEntity<Medium>(mediumId);
                 }
             }
 
@@ -232,7 +232,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    genre = museumRepository.GetGenre(genreId);
+                    genre = museumRepository.GetEntity<Genre>(genreId);
                 }
             }
 
@@ -250,7 +250,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    subgenre = museumRepository.GetSubgenre(subgenreId);
+                    subgenre = museumRepository.GetEntity<Subgenre>(subgenreId);
                 }
             }
 
@@ -268,7 +268,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
                 else
                 {
-                    subjectMatter = museumRepository.GetSubjectMatter(subjectMatterId);
+                    subjectMatter = museumRepository.GetEntity<SubjectMatter>(subjectMatterId);
                 }
             }
 
@@ -293,7 +293,7 @@ namespace CoraCorpCM.Web.Utilities
 
                     if (int.TryParse(model.ArtistCountryId, out int countryId))
                     {
-                        artist.CountryOfOrigin = museumRepository.GetCountry(countryId);
+                        artist.CountryOfOrigin = museumRepository.GetEntity<Country>(countryId);
                     }
 
                     if (DateTime.TryParse(model.ArtistBirthdate, out DateTime birthdate))
@@ -346,7 +346,7 @@ namespace CoraCorpCM.Web.Utilities
                         }
                         else
                         {
-                            acquisition.PieceSource = museumRepository.GetPieceSource(pieceSourceId);
+                            acquisition.PieceSource = museumRepository.GetEntity<PieceSource>(pieceSourceId);
                         }
                     }
 
@@ -362,7 +362,7 @@ namespace CoraCorpCM.Web.Utilities
                         }
                         else
                         {
-                            acquisition.FundingSource = museumRepository.GetFundingSource(fundingSourceId);
+                            acquisition.FundingSource = museumRepository.GetEntity<FundingSource>(fundingSourceId);
                         }
                     }
                 }
