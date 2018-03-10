@@ -158,7 +158,7 @@ namespace CoraCorpCM.Web.Controllers
                 return NotFound();
             }
 
-            var piece = museumRepository.GetPiece(id.Value);
+            var piece = museumRepository.GetEntity<Piece>(id.Value);
             if (piece == null)
             {
                 return NotFound();
