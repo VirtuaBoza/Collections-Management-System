@@ -191,5 +191,43 @@ namespace CoraCorpCM.Web.Tests
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(PieceViewModel));
         }
+
+        [TestMethod]
+        public void PostCreate_WithValidModelState_CallsResolveToPieceModelOnModelMapper()
+        {
+            // Arrange
+            var mockRepo = new Mock<IMuseumRepository>();
+            var mockUserManager = MockHelper.GetMockUserManager();
+            var mockModelMapper = new Mock<IModelMapper>();
+            var mockModelValidator = new Mock<IModelValidator>();
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var viewModel = new PieceViewModel();
+
+            // Act
+            var result = controller.Create(viewModel);
+
+            // Assert
+            mockModelMapper.Verify(r => r.ResolveToPieceModel(viewModel, null));
+        }
+
+        [TestMethod]
+        public void PostCreate_WithValidModelState_AddsPieceToRepository()
+        {
+            // Arrange
+            var mockRepo = new Mock<IMuseumRepository>();
+            var mockUserManager = MockHelper.GetMockUserManager();
+            var mockModelMapper = new Mock<IModelMapper>();
+            var mockModelValidator = new Mock<IModelValidator>();
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var viewModel = new PieceViewModel();
+            var piece = new Piece();
+            mockModelMapper.Setup(m => m.ResolveToPieceModel(viewModel, null)).Returns(piece);
+
+            // Act
+            var result = controller.Create(viewModel);
+
+            // Assert
+            mockRepo.Verify(r => r.Add(piece));
+        }
     }
 }

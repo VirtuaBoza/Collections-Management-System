@@ -45,7 +45,7 @@ namespace CoraCorpCM.Web.Utilities
         private void SetCurrentLocation(PieceViewModel pieceViewModel, Piece piece)
         {
             Location currentLocation = null;
-            if (int.TryParse(pieceViewModel.PermanentLocationId, out int currLocId))
+            if (int.TryParse(pieceViewModel.CurrentLocationId, out int currLocId))
             {
                 if (currLocId == -1 && !string.IsNullOrWhiteSpace(pieceViewModel.CurrentLocationName))
                 {
@@ -69,7 +69,7 @@ namespace CoraCorpCM.Web.Utilities
                 }
             }
 
-            piece.PermanentLocation = currentLocation;
+            piece.CurrentLocation = currentLocation;
         }
 
         private void SetPermanentLocation(PieceViewModel pieceViewModel, Piece piece)
@@ -365,6 +365,10 @@ namespace CoraCorpCM.Web.Utilities
                             acquisition.FundingSource = museumRepository.GetEntity<FundingSource>(fundingSourceId);
                         }
                     }
+                }
+                else
+                {
+                    acquisition = museumRepository.GetEntity<Acquisition>(acquisitionId);
                 }
             }
 
