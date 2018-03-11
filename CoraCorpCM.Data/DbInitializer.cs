@@ -64,20 +64,20 @@ namespace CoraCorpCM.Data
                         ZipCode = "12345",
                         Country = country
                     };
-                    museumRepository.Add(museum);
+                    museumRepository.Insert(museum);
 
                     if (!context.Media.Any())
                     {
-                        museumRepository.Add(new Medium {Name = "Medium1", Museum = museum});
-                        museumRepository.Add(new Medium {Name = "Medium2", Museum = museum});
-                        museumRepository.Add(new Medium {Name = "Medium3", Museum = museum});
+                        museumRepository.Insert(new Medium {Name = "Medium1", Museum = museum});
+                        museumRepository.Insert(new Medium {Name = "Medium2", Museum = museum});
+                        museumRepository.Insert(new Medium {Name = "Medium3", Museum = museum});
                     }
 
                     if (!context.Locations.Any())
                     {
-                        museumRepository.Add(new Location { Name = "Location1", Address1 = "street1", Address2 = "suite1", City = "city1", State = "state1", ZipCode = "12345", Country = country, Museum = museum });
-                        museumRepository.Add(new Location { Name = "Location2", Address1 = "street2", Address2 = "suite2", City = "city2", State = "state2", ZipCode = "23456", Country = country, Museum = museum });
-                        museumRepository.Add(new Location { Name = "Location3", Address1 = "street3", Address2 = "suite3", City = "city3", State = "state3", ZipCode = "34567", Country = country, Museum = museum });
+                        museumRepository.Insert(new Location { Name = "Location1", Address1 = "street1", Address2 = "suite1", City = "city1", State = "state1", ZipCode = "12345", Country = country, Museum = museum });
+                        museumRepository.Insert(new Location { Name = "Location2", Address1 = "street2", Address2 = "suite2", City = "city2", State = "state2", ZipCode = "23456", Country = country, Museum = museum });
+                        museumRepository.Insert(new Location { Name = "Location3", Address1 = "street3", Address2 = "suite3", City = "city3", State = "state3", ZipCode = "34567", Country = country, Museum = museum });
 
                     }
 

@@ -249,7 +249,7 @@ namespace CoraCorpCM.Web.Controllers
                     ZipCode = model.ZipCode,
                     Country = country
                 };
-                museumRepository.Add(museum);
+                museumRepository.Insert(museum);
 
                 var user = new ApplicationUser
                 {

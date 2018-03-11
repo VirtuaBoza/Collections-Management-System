@@ -6,7 +6,7 @@ namespace CoraCorpCM.Data
     public interface IMuseumRepository
     {
         // Create
-        int Add(IEntity entity);
+        int Insert(IEntity entity);
 
         // Read
         TEntity GetFirstEntity<TEntity>() where TEntity : class, IEntity;

@@ -16,7 +16,7 @@ namespace CoraCorpCM.Data
 
         // Create
 
-        public int Add(IEntity entity)
+        public int Insert(IEntity entity)
         {
             context.Add(entity);
             return context.SaveChanges();

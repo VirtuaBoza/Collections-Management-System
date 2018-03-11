@@ -227,7 +227,7 @@ namespace CoraCorpCM.Web.Tests
             var result = controller.Create(viewModel);
 
             // Assert
-            mockRepo.Verify(r => r.Add(piece));
+            mockRepo.Verify(r => r.Insert(piece));
         }
     }
 }

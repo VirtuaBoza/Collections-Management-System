@@ -93,7 +93,7 @@ namespace CoraCorpCM.Web.Controllers
             {
                 var user = userManager.GetUserAsync(User).Result;
                 var piece = modelMapper.ResolveToPieceModel(viewModel, user);
-                museumRepository.Add(piece);
+                museumRepository.Insert(piece);
 
                 return RedirectToAction(nameof(Index));
             }
