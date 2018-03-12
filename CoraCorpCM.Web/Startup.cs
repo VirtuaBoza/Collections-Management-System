@@ -42,7 +42,6 @@ namespace CoraCorpCM.Web
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<IModelValidator, ModelValidator>();
 
             services.AddScoped<IModelMapper, ModelMapper>();
@@ -51,6 +50,7 @@ namespace CoraCorpCM.Web
 
             services.AddMvc();
 
+            services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
