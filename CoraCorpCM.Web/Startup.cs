@@ -41,14 +41,14 @@ namespace CoraCorpCM.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
+            services.AddMvc();
+
+            // Application services.
             services.AddTransient<IModelValidator, ModelValidator>();
 
             services.AddScoped<IModelMapper, ModelMapper>();
             services.AddScoped<ISelectListMaker, SelectListMaker>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
-
-            services.AddMvc();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
