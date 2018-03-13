@@ -17,11 +17,11 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
             // Assert
-            Assert.ThrowsException<ArgumentNullException>(() => modelMapper.ResolveToPieceModel(null, user));
+            Assert.ThrowsException<ArgumentNullException>(() => modelMapper.ResolveToPieceModel(null, userMuseum));
         }
 
         [TestMethod]
@@ -45,10 +45,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var title = "Title";
             var pieceViewModel = new PieceViewModel { Title = title };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(title, piece.Title);
@@ -64,10 +64,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var title = "Title";
             var pieceViewModel = new PieceViewModel { Title = title, UnitOfMeasureId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(title, piece.Title);
@@ -102,8 +102,6 @@ namespace CoraCorpCM.Web.Tests
             Assert.IsNull(piece.CurrentLocation);
             Assert.IsNull(piece.PermanentLocation);
             Assert.IsNull(piece.Collection);
-            // TODO handle mocking DateTime.Now
-            Assert.AreEqual(user, piece.LastModifiedBy);
             Assert.AreEqual(0, piece.Inspections.Count);
             Assert.AreEqual(0, piece.ExhibitionPieces.Count);
             Assert.AreEqual(0, piece.LoanPieces.Count);
@@ -118,10 +116,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var accessionNumber = "ABC123";
             var pieceViewModel = new PieceViewModel { AccessionNumber = accessionNumber };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(accessionNumber, piece.AccessionNumber);
@@ -135,10 +133,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var subject = "ABC123";
             var pieceViewModel = new PieceViewModel { Subject = subject };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(subject, piece.Subject);
@@ -152,10 +150,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Medium>(1)).Returns(new Medium());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { MediumId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Medium);
@@ -170,10 +168,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { MediumId = "-1", MediumName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Medium);
@@ -188,10 +186,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { MediumId = "-1", MediumName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Medium.Name);
@@ -205,10 +203,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Genre>(1)).Returns(new Genre());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { GenreId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Genre);
@@ -223,10 +221,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { GenreId = "-1", GenreName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Genre);
@@ -241,10 +239,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { GenreId = "-1", GenreName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Genre.Name);
@@ -258,10 +256,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Subgenre>(1)).Returns(new Subgenre());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { SubgenreId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Subgenre);
@@ -276,10 +274,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { SubgenreId = "-1", SubgenreName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Subgenre);
@@ -294,10 +292,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { SubgenreId = "-1", SubgenreName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Subgenre.Name);
@@ -311,10 +309,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<SubjectMatter>(1)).Returns(new SubjectMatter());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { SubjectMatterId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.SubjectMatter);
@@ -329,10 +327,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.SubjectMatter);
@@ -347,10 +345,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.SubjectMatter.Name);
@@ -363,10 +361,10 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { EstimatedValue = (decimal)100.00 };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.EstimatedValue);
@@ -379,10 +377,10 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { IsFramed = true };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsTrue(piece.IsFramed);
@@ -396,10 +394,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Collection>(1)).Returns(new Collection());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { CollectionId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Collection);
@@ -414,10 +412,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { CollectionId = "-1", CollectionName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Collection);
@@ -432,10 +430,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { CollectionId = "-1", CollectionName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Collection.Name);
@@ -449,10 +447,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Location>(1)).Returns(new Location());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { PermanentLocationId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.PermanentLocation);
@@ -467,10 +465,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.PermanentLocation);
@@ -485,10 +483,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.PermanentLocation.Name);
@@ -520,10 +518,10 @@ namespace CoraCorpCM.Web.Tests
                 PermanentZipCode = zip,
                 PermanentCountryId = "1"
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.PermanentLocation.Name);
@@ -543,10 +541,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Location>(1)).Returns(new Location());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { CurrentLocationId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.CurrentLocation);
@@ -561,10 +559,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.CurrentLocation);
@@ -579,10 +577,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.CurrentLocation.Name);
@@ -614,10 +612,10 @@ namespace CoraCorpCM.Web.Tests
                 CurrentZipCode = zip,
                 CurrentCountryId = "1"
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.CurrentLocation.Name);
@@ -637,10 +635,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Artist>(1)).Returns(new Artist());
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { ArtistId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Artist);
@@ -655,10 +653,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { ArtistId = "-1", ArtistName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Artist);
@@ -673,10 +671,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { ArtistId = "-1", ArtistName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Artist.Name);
@@ -710,10 +708,10 @@ namespace CoraCorpCM.Web.Tests
                 ArtistBirthdate = birthdateString,
                 ArtistDeathdate = deathdateString
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Artist.Name);
@@ -733,10 +731,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationYear = 2018;
             var pieceViewModel = new PieceViewModel { CreationYear = creationYear.ToString() };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(creationYear, piece.CreationYear);
@@ -750,10 +748,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationMonth = 1;
             var pieceViewModel = new PieceViewModel { CreationMonth = creationMonth.ToString() };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(creationMonth, piece.CreationMonth);
@@ -767,10 +765,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationDay = 1;
             var pieceViewModel = new PieceViewModel { CreationDay = creationDay.ToString() };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(creationDay, piece.CreationDay);
@@ -784,10 +782,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var originCity = "City";
             var pieceViewModel = new PieceViewModel { OriginCity = originCity };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(originCity, piece.CityOfOrigin);
@@ -801,10 +799,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var originState = "State";
             var pieceViewModel = new PieceViewModel { OriginState = originState };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(originState, piece.StateOfOrigin);
@@ -819,10 +817,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Country>(1)).Returns(country);
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { OriginCountryId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(country, piece.CountryOfOrigin);
@@ -846,10 +844,10 @@ namespace CoraCorpCM.Web.Tests
                 Depth = depth,
                 UnitOfMeasureId = "2"
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(height, piece.Height);
@@ -871,10 +869,10 @@ namespace CoraCorpCM.Web.Tests
                 CopyrightYear = year.ToString(),
                 CopyrightOwner = owner
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(year, piece.CopyrightYear);
@@ -899,10 +897,10 @@ namespace CoraCorpCM.Web.Tests
                 ExpirationDate = expDateString,
                 Carrier = carrier
             };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(policyNumber, piece.InsurancePolicyNumber);
@@ -920,10 +918,10 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<Acquisition>(1)).Returns(acquisition);
             var modelMapper = new ModelMapper(mockRepo.Object);
             var pieceViewModel = new PieceViewModel { AcquisitionId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(acquisition, piece.Acquisition);
@@ -940,10 +938,10 @@ namespace CoraCorpCM.Web.Tests
             var date = DateTime.Parse(dateString);
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", AcquisitionDate = dateString };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(date, piece.Acquisition.Date);
@@ -960,10 +958,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(source, piece.Acquisition.PieceSource);
@@ -979,10 +977,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Acquisition.PieceSource);
@@ -998,10 +996,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Acquisition.PieceSource.Name);
@@ -1017,10 +1015,10 @@ namespace CoraCorpCM.Web.Tests
             var cost = (decimal)100.00;
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", Cost = cost };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(cost, piece.Acquisition.Cost);
@@ -1037,10 +1035,10 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "1" };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(source, piece.Acquisition.FundingSource);
@@ -1056,10 +1054,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.IsNotNull(piece.Acquisition.FundingSource);
@@ -1075,10 +1073,10 @@ namespace CoraCorpCM.Web.Tests
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(name, piece.Acquisition.FundingSource.Name);
@@ -1094,10 +1092,10 @@ namespace CoraCorpCM.Web.Tests
             var terms = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
             var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", Terms = terms };
-            var user = new ApplicationUser();
+            var userMuseum= new Museum();
 
             // Act
-            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, user);
+            var piece = modelMapper.ResolveToPieceModel(pieceViewModel, userMuseum);
 
             // Assert
             Assert.AreEqual(terms, piece.Acquisition.Terms);

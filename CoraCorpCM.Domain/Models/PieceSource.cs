@@ -2,7 +2,7 @@
 
 namespace CoraCorpCM.Domain.Models
 {
-    public class PieceSource : IEntity, IMuseumEntity
+    public class PieceSource : INamedEntity, IMuseumEntity
     {
         public PieceSource()
         {

@@ -46,6 +46,45 @@ namespace CoraCorpCM.Data.Tests
         }
 
         [TestMethod]
+        public void Insert_WithNewPiece_WritesToTheDatabase()
+        {
+            // Arrange
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                using (var context = new ApplicationDbContext(options))
+                {
+                    context.Database.EnsureCreated();
+                    var repo = new MuseumRepository(context);
+                    var museum = new Museum { Name = "Test Museum", ShortName = "TM" };
+                    context.Add(museum);
+                    context.SaveChanges();
+
+                    // Act
+                    repo.Insert(new Piece { Title = "Test Piece", Museum = museum });
+                }
+
+                using (var context = new ApplicationDbContext(options))
+                {
+                    // Assert
+                    Assert.AreEqual(1, context.Pieces.Count());
+                    Assert.AreEqual(1, context.Pieces.Single().RecordNumber);
+                }
+            }
+            finally
+            {
+                // Cleanup
+                connection.Close();
+            }
+        }
+
+        [TestMethod]
         public void GetFirstEntity_WithMuseum_RetrievesFirstMuseumInTheDatabase()
         {
             // Arrange

@@ -14,16 +14,14 @@ namespace CoraCorpCM.Web.Utilities
             this.museumRepository = museumRepository;
         }
 
-        public Piece ResolveToPieceModel(PieceViewModel pieceViewModel, ApplicationUser user)
+        public Piece ResolveToPieceModel(PieceViewModel pieceViewModel, Museum userMuseum)
         {
             if (pieceViewModel == null) throw new ArgumentNullException();
-            if (user == null) throw new ArgumentNullException();
-
-            var userMuseum = museumRepository.GetMuseum(user);
+            if (userMuseum == null) throw new ArgumentNullException();
 
             var piece = new Piece();
 
-            SetPrimitiveProperties(pieceViewModel, piece, user, userMuseum);
+            SetPrimitiveProperties(pieceViewModel, piece, userMuseum);
             SetCreationInformation(pieceViewModel, piece);
             SetContryOfOrigin(pieceViewModel, piece);
             SetArtist(pieceViewModel, piece, userMuseum);
@@ -42,96 +40,23 @@ namespace CoraCorpCM.Web.Utilities
             return piece;
         }
 
-        private void SetCurrentLocation(PieceViewModel pieceViewModel, Piece piece)
+        private void SetPrimitiveProperties(PieceViewModel model, Piece piece, Museum userMuseum)
         {
-            Location currentLocation = null;
-            if (int.TryParse(pieceViewModel.CurrentLocationId, out int currLocId))
-            {
-                if (currLocId == -1 && !string.IsNullOrWhiteSpace(pieceViewModel.CurrentLocationName))
-                {
-                    currentLocation = new Location
-                    {
-                        Name = pieceViewModel.CurrentLocationName,
-                        Address1 = pieceViewModel.CurrentAddress1,
-                        Address2 = pieceViewModel.CurrentAddress2,
-                        City = pieceViewModel.CurrentCity,
-                        State = pieceViewModel.CurrentState,
-                        ZipCode = pieceViewModel.CurrentZipCode
-                    };
-                    if (int.TryParse(pieceViewModel.CurrentCountryId, out int currCountry))
-                    {
-                        currentLocation.Country = museumRepository.GetEntity<Country>(currCountry);
-                    }
-                }
-                else
-                {
-                    currentLocation = museumRepository.GetEntity<Location>(currLocId);
-                }
-            }
-
-            piece.CurrentLocation = currentLocation;
-        }
-
-        private void SetPermanentLocation(PieceViewModel pieceViewModel, Piece piece)
-        {
-            Location permanentLocation = null;
-            if (int.TryParse(pieceViewModel.PermanentLocationId, out int permLocId))
-            {
-                if (permLocId == -1 && !string.IsNullOrWhiteSpace(pieceViewModel.PermanentLocationName))
-                {
-                    permanentLocation = new Location
-                    {
-                        Name = pieceViewModel.PermanentLocationName,
-                        Address1 = pieceViewModel.PermanentAddress1,
-                        Address2 = pieceViewModel.PermanentAddress2,
-                        City = pieceViewModel.PermanentCity,
-                        State = pieceViewModel.PermanentState,
-                        ZipCode = pieceViewModel.PermanentZipCode
-                    };
-                    if (int.TryParse(pieceViewModel.PermanentCountryId, out int permCountry))
-                    {
-                        permanentLocation.Country = museumRepository.GetEntity<Country>(permCountry);
-                    }
-                }
-                else
-                {
-                    permanentLocation = museumRepository.GetEntity<Location>(permLocId);
-                }
-            }
-
-            piece.PermanentLocation = permanentLocation;
-        }
-
-        private static void SetInsuranceExpiration(PieceViewModel pieceViewModel, Piece piece)
-        {
-            if (DateTime.TryParse(pieceViewModel.ExpirationDate, out DateTime expDate))
-            {
-                piece.InsuranceExpirationDate = expDate;
-            }
-        }
-
-        private static void SetCopyrightYear(PieceViewModel pieceViewModel, Piece piece)
-        {
-            if (int.TryParse(pieceViewModel.CopyrightYear, out int copyrightYear))
-            {
-                piece.CopyrightYear = copyrightYear;
-            }
-        }
-
-        private void SetUnitOfMeasurement(PieceViewModel model, Piece piece)
-        {
-            if (int.TryParse(model.UnitOfMeasureId, out int unitOfMeasureId))
-            {
-                piece.UnitOfMeasure = museumRepository.GetEntity<UnitOfMeasure>(unitOfMeasureId);
-            }
-        }
-
-        private void SetContryOfOrigin(PieceViewModel model, Piece piece)
-        {
-            if (int.TryParse(model.OriginCountryId, out int originCountryId))
-            {
-                piece.CountryOfOrigin = museumRepository.GetEntity<Country>(originCountryId);
-            }
+            piece.Title = model.Title;
+            piece.Museum = userMuseum;
+            piece.AccessionNumber = model.AccessionNumber;
+            piece.StateOfOrigin = model.OriginState;
+            piece.CityOfOrigin = model.OriginCity;
+            piece.Height = model.Height;
+            piece.Width = model.Width;
+            piece.Depth = model.Depth;
+            piece.EstimatedValue = model.EstimatedValue;
+            piece.Subject = model.Subject;
+            piece.CopyrightOwner = model.CopyrightOwner;
+            piece.InsurancePolicyNumber = model.PolicyNumber;
+            piece.InsuranceAmount = model.AmountInsured;
+            piece.InsuranceCarrier = model.Carrier;
+            piece.IsFramed = model.IsFramed;
         }
 
         private static void SetCreationInformation(PieceViewModel model, Piece piece)
@@ -152,47 +77,60 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetPrimitiveProperties(PieceViewModel model, Piece piece, ApplicationUser user, Museum userMuseum)
+        private void SetContryOfOrigin(PieceViewModel model, Piece piece)
         {
-            piece.Title = model.Title;
-            piece.Museum = userMuseum;
-            piece.AccessionNumber = model.AccessionNumber;
-            piece.StateOfOrigin = model.OriginState;
-            piece.CityOfOrigin = model.OriginCity;
-            piece.Height = model.Height;
-            piece.Width = model.Width;
-            piece.Depth = model.Depth;
-            piece.EstimatedValue = model.EstimatedValue;
-            piece.Subject = model.Subject;
-            piece.CopyrightOwner = model.CopyrightOwner;
-            piece.InsurancePolicyNumber = model.PolicyNumber;
-            piece.InsuranceAmount = model.AmountInsured;
-            piece.InsuranceCarrier = model.Carrier;
-            piece.IsFramed = model.IsFramed;
-            piece.LastModifiedBy = user;
-            piece.LastModified = DateTime.Now;
+            if (int.TryParse(model.OriginCountryId, out int originCountryId))
+            {
+                piece.CountryOfOrigin = museumRepository.GetEntity<Country>(originCountryId);
+            }
         }
 
-        private void SetCollection(PieceViewModel model, Piece piece, Museum museum)
+        private void SetArtist(PieceViewModel model, Piece piece, Museum museum)
         {
-            Collection collection = null;
-            if (int.TryParse(model.CollectionId, out int collId))
+            Artist artist = null;
+            if (int.TryParse(model.ArtistId, out int artistId))
             {
-                if (collId == -1 && !string.IsNullOrWhiteSpace(model.CollectionName))
+                if (artistId == -1)
                 {
-                    collection = new Collection
+                    artist = new Artist
                     {
-                        Name = model.CollectionName,
+                        Name = model.ArtistName,
+                        AlsoKnownAs = model.ArtistAlsoKnownAs,
+                        CityOfOrigin = model.ArtistCity,
+                        StateOfOrigin = model.ArtistState,
                         Museum = museum
                     };
+
+                    if (int.TryParse(model.ArtistCountryId, out int countryId))
+                    {
+                        artist.CountryOfOrigin = museumRepository.GetEntity<Country>(countryId);
+                    }
+
+                    if (DateTime.TryParse(model.ArtistBirthdate, out DateTime birthdate))
+                    {
+                        artist.Birthdate = birthdate;
+                    }
+
+                    if (DateTime.TryParse(model.ArtistDeathdate, out DateTime deathdate))
+                    {
+                        artist.Deathdate = deathdate;
+                    }
                 }
                 else
                 {
-                    collection = museumRepository.GetEntity<Collection>(collId);
+                    artist = museumRepository.GetEntity<Artist>(artistId);
                 }
             }
 
-            piece.Collection = collection;
+            piece.Artist = artist;
+        }
+
+        private void SetUnitOfMeasurement(PieceViewModel model, Piece piece)
+        {
+            if (int.TryParse(model.UnitOfMeasureId, out int unitOfMeasureId))
+            {
+                piece.UnitOfMeasure = museumRepository.GetEntity<UnitOfMeasure>(unitOfMeasureId);
+            }
         }
 
         private void SetMedium(PieceViewModel model, Piece piece, Museum museum)
@@ -275,44 +213,12 @@ namespace CoraCorpCM.Web.Utilities
             piece.SubjectMatter = subjectMatter;
         }
 
-        private void SetArtist(PieceViewModel model, Piece piece, Museum museum)
+        private static void SetCopyrightYear(PieceViewModel pieceViewModel, Piece piece)
         {
-            Artist artist = null;
-            if (int.TryParse(model.ArtistId, out int artistId))
+            if (int.TryParse(pieceViewModel.CopyrightYear, out int copyrightYear))
             {
-                if (artistId == -1)
-                {
-                    artist = new Artist
-                    {
-                        Name = model.ArtistName,
-                        AlsoKnownAs = model.ArtistAlsoKnownAs,
-                        CityOfOrigin = model.ArtistCity,
-                        StateOfOrigin = model.ArtistState,
-                        Museum = museum
-                    };
-
-                    if (int.TryParse(model.ArtistCountryId, out int countryId))
-                    {
-                        artist.CountryOfOrigin = museumRepository.GetEntity<Country>(countryId);
-                    }
-
-                    if (DateTime.TryParse(model.ArtistBirthdate, out DateTime birthdate))
-                    {
-                        artist.Birthdate = birthdate;
-                    }
-
-                    if (DateTime.TryParse(model.ArtistDeathdate, out DateTime deathdate))
-                    {
-                        artist.Deathdate = deathdate;
-                    }
-                }
-                else
-                {
-                    artist = museumRepository.GetEntity<Artist>(artistId);
-                }
+                piece.CopyrightYear = copyrightYear;
             }
-
-            piece.Artist = artist;
         }
 
         private void SetAcquisition(PieceViewModel model, Piece piece, Museum museum)
@@ -373,6 +279,96 @@ namespace CoraCorpCM.Web.Utilities
             }
 
             piece.Acquisition = acquisition;
+        }
+
+        private void SetPermanentLocation(PieceViewModel pieceViewModel, Piece piece)
+        {
+            Location permanentLocation = null;
+            if (int.TryParse(pieceViewModel.PermanentLocationId, out int permLocId))
+            {
+                if (permLocId == -1 && !string.IsNullOrWhiteSpace(pieceViewModel.PermanentLocationName))
+                {
+                    permanentLocation = new Location
+                    {
+                        Name = pieceViewModel.PermanentLocationName,
+                        Address1 = pieceViewModel.PermanentAddress1,
+                        Address2 = pieceViewModel.PermanentAddress2,
+                        City = pieceViewModel.PermanentCity,
+                        State = pieceViewModel.PermanentState,
+                        ZipCode = pieceViewModel.PermanentZipCode
+                    };
+                    if (int.TryParse(pieceViewModel.PermanentCountryId, out int permCountry))
+                    {
+                        permanentLocation.Country = museumRepository.GetEntity<Country>(permCountry);
+                    }
+                }
+                else
+                {
+                    permanentLocation = museumRepository.GetEntity<Location>(permLocId);
+                }
+            }
+
+            piece.PermanentLocation = permanentLocation;
+        }
+
+        private static void SetInsuranceExpiration(PieceViewModel pieceViewModel, Piece piece)
+        {
+            if (DateTime.TryParse(pieceViewModel.ExpirationDate, out DateTime expDate))
+            {
+                piece.InsuranceExpirationDate = expDate;
+            }
+        }
+
+        private void SetCurrentLocation(PieceViewModel pieceViewModel, Piece piece)
+        {
+            Location currentLocation = null;
+            if (int.TryParse(pieceViewModel.CurrentLocationId, out int currLocId))
+            {
+                if (currLocId == -1 && !string.IsNullOrWhiteSpace(pieceViewModel.CurrentLocationName))
+                {
+                    currentLocation = new Location
+                    {
+                        Name = pieceViewModel.CurrentLocationName,
+                        Address1 = pieceViewModel.CurrentAddress1,
+                        Address2 = pieceViewModel.CurrentAddress2,
+                        City = pieceViewModel.CurrentCity,
+                        State = pieceViewModel.CurrentState,
+                        ZipCode = pieceViewModel.CurrentZipCode
+                    };
+                    if (int.TryParse(pieceViewModel.CurrentCountryId, out int currCountry))
+                    {
+                        currentLocation.Country = museumRepository.GetEntity<Country>(currCountry);
+                    }
+                }
+                else
+                {
+                    currentLocation = museumRepository.GetEntity<Location>(currLocId);
+                }
+            }
+
+            piece.CurrentLocation = currentLocation;
+        }
+
+        private void SetCollection(PieceViewModel model, Piece piece, Museum museum)
+        {
+            Collection collection = null;
+            if (int.TryParse(model.CollectionId, out int collId))
+            {
+                if (collId == -1 && !string.IsNullOrWhiteSpace(model.CollectionName))
+                {
+                    collection = new Collection
+                    {
+                        Name = model.CollectionName,
+                        Museum = museum
+                    };
+                }
+                else
+                {
+                    collection = museumRepository.GetEntity<Collection>(collId);
+                }
+            }
+
+            piece.Collection = collection;
         }
     }
 }

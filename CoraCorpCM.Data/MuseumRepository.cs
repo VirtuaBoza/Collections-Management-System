@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CoraCorpCM.Data
 {
@@ -18,6 +19,13 @@ namespace CoraCorpCM.Data
 
         public int Insert(IEntity entity)
         {
+            if (entity.GetType() == typeof(Piece))
+            {
+                var piece = (Piece)entity;
+                piece.LastModified = DateTime.Now;
+                piece.RecordNumber = ++piece.Museum.RecordCount;
+            }
+
             context.Add(entity);
             return context.SaveChanges();
         }

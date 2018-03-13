@@ -143,9 +143,10 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
             var mockModelMapper = new Mock<IModelMapper>();
+            var viewModel = new PieceViewModel();
+            mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
-            var viewModel = new PieceViewModel();
 
             // Act
             var result = controller.Create(viewModel);
@@ -199,9 +200,10 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
             var mockModelMapper = new Mock<IModelMapper>();
+            var viewModel = new PieceViewModel();
+            mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
-            var viewModel = new PieceViewModel();
 
             // Act
             var result = controller.Create(viewModel);

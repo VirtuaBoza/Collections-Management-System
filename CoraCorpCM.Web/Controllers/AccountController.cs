@@ -219,7 +219,7 @@ namespace CoraCorpCM.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 
             var model = new RegisterViewModel();
-            model.Countries = selectListMaker.GetCountrySelections(museumRepository);
+            model.Countries = selectListMaker.GetSelections<Country>(museumRepository);
 
             return View(model);
         }

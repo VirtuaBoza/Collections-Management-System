@@ -7,17 +7,9 @@ namespace CoraCorpCM.Web.Utilities
 {
     public interface ISelectListMaker
     {
+        IEnumerable<SelectListItem> GetSelections<TNamedMuseumEntity>(IMuseumRepository repository, Museum museum) where TNamedMuseumEntity : class, INamedEntity, IMuseumEntity;
+        IEnumerable<SelectListItem> GetSelections<TNamedEntity>(IMuseumRepository repository) where TNamedEntity : class, INamedEntity;
         IEnumerable<SelectListItem> GetAcquisitionSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetArtistSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetCollectionSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetCountrySelections(IMuseumRepository repository);
-        IEnumerable<SelectListItem> GetFundingSourceSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetLocationSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetGenreSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetMediumSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetPieceSourceSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetSubgenreSelections(IMuseumRepository repository, Museum museum);
-        IEnumerable<SelectListItem> GetSubjectMatterSelections(IMuseumRepository repository, Museum museum);
         IEnumerable<SelectListItem> GetUnitOfMeasureSelections(IMuseumRepository repository);
     }
 }
