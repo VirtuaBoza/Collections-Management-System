@@ -57,12 +57,6 @@ namespace CoraCorpCM.Data
             return context.Set<TMuseumEntity>().Where(x => x.Museum == museum).AsNoTracking().ToList();
         }
 
-        public Museum GetMuseum(IMuseumEntity museumEntity)
-        {
-            context.Entry(museumEntity).Reference(x => x.Museum).Load();
-            return museumEntity.Museum;
-        }
-
         public bool EntityExists<TEntity>(int id) where TEntity : class, IEntity
         {
             return context.Set<TEntity>().Any(x => x.Id == id);

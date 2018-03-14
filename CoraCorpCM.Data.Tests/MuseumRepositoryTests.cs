@@ -297,48 +297,6 @@ namespace CoraCorpCM.Data.Tests
         }
 
         [TestMethod]
-        public void GetMuseum_WithPiece_RetrievesMuseumFromTheDatabase()
-        {
-            // Arrange
-            var expectedMuseum = new Museum { Name = "Test Museum1", ShortName = "TM1" };
-
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-
-            try
-            {
-                var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                    .UseSqlite(connection)
-                    .Options;
-
-                using (var context = new ApplicationDbContext(options))
-                {
-                    context.Database.EnsureCreated();
-                    context.Add(new Piece { Title = "Title1", Museum = expectedMuseum });
-                    context.SaveChanges();
-                }
-
-                using (var context = new ApplicationDbContext(options))
-                {
-                    var repo = new MuseumRepository(context);
-                    var piece = context.Pieces.Single();
-                    // Double check
-                    Assert.AreNotEqual(expectedMuseum.Name, piece.Museum?.Name);
-
-                    // Act
-                    var actualMuseum = repo.GetMuseum(piece);
-
-                    // Assert
-                    Assert.AreEqual(expectedMuseum.Name, actualMuseum.Name);
-                }
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
-        [TestMethod]
         public void EntityExists_WithExistingMuseum_ReturnsTrue()
         {
             // Arrange

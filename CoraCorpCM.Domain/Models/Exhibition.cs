@@ -12,7 +12,7 @@ namespace CoraCorpCM.Domain.Models
 
         public int Id { get; set; }
 
-        public Museum Museum { get; set; }
+        public virtual Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         public string Name { get; set; }
@@ -20,8 +20,8 @@ namespace CoraCorpCM.Domain.Models
         public string Theme { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
-        public ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
+        public virtual ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace CoraCorpCM.Domain.Models
 
         public int Id { get; set; }
 
-        public Museum Museum { get; set; }
+        public virtual Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Column(TypeName = "date")]
@@ -21,10 +21,10 @@ namespace CoraCorpCM.Domain.Models
         public decimal? Cost { get; set; }
         public string Terms { get; set; }
 
-        public FundingSource FundingSource { get; set; }
-        public Upload PurchaseReceipt { get; set; }
-        public PieceSource PieceSource { get; set; }
+        public virtual FundingSource FundingSource { get; set; }
+        public virtual Upload PurchaseReceipt { get; set; }
+        public virtual PieceSource PieceSource { get; set; }
 
-        public ICollection<Piece> Pieces { get; set; }
+        public virtual ICollection<Piece> Pieces { get; set; }
     }
 }

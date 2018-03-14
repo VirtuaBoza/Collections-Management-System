@@ -39,27 +39,27 @@ namespace CoraCorpCM.Domain.Models
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public Country Country { get; set; }
-        public Upload Logo { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Upload Logo { get; set; }
         public int RecordCount { get; set; }
 
-        public ICollection<Acquisition> Acquisitions { get; set; }
-        public ICollection<ApplicationUser> Users { get; set; }
-        public ICollection<Artist> Artists { get; set; }
-        public ICollection<Collection> Collections { get; set; }
-        public ICollection<Condition> Conditions { get; set; }
-        public ICollection<Exhibition> Exhibitions { get; set; }
-        public ICollection<FundingSource> FundingSources { get; set; }
-        public ICollection<Genre> Genres { get; set; }
-        public ICollection<Inspection> Inspections { get; set; }
-        public ICollection<Inspector> Inspectors { get; set; }
-        public ICollection<Loan> Loans { get; set; }
-        public ICollection<Location> Locations { get; set; }
-        public ICollection<Medium> Media { get; set; }
-        public ICollection<Piece> Pieces { get; set; }
-        public ICollection<Subgenre> Subgenres { get; set; }
-        public ICollection<SubjectMatter> SubjectMatters { get; set; }
-        public ICollection<Tag> Tags { get; set; }
-        public ICollection<Upload> Uploads { get; set; }
+        public virtual ICollection<Acquisition> Acquisitions { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+        public virtual ICollection<Artist> Artists { get; set; }
+        public virtual ICollection<Collection> Collections { get; set; }
+        public virtual ICollection<Condition> Conditions { get; set; }
+        public virtual ICollection<Exhibition> Exhibitions { get; set; }
+        public virtual ICollection<FundingSource> FundingSources { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
+        public virtual ICollection<Inspector> Inspectors { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
+        public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Medium> Media { get; set; }
+        public virtual ICollection<Piece> Pieces { get; set; }
+        public virtual ICollection<Subgenre> Subgenres { get; set; }
+        public virtual ICollection<SubjectMatter> SubjectMatters { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Upload> Uploads { get; set; }
     }
 }

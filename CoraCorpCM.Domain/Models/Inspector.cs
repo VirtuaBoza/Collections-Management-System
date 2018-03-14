@@ -6,7 +6,7 @@ namespace CoraCorpCM.Domain.Models
     {
         public int Id { get; set; }
 
-        public Museum Museum { get; set; }
+        public virtual Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Required]

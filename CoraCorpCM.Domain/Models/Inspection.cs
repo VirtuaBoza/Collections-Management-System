@@ -8,15 +8,15 @@ namespace CoraCorpCM.Domain.Models
     {
         public int Id { get; set; }
 
-        public Museum Museum { get; set; }
+        public virtual Museum Museum { get; set; }
 
         [Required]
-        public Piece Piece { get; set; }
+        public virtual Piece Piece { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
-        public Inspector Inspector { get; set; }
-        public Condition Condition { get; set; }
+        public virtual Inspector Inspector { get; set; }
+        public virtual Condition Condition { get; set; }
         public string Notes { get; set; }
     }
 }

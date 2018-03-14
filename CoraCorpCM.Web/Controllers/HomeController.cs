@@ -29,9 +29,8 @@ namespace CoraCorpCM.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = userManager.GetUserAsync(User).Result;
-                var museum = museumRepository.GetMuseum(user);
-                ViewData["Title"] = museum.ShortName;
-                ViewData["MuseumName"] = museum.Name;
+                ViewData["Title"] = user.Museum.ShortName;
+                ViewData["MuseumName"] = user.Museum.Name;
             }
             else
             {

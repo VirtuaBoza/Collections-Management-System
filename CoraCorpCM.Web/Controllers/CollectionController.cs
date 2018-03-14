@@ -37,8 +37,7 @@ namespace CoraCorpCM.Web.Controllers
         public IActionResult Index()
         {
             var user = userManager.GetUserAsync(User).Result;
-            var userMuseum = museumRepository.GetMuseum(user);
-            var pieces = museumRepository.GetEntities<Piece>(userMuseum);
+            var pieces = museumRepository.GetEntities<Piece>(user.Museum);
             return View(pieces);
         }
 
@@ -62,21 +61,20 @@ namespace CoraCorpCM.Web.Controllers
         public IActionResult Create()
         {
             var user = userManager.GetUserAsync(User).Result;
-            var userMuseum = museumRepository.GetMuseum(user);
             var viewModel = new PieceViewModel
             {
                 Countries = selectListMaker.GetSelections<Country>(museumRepository),
                 UnitsOfMeasure = selectListMaker.GetUnitOfMeasureSelections(museumRepository),
-                Media = selectListMaker.GetSelections<Medium>(museumRepository, userMuseum),
-                Genres = selectListMaker.GetSelections<Genre>(museumRepository, userMuseum),
-                Subgenres = selectListMaker.GetSelections<Subgenre>(museumRepository, userMuseum),
-                SubjectMatters = selectListMaker.GetSelections<SubjectMatter>(museumRepository, userMuseum),
-                Collections = selectListMaker.GetSelections<Collection>(museumRepository, userMuseum),
-                Locations = selectListMaker.GetSelections<Location>(museumRepository, userMuseum),
-                KnownArtists = selectListMaker.GetSelections<Artist>(museumRepository, userMuseum),
-                Acquisitions = selectListMaker.GetAcquisitionSelections(museumRepository, userMuseum),
-                FundingSources = selectListMaker.GetSelections<FundingSource>(museumRepository, userMuseum),
-                PieceSources = selectListMaker.GetSelections<PieceSource>(museumRepository, userMuseum)
+                Media = selectListMaker.GetSelections<Medium>(museumRepository, user.Museum),
+                Genres = selectListMaker.GetSelections<Genre>(museumRepository, user.Museum),
+                Subgenres = selectListMaker.GetSelections<Subgenre>(museumRepository, user.Museum),
+                SubjectMatters = selectListMaker.GetSelections<SubjectMatter>(museumRepository, user.Museum),
+                Collections = selectListMaker.GetSelections<Collection>(museumRepository, user.Museum),
+                Locations = selectListMaker.GetSelections<Location>(museumRepository, user.Museum),
+                KnownArtists = selectListMaker.GetSelections<Artist>(museumRepository, user.Museum),
+                Acquisitions = selectListMaker.GetAcquisitionSelections(museumRepository, user.Museum),
+                FundingSources = selectListMaker.GetSelections<FundingSource>(museumRepository, user.Museum),
+                PieceSources = selectListMaker.GetSelections<PieceSource>(museumRepository, user.Museum)
             };
 
             return View(viewModel);
@@ -92,8 +90,7 @@ namespace CoraCorpCM.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = userManager.GetUserAsync(User).Result;
-                var userMuseum = museumRepository.GetMuseum(user);
-                var piece = modelMapper.ResolveToPieceModel(viewModel, userMuseum);
+                var piece = modelMapper.ResolveToPieceModel(viewModel, user.Museum);
                 piece.LastModifiedBy = user;
                 museumRepository.Insert(piece);
 

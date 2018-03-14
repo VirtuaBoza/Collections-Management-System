@@ -12,12 +12,12 @@ namespace CoraCorpCM.Domain.Models
 
         public int Id { get; set; }
 
-        public Museum Museum { get; set; }
+        public virtual Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
-        public ICollection<ArtistSubgenre> ArtistSubgenres { get; set; }
+        public virtual ICollection<ArtistSubgenre> ArtistSubgenres { get; set; }
     }
 }
