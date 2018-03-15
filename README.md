@@ -1,3 +1,5 @@
+[![Build Status](https://virtuaboza.visualstudio.com/_apis/public/build/definitions/88e1d8ce-577e-4a11-8e51-4f1c1d891f3c/7/badge)](https://virtuaboza.visualstudio.com/Collections%20Management%20System/_build/index?context=mine&path=%5C&definitionId=7&_a=completed)
+
 # CoraCorpCM
 
 Popular collections management systems that museums use to manage their collections can be prohibitively expensive for smaller, non-profit organizations. I'm making this application to be a free and open-source alternative to such applications. As a bonus, I'm using this project as an opportunity to learn about ASP.NET Core MVC, Entity Framework Core, Angular, and other technologies.
