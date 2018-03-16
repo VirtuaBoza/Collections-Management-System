@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using CoraCorpCM.Web.Utilities;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
+using System.Threading.Tasks;
 
 namespace CoraCorpCM.Web.Tests
 {
@@ -19,6 +20,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null);
 
             // Act
@@ -35,6 +37,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntities<Piece>(null)).Returns(MockHelper.GetTestPieces());
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null);
 
             // Act
@@ -110,6 +113,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockSelectListMaker = new Mock<SelectListMaker>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, mockSelectListMaker.Object, null);
 
@@ -126,6 +130,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockSelectListMaker = new Mock<SelectListMaker>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, mockSelectListMaker.Object, null);
 
@@ -142,6 +147,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
             var viewModel = new PieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
@@ -199,6 +205,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
             var viewModel = new PieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
@@ -218,6 +225,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
+            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
