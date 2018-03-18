@@ -1,4 +1,5 @@
-﻿using CoraCorpCM.Domain.Models;
+﻿using CoraCorpCM.App.Interfaces;
+using CoraCorpCM.Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;

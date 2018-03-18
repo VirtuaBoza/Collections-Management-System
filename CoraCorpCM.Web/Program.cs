@@ -1,4 +1,5 @@
 ﻿using System;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Data;
 using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore;

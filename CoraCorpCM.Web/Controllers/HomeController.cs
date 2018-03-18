@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using CoraCorpCM.Data;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;

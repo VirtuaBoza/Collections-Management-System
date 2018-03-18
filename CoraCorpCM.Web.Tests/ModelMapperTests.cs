@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CoraCorpCM.Data;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Utilities;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
