@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using CoraCorpCM.Data;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;

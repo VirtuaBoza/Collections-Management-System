@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CoraCorpCM.Data;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Domain;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Utilities;

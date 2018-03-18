@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Data;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;

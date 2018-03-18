@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CoraCorpCM.Domain.Models;
 
-namespace CoraCorpCM.Data
+namespace CoraCorpCM.App.Interfaces
 {
     public interface IMuseumRepository
     {

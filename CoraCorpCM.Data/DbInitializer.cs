@@ -1,4 +1,5 @@
-﻿using CoraCorpCM.Domain;
+﻿using CoraCorpCM.App.Interfaces;
+using CoraCorpCM.Domain;
 using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;

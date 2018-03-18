@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.Data;
+﻿using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Domain.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
