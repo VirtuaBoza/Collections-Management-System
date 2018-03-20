@@ -282,7 +282,7 @@ namespace CoraCorpCM.Data.Tests
                     var repo = new MuseumRepository(context);
 
                     // Act
-                    var countries = repo.GetEntitiesAsNoTracking<Country>().ToList();
+                    var countries = repo.GetEntities<Country>().ToList();
                     countries[0].Name = "America";
                     context.SaveChanges();
 

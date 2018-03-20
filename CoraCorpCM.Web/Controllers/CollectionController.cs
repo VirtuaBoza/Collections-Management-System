@@ -7,6 +7,8 @@ using CoraCorpCM.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.AspNetCore.Identity;
+using CoraCorpCM.Web.Services;
+using System.Security.Claims;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -18,19 +20,22 @@ namespace CoraCorpCM.Web.Controllers
         private readonly IModelMapper modelMapper;
         private readonly ISelectListMaker selectListMaker;
         private readonly IModelValidator modelValidator;
+        private readonly ICreatePieceViewModelFactory createPieceViewModelFactory;
 
         public CollectionController(
             IMuseumRepository museumRepository,
             UserManager<ApplicationUser> userManager,
             IModelMapper modelMapper,
             ISelectListMaker selectListMaker,
-            IModelValidator modelValidator)
+            IModelValidator modelValidator,
+            ICreatePieceViewModelFactory createPieceViewModelFactory)
         {
             this.museumRepository = museumRepository;
             this.userManager = userManager;
             this.modelMapper = modelMapper;
             this.selectListMaker = selectListMaker;
             this.modelValidator = modelValidator;
+            this.createPieceViewModelFactory = createPieceViewModelFactory;
         }
 
         public IActionResult Index()
@@ -59,22 +64,8 @@ namespace CoraCorpCM.Web.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create()
         {
-            var user = userManager.GetUserAsync(User).Result;
-            var viewModel = new CreatePieceViewModel
-            {
-                Countries = selectListMaker.GetSelections<Country>(museumRepository),
-                UnitsOfMeasure = selectListMaker.GetUnitOfMeasureSelections(museumRepository),
-                Media = selectListMaker.GetSelections<Medium>(museumRepository, user.Museum),
-                Genres = selectListMaker.GetSelections<Genre>(museumRepository, user.Museum),
-                Subgenres = selectListMaker.GetSelections<Subgenre>(museumRepository, user.Museum),
-                SubjectMatters = selectListMaker.GetSelections<SubjectMatter>(museumRepository, user.Museum),
-                Collections = selectListMaker.GetSelections<Collection>(museumRepository, user.Museum),
-                Locations = selectListMaker.GetSelections<Location>(museumRepository, user.Museum),
-                KnownArtists = selectListMaker.GetSelections<Artist>(museumRepository, user.Museum),
-                Acquisitions = selectListMaker.GetAcquisitionSelections(museumRepository, user.Museum),
-                FundingSources = selectListMaker.GetSelections<FundingSource>(museumRepository, user.Museum),
-                PieceSources = selectListMaker.GetSelections<PieceSource>(museumRepository, user.Museum)
-            };
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewModel = createPieceViewModelFactory.Create(userId);
 
             return View(viewModel);
         }

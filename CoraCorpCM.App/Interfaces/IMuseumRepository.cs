@@ -12,7 +12,7 @@ namespace CoraCorpCM.App.Interfaces
         TEntity GetFirstEntity<TEntity>() where TEntity : class, IEntity;
         TEntity GetEntity<TEntity>(int id) where TEntity : class, IEntity;
         IEnumerable<TMuseumEntity> GetEntities<TMuseumEntity>(Museum museum) where TMuseumEntity : class, IMuseumEntity;
-        IEnumerable<TEntity> GetEntitiesAsNoTracking<TEntity>() where TEntity : class, IEntity;
+        IEnumerable<TEntity> GetEntities<TEntity>() where TEntity : class, IEntity;
         IEnumerable<TMuseumEntity> GetEntitiesAsNoTracking<TMuseumEntity>(Museum museum) where TMuseumEntity : class, IMuseumEntity;
         bool EntityExists<TEntity>(int id) where TEntity : class, IEntity;
 

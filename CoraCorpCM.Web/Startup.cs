@@ -9,6 +9,7 @@ using CoraCorpCM.Data;
 using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.Utilities;
+using CoraCorpCM.App.Countries.Queries;
 
 namespace CoraCorpCM.Web
 {
@@ -28,7 +29,7 @@ namespace CoraCorpCM.Web
             .UseLazyLoadingProxies()
             .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
                 {
                     // Password settings
                     options.Password.RequireDigit = false;
@@ -51,6 +52,8 @@ namespace CoraCorpCM.Web
             services.AddScoped<IModelMapper, ModelMapper>();
             services.AddScoped<ISelectListMaker, SelectListMaker>();
             services.AddScoped<IMuseumRepository, MuseumRepository>();
+            services.AddScoped<ICreatePieceViewModelFactory, CreatePieceViewModelFactory>();
+            services.AddScoped<IGetCountryListQuery, GetCountryListQuery>();
 
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

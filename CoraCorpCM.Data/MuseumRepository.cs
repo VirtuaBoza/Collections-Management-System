@@ -48,7 +48,7 @@ namespace CoraCorpCM.Data
             return context.Set<TMuseumEntity>().Where(x => x.Museum == museum).ToList();
         }
 
-        public IEnumerable<TEntity> GetEntitiesAsNoTracking<TEntity>() where TEntity : class, IEntity
+        public IEnumerable<TEntity> GetEntities<TEntity>() where TEntity : class, IEntity
         {
             return context.Set<TEntity>().AsNoTracking().ToList();
         }

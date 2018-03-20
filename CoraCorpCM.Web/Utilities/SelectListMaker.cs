@@ -20,7 +20,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetSelections<TNamedEntity>(IMuseumRepository repository) where TNamedEntity : class, INamedEntity
         {
-            var entities = repository.GetEntitiesAsNoTracking<Country>();
+            var entities = repository.GetEntities<Country>();
             var selectList = new List<SelectListItem>();
             foreach (var entity in entities)
             {
@@ -42,7 +42,7 @@ namespace CoraCorpCM.Web.Utilities
 
         public IEnumerable<SelectListItem> GetUnitOfMeasureSelections(IMuseumRepository repository)
         {
-            var units = repository.GetEntitiesAsNoTracking<UnitOfMeasure>();
+            var units = repository.GetEntities<UnitOfMeasure>();
             var selectList = new List<SelectListItem>();
             foreach (var unit in units)
             {

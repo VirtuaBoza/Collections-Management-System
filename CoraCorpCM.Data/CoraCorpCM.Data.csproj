@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180211133350_Initial.cs" />
-    <Compile Remove="Migrations\20180309171018_MuseumFKOnArtistGenre.cs" />
-    <Compile Remove="Migrations\20180313031228_testing.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="countries.json" />
   </ItemGroup>
 

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using CoraCorpCM.Web.Utilities;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System.Threading.Tasks;
+using CoraCorpCM.Web.Services;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace CoraCorpCM.Web.Tests
 {
@@ -21,7 +24,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var mockUserManager = MockHelper.GetMockUserManager();
             mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null, null);
 
             // Act
             var result = controller.Index();
@@ -38,7 +41,7 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntities<Piece>(null)).Returns(MockHelper.GetTestPieces());
             var mockUserManager = MockHelper.GetMockUserManager();
             mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, null, null, null);
 
             // Act
             var result = controller.Index() as ViewResult;
@@ -53,7 +56,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-            var controller = new CollectionController(mockRepo.Object, null, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
 
             // Act
             var result = controller.Details(1);
@@ -68,7 +71,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-            var controller = new CollectionController(mockRepo.Object, null, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
 
             // Act
             var result = controller.Details(1) as ViewResult;
@@ -83,7 +86,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-            var controller = new CollectionController(mockRepo.Object, null, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
 
             // Act
             var result = controller.Details(null);
@@ -98,7 +101,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns<Piece>(null);
-            var controller = new CollectionController(mockRepo.Object, null, null, null, null);
+            var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
 
             // Act
             var result = controller.Details(1);
@@ -111,11 +114,12 @@ namespace CoraCorpCM.Web.Tests
         public void GetCreate_ReturnsViewResult()
         {
             // Arrange
-            var mockRepo = new Mock<IMuseumRepository>();
-            var mockUserManager = MockHelper.GetMockUserManager();
-            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
-            var mockSelectListMaker = new Mock<SelectListMaker>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, mockSelectListMaker.Object, null);
+            var mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
+            var controller = new CollectionController(null, null, null, null, null, mockCreatePieceViewModelFactory.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = new ClaimsPrincipal() }
+            };
 
             // Act
             var result = controller.Create();
@@ -128,11 +132,13 @@ namespace CoraCorpCM.Web.Tests
         public void GetCreate_ReturnsViewResultWithPieceViewModel()
         {
             // Arrange
-            var mockRepo = new Mock<IMuseumRepository>();
-            var mockUserManager = MockHelper.GetMockUserManager();
-            mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
-            var mockSelectListMaker = new Mock<SelectListMaker>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, null, mockSelectListMaker.Object, null);
+            var mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
+            mockCreatePieceViewModelFactory.Setup(f => f.Create(null)).Returns(new CreatePieceViewModel());
+            var controller = new CollectionController(null, null, null, null, null, mockCreatePieceViewModelFactory.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = new ClaimsPrincipal() }
+            };
 
             // Act
             var result = controller.Create() as ViewResult;
@@ -152,7 +158,7 @@ namespace CoraCorpCM.Web.Tests
             var viewModel = new CreatePieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
 
             // Act
             var result = controller.Create(viewModel);
@@ -169,7 +175,7 @@ namespace CoraCorpCM.Web.Tests
             var mockUserManager = MockHelper.GetMockUserManager();
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
             var viewModel = new CreatePieceViewModel();
             controller.ModelState.AddModelError("key", "error");
 
@@ -188,7 +194,7 @@ namespace CoraCorpCM.Web.Tests
             var mockUserManager = MockHelper.GetMockUserManager();
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
             var viewModel = new CreatePieceViewModel();
             controller.ModelState.AddModelError("key", "error");
 
@@ -210,7 +216,7 @@ namespace CoraCorpCM.Web.Tests
             var viewModel = new CreatePieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
 
             // Act
             var result = controller.Create(viewModel);
@@ -228,7 +234,7 @@ namespace CoraCorpCM.Web.Tests
             mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
-            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
+            var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
             var viewModel = new CreatePieceViewModel();
             var piece = new Piece();
             mockModelMapper.Setup(m => m.ResolveToPieceModel(viewModel, null)).Returns(piece);
