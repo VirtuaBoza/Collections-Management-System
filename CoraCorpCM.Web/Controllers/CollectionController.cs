@@ -60,7 +60,7 @@ namespace CoraCorpCM.Web.Controllers
         public IActionResult Create()
         {
             var user = userManager.GetUserAsync(User).Result;
-            var viewModel = new PieceViewModel
+            var viewModel = new CreatePieceViewModel
             {
                 Countries = selectListMaker.GetSelections<Country>(museumRepository),
                 UnitsOfMeasure = selectListMaker.GetUnitOfMeasureSelections(museumRepository),
@@ -82,7 +82,7 @@ namespace CoraCorpCM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public IActionResult Create(PieceViewModel viewModel)
+        public IActionResult Create(CreatePieceViewModel viewModel)
         {
             modelValidator.Validate(ModelState, viewModel);
 

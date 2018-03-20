@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
 {
-    public class PieceViewModel
+    public class CreatePieceViewModel
     {
         // Piece Info
         [Display(Name = "Assession Number")]

@@ -29,9 +29,9 @@ namespace CoraCorpCM.Web.Tests
             return pieces;
         }
 
-        internal static PieceViewModel GetMaximumValidPieceViewModel()
+        internal static CreatePieceViewModel GetMaximumValidPieceViewModel()
         {
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 AccessionNumber = "ABC123",
                 Title = "Title",

@@ -14,7 +14,7 @@ namespace CoraCorpCM.Web.Utilities
             this.museumRepository = museumRepository;
         }
 
-        public Piece ResolveToPieceModel(PieceViewModel pieceViewModel, Museum userMuseum)
+        public Piece ResolveToPieceModel(CreatePieceViewModel pieceViewModel, Museum userMuseum)
         {
             if (pieceViewModel == null) throw new ArgumentNullException();
             if (userMuseum == null) throw new ArgumentNullException();
@@ -40,7 +40,7 @@ namespace CoraCorpCM.Web.Utilities
             return piece;
         }
 
-        private void SetPrimitiveProperties(PieceViewModel model, Piece piece, Museum userMuseum)
+        private void SetPrimitiveProperties(CreatePieceViewModel model, Piece piece, Museum userMuseum)
         {
             piece.Title = model.Title;
             piece.Museum = userMuseum;
@@ -59,7 +59,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.IsFramed = model.IsFramed;
         }
 
-        private static void SetCreationInformation(PieceViewModel model, Piece piece)
+        private static void SetCreationInformation(CreatePieceViewModel model, Piece piece)
         {
             if (int.TryParse(model.CreationDay, out int creationDay))
             {
@@ -77,7 +77,7 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetContryOfOrigin(PieceViewModel model, Piece piece)
+        private void SetContryOfOrigin(CreatePieceViewModel model, Piece piece)
         {
             if (int.TryParse(model.OriginCountryId, out int originCountryId))
             {
@@ -85,7 +85,7 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetArtist(PieceViewModel model, Piece piece, Museum museum)
+        private void SetArtist(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Artist artist = null;
             if (int.TryParse(model.ArtistId, out int artistId))
@@ -125,7 +125,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.Artist = artist;
         }
 
-        private void SetUnitOfMeasurement(PieceViewModel model, Piece piece)
+        private void SetUnitOfMeasurement(CreatePieceViewModel model, Piece piece)
         {
             if (int.TryParse(model.UnitOfMeasureId, out int unitOfMeasureId))
             {
@@ -133,7 +133,7 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetMedium(PieceViewModel model, Piece piece, Museum museum)
+        private void SetMedium(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Medium medium = null;
             if(int.TryParse(model.MediumId, out int mediumId))
@@ -155,7 +155,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.Medium = medium;
         }
 
-        private void SetGenre(PieceViewModel model, Piece piece, Museum museum)
+        private void SetGenre(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Genre genre = null;
             if (int.TryParse(model.GenreId, out int genreId))
@@ -177,7 +177,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.Genre = genre;
         }
 
-        private void SetSubgenre(PieceViewModel model, Piece piece, Museum museum)
+        private void SetSubgenre(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Subgenre subgenre = null;
             if (int.TryParse(model.SubgenreId, out int subgenreId))
@@ -195,7 +195,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.Subgenre = subgenre;
         }
 
-        private void SetSubjectMatter(PieceViewModel model, Piece piece, Museum museum)
+        private void SetSubjectMatter(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             SubjectMatter subjectMatter = null;
             if (int.TryParse(model.SubjectMatterId, out int subjectMatterId))
@@ -213,7 +213,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.SubjectMatter = subjectMatter;
         }
 
-        private static void SetCopyrightYear(PieceViewModel pieceViewModel, Piece piece)
+        private static void SetCopyrightYear(CreatePieceViewModel pieceViewModel, Piece piece)
         {
             if (int.TryParse(pieceViewModel.CopyrightYear, out int copyrightYear))
             {
@@ -221,7 +221,7 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetAcquisition(PieceViewModel model, Piece piece, Museum museum)
+        private void SetAcquisition(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Acquisition acquisition = null;
 
@@ -281,7 +281,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.Acquisition = acquisition;
         }
 
-        private void SetPermanentLocation(PieceViewModel pieceViewModel, Piece piece)
+        private void SetPermanentLocation(CreatePieceViewModel pieceViewModel, Piece piece)
         {
             Location permanentLocation = null;
             if (int.TryParse(pieceViewModel.PermanentLocationId, out int permLocId))
@@ -311,7 +311,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.PermanentLocation = permanentLocation;
         }
 
-        private static void SetInsuranceExpiration(PieceViewModel pieceViewModel, Piece piece)
+        private static void SetInsuranceExpiration(CreatePieceViewModel pieceViewModel, Piece piece)
         {
             if (DateTime.TryParse(pieceViewModel.ExpirationDate, out DateTime expDate))
             {
@@ -319,7 +319,7 @@ namespace CoraCorpCM.Web.Utilities
             }
         }
 
-        private void SetCurrentLocation(PieceViewModel pieceViewModel, Piece piece)
+        private void SetCurrentLocation(CreatePieceViewModel pieceViewModel, Piece piece)
         {
             Location currentLocation = null;
             if (int.TryParse(pieceViewModel.CurrentLocationId, out int currLocId))
@@ -349,7 +349,7 @@ namespace CoraCorpCM.Web.Utilities
             piece.CurrentLocation = currentLocation;
         }
 
-        private void SetCollection(PieceViewModel model, Piece piece, Museum museum)
+        private void SetCollection(CreatePieceViewModel model, Piece piece, Museum museum)
         {
             Collection collection = null;
             if (int.TryParse(model.CollectionId, out int collId))

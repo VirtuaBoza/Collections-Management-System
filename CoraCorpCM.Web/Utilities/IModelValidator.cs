@@ -5,6 +5,6 @@ namespace CoraCorpCM.Web.Utilities
 {
     public interface IModelValidator
     {
-        bool Validate(ModelStateDictionary modelState, PieceViewModel pieceViewModel);
+        bool Validate(ModelStateDictionary modelState, CreatePieceViewModel pieceViewModel);
     }
 }

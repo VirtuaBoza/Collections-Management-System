@@ -5,7 +5,7 @@ namespace CoraCorpCM.Web.Utilities
 {
     public class ModelValidator : IModelValidator
     {
-        public bool Validate(ModelStateDictionary modelState, PieceViewModel pieceViewModel)
+        public bool Validate(ModelStateDictionary modelState, CreatePieceViewModel pieceViewModel)
         {
             if (!ValidateArtist(pieceViewModel))
             {
@@ -31,7 +31,7 @@ namespace CoraCorpCM.Web.Utilities
             return modelState.IsValid;
         }
 
-        private bool ValidateCurrentLocation(PieceViewModel viewModel)
+        private bool ValidateCurrentLocation(CreatePieceViewModel viewModel)
         {
             if (viewModel.CurrentLocationId == "-2")
             {
@@ -53,7 +53,7 @@ namespace CoraCorpCM.Web.Utilities
             return true;
         }
 
-        private bool ValidatePermanentLocation(PieceViewModel viewModel)
+        private bool ValidatePermanentLocation(CreatePieceViewModel viewModel)
         {
             if (viewModel.PermanentLocationId == "-1" && string.IsNullOrWhiteSpace(viewModel.PermanentLocationName))
             {
@@ -63,7 +63,7 @@ namespace CoraCorpCM.Web.Utilities
             return true;
         }
 
-        private bool ValidateArtist(PieceViewModel viewModel)
+        private bool ValidateArtist(CreatePieceViewModel viewModel)
         {
             if (viewModel.ArtistId == "-1" && string.IsNullOrWhiteSpace(viewModel.ArtistName))
             {
@@ -73,7 +73,7 @@ namespace CoraCorpCM.Web.Utilities
             return true;
         }
 
-        private bool ValidateAcquisition(PieceViewModel viewModel)
+        private bool ValidateAcquisition(CreatePieceViewModel viewModel)
         {
             if (viewModel.AcquisitionId == "-1" && string.IsNullOrWhiteSpace(viewModel.AcquisitionDate) &&
                 (string.IsNullOrWhiteSpace(viewModel.PieceSourceId) ||

@@ -30,7 +30,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel();
+            var pieceViewModel = new CreatePieceViewModel();
 
             // Act
             // Assert
@@ -44,7 +44,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var title = "Title";
-            var pieceViewModel = new PieceViewModel { Title = title };
+            var pieceViewModel = new CreatePieceViewModel { Title = title };
             var userMuseum= new Museum();
 
             // Act
@@ -63,7 +63,7 @@ namespace CoraCorpCM.Web.Tests
             mockRepo.Setup(r => r.GetEntity<UnitOfMeasure>(1)).Returns(unitOfMeasure);
             var modelMapper = new ModelMapper(mockRepo.Object);
             var title = "Title";
-            var pieceViewModel = new PieceViewModel { Title = title, UnitOfMeasureId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { Title = title, UnitOfMeasureId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -115,7 +115,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var accessionNumber = "ABC123";
-            var pieceViewModel = new PieceViewModel { AccessionNumber = accessionNumber };
+            var pieceViewModel = new CreatePieceViewModel { AccessionNumber = accessionNumber };
             var userMuseum= new Museum();
 
             // Act
@@ -132,7 +132,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var subject = "ABC123";
-            var pieceViewModel = new PieceViewModel { Subject = subject };
+            var pieceViewModel = new CreatePieceViewModel { Subject = subject };
             var userMuseum= new Museum();
 
             // Act
@@ -149,7 +149,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Medium>(1)).Returns(new Medium());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { MediumId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { MediumId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -167,7 +167,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { MediumId = "-1", MediumName = name };
+            var pieceViewModel = new CreatePieceViewModel { MediumId = "-1", MediumName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -185,7 +185,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { MediumId = "-1", MediumName = name };
+            var pieceViewModel = new CreatePieceViewModel { MediumId = "-1", MediumName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -202,7 +202,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Genre>(1)).Returns(new Genre());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { GenreId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { GenreId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -220,7 +220,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { GenreId = "-1", GenreName = name };
+            var pieceViewModel = new CreatePieceViewModel { GenreId = "-1", GenreName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -238,7 +238,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { GenreId = "-1", GenreName = name };
+            var pieceViewModel = new CreatePieceViewModel { GenreId = "-1", GenreName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -255,7 +255,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Subgenre>(1)).Returns(new Subgenre());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { SubgenreId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { SubgenreId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -273,7 +273,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { SubgenreId = "-1", SubgenreName = name };
+            var pieceViewModel = new CreatePieceViewModel { SubgenreId = "-1", SubgenreName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -291,7 +291,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { SubgenreId = "-1", SubgenreName = name };
+            var pieceViewModel = new CreatePieceViewModel { SubgenreId = "-1", SubgenreName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -308,7 +308,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<SubjectMatter>(1)).Returns(new SubjectMatter());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { SubjectMatterId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { SubjectMatterId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -326,7 +326,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
+            var pieceViewModel = new CreatePieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -344,7 +344,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
+            var pieceViewModel = new CreatePieceViewModel { SubjectMatterId = "-1", SubjectMatterName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -360,7 +360,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { EstimatedValue = (decimal)100.00 };
+            var pieceViewModel = new CreatePieceViewModel { EstimatedValue = (decimal)100.00 };
             var userMuseum= new Museum();
 
             // Act
@@ -376,7 +376,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { IsFramed = true };
+            var pieceViewModel = new CreatePieceViewModel { IsFramed = true };
             var userMuseum= new Museum();
 
             // Act
@@ -393,7 +393,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Collection>(1)).Returns(new Collection());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { CollectionId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { CollectionId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -411,7 +411,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { CollectionId = "-1", CollectionName = name };
+            var pieceViewModel = new CreatePieceViewModel { CollectionId = "-1", CollectionName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -429,7 +429,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { CollectionId = "-1", CollectionName = name };
+            var pieceViewModel = new CreatePieceViewModel { CollectionId = "-1", CollectionName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -446,7 +446,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Location>(1)).Returns(new Location());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { PermanentLocationId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { PermanentLocationId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -464,7 +464,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
+            var pieceViewModel = new CreatePieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -482,7 +482,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
+            var pieceViewModel = new CreatePieceViewModel { PermanentLocationId = "-1", PermanentLocationName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -507,7 +507,7 @@ namespace CoraCorpCM.Web.Tests
             var state = "State";
             var zip = "123456";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 PermanentLocationId = "-1",
                 PermanentLocationName = name,
@@ -540,7 +540,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Location>(1)).Returns(new Location());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { CurrentLocationId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { CurrentLocationId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -558,7 +558,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
+            var pieceViewModel = new CreatePieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -576,7 +576,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
+            var pieceViewModel = new CreatePieceViewModel { CurrentLocationId = "-1", CurrentLocationName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -601,7 +601,7 @@ namespace CoraCorpCM.Web.Tests
             var state = "State";
             var zip = "123456";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 CurrentLocationId = "-1",
                 CurrentLocationName = name,
@@ -634,7 +634,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             mockRepo.Setup(r => r.GetEntity<Artist>(1)).Returns(new Artist());
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { ArtistId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { ArtistId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -652,7 +652,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { ArtistId = "-1", ArtistName = name };
+            var pieceViewModel = new CreatePieceViewModel { ArtistId = "-1", ArtistName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -670,7 +670,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { ArtistId = "-1", ArtistName = name };
+            var pieceViewModel = new CreatePieceViewModel { ArtistId = "-1", ArtistName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -697,7 +697,7 @@ namespace CoraCorpCM.Web.Tests
             var deathdateString = "1/2/2018";
             var deathdate = DateTime.Parse(deathdateString);
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 ArtistId = "-1",
                 ArtistName = name,
@@ -730,7 +730,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationYear = 2018;
-            var pieceViewModel = new PieceViewModel { CreationYear = creationYear.ToString() };
+            var pieceViewModel = new CreatePieceViewModel { CreationYear = creationYear.ToString() };
             var userMuseum= new Museum();
 
             // Act
@@ -747,7 +747,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationMonth = 1;
-            var pieceViewModel = new PieceViewModel { CreationMonth = creationMonth.ToString() };
+            var pieceViewModel = new CreatePieceViewModel { CreationMonth = creationMonth.ToString() };
             var userMuseum= new Museum();
 
             // Act
@@ -764,7 +764,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var creationDay = 1;
-            var pieceViewModel = new PieceViewModel { CreationDay = creationDay.ToString() };
+            var pieceViewModel = new CreatePieceViewModel { CreationDay = creationDay.ToString() };
             var userMuseum= new Museum();
 
             // Act
@@ -781,7 +781,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var originCity = "City";
-            var pieceViewModel = new PieceViewModel { OriginCity = originCity };
+            var pieceViewModel = new CreatePieceViewModel { OriginCity = originCity };
             var userMuseum= new Museum();
 
             // Act
@@ -798,7 +798,7 @@ namespace CoraCorpCM.Web.Tests
             var mockRepo = new Mock<IMuseumRepository>();
             var modelMapper = new ModelMapper(mockRepo.Object);
             var originState = "State";
-            var pieceViewModel = new PieceViewModel { OriginState = originState };
+            var pieceViewModel = new CreatePieceViewModel { OriginState = originState };
             var userMuseum= new Museum();
 
             // Act
@@ -816,7 +816,7 @@ namespace CoraCorpCM.Web.Tests
             var country = new Country { Id = 1 };
             mockRepo.Setup(r => r.GetEntity<Country>(1)).Returns(country);
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { OriginCountryId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { OriginCountryId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -837,7 +837,7 @@ namespace CoraCorpCM.Web.Tests
             var height = 1;
             var width = 2;
             var depth = 3;
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 Height = height,
                 Width = width,
@@ -864,7 +864,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var year = 2018;
             var owner = "Owner";
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 CopyrightYear = year.ToString(),
                 CopyrightOwner = owner
@@ -890,7 +890,7 @@ namespace CoraCorpCM.Web.Tests
             var expDateString = "1/1/2019";
             var expDate = DateTime.Parse(expDateString);
             var carrier = "Carrier";
-            var pieceViewModel = new PieceViewModel
+            var pieceViewModel = new CreatePieceViewModel
             {
                 PolicyNumber = policyNumber,
                 AmountInsured = amountInsured,
@@ -917,7 +917,7 @@ namespace CoraCorpCM.Web.Tests
             var acquisition = new Acquisition { Id = 1 };
             mockRepo.Setup(r => r.GetEntity<Acquisition>(1)).Returns(acquisition);
             var modelMapper = new ModelMapper(mockRepo.Object);
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -937,7 +937,7 @@ namespace CoraCorpCM.Web.Tests
             var dateString = "1/1/2018";
             var date = DateTime.Parse(dateString);
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", AcquisitionDate = dateString };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", AcquisitionDate = dateString };
             var userMuseum= new Museum();
 
             // Act
@@ -957,7 +957,7 @@ namespace CoraCorpCM.Web.Tests
             var acquisition = new Acquisition { Id = 1 };
             var modelMapper = new ModelMapper(mockRepo.Object);
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", PieceSourceId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -976,7 +976,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -995,7 +995,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", PieceSourceId = "-1", PieceSourceName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -1014,7 +1014,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var cost = (decimal)100.00;
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", Cost = cost };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", Cost = cost };
             var userMuseum= new Museum();
 
             // Act
@@ -1034,7 +1034,7 @@ namespace CoraCorpCM.Web.Tests
             var acquisition = new Acquisition { Id = 1 };
             var modelMapper = new ModelMapper(mockRepo.Object);
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "1" };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", FundingSourceId = "1" };
             var userMuseum= new Museum();
 
             // Act
@@ -1053,7 +1053,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -1072,7 +1072,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var name = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", FundingSourceId = "-1", FundingSourceName = name };
             var userMuseum= new Museum();
 
             // Act
@@ -1091,7 +1091,7 @@ namespace CoraCorpCM.Web.Tests
             var modelMapper = new ModelMapper(mockRepo.Object);
             var terms = "ABC123";
             // TODO Change mechanism so as not to use magic number -1 as create new
-            var pieceViewModel = new PieceViewModel { AcquisitionId = "-1", Terms = terms };
+            var pieceViewModel = new CreatePieceViewModel { AcquisitionId = "-1", Terms = terms };
             var userMuseum= new Museum();
 
             // Act

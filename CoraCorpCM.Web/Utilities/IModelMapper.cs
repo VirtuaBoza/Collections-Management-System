@@ -5,6 +5,6 @@ namespace CoraCorpCM.Web.Utilities
 {
     public interface IModelMapper
     {
-        Piece ResolveToPieceModel(PieceViewModel pieceViewModel, Museum userMuseum);
+        Piece ResolveToPieceModel(CreatePieceViewModel pieceViewModel, Museum userMuseum);
     }
 }

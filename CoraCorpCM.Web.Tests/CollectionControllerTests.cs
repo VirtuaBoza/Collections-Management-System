@@ -138,7 +138,7 @@ namespace CoraCorpCM.Web.Tests
             var result = controller.Create() as ViewResult;
 
             // Assert
-            Assert.IsInstanceOfType(result.ViewData.Model, typeof(PieceViewModel));
+            Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace CoraCorpCM.Web.Tests
             var mockUserManager = MockHelper.GetMockUserManager();
             mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
-            var viewModel = new PieceViewModel();
+            var viewModel = new CreatePieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
@@ -170,7 +170,7 @@ namespace CoraCorpCM.Web.Tests
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
-            var viewModel = new PieceViewModel();
+            var viewModel = new CreatePieceViewModel();
             controller.ModelState.AddModelError("key", "error");
 
             // Act
@@ -189,14 +189,14 @@ namespace CoraCorpCM.Web.Tests
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
-            var viewModel = new PieceViewModel();
+            var viewModel = new CreatePieceViewModel();
             controller.ModelState.AddModelError("key", "error");
 
             // Act
             var result = controller.Create(viewModel) as ViewResult;
 
             // Assert
-            Assert.IsInstanceOfType(result.ViewData.Model, typeof(PieceViewModel));
+            Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
@@ -207,7 +207,7 @@ namespace CoraCorpCM.Web.Tests
             var mockUserManager = MockHelper.GetMockUserManager();
             mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
             var mockModelMapper = new Mock<IModelMapper>();
-            var viewModel = new PieceViewModel();
+            var viewModel = new CreatePieceViewModel();
             mockModelMapper.Setup(mm => mm.ResolveToPieceModel(viewModel, null)).Returns(new Piece());
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
@@ -229,7 +229,7 @@ namespace CoraCorpCM.Web.Tests
             var mockModelMapper = new Mock<IModelMapper>();
             var mockModelValidator = new Mock<IModelValidator>();
             var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object);
-            var viewModel = new PieceViewModel();
+            var viewModel = new CreatePieceViewModel();
             var piece = new Piece();
             mockModelMapper.Setup(m => m.ResolveToPieceModel(viewModel, null)).Returns(piece);
 
