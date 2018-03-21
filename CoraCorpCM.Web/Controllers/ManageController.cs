@@ -264,7 +264,7 @@ namespace CoraCorpCM.Web.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            var info = await signInManager.GetExternalLoginInfoAsync(user.Id.ToString());
+            var info = await signInManager.GetExternalLoginInfoAsync(user.Id);
             if (info == null)
             {
                 throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");

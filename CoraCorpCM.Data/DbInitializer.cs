@@ -16,7 +16,7 @@ namespace CoraCorpCM.Data
         public static async Task Seed(
             ApplicationDbContext context,
             IHostingEnvironment environment,
-            RoleManager<IdentityRole<int>> roleManager,
+            RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
             IMuseumRepository museumRepository)
         {
@@ -44,8 +44,8 @@ namespace CoraCorpCM.Data
 
             if (!context.Roles.Any())
             {
-                await roleManager.CreateAsync(new IdentityRole<int>(Role.Admin));
-                await roleManager.CreateAsync(new IdentityRole<int>(Role.Contributor));
+                await roleManager.CreateAsync(new IdentityRole(Role.Admin));
+                await roleManager.CreateAsync(new IdentityRole(Role.Contributor));
             }
 
             if (environment.IsDevelopment())

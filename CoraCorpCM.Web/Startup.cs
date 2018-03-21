@@ -29,7 +29,7 @@ namespace CoraCorpCM.Web
             .UseLazyLoadingProxies()
             .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     // Password settings
                     options.Password.RequireDigit = false;

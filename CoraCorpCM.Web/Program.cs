@@ -23,7 +23,7 @@ namespace CoraCorpCM.Web
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var environment = services.GetRequiredService<IHostingEnvironment>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var museumRepository = services.GetRequiredService<IMuseumRepository>();
                     DbInitializer.Seed(context, environment, roleManager, userManager, museumRepository).Wait();
