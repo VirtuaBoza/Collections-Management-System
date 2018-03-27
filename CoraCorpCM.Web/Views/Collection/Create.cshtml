@@ -4,8 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+@section Scripts
+{
+    <script src="~/js/create-piece-view.js"></script>
+}
 
+<h2>Create</h2>
 
 <hr />
 
@@ -15,148 +19,148 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h4>Piece</h4>
             <div class="form-group">
-                <label asp-for="AccessionNumber" class="control-label"></label>
-                <input asp-for="AccessionNumber" class="form-control" />
+                <label class="control-label">Accession Number</label>
+                <input asp-for="Piece.AccessionNumber" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" placeholder="Required" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label class="control-label">Title</label>
+                <input asp-for="Piece.Title" class="form-control" placeholder="Required" />
+                <span asp-validation-for="Piece.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
+                <label class="control-label">Subject</label>
+                <input asp-for="Piece.Subject" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="MediumId" class="control-label"></label>
-                <select asp-for="MediumId" asp-items="Model.Media" class="form-control" id="medium-toggle">
+                <label class="control-label">Medium</label>
+                <select asp-for="Piece.MediumId" asp-items="Model.Media" class="form-control" id="medium-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group medium-toggle-target">
-                <label asp-for="MediumName" class="control-label"></label>
-                <input asp-for="MediumName" class="form-control" />
+                <label class="control-label">New Medium</label>
+                <input asp-for="Medium.Name" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="GenreId" class="control-label"></label>
-                <select asp-for="GenreId" asp-items="Model.Genres" class="form-control" id="genre-toggle">
+                <label class="control-label">Genre</label>
+                <select asp-for="Piece.GenreId" asp-items="Model.Genres" class="form-control" id="genre-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group genre-toggle-target">
-                <label asp-for="GenreName" class="control-label"></label>
-                <input asp-for="GenreName" class="form-control" />
+                <label class="control-label">New Genre</label>
+                <input asp-for="Genre.Name" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="SubgenreId" class="control-label"></label>
-                <select asp-for="SubgenreId" asp-items="Model.Subgenres" class="form-control" id="subgenre-toggle">
+                <label class="control-label">Subgenre</label>
+                <select asp-for="Piece.SubgenreId" asp-items="Model.Subgenres" class="form-control" id="subgenre-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group subgenre-toggle-target">
-                <label asp-for="SubgenreName" class="control-label"></label>
-                <input asp-for="SubgenreName" class="form-control" />
+                <label class="control-label">New Subgenre</label>
+                <input asp-for="Subgenre.Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SubjectMatterId" class="control-label"></label>
-                <select asp-for="SubjectMatterId" asp-items="Model.SubjectMatters" class="form-control" id="subjectMatter-toggle">
+                <label class="control-label">Subject Matter</label>
+                <select asp-for="Piece.SubjectMatterId" asp-items="Model.SubjectMatters" class="form-control" id="subjectMatter-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group subjectMatter-toggle-target">
-                <label asp-for="SubjectMatterName" class="control-label"></label>
-                <input asp-for="SubjectMatterName" class="form-control" />
+                <label class="control-label">New Subject Matter</label>
+                <input asp-for="SubjectMatter.Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="EstimatedValue" class="control-label"></label>
+                <label class="control-label">Estimated Value</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input asp-for="EstimatedValue" class="form-control text-right money-mask">
+                    <input asp-for="Piece.EstimatedValue" class="form-control text-right money-mask">
                 </div>
-                <span asp-validation-for="EstimatedValue" class="text-danger"></span>
+                <span asp-validation-for="Piece.EstimatedValue" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="PermanentLocationId" class="control-label"></label>
-                <select asp-for="PermanentLocationId" asp-items="Model.Locations" class="form-control" id="permanentLocation-toggle">
+                <label class="control-label">Permanent Location</label>
+                <select asp-for="Piece.PermanentLocationId" asp-items="Model.Locations" class="form-control" id="permanentLocation-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentLocationName" class="control-label"></label>
-                <input asp-for="PermanentLocationName" class="form-control" placeholder="Required" />
-                <span asp-validation-for="PermanentLocationName" class="text-danger"></span>
+                <label class="control-label">New Location Name</label>
+                <input asp-for="PermanentLocation.Name" class="form-control" placeholder="Required" />
+                <span asp-validation-for="PermanentLocation.Name" class="text-danger"></span>
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentAddress1" class="control-label"></label>
-                <input asp-for="PermanentAddress1" class="form-control" />
+                <label class="control-label">New Location Address Line 1</label>
+                <input asp-for="PermanentLocation.Address1" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentAddress2" class="control-label"></label>
-                <input asp-for="PermanentAddress2" class="form-control" />
+                <label class="control-label">New Location Address Line 2</label>
+                <input asp-for="PermanentLocation.Address2" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentCity" class="control-label"></label>
-                <input asp-for="PermanentCity" class="form-control" />
+                <label class="control-label">New Location City</label>
+                <input asp-for="PermanentLocation.City" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentState" class="control-label"></label>
-                <input asp-for="PermanentState" class="form-control" />
+                <label class="control-label">New Location State</label>
+                <input asp-for="PermanentLocation.State" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentZipCode" class="control-label"></label>
-                <input asp-for="PermanentZipCode" class="form-control" />
+                <label class="control-label">New Location Zip Code</label>
+                <input asp-for="PermanentLocation.ZipCode" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label asp-for="PermanentCountryId"></label>
-                <select asp-for="PermanentCountryId" asp-items="Model.Countries" class="form-control">
+                <label class="control-label">New Location Country</label>
+                <select asp-for="PermanentLocation.CountryId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label asp-for="CurrentLocationId" class="control-label"></label>
-                <select asp-for="CurrentLocationId" asp-items="Model.Locations" class="form-control" id="currentLocation-toggle">
+                <label class="control-label">Current Location</label>
+                <select asp-for="Piece.CurrentLocationId" asp-items="Model.Locations" class="form-control" id="currentLocation-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                     <option value="-2">- Same as Permanent Location -</option>
                 </select>
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentLocationName" class="control-label"></label>
-                <input asp-for="CurrentLocationName" class="form-control" placeholder="Required" />
-                <span asp-validation-for="CurrentLocationName" class="text-danger"></span>
+                <label class="control-label">New Location Name</label>
+                <input asp-for="CurrentLocation.Name" class="form-control" placeholder="Required" />
+                <span asp-validation-for="CurrentLocation.Name" class="text-danger"></span>
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentAddress1" class="control-label"></label>
-                <input asp-for="CurrentAddress1" class="form-control" />
+                <label class="control-label">New Location Address 1</label>
+                <input asp-for="CurrentLocation.Address1" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentAddress2" class="control-label"></label>
-                <input asp-for="CurrentAddress2" class="form-control" />
+                <label class="control-label">New Location Address 2</label>
+                <input asp-for="CurrentLocation.Address2" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentCity" class="control-label"></label>
-                <input asp-for="CurrentCity" class="form-control" />
+                <label class="control-label">New Location City</label>
+                <input asp-for="CurrentLocation.City" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentState" class="control-label"></label>
-                <input asp-for="CurrentState" class="form-control" />
+                <label class="control-label">New Location State</label>
+                <input asp-for="CurrentLocation.State" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentZipCode" class="control-label"></label>
-                <input asp-for="CurrentZipCode" class="form-control" />
+                <label class="control-label">New Location Zip Code</label>
+                <input asp-for="CurrentLocation.ZipCode" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label asp-for="CurrentCountryId"></label>
-                <select asp-for="CurrentCountryId" asp-items="Model.Countries" class="form-control">
+                <label class="control-label">New Location Country</label>
+                <select asp-for="CurrentLocation.CountryId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
@@ -167,63 +171,63 @@
                 <h4>Insurance</h4>
             </div>
             <div class="form-group">
-                <label asp-for="PolicyNumber" class="control-label"></label>
-                <input asp-for="PolicyNumber" class="form-control" />
+                <label class="control-label">Policy Number</label>
+                <input asp-for="Piece.InsurancePolicyNumber" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="AmountInsured" class="control-label"></label>
-                <input asp-for="AmountInsured" class="form-control money-mask" />
+                <label class="control-label">Amount Insured</label>
+                <input asp-for="Piece.InsuranceAmount" class="form-control money-mask" />
             </div>
             <div class="form-group">
-                <label asp-for="ExpirationDate" class="control-label"></label>
-                <input asp-for="ExpirationDate" class="form-control date-picker" />
+                <label class="control-label">Insurance Expiration Date</label>
+                <input asp-for="Piece.InsuranceExpirationDate" class="form-control date-picker" />
             </div>
             <div class="form-group">
-                <label asp-for="Carrier" class="control-label"></label>
-                <input asp-for="Carrier" class="form-control" />
+                <label class="control-label">Insurance Carrier</label>
+                <input asp-for="Piece.InsuranceCarrier" class="form-control" />
             </div>
             <hr />
         </div>
         <div class="col-md-4">
             <h4>Artist</h4>
             <div class="form-group">
-                <select asp-for="ArtistId" asp-items="Model.KnownArtists" class="form-control" id="artist-toggle">
+                <select asp-for="Piece.ArtistId" asp-items="Model.Artists" class="form-control" id="artist-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistName" class="control-label"></label>
-                <input asp-for="ArtistName" class="form-control" placeholder="Required" />
-                <span asp-validation-for="ArtistName" class="text-danger"></span>
+                <label class="control-label">New Artist Name</label>
+                <input asp-for="Artist.Name" class="form-control" placeholder="Required" />
+                <span asp-validation-for="Artist.Name" class="text-danger"></span>
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistAlsoKnownAs" class="control-label"></label>
-                <input asp-for="ArtistAlsoKnownAs" class="form-control" />
+                <label class="control-label">New Artist Psuedonym</label>
+                <input asp-for="Artist.AlsoKnownAs" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistCity" class="control-label"></label>
-                <input asp-for="ArtistCity" class="form-control" />
+                <label class="control-label">New Artist City of Origin</label>
+                <input asp-for="Artist.CityOfOrigin" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistState" class="control-label"></label>
-                <input asp-for="ArtistState" class="form-control" />
+                <label class="control-label">New Artist State of Origin</label>
+                <input asp-for="Artist.StateOfOrigin" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistCountryId"></label>
-                <select asp-for="ArtistCountryId" asp-items="Model.Countries" class="form-control">
+                <label class="form-control" >New Artist Country of Origin</label>
+                <select asp-for="Artist.CountryOfOriginId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistBirthdate" class="control-label"></label>
-                <input asp-for="ArtistBirthdate" class="form-control date-picker" />
-                <span asp-validation-for="ArtistBirthdate" class="text-danger"></span>
+                <label class="control-label">New Artist Birth Date</label>
+                <input asp-for="Artist.BirthDate" class="form-control date-picker" />
+                <span asp-validation-for="Artist.BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group artist-toggle-target">
-                <label asp-for="ArtistDeathdate" class="control-label"></label>
-                <input asp-for="ArtistDeathdate" class="form-control date-picker" />
-                <span asp-validation-for="ArtistDeathdate" class="text-danger"></span>
+                <label class="control-label">New Artist Death Date</label>
+                <input asp-for="Artist.DeathDate" class="form-control date-picker" />
+                <span asp-validation-for="Artist.DeathDate" class="text-danger"></span>
             </div>
             <hr />
             <div>
@@ -232,26 +236,26 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="CreationYear" class="control-label"></label>
-                        <input asp-for="CreationYear" class="form-control year-picker year-mask" />
+                        <label class="control-label">Year</label>
+                        <input asp-for="Piece.CreationYear" class="form-control year-picker year-mask" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="CreationMonth" class="control-label"></label>
-                        <input asp-for="CreationMonth" class="form-control month-picker month-mask" />
+                        <label class="control-label">Month</label>
+                        <input asp-for="Piece.CreationMonth" class="form-control month-picker month-mask" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="CreationDay" class="control-label"></label>
-                        <input asp-for="CreationDay" class="form-control day-mask" />
+                        <label class="control-label">Day</label>
+                        <input asp-for="Piece.CreationDay" class="form-control day-mask" />
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <span asp-validation-for="CreationYear" class="text-danger"></span>
-                    <span asp-validation-for="CreationMonth" class="text-danger"></span>
-                    <span asp-validation-for="CreationDay" class="text-danger"></span>
+                    <span asp-validation-for="Piece.CreationYear" class="text-danger"></span>
+                    <span asp-validation-for="Piece.CreationMonth" class="text-danger"></span>
+                    <span asp-validation-for="Piece.CreationDay" class="text-danger"></span>
                 </div>
             </div>
             <hr />
@@ -259,16 +263,16 @@
                 <h4>Origin</h4>
             </div>
             <div class="form-group">
-                <label asp-for="OriginCity" class="control-label"></label>
-                <input asp-for="OriginCity" class="form-control" />
+                <label class="control-label">City of Origin</label>
+                <input asp-for="Piece.CityOfOrigin" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="OriginState" class="control-label"></label>
-                <input asp-for="OriginState" class="form-control" />
+                <label class="control-label">State of Origin</label>
+                <input asp-for="Piece.StateOfOrigin" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="OriginCountryId"></label>
-                <select asp-for="OriginCountryId" asp-items="Model.Countries" class="form-control">
+                <label class="control-label">Country of Origin</label>
+                <select asp-for="Piece.CountryOfOriginId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
@@ -279,37 +283,37 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="Height" class="control-label"></label>
-                        <input asp-for="Height" class="form-control text-right" />
+                        <label class="control-label">Height</label>
+                        <input asp-for="Piece.Height" class="form-control text-right" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="Width" class="control-label"></label>
-                        <input asp-for="Width" class="form-control text-right" />
+                        <label class="control-label">Width</label>
+                        <input asp-for="Piece.Width" class="form-control text-right" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="Depth" class="control-label"></label>
-                        <input asp-for="Depth" class="form-control text-right" />
+                        <label class="control-label">Depth</label>
+                        <input asp-for="Piece.Depth" class="form-control text-right" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="UnitOfMeasureId" class="control-label"></label>
-                        <select asp-for="UnitOfMeasureId" asp-items="Model.UnitsOfMeasure" class="form-control"></select>
+                        <label class="control-label">Unit of Measure</label>
+                        <select asp-for="Piece.UnitOfMeasureId" asp-items="Model.UnitsOfMeasure" class="form-control"></select>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="checkbox">
                         <label>
-                            <input asp-for="IsFramed" /> @Html.DisplayNameFor(model => model.IsFramed)
+                            <input asp-for="Piece.IsFramed" /> @Html.DisplayNameFor(model => model.Piece.IsFramed)
                         </label>
                     </div>
-                    <div><span asp-validation-for="Height" class="text-danger"></span></div>
-                    <div><span asp-validation-for="Width" class="text-danger"></span></div>
-                    <div><span asp-validation-for="Depth" class="text-danger"></span></div>
+                    <div><span asp-validation-for="Piece.Height" class="text-danger"></span></div>
+                    <div><span asp-validation-for="Piece.Width" class="text-danger"></span></div>
+                    <div><span asp-validation-for="Piece.Depth" class="text-danger"></span></div>
                 </div>
             </div>
             <hr />
@@ -317,63 +321,76 @@
                 <h4>Copyright</h4>
             </div>
             <div class="form-group">
-                <label asp-for="CopyrightYear" class="control-label"></label>
-                <input asp-for="CopyrightYear" class="form-control year-picker year-mask" />
-                <span asp-validation-for="CopyrightYear" class="text-danger"></span>
+                <label class="control-label">Year</label>
+                <input asp-for="Piece.CopyrightYear" class="form-control year-picker year-mask" />
+                <span asp-validation-for="Piece.CopyrightYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CopyrightOwner" class="control-label"></label>
-                <input asp-for="CopyrightOwner" class="form-control" />
+                <label class="control-label">Owner</label>
+                <input asp-for="Piece.CopyrightOwner" class="form-control" />
             </div>
             <hr />
         </div>
         <div class="col-md-4">
             <h4>Acquisition</h4>
             <div class="form-group">
-                <select asp-for="AcquisitionId" asp-items="Model.Acquisitions" class="form-control" id="acquisition-toggle">
+                <select asp-for="Piece.AcquisitionId" asp-items="Model.Acquisitions" class="form-control" id="acquisition-toggle">
                     <option value="-1">- Create New -</option>
                     <option value="">- Skip Acquisition Creation -</option>
                 </select>
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label asp-for="AcquisitionDate" class="control-label"></label>
-                <input asp-for="AcquisitionDate" class="form-control date-picker" />
-                <span asp-validation-for="AcquisitionDate" class="text-danger"></span>
+                <label class="control-label">New Acquisition Date</label>
+                <input asp-for="Acquisition.Date" class="form-control date-picker" />
+                <span asp-validation-for="Acquisition.Date" class="text-danger"></span>
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label asp-for="PieceSourceId" class="control-label"></label>
-                <select asp-for="PieceSourceId" asp-items="Model.PieceSources" class="form-control toggle" id="pieceSource-toggle">
+                <label class="control-label">Piece Source</label>
+                <select asp-for="Acquisition.PieceSourceId" asp-items="Model.PieceSources" class="form-control toggle" id="pieceSource-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
-                <span asp-validation-for="PieceSourceId" class="text-danger"></span>
+                <span asp-validation-for="Acquisition.PieceSourceId" class="text-danger"></span>
             </div>
             <div class="form-group acquisition-toggle-target pieceSource-toggle-target">
-                <label asp-for="PieceSourceName" class="control-label"></label>
-                <input asp-for="PieceSourceName" class="form-control" />
+                <label class="control-label">New Piece Source</label>
+                <input asp-for="PieceSource.Name" class="form-control" />
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label asp-for="Cost"></label>
+                <label>Cost</label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input asp-for="Cost" class="form-control text-right money-mask" />
+                    <input asp-for="Acquisition.Cost" class="form-control text-right money-mask" />
                 </div>
-                <span asp-validation-for="Cost" class="text-danger"></span>
+                <span asp-validation-for="Acquisition.Cost" class="text-danger"></span>
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label asp-for="FundingSourceId" class="control-label"></label>
-                <select asp-for="FundingSourceId" asp-items="Model.FundingSources" class="form-control toggle" id="fundingSouce-toggle">
+                <label class="control-label">Funding Source</label>
+                <select asp-for="Acquisition.FundingSourceId" asp-items="Model.FundingSources" class="form-control toggle" id="fundingSouce-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
                 </select>
             </div>
             <div class="form-group acquisition-toggle-target fundingSouce-toggle-target">
-                <label asp-for="FundingSourceName" class="control-label"></label>
-                <input asp-for="FundingSourceName" class="form-control" />
+                <label class="control-label">New Funding Source</label>
+                <input asp-for="FundingSource.Name" class="form-control" />
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label asp-for="Terms"></label>
-                <textarea rows="6" asp-for="Terms" class="form-control"></textarea>
+                <label class="control-label">Terms</label>
+                <textarea rows="6" asp-for="Acquisition.Terms" class="form-control"></textarea>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <label class="control-label">Collection</label>
+                <select asp-for="Piece.CollectionId" asp-items="Model.Collections" class="form-control toggle" id="collection-toggle">
+                    <option value=""></option>
+                    <option value="-1">- Create New -</option>
+                </select>
+            </div>
+            <div class="form-group collection-toggle-target">
+                <label class="control-label">New Collection</label>
+                <input asp-for="Collection.Name" class="form-control" />
             </div>
         </div>
     </div>
@@ -385,7 +402,6 @@
         </div>
     </div>
 </form>
-
 
 <div>
     <a asp-action="Index">Back to List</a>

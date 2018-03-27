@@ -1,26 +1,22 @@
 ﻿using System.Diagnostics;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using CoraCorpCM.App.Membership;
 
 namespace CoraCorpCM.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IEmailSender emailSender;
-        private readonly IMuseumRepository museumRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(
             IEmailSender emailSender, 
-            IMuseumRepository museumRepository,
             UserManager<ApplicationUser> userManager)
         {
             this.emailSender = emailSender;
-            this.museumRepository = museumRepository;
             this.userManager = userManager;
         }
 

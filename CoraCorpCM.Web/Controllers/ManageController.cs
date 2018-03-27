@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CoraCorpCM.Domain.Models;
+using CoraCorpCM.App.Membership;
 using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
 

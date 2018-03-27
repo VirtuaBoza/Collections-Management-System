@@ -1,19 +1,20 @@
-﻿using CoraCorpCM.App.Interfaces.Persistence;
+﻿using CoraCorpCM.App.Membership;
+using Microsoft.AspNetCore.Identity;
 
 namespace CoraCorpCM.App.Museums.Queries
 {
     public class GetMuseumIdForUserIdQuery : IGetMuseumIdForUserIdQuery
     {
-        private readonly IUserRepository museumRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public GetMuseumIdForUserIdQuery(IUserRepository museumRepository)
+        public GetMuseumIdForUserIdQuery(UserManager<ApplicationUser> userManager)
         {
-            this.museumRepository = museumRepository;
+            this.userManager = userManager;
         }
 
         public int Execute(string userId)
         {
-            var user = museumRepository.Get(userId);
+            var user = userManager.FindByIdAsync(userId).Result;
             return user.MuseumId;
         }
     }

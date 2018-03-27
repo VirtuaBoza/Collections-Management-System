@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Data", "CoraCorpCM.Data\CoraCorpCM.Data.csproj", "{15B7B207-77DC-4E03-B14D-1139FC44DE7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Web.Tests", "CoraCorpCM.Web.Tests\CoraCorpCM.Web.Tests.csproj", "{683CE7C0-9E29-4997-835D-A97254717C38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{197C0B11-4CEA-4775-A056-DCEBC6502FCB} = {197C0B11-4CEA-4775-A056-DCEBC6502FCB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Web", "CoraCorpCM.Web\CoraCorpCM.Web.csproj", "{F3EA2584-201A-4CDA-826B-888EB899A174}"
 EndProject
@@ -15,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.Data.Tests", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.App", "CoraCorpCM.App\CoraCorpCM.App.csproj", "{F103A1A3-C0DE-45DC-A92C-02402A098351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoraCorpCM.App.Tests", "CoraCorpCM.App.Tests\CoraCorpCM.App.Tests.csproj", "{197C0B11-4CEA-4775-A056-DCEBC6502FCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoraCorpCM.App.Tests", "CoraCorpCM.App.Tests\CoraCorpCM.App.Tests.csproj", "{197C0B11-4CEA-4775-A056-DCEBC6502FCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,12 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Data;
-using CoraCorpCM.Domain.Models;
+using CoraCorpCM.Data.Shared;
 using CoraCorpCM.Web.Services;
-using CoraCorpCM.Web.Utilities;
-using CoraCorpCM.App.Countries.Queries;
+using CoraCorpCM.App.Membership;
+using CoraCorpCM.Data;
 
 namespace CoraCorpCM.Web
 {
@@ -46,16 +44,11 @@ namespace CoraCorpCM.Web
 
             services.AddMvc();
 
-            // Application services.
-            services.AddTransient<IModelValidator, ModelValidator>();
+            services.AddTransient<DbInitializer>();
+            services.AddTransient<DbSeeder>();
 
-            services.AddScoped<IModelMapper, ModelMapper>();
-            services.AddScoped<ISelectListMaker, SelectListMaker>();
-            services.AddScoped<IMuseumRepository, MuseumRepository>();
-            services.AddScoped<ICreatePieceViewModelFactory, CreatePieceViewModelFactory>();
-            services.AddScoped<IGetCountryListQuery, GetCountryListQuery>();
+            DependencyResolver.Resolve(services);
 
-            services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
@@ -83,6 +76,18 @@ namespace CoraCorpCM.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var initializer = scope.ServiceProvider.GetService<DbInitializer>();
+                initializer.Initialize();
+
+                if (env.IsDevelopment())
+                {
+                    var seeder = scope.ServiceProvider.GetService<DbSeeder>();
+                    seeder.Seed();
+                }
+            }
         }
     }
 }
