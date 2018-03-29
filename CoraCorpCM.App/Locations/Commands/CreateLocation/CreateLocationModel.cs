@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoraCorpCM.App.Locations.Commands.CreateLocation
+﻿namespace CoraCorpCM.App.Locations.Commands.CreateLocation
 {
     public class CreateLocationModel
     {
@@ -15,6 +9,6 @@ namespace CoraCorpCM.App.Locations.Commands.CreateLocation
         public string State { get; set; }
         public string ZipCode { get; set; }
         public int CountryId { get; set; }
-        public int MuseumdId { get; set; }
+        public int MuseumId { get; set; }
     }
 }

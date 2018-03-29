@@ -4,7 +4,7 @@ using Moq;
 
 namespace CoraCorpCM.App.Tests
 {
-    class AppMockHelper
+    public class AppMockHelper
     {
         public static Mock<UserManager<ApplicationUser>> GetMockUserManager()
         {

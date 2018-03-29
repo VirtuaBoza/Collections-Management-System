@@ -31,7 +31,6 @@ namespace CoraCorpCM.Web.Controllers
 
         public IActionResult Index()
         {
-            // TODO replace code below with factory creation of some new IndexPieceViewModel
             var pieces = getPieceListQuery.Execute(User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View(pieces);
         }
@@ -50,7 +49,7 @@ namespace CoraCorpCM.Web.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create(CreatePieceViewModel viewModel)
         {
-            // TODO Validate piece
+            viewModel.Validate(ModelState);
 
             if (ModelState.IsValid)
             {

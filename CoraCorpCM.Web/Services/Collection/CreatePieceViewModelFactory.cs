@@ -80,18 +80,7 @@ namespace CoraCorpCM.Web.Services.Collection
 
             var viewModel = new CreatePieceViewModel
             {
-                Piece = new CreatePieceModel(),
-                Medium = new CreateMediumModel(),
-                Genre = new CreateGenreModel(),
-                Subgenre = new CreateSubgenreModel(),
-                SubjectMatter = new CreateSubjectMatterModel(),
-                PermanentLocation = new CreateLocationModel(),
-                CurrentLocation = new CreateLocationModel(),
-                Artist = new CreateArtistModel(),
-                Acquisition = new CreateAcquisitionModel(),
-                PieceSource = new CreatePieceSourceModel(),
-                FundingSource = new CreateFundingSourceModel(),
-                Collection = new CreateCollectionModel()
+                Piece = new CreatePieceModel()
             };
 
             var media = mediumListQuery.Execute(museumId);
