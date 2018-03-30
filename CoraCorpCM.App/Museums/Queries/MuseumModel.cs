@@ -1,24 +1,19 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using CoraCorpCM.Domain.Entities;
 
-namespace CoraCorpCM.Domain.Entities
+namespace CoraCorpCM.App.Museums.Queries
 {
-    public class Museum : IEntity<int>, INamedEntity
+    public class MuseumModel
     {
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string ShortName { get; set; }
-
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public Country Country { get; set; }
-        public Upload Logo { get; set; }
+        public int CountryId { get; set; }
         public int RecordCount { get; set; }
     }
 }

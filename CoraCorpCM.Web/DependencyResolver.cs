@@ -58,7 +58,7 @@ namespace CoraCorpCM.Web
             services.AddScoped<IGetPieceQuery, GetPieceQuery>();
             services.AddScoped<IGetPieceListQuery, GetPieceListQuery>();
             services.AddScoped<IRemovePieceCommand, RemovePieceCommand>();
-            services.AddScoped<IGetMuseumIdForUserIdQuery, GetMuseumIdForUserIdQuery>();
+            services.AddScoped<IGetMuseumForUserIdQuery, GetMuseumForUserIdQuery>();
             services.AddScoped<IRemoveMuseumCommand, RemoveMuseumCommand>();
             services.AddScoped<IGetMediumListQuery, GetMediumListQuery>();
             services.AddScoped<IGetLocationListQuery, GetLocationListQuery>();

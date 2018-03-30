@@ -24,7 +24,6 @@ namespace CoraCorpCM.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options
-            .UseLazyLoadingProxies()
             .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -57,8 +56,8 @@ namespace CoraCorpCM.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
             else
@@ -81,11 +80,14 @@ namespace CoraCorpCM.Web
             {
                 var initializer = scope.ServiceProvider.GetService<DbInitializer>();
                 initializer.Initialize();
+            }
 
-                if (env.IsDevelopment())
+            if (env.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetService<DbSeeder>();
-                    seeder.Seed();
+                    seeder.Seed().Wait();
                 }
             }
         }

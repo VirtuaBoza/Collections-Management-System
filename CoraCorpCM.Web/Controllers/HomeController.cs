@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using CoraCorpCM.App.Membership;
+using CoraCorpCM.App.Museums.Queries;
+using System.Security.Claims;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -11,22 +13,25 @@ namespace CoraCorpCM.Web.Controllers
     {
         private readonly IEmailSender emailSender;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IGetMuseumForUserIdQuery museumForUserIdQuery;
 
         public HomeController(
             IEmailSender emailSender, 
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IGetMuseumForUserIdQuery museumForUserIdQuery)
         {
             this.emailSender = emailSender;
             this.userManager = userManager;
+            this.museumForUserIdQuery = museumForUserIdQuery;
         }
 
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var user = userManager.GetUserAsync(User).Result;
-                ViewData["Title"] = user.Museum.ShortName;
-                ViewData["MuseumName"] = user.Museum.Name;
+                var museumModel = museumForUserIdQuery.Execute(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                ViewData["Title"] = museumModel.ShortName;
+                ViewData["MuseumName"] = museumModel.Name;
             }
             else
             {

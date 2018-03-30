@@ -7,8 +7,7 @@ namespace CoraCorpCM.Web
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
-            host.Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

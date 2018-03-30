@@ -21,7 +21,7 @@ namespace CoraCorpCM.Data.Shared
             return context.Set<TEntity>();
         }
 
-        public TEntity Get(TId id)
+        public virtual TEntity Get(TId id)
         {
             return context.Set<TEntity>()
                 .Single(p => p.Id.Equals(id));

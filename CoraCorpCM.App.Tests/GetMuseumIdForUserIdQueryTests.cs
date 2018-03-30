@@ -6,13 +6,10 @@ namespace CoraCorpCM.App.Tests
     [TestClass]
     public class GetMuseumIdForUserIdQueryTests
     {
-        GetMuseumIdForUserIdQuery query;
 
         [TestInitialize]
         public void SetUp()
         {
-            var mockUserManager = AppMockHelper.GetMockUserManager();
-            query = new GetMuseumIdForUserIdQuery(mockUserManager.Object);
         }
     }
 }

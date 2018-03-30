@@ -2,6 +2,7 @@
 using CoraCorpCM.Domain.Entities;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace CoraCorpCM.Data.Shared
 {
@@ -18,11 +19,11 @@ namespace CoraCorpCM.Data.Shared
             this.userManager = userManager;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
             context.Database.EnsureCreated();
-            
-            if (!context.Users.Any() && !context.Museums.Any())
+
+            if (!context.Museums.Any())
             {
                 var country = context.Countries.First();
                 var museum = new Museum
@@ -61,9 +62,12 @@ namespace CoraCorpCM.Data.Shared
                     EmailConfirmed = true,
                     Museum = museum
                 };
-                var fullControlUserResult = userManager.CreateAsync(fullControlUser, "password");
-                userManager.AddToRoleAsync(fullControlUser, Role.Admin);
-                userManager.AddToRoleAsync(fullControlUser, Role.Contributor);
+                var fullControlUserResult =  await userManager.CreateAsync(fullControlUser, "password");
+                if (fullControlUserResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(fullControlUser, Role.Admin);
+                    await userManager.AddToRoleAsync(fullControlUser, Role.Contributor);
+                }
 
                 var adminUser = new ApplicationUser
                 {
@@ -74,8 +78,11 @@ namespace CoraCorpCM.Data.Shared
                     EmailConfirmed = true,
                     Museum = museum
                 };
-                var adminUserResult = userManager.CreateAsync(adminUser, "password");
-                userManager.AddToRoleAsync(adminUser, Role.Admin);
+                var adminUserResult = await userManager.CreateAsync(adminUser, "password");
+                if (adminUserResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(adminUser, Role.Admin);
+                }
 
                 var contributorUser = new ApplicationUser
                 {
@@ -86,8 +93,11 @@ namespace CoraCorpCM.Data.Shared
                     EmailConfirmed = true,
                     Museum = museum
                 };
-                var contributorUserResult = userManager.CreateAsync(contributorUser, "password");
-                userManager.AddToRoleAsync(contributorUser, Role.Contributor);
+                var contributorUserResult = await userManager.CreateAsync(contributorUser, "password");
+                if (contributorUserResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(contributorUser, Role.Contributor);
+                }
 
                 var readonlyUser = new ApplicationUser
                 {
@@ -98,7 +108,7 @@ namespace CoraCorpCM.Data.Shared
                     EmailConfirmed = true,
                     Museum = museum
                 };
-                userManager.CreateAsync(readonlyUser, "password");
+                await userManager.CreateAsync(readonlyUser, "password");
             }
         }
     }

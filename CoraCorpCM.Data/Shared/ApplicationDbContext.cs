@@ -27,6 +27,7 @@ namespace CoraCorpCM.Data
         public DbSet<Subgenre> Subgenres { get; set; }
         public DbSet<SubjectMatter> SubjectMatters { get; set; }
         public DbSet<UnitOfMeasure> UnitsOfMeasure { get; set; }
+        public DbSet<Inspection> Inspections { get; set; }
 
         public void Save()
         {
@@ -58,10 +59,6 @@ namespace CoraCorpCM.Data
                 .HasKey(pieceTag => new { pieceTag.PieceId, pieceTag.TagId });
 
             // Explicitly define one-to-many relationships where necessary
-            builder.Entity<Upload>()
-                .HasOne(upload => upload.Museum)
-                .WithMany(museum => museum.Uploads);
-
             builder.Entity<ArtistGenre>()
                 .HasOne(artistGenre => artistGenre.Artist)
                 .WithMany(artist => artist.ArtistGenres)
@@ -141,6 +138,11 @@ namespace CoraCorpCM.Data
             builder.Entity<PieceTag>()
                 .HasOne(pieceTag => pieceTag.Tag)
                 .WithMany(tag => tag.PieceTags)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Inspection>()
+                .HasOne(i => i.Piece)
+                .WithMany(p => p.Inspections)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

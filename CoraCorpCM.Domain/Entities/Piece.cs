@@ -9,8 +9,8 @@ namespace CoraCorpCM.Domain.Entities
     {
         public Piece()
         {
-            ExhibitionPieces = new HashSet<ExhibitionPiece>();
             Inspections = new HashSet<Inspection>();
+            ExhibitionPieces = new HashSet<ExhibitionPiece>();
             LoanPieces = new HashSet<LoanPiece>();
             PieceTags = new HashSet<PieceTag>();
         }
