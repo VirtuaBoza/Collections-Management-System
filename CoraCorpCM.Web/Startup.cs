@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -79,7 +79,7 @@ namespace CoraCorpCM.Web
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetService<DbInitializer>();
-                initializer.Initialize();
+                initializer.Initialize().Wait();
             }
 
             if (env.IsDevelopment())

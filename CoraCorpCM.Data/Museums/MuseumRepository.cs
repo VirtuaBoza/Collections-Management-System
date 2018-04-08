@@ -19,7 +19,6 @@ namespace CoraCorpCM.Data.Museums
         {
             return context.Museums
                 .Include(m => m.Country)
-                .Include(m => m.Logo)
                 .Single(m => m.Id == id);
         }
     }

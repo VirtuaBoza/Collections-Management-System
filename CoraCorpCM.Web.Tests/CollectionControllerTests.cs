@@ -13,6 +13,9 @@ using CoraCorpCM.App.Tests;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.App.Pieces.Queries;
 using CoraCorpCM.App.Pieces.Commands.CreatePiece;
+using CoraCorpCM.App.Membership;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CoraCorpCM.Web.Tests
 {
@@ -21,28 +24,42 @@ namespace CoraCorpCM.Web.Tests
     {
         private CollectionController collectionController;
 
+        Mock<UserManager<ApplicationUser>> mockUserManager;
+        Mock<ICreatePieceViewModelFactory> mockCreatePieceViewModelFactory;
+        Mock<IGetPieceListQuery> mockPieceListQuery;
+        Mock<IGetPieceQuery> mockPieceQuery;
+        Mock<ICreatePieceCommand> mockCreatePieceCommand;
+        Mock<ICreatePieceViewModelValidator> mockValidator;
+
         [TestInitialize]
         public void SetUp()
         {
-            var mockUserManager = AppMockHelper.GetMockUserManager();
+            mockUserManager = AppMockHelper.GetMockUserManager();
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
 
-            var mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
+            mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
             mockCreatePieceViewModelFactory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(new CreatePieceViewModel());
 
-            var mockPieceListQuery = new Mock<IGetPieceListQuery>();
-            mockPieceListQuery.Setup(q => q.Execute(It.IsAny<string>()))
+            mockPieceListQuery = new Mock<IGetPieceListQuery>();
+            mockPieceListQuery.Setup(q => q.Execute(It.IsAny<int>()))
                 .Returns(new List<PieceModel>());
 
-            var mockPieceQuery = new Mock<IGetPieceQuery>();
+            mockPieceQuery = new Mock<IGetPieceQuery>();
             mockPieceQuery.Setup(q => q.Execute(It.IsAny<int>()))
                 .Returns(new PieceModel());
+
+            mockCreatePieceCommand = new Mock<ICreatePieceCommand>();
+
+            mockValidator = new Mock<ICreatePieceViewModelValidator>();
 
             collectionController = new CollectionController(
                 mockUserManager.Object,
                 mockCreatePieceViewModelFactory.Object,
                 mockPieceListQuery.Object,
-                mockPieceQuery.Object);
+                mockPieceQuery.Object,
+                mockCreatePieceCommand.Object,
+                mockValidator.Object);
 
             collectionController.ControllerContext = new ControllerContext()
             {
@@ -144,6 +161,7 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
+            collectionController.ModelState.AddModelError("ErrorKey", "Error Message");
 
             // Act
             var result = collectionController.Create(viewModel) as ViewResult;
@@ -157,12 +175,27 @@ namespace CoraCorpCM.Web.Tests
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
+            collectionController.ModelState.AddModelError("ErrorKey", "Error Message");
 
             // Act
             var result = collectionController.Create(viewModel) as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
+        }
+
+        [TestMethod]
+        public void PostCreate_WithValidCreatePieceViewModel_CallsCreatePieceCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+
+            // Act
+            var result = collectionController.Create(viewModel);
+
+            // Assert
+            mockCreatePieceCommand.Verify(c => c.Execute(viewModel.Piece));
         }
 
         //[TestMethod]

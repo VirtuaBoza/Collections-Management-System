@@ -7,6 +7,7 @@
 @section Scripts
 {
     <script src="~/js/create-piece-view.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
 <h2>Create</h2>
@@ -94,32 +95,32 @@
                 </select>
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location Name</label>
+                <label class="control-label">Permanent Location Name</label>
                 <input asp-for="Piece.PermanentLocationName" class="form-control" placeholder="Required" />
                 <span asp-validation-for="Piece.PermanentLocationName" class="text-danger"></span>
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location Address Line 1</label>
+                <label class="control-label">Permanent Address Line 1</label>
                 <input asp-for="Piece.PermanentLocationAddress1" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location Address Line 2</label>
+                <label class="control-label">Permanent Address Line 2</label>
                 <input asp-for="Piece.PermanentLocationAddress2" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location City</label>
+                <label class="control-label">Permanent City</label>
                 <input asp-for="Piece.PermanentLocationCity" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location State</label>
+                <label class="control-label">Permanent State</label>
                 <input asp-for="Piece.PermanentLocationState" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location Zip Code</label>
+                <label class="control-label">Permanent Zip Code</label>
                 <input asp-for="Piece.PermanentLocationZipCode" class="form-control" />
             </div>
             <div class="form-group permanentLocation-toggle-target">
-                <label class="control-label">New Location Country</label>
+                <label class="control-label">Permanent Country</label>
                 <select asp-for="Piece.PermanentLocationCountryId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
@@ -130,36 +131,36 @@
                 <select asp-for="Piece.CurrentLocationId" asp-items="Model.Locations" class="form-control" id="currentLocation-toggle">
                     <option value=""></option>
                     <option value="-1">- Create New -</option>
-                    <option value="-2">- Same as Permanent Location -</option>
+                    @*<option value="-2">- Same as Permanent Location -</option>*@
                 </select>
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location Name</label>
+                <label class="control-label">Current Location Name</label>
                 <input asp-for="Piece.CurrentLocationName" class="form-control" placeholder="Required" />
                 <span asp-validation-for="Piece.CurrentLocationName" class="text-danger"></span>
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location Address 1</label>
+                <label class="control-label">Current Address 1</label>
                 <input asp-for="Piece.CurrentLocationAddress1" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location Address 2</label>
+                <label class="control-label">Current Address 2</label>
                 <input asp-for="Piece.CurrentLocationAddress2" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location City</label>
+                <label class="control-label">Current City</label>
                 <input asp-for="Piece.CurrentLocationCity" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location State</label>
+                <label class="control-label">Current State</label>
                 <input asp-for="Piece.CurrentLocationState" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location Zip Code</label>
+                <label class="control-label">Current Zip Code</label>
                 <input asp-for="Piece.CurrentLocationZipCode" class="form-control" />
             </div>
             <div class="form-group currentLocation-toggle-target">
-                <label class="control-label">New Location Country</label>
+                <label class="control-label">Current Country</label>
                 <select asp-for="Piece.CurrentLocationCountryId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
@@ -180,7 +181,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Insurance Expiration Date</label>
-                <input asp-for="Piece.InsuranceExpirationDate" class="form-control date-picker" />
+                <input asp-for="Piece.InsuranceExpirationDate" class="form-control" type="date"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Insurance Carrier</label>
@@ -197,36 +198,36 @@
                 </select>
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist Name</label>
+                <label class="control-label">Name</label>
                 <input asp-for="Piece.ArtistName" class="form-control" placeholder="Required" />
                 <span asp-validation-for="Piece.ArtistName" class="text-danger"></span>
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist Psuedonym</label>
+                <label class="control-label">Also Known As</label>
                 <input asp-for="Piece.ArtistAlsoKnownAs" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist City of Origin</label>
+                <label class="control-label">City of Origin</label>
                 <input asp-for="Piece.ArtistCityOfOrigin" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist State of Origin</label>
+                <label class="control-label">State of Origin</label>
                 <input asp-for="Piece.ArtistStateOfOrigin" class="form-control" />
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="form-control" >New Artist Country of Origin</label>
+                <label class="control-label">Country of Origin</label>
                 <select asp-for="Piece.ArtistCountryOfOriginId" asp-items="Model.Countries" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist Birth Date</label>
-                <input asp-for="Piece.ArtistBirthDate" class="form-control date-picker" />
+                <label class="control-label">Birth Date</label>
+                <input asp-for="Piece.ArtistBirthDate" class="form-control" type="date" />
                 <span asp-validation-for="Piece.ArtistBirthDate" class="text-danger"></span>
             </div>
             <div class="form-group artist-toggle-target">
-                <label class="control-label">New Artist Death Date</label>
-                <input asp-for="Piece.ArtistDeathDate" class="form-control date-picker" />
+                <label class="control-label">Death Date</label>
+                <input asp-for="Piece.ArtistDeathDate" class="form-control" type="date" />
                 <span asp-validation-for="Piece.ArtistDeathDate" class="text-danger"></span>
             </div>
             <hr />
@@ -308,7 +309,7 @@
                 <div class="col-md-12">
                     <div class="checkbox">
                         <label>
-                            <input asp-for="Piece.IsFramed" /> @Html.DisplayNameFor(model => model.Piece.IsFramed)
+                            <input asp-for="Piece.IsFramed" /> <label>Framed</label>
                         </label>
                     </div>
                     <div><span asp-validation-for="Piece.Height" class="text-danger"></span></div>
@@ -340,8 +341,8 @@
                 </select>
             </div>
             <div class="form-group acquisition-toggle-target">
-                <label class="control-label">New Acquisition Date</label>
-                <input asp-for="Piece.AcquisitionDate" class="form-control date-picker" />
+                <label class="control-label">Acquisition Date</label>
+                <input asp-for="Piece.AcquisitionDate" class="form-control" type="date" />
                 <span asp-validation-for="Piece.AcquisitionDate" class="text-danger"></span>
             </div>
             <div class="form-group acquisition-toggle-target">
@@ -406,7 +407,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

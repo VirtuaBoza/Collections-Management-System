@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace CoraCorpCM.Data.Shared
 {
@@ -25,10 +26,10 @@ namespace CoraCorpCM.Data.Shared
             this.roleManager = roleManager;
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
             context.Database.EnsureCreated();
-            
+
             if (!context.Countries.Any())
             {
                 var filepath = Path.Combine(Directory.GetParent(environment.ContentRootPath).ToString(), "CoraCorpCM.Data","countries.json");
@@ -51,8 +52,8 @@ namespace CoraCorpCM.Data.Shared
 
             if (!context.Roles.Any())
             {
-                roleManager.CreateAsync(new IdentityRole(Role.Admin));
-                roleManager.CreateAsync(new IdentityRole(Role.Contributor));
+                await roleManager.CreateAsync(new IdentityRole(Role.Admin));
+                await roleManager.CreateAsync(new IdentityRole(Role.Contributor));
             }
         }
     }

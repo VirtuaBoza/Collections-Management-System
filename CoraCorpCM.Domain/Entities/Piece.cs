@@ -48,7 +48,6 @@ namespace CoraCorpCM.Domain.Entities
         public bool IsArchived { get; set; }
         public DateTime LastModified { get; set; }
 
-        public virtual Upload Photo { get; set; }
         public virtual Artist Artist { get; set; }
         public virtual Medium Medium { get; set; }
         public virtual Genre Genre { get; set; }

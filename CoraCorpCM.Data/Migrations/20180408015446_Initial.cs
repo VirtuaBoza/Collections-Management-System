@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+using System.Collections.Generic;
 
 namespace CoraCorpCM.Data.Migrations
 {
-    public partial class cleanarchitecture : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,9 +14,9 @@ namespace CoraCorpCM.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,8 +28,8 @@ namespace CoraCorpCM.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Code = table.Column<string>(maxLength: 2, nullable: false)
+                    Code = table.Column<string>(maxLength: 2, nullable: false),
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,9 +56,9 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,15 +77,15 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false),
-                    ShortName = table.Column<string>(nullable: false),
                     Address1 = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true),
                     CountryId = table.Column<int>(nullable: true),
-                    RecordCount = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    RecordCount = table.Column<int>(nullable: false),
+                    ShortName = table.Column<string>(nullable: false),
+                    State = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,14 +104,14 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AlsoKnownAs = table.Column<string>(nullable: true),
+                    Birthdate = table.Column<DateTime>(type: "date", nullable: true),
+                    CityOfOrigin = table.Column<string>(nullable: true),
+                    CountryOfOriginId = table.Column<int>(nullable: true),
+                    Deathdate = table.Column<DateTime>(type: "date", nullable: true),
                     MuseumId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    AlsoKnownAs = table.Column<string>(nullable: true),
-                    StateOfOrigin = table.Column<string>(nullable: true),
-                    CityOfOrigin = table.Column<string>(nullable: true),
-                    Birthdate = table.Column<DateTime>(type: "date", nullable: true),
-                    Deathdate = table.Column<DateTime>(type: "date", nullable: true),
-                    CountryOfOriginId = table.Column<int>(nullable: true)
+                    StateOfOrigin = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -135,23 +135,23 @@ namespace CoraCorpCM.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: false),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    MuseumId = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,9 +190,9 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
                     MuseumId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -271,14 +271,14 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
                     Address1 = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
+                    CountryId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true),
-                    CountryId = table.Column<int>(nullable: true)
+                    ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -398,35 +398,14 @@ namespace CoraCorpCM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Upload",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Data = table.Column<byte[]>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Upload", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Upload_Museums_MuseumId",
-                        column: x => x.MuseumId,
-                        principalTable: "Museums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -540,13 +519,13 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Curator = table.Column<string>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    LocationId = table.Column<int>(nullable: true),
                     MuseumId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Curator = table.Column<string>(nullable: true),
-                    Theme = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true)
+                    Theme = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -594,6 +573,42 @@ namespace CoraCorpCM.Data.Migrations
                         principalTable: "Museums",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Acquisitions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Cost = table.Column<decimal>(nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: true),
+                    FundingSourceId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: false),
+                    PieceSourceId = table.Column<int>(nullable: true),
+                    Terms = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Acquisitions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Acquisitions_FundingSources_FundingSourceId",
+                        column: x => x.FundingSourceId,
+                        principalTable: "FundingSources",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Acquisitions_Museums_MuseumId",
+                        column: x => x.MuseumId,
+                        principalTable: "Museums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Acquisitions_PieceSources_PieceSourceId",
+                        column: x => x.PieceSourceId,
+                        principalTable: "PieceSources",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -721,62 +736,18 @@ namespace CoraCorpCM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Acquisitions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Cost = table.Column<decimal>(nullable: true),
-                    Terms = table.Column<string>(nullable: true),
-                    FundingSourceId = table.Column<int>(nullable: true),
-                    PurchaseReceiptId = table.Column<int>(nullable: true),
-                    PieceSourceId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Acquisitions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Acquisitions_FundingSources_FundingSourceId",
-                        column: x => x.FundingSourceId,
-                        principalTable: "FundingSources",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Acquisitions_Museums_MuseumId",
-                        column: x => x.MuseumId,
-                        principalTable: "Museums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Acquisitions_PieceSources_PieceSourceId",
-                        column: x => x.PieceSourceId,
-                        principalTable: "PieceSources",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Acquisitions_Upload_PurchaseReceiptId",
-                        column: x => x.PurchaseReceiptId,
-                        principalTable: "Upload",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Loan",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    FromLocationId = table.Column<int>(nullable: true),
-                    ToLocationId = table.Column<int>(nullable: true),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    ToDate = table.Column<DateTime>(nullable: false),
                     ExhibitionId = table.Column<int>(nullable: true),
-                    LoanAgreementId = table.Column<int>(nullable: true),
-                    Terms = table.Column<string>(nullable: true)
+                    FromDate = table.Column<DateTime>(nullable: false),
+                    FromLocationId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: false),
+                    Terms = table.Column<string>(nullable: true),
+                    ToDate = table.Column<DateTime>(nullable: false),
+                    ToLocationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -791,12 +762,6 @@ namespace CoraCorpCM.Data.Migrations
                         name: "FK_Loan_Locations_FromLocationId",
                         column: x => x.FromLocationId,
                         principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Loan_Upload_LoanAgreementId",
-                        column: x => x.LoanAgreementId,
-                        principalTable: "Upload",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -819,42 +784,41 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    RecordNumber = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
                     AccessionNumber = table.Column<string>(nullable: true),
+                    AcquisitionId = table.Column<int>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    ArtistId = table.Column<int>(nullable: true),
+                    CityOfOrigin = table.Column<string>(nullable: true),
+                    CollectionId = table.Column<int>(nullable: true),
+                    CopyrightOwner = table.Column<string>(nullable: true),
+                    CopyrightYear = table.Column<int>(nullable: true),
+                    CountryOfOriginId = table.Column<int>(nullable: true),
                     CreationDay = table.Column<int>(nullable: true),
                     CreationMonth = table.Column<int>(nullable: true),
                     CreationYear = table.Column<int>(nullable: true),
-                    CountryOfOriginId = table.Column<int>(nullable: true),
-                    StateOfOrigin = table.Column<string>(nullable: true),
-                    CityOfOrigin = table.Column<string>(nullable: true),
-                    Height = table.Column<double>(nullable: true),
-                    Width = table.Column<double>(nullable: true),
+                    CurrentLocationId = table.Column<int>(nullable: true),
                     Depth = table.Column<double>(nullable: true),
-                    UnitOfMeasureId = table.Column<int>(nullable: true),
                     EstimatedValue = table.Column<decimal>(nullable: true),
-                    Subject = table.Column<string>(nullable: true),
-                    CopyrightYear = table.Column<int>(nullable: true),
-                    CopyrightOwner = table.Column<string>(nullable: true),
-                    InsurancePolicyNumber = table.Column<string>(nullable: true),
-                    InsuranceExpirationDate = table.Column<DateTime>(type: "date", nullable: true),
+                    GenreId = table.Column<int>(nullable: true),
+                    Height = table.Column<double>(nullable: true),
                     InsuranceAmount = table.Column<decimal>(nullable: true),
                     InsuranceCarrier = table.Column<string>(nullable: true),
-                    IsFramed = table.Column<bool>(nullable: false),
+                    InsuranceExpirationDate = table.Column<DateTime>(type: "date", nullable: true),
+                    InsurancePolicyNumber = table.Column<string>(nullable: true),
                     IsArchived = table.Column<bool>(nullable: false),
+                    IsFramed = table.Column<bool>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
-                    PhotoId = table.Column<int>(nullable: true),
-                    ArtistId = table.Column<int>(nullable: true),
                     MediumId = table.Column<int>(nullable: true),
-                    GenreId = table.Column<int>(nullable: true),
-                    SubgenreId = table.Column<int>(nullable: true),
-                    SubjectMatterId = table.Column<int>(nullable: true),
-                    AcquisitionId = table.Column<int>(nullable: true),
-                    CurrentLocationId = table.Column<int>(nullable: true),
+                    MuseumId = table.Column<int>(nullable: false),
                     PermanentLocationId = table.Column<int>(nullable: true),
-                    CollectionId = table.Column<int>(nullable: true),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    RecordNumber = table.Column<int>(nullable: false),
+                    StateOfOrigin = table.Column<string>(nullable: true),
+                    SubgenreId = table.Column<int>(nullable: true),
+                    Subject = table.Column<string>(nullable: true),
+                    SubjectMatterId = table.Column<int>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    UnitOfMeasureId = table.Column<int>(nullable: true),
+                    Width = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -914,12 +878,6 @@ namespace CoraCorpCM.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Pieces_Upload_PhotoId",
-                        column: x => x.PhotoId,
-                        principalTable: "Upload",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Pieces_Subgenres_SubgenreId",
                         column: x => x.SubgenreId,
                         principalTable: "Subgenres",
@@ -976,12 +934,12 @@ namespace CoraCorpCM.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuseumId = table.Column<int>(nullable: false),
-                    PieceId = table.Column<int>(nullable: false),
+                    ConditionId = table.Column<int>(nullable: true),
                     Date = table.Column<DateTime>(type: "date", nullable: false),
                     InspectorId = table.Column<int>(nullable: true),
-                    ConditionId = table.Column<int>(nullable: true),
-                    Notes = table.Column<string>(nullable: true)
+                    MuseumId = table.Column<int>(nullable: false),
+                    Notes = table.Column<string>(nullable: true),
+                    PieceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1088,11 +1046,6 @@ namespace CoraCorpCM.Data.Migrations
                 name: "IX_Acquisitions_PieceSourceId",
                 table: "Acquisitions",
                 column: "PieceSourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Acquisitions_PurchaseReceiptId",
-                table: "Acquisitions",
-                column: "PurchaseReceiptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtistGenre_GenreId",
@@ -1274,11 +1227,6 @@ namespace CoraCorpCM.Data.Migrations
                 column: "FromLocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loan_LoanAgreementId",
-                table: "Loan",
-                column: "LoanAgreementId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Loan_MuseumId",
                 table: "Loan",
                 column: "MuseumId");
@@ -1374,11 +1322,6 @@ namespace CoraCorpCM.Data.Migrations
                 column: "PermanentLocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pieces_PhotoId",
-                table: "Pieces",
-                column: "PhotoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pieces_SubgenreId",
                 table: "Pieces",
                 column: "SubgenreId");
@@ -1422,12 +1365,6 @@ namespace CoraCorpCM.Data.Migrations
                 name: "IX_Tag_MuseumId",
                 table: "Tag",
                 column: "MuseumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Upload_MuseumId",
-                table: "Upload",
-                column: "MuseumId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1533,9 +1470,6 @@ namespace CoraCorpCM.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "PieceSources");
-
-            migrationBuilder.DropTable(
-                name: "Upload");
 
             migrationBuilder.DropTable(
                 name: "Museums");

@@ -18,7 +18,6 @@ namespace CoraCorpCM.Domain.Entities
         public string State { get; set; }
         public string ZipCode { get; set; }
         public Country Country { get; set; }
-        public Upload Logo { get; set; }
         public int RecordCount { get; set; }
     }
 }

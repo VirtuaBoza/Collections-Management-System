@@ -31,85 +31,85 @@ namespace CoraCorpCM.Web.Tests
             modelState = new ModelStateDictionary();
         }
 
-        [TestMethod]
-        public void Validate_WithValidState_AddsNoErrorsToModelState()
-        {
-            // Arrange
-            viewModel.Piece.Title = "title";
+        //[TestMethod]
+        //public void Validate_WithValidState_AddsNoErrorsToModelState()
+        //{
+        //    // Arrange
+        //    viewModel.Piece.Title = "title";
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(0, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(0, modelState.Count);
+        //}
 
-        [TestMethod]
-        public void Validate_WithMissingTitle_AddsErrorToModelState()
-        {
-            // Arrange
+        //[TestMethod]
+        //public void Validate_WithMissingTitle_AddsErrorToModelState()
+        //{
+        //    // Arrange
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(1, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(1, modelState.Count);
+        //}
 
-        [TestMethod]
-        public void Validate_WithNoNameForNewPermanentLocation_AddsErrorToModelState()
-        {
-            // Arrange
-            viewModel.Piece.Title = "title";
-            viewModel.Piece.PermanentLocationId = -1;
+        //[TestMethod]
+        //public void Validate_WithNoNameForNewPermanentLocation_AddsErrorToModelState()
+        //{
+        //    // Arrange
+        //    viewModel.Piece.Title = "title";
+        //    viewModel.Piece.PermanentLocationId = -1;
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(1, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(1, modelState.Count);
+        //}
 
-        [TestMethod]
-        public void Validate_WithNoNameForNewCurrentLocation_AddsErrorToModelState()
-        {
-            // Arrange
-            viewModel.Piece.Title = "title";
-            viewModel.Piece.CurrentLocationId = -1;
+        //[TestMethod]
+        //public void Validate_WithNoNameForNewCurrentLocation_AddsErrorToModelState()
+        //{
+        //    // Arrange
+        //    viewModel.Piece.Title = "title";
+        //    viewModel.Piece.CurrentLocationId = -1;
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(1, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(1, modelState.Count);
+        //}
 
-        [TestMethod]
-        public void Validate_WithNoNameForNewArtist_AddsErrorToModelState()
-        {
-            // Arrange
-            viewModel.Piece.Title = "title";
-            viewModel.Piece.ArtistId = -1;
+        //[TestMethod]
+        //public void Validate_WithNoNameForNewArtist_AddsErrorToModelState()
+        //{
+        //    // Arrange
+        //    viewModel.Piece.Title = "title";
+        //    viewModel.Piece.ArtistId = -1;
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(1, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(1, modelState.Count);
+        //}
 
-        [TestMethod]
-        public void Validate_WithNoDateOrSourceForNewAcquisition_AddsErrorsToModelState()
-        {
-            // Arrange
-            viewModel.Piece.Title = "title";
-            viewModel.Piece.AcquisitionId = -1;
+        //[TestMethod]
+        //public void Validate_WithNoDateOrSourceForNewAcquisition_AddsErrorsToModelState()
+        //{
+        //    // Arrange
+        //    viewModel.Piece.Title = "title";
+        //    viewModel.Piece.AcquisitionId = -1;
 
-            // Act
-            viewModel.Validate(modelState);
+        //    // Act
+        //    viewModel.Validate(modelState);
 
-            // Assert
-            Assert.AreEqual(2, modelState.Count);
-        }
+        //    // Assert
+        //    Assert.AreEqual(2, modelState.Count);
+        //}
     }
 }

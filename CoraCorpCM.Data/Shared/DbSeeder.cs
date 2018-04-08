@@ -21,8 +21,6 @@ namespace CoraCorpCM.Data.Shared
 
         public async Task Seed()
         {
-            context.Database.EnsureCreated();
-
             if (!context.Museums.Any())
             {
                 var country = context.Countries.First();

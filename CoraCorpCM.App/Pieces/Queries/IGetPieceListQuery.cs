@@ -4,6 +4,6 @@ namespace CoraCorpCM.App.Pieces.Queries
 {
     public interface IGetPieceListQuery
     {
-        List<PieceModel> Execute(string userId);
+        List<PieceModel> Execute(int museumId);
     }
 }

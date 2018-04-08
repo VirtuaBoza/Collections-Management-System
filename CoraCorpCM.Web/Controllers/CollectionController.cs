@@ -6,6 +6,7 @@ using System.Security.Claims;
 using CoraCorpCM.App.Membership;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.App.Pieces.Queries;
+using CoraCorpCM.App.Pieces.Commands.CreatePiece;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -16,22 +17,30 @@ namespace CoraCorpCM.Web.Controllers
         private readonly ICreatePieceViewModelFactory createPieceViewModelFactory;
         private readonly IGetPieceListQuery getPieceListQuery;
         private readonly IGetPieceQuery getPieceQuery;
+        private readonly ICreatePieceCommand createPieceCommand;
+        private readonly ICreatePieceViewModelValidator createPieceViewModelValidator;
 
         public CollectionController(
             UserManager<ApplicationUser> userManager,
             ICreatePieceViewModelFactory createPieceViewModelFactory,
             IGetPieceListQuery getPieceListQuery,
-            IGetPieceQuery getPieceQuery)
+            IGetPieceQuery getPieceQuery,
+            ICreatePieceCommand createPieceCommand,
+            ICreatePieceViewModelValidator createPieceViewModelValidator)
         {
             this.userManager = userManager;
             this.createPieceViewModelFactory = createPieceViewModelFactory;
             this.getPieceListQuery = getPieceListQuery;
             this.getPieceQuery = getPieceQuery;
+            this.createPieceCommand = createPieceCommand;
+            this.createPieceViewModelValidator = createPieceViewModelValidator;
         }
 
         public IActionResult Index()
         {
-            var pieces = getPieceListQuery.Execute(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
+            var museumId = user.MuseumId;
+            var pieces = getPieceListQuery.Execute(museumId);
             return View(pieces);
         }
 
@@ -49,15 +58,21 @@ namespace CoraCorpCM.Web.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create(CreatePieceViewModel viewModel)
         {
-            viewModel.Validate(ModelState);
+            createPieceViewModelValidator.Validate(viewModel, ModelState);
 
             if (ModelState.IsValid)
             {
-                // TODO Add the piece and associated info to the repository/database
+                var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
+                viewModel.Piece.MuseumId = user.MuseumId;
+                createPieceCommand.Execute(viewModel.Piece);
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(viewModel);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var newViewModel = createPieceViewModelFactory.Create(userId);
+            newViewModel.Piece = viewModel.Piece;
+            return View(newViewModel);
         }
 
         [Authorize(Roles = Role.Contributor)]

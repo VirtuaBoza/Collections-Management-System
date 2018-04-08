@@ -19,10 +19,10 @@ namespace CoraCorpCM.App.Pieces.Queries
             this.userManager = userManager;
         }
 
-        public List<PieceModel> Execute(string userId)
+        public List<PieceModel> Execute(int museumId)
         {
             var pieces = pieceRepository.GetAll()
-                .Where(p => p.MuseumId == userManager.FindByIdAsync(userId).Result.MuseumId)
+                .Where(p => p.MuseumId == museumId)
                 .Select(p => new PieceModel
                 {
                     Id = p.Id,
@@ -58,8 +58,7 @@ namespace CoraCorpCM.App.Pieces.Queries
                     Acquisition = p.Acquisition,
                     CurrentLocation = p.CurrentLocation,
                     PermanentLocation = p.PermanentLocation,
-                    Collection = p.Collection,
-                    LastModifiedBy = userManager.FindByIdAsync(p.ApplicationUserId).Result
+                    Collection = p.Collection
                 });
 
             return pieces.ToList();

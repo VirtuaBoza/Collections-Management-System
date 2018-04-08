@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CoraCorpCM.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 using CoraCorpCM.App.Membership;
 
 namespace CoraCorpCM.Data

@@ -17,12 +17,11 @@ namespace CoraCorpCM.Domain.Entities
         public int MuseumId { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public decimal? Cost { get; set; }
         public string Terms { get; set; }
 
         public virtual FundingSource FundingSource { get; set; }
-        public virtual Upload PurchaseReceipt { get; set; }
         public virtual PieceSource PieceSource { get; set; }
 
         public virtual ICollection<Piece> Pieces { get; set; }
