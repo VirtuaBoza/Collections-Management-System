@@ -16,7 +16,8 @@
     "jquery": "3.0.0",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "bootstrap": "3.3.7",
+    "popper.js": "1.14.3",
+    "bootstrap": "4.0.0",
     "font-awesome": "4.7.0",
     "bootstrap-datepicker": "1.7.1",
     "jquery-mask-plugin": "1.14.13"
