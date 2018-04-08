@@ -39,6 +39,9 @@ var deps = {
     },
     "jquery-mask-plugin": {
         "dist/*": "dist"
+    },
+    "popper.js": {
+        "dist/**/*": "dist"
     }
 };
 
