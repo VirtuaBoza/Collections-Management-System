@@ -1,80 +1,54 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Domain;
-using CoraCorpCM.Domain.Models;
-using CoraCorpCM.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using CoraCorpCM.App.Membership;
+using CoraCorpCM.Web.Services.Collection;
+using CoraCorpCM.App.Pieces.Queries;
+using CoraCorpCM.App.Pieces.Commands.CreatePiece;
 
 namespace CoraCorpCM.Web.Controllers
 {
     [Authorize]
     public class CollectionController : Controller
     {
-        private readonly IMuseumRepository museumRepository;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IModelMapper modelMapper;
-        private readonly ISelectListMaker selectListMaker;
-        private readonly IModelValidator modelValidator;
+        private readonly ICreatePieceViewModelFactory createPieceViewModelFactory;
+        private readonly IGetPieceListQuery getPieceListQuery;
+        private readonly IGetPieceQuery getPieceQuery;
+        private readonly ICreatePieceCommand createPieceCommand;
+        private readonly ICreatePieceViewModelValidator createPieceViewModelValidator;
 
         public CollectionController(
-            IMuseumRepository museumRepository,
             UserManager<ApplicationUser> userManager,
-            IModelMapper modelMapper,
-            ISelectListMaker selectListMaker,
-            IModelValidator modelValidator)
+            ICreatePieceViewModelFactory createPieceViewModelFactory,
+            IGetPieceListQuery getPieceListQuery,
+            IGetPieceQuery getPieceQuery,
+            ICreatePieceCommand createPieceCommand,
+            ICreatePieceViewModelValidator createPieceViewModelValidator)
         {
-            this.museumRepository = museumRepository;
             this.userManager = userManager;
-            this.modelMapper = modelMapper;
-            this.selectListMaker = selectListMaker;
-            this.modelValidator = modelValidator;
+            this.createPieceViewModelFactory = createPieceViewModelFactory;
+            this.getPieceListQuery = getPieceListQuery;
+            this.getPieceQuery = getPieceQuery;
+            this.createPieceCommand = createPieceCommand;
+            this.createPieceViewModelValidator = createPieceViewModelValidator;
         }
 
         public IActionResult Index()
         {
-            var user = userManager.GetUserAsync(User).Result;
-            var pieces = museumRepository.GetEntities<Piece>(user.Museum);
+            var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
+            var museumId = user.MuseumId;
+            var pieces = getPieceListQuery.Execute(museumId);
             return View(pieces);
-        }
-
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var piece = museumRepository.GetEntity<Piece>(id.Value);
-            if (piece == null)
-            {
-                return NotFound();
-            }
-
-            return View(piece);
         }
 
         [Authorize(Roles = Role.Contributor)]
         public IActionResult Create()
         {
-            var user = userManager.GetUserAsync(User).Result;
-            var viewModel = new PieceViewModel
-            {
-                Countries = selectListMaker.GetSelections<Country>(museumRepository),
-                UnitsOfMeasure = selectListMaker.GetUnitOfMeasureSelections(museumRepository),
-                Media = selectListMaker.GetSelections<Medium>(museumRepository, user.Museum),
-                Genres = selectListMaker.GetSelections<Genre>(museumRepository, user.Museum),
-                Subgenres = selectListMaker.GetSelections<Subgenre>(museumRepository, user.Museum),
-                SubjectMatters = selectListMaker.GetSelections<SubjectMatter>(museumRepository, user.Museum),
-                Collections = selectListMaker.GetSelections<Collection>(museumRepository, user.Museum),
-                Locations = selectListMaker.GetSelections<Location>(museumRepository, user.Museum),
-                KnownArtists = selectListMaker.GetSelections<Artist>(museumRepository, user.Museum),
-                Acquisitions = selectListMaker.GetAcquisitionSelections(museumRepository, user.Museum),
-                FundingSources = selectListMaker.GetSelections<FundingSource>(museumRepository, user.Museum),
-                PieceSources = selectListMaker.GetSelections<PieceSource>(museumRepository, user.Museum)
-            };
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewModel = createPieceViewModelFactory.Create(userId);
 
             return View(viewModel);
         }
@@ -82,20 +56,23 @@ namespace CoraCorpCM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public IActionResult Create(PieceViewModel viewModel)
+        public IActionResult Create(CreatePieceViewModel viewModel)
         {
-            modelValidator.Validate(ModelState, viewModel);
+            createPieceViewModelValidator.Validate(viewModel, ModelState);
 
             if (ModelState.IsValid)
             {
-                var user = userManager.GetUserAsync(User).Result;
-                var piece = modelMapper.ResolveToPieceModel(viewModel, user.Museum);
-                piece.LastModifiedBy = user;
-                museumRepository.Insert(piece);
+                var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
+                viewModel.Piece.MuseumId = user.MuseumId;
+                createPieceCommand.Execute(viewModel.Piece);
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(viewModel);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var newViewModel = createPieceViewModelFactory.Create(userId);
+            newViewModel.Piece = viewModel.Piece;
+            return View(newViewModel);
         }
 
         [Authorize(Roles = Role.Contributor)]
@@ -106,63 +83,41 @@ namespace CoraCorpCM.Web.Controllers
                 return NotFound();
             }
 
-            var piece = museumRepository.GetEntity<Piece>(id.Value);
-            if (piece == null)
-            {
-                return NotFound();
-            }
-            return View(piece);
+            // TODO Create EditPieceViewModel and return that via View(viewModel);
+            return null;
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public IActionResult Edit(int id, [Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece)
+        public IActionResult Edit(int id/* TODO Replace this second param with viewModel, [Bind("Id,RecordNumber,AccessionNumber,Title,CreationDate,Height,Width,Depth,EstimatedValue,Subject,CopyrightYear,CopyrightOwner,IsFramed,Created,LastModified")] Piece piece*/)
         {
-            if (id != piece.Id)
-            {
-                return NotFound();
-            }
+            //if (id != piece.Id)
+            //{
+            //    return NotFound();
+            //}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    museumRepository.Update(piece);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!museumRepository.EntityExists<Piece>(piece.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(piece);
-        }
-
-        [Authorize(Roles = Role.Contributor)]
-        public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var piece = museumRepository.GetEntity<Piece>(id.Value);
-            if (piece == null)
-            {
-                return NotFound();
-            }
-
-            return View(piece);
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        museumRepository.Update(piece);
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!museumRepository.EntityExists<Piece>(piece.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(piece);
+            return null;
         }
 
         [HttpPost, ActionName("Delete")]
@@ -170,7 +125,7 @@ namespace CoraCorpCM.Web.Controllers
         [Authorize(Roles = Role.Contributor)]
         public IActionResult DeleteConfirmed(int id)
         {
-            museumRepository.Delete<Piece>(id);
+            // TODO Delete piece
             return RedirectToAction(nameof(Index));
         }
     }

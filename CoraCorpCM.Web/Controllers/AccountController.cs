@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Domain;
-using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.ViewModels.AccountViewModels;
-using CoraCorpCM.Data;
-using CoraCorpCM.Web.Utilities;
+using CoraCorpCM.App.Users.Commands.RegisterUser.Factory;
+using CoraCorpCM.App.Museums.Commands.RegisterMuseum.Factory;
+using CoraCorpCM.App.Countries.Queries.GetCountry;
+using CoraCorpCM.App.Membership;
+using CoraCorpCM.App.Museums.Commands.RemoveMuseum;
+using CoraCorpCM.Web.Services.Account;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -24,26 +25,32 @@ namespace CoraCorpCM.Web.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
         private readonly ILogger logger;
-        private readonly ApplicationDbContext context;
-        private readonly IMuseumRepository museumRepository;
-        private readonly ISelectListMaker selectListMaker;
+        private readonly IUserFactory userFactory;
+        private readonly IMuseumFactory museumFactory;
+        private readonly IRegisterViewModelFactory registerViewModelFactory;
+        private readonly IGetCountryQuery getCountryQuery;
+        private readonly IRemoveMuseumCommand removeMuseumCommand;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            ApplicationDbContext context,
-            IMuseumRepository museumRepository,
-            ISelectListMaker selectListMaker)
+            IUserFactory userFactory,
+            IMuseumFactory museumFactory,
+            IRegisterViewModelFactory registerViewModelFactory,
+            IGetCountryQuery getCountryQuery,
+            IRemoveMuseumCommand removeMuseumCommand)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.logger = logger;
-            this.context = context;
-            this.museumRepository = museumRepository;
-            this.selectListMaker = selectListMaker;
+            this.userFactory = userFactory;
+            this.museumFactory = museumFactory;
+            this.registerViewModelFactory = registerViewModelFactory;
+            this.getCountryQuery = getCountryQuery;
+            this.removeMuseumCommand = removeMuseumCommand;
         }
 
         [TempData]
@@ -219,8 +226,7 @@ namespace CoraCorpCM.Web.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            var model = new RegisterViewModel();
-            model.Countries = selectListMaker.GetSelections<Country>(museumRepository);
+            var model = registerViewModelFactory.Create();
 
             return View(model);
         }
@@ -233,33 +239,9 @@ namespace CoraCorpCM.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Country country = null;
-                if (int.TryParse(model.CountryId, out int countryId))
-                {
-                    country = museumRepository.GetEntity<Country>(countryId);
-                }
+                var museum = museumFactory.Create(model.MuseumName, model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, model.ZipCode, model.CountryId);
 
-                var museum = new Museum
-                {
-                    Name = model.MuseumName,
-                    ShortName = model.MuseumShortName,
-                    Address1 = model.Address1,
-                    Address2 = model.Address2,
-                    City = model.City,
-                    State = model.State,
-                    ZipCode = model.ZipCode,
-                    Country = country
-                };
-                museumRepository.Insert(museum);
-
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Museum = museum
-                };
+                var user = userFactory.Create(museum, model.Email, model.FirstName, model.LastName);
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -277,7 +259,7 @@ namespace CoraCorpCM.Web.Controllers
                 }
                 else
                 {
-                    museumRepository.Delete(museum);
+                    removeMuseumCommand.Execute(museum);
                 }
                 AddErrors(result);
             }

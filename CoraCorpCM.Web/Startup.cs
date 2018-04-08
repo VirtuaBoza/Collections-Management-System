@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Data;
-using CoraCorpCM.Domain.Models;
+using CoraCorpCM.Data.Shared;
 using CoraCorpCM.Web.Services;
-using CoraCorpCM.Web.Utilities;
+using CoraCorpCM.App.Membership;
+using CoraCorpCM.Data;
 
 namespace CoraCorpCM.Web
 {
@@ -25,7 +24,6 @@ namespace CoraCorpCM.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options
-            .UseLazyLoadingProxies()
             .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -45,14 +43,11 @@ namespace CoraCorpCM.Web
 
             services.AddMvc();
 
-            // Application services.
-            services.AddTransient<IModelValidator, ModelValidator>();
+            services.AddTransient<DbInitializer>();
+            services.AddTransient<DbSeeder>();
 
-            services.AddScoped<IModelMapper, ModelMapper>();
-            services.AddScoped<ISelectListMaker, SelectListMaker>();
-            services.AddScoped<IMuseumRepository, MuseumRepository>();
+            DependencyResolver.Resolve(services);
 
-            services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
@@ -61,8 +56,8 @@ namespace CoraCorpCM.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
             else
@@ -80,6 +75,21 @@ namespace CoraCorpCM.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var initializer = scope.ServiceProvider.GetService<DbInitializer>();
+                initializer.Initialize().Wait();
+            }
+
+            if (env.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetService<DbSeeder>();
+                    seeder.Seed().Wait();
+                }
+            }
         }
     }
 }

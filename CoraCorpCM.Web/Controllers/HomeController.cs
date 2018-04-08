@@ -1,36 +1,37 @@
 ﻿using System.Diagnostics;
-using CoraCorpCM.App.Interfaces;
-using CoraCorpCM.Domain.Models;
 using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using CoraCorpCM.App.Membership;
+using CoraCorpCM.App.Museums.Queries;
+using System.Security.Claims;
 
 namespace CoraCorpCM.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IEmailSender emailSender;
-        private readonly IMuseumRepository museumRepository;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IGetMuseumForUserIdQuery museumForUserIdQuery;
 
         public HomeController(
             IEmailSender emailSender, 
-            IMuseumRepository museumRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IGetMuseumForUserIdQuery museumForUserIdQuery)
         {
             this.emailSender = emailSender;
-            this.museumRepository = museumRepository;
             this.userManager = userManager;
+            this.museumForUserIdQuery = museumForUserIdQuery;
         }
 
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var user = userManager.GetUserAsync(User).Result;
-                ViewData["Title"] = user.Museum.ShortName;
-                ViewData["MuseumName"] = user.Museum.Name;
+                var museumModel = museumForUserIdQuery.Execute(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                ViewData["Title"] = museumModel.ShortName;
+                ViewData["MuseumName"] = museumModel.Name;
             }
             else
             {

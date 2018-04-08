@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace CoraCorpCM.Data.Migrations
@@ -15,43 +17,10 @@ namespace CoraCorpCM.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Acquisition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal?>("Cost");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("FundingSourceId");
-
-                    b.Property<int>("MuseumId");
-
-                    b.Property<int?>("PieceSourceId");
-
-                    b.Property<int?>("PurchaseReceiptId");
-
-                    b.Property<string>("Terms");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FundingSourceId");
-
-                    b.HasIndex("MuseumId");
-
-                    b.HasIndex("PieceSourceId");
-
-                    b.HasIndex("PurchaseReceiptId");
-
-                    b.ToTable("Acquisitions");
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Domain.ApplicationUser", b =>
+            modelBuilder.Entity("CoraCorpCM.App.Membership.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -111,7 +80,36 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Artist", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Acquisition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal?>("Cost");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("FundingSourceId");
+
+                    b.Property<int>("MuseumId");
+
+                    b.Property<int?>("PieceSourceId");
+
+                    b.Property<string>("Terms");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FundingSourceId");
+
+                    b.HasIndex("MuseumId");
+
+                    b.HasIndex("PieceSourceId");
+
+                    b.ToTable("Acquisitions");
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -144,7 +142,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistGenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistGenre", b =>
                 {
                     b.Property<int>("ArtistId");
 
@@ -161,7 +159,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ArtistGenre");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistMedium", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistMedium", b =>
                 {
                     b.Property<int>("ArtistId");
 
@@ -178,7 +176,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ArtistMedium");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistSubgenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistSubgenre", b =>
                 {
                     b.Property<int>("ArtistId");
 
@@ -195,7 +193,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ArtistSubgenre");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistSubjectMatter", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistSubjectMatter", b =>
                 {
                     b.Property<int>("ArtistId");
 
@@ -212,7 +210,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ArtistSubjectMatter");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistTag", b =>
                 {
                     b.Property<int>("ArtistId");
 
@@ -229,7 +227,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ArtistTag");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Collection", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Collection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -246,7 +244,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Collections");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Condition", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Condition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -265,7 +263,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Condition");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Country", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id");
 
@@ -281,7 +279,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Exhibition", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Exhibition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -309,7 +307,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Exhibition");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ExhibitionPiece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ExhibitionPiece", b =>
                 {
                     b.Property<int>("ExhibitionId");
 
@@ -326,7 +324,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("ExhibitionPiece");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.FundingSource", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.FundingSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -343,7 +341,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("FundingSources");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Genre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -360,7 +358,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Inspection", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Inspection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -372,7 +370,7 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.Property<int?>("InspectorId");
 
-                    b.Property<int?>("MuseumId");
+                    b.Property<int>("MuseumId");
 
                     b.Property<string>("Notes");
 
@@ -388,10 +386,10 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.HasIndex("PieceId");
 
-                    b.ToTable("Inspection");
+                    b.ToTable("Inspections");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Inspector", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Inspector", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -408,7 +406,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Inspector");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Loan", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Loan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -418,8 +416,6 @@ namespace CoraCorpCM.Data.Migrations
                     b.Property<DateTime>("FromDate");
 
                     b.Property<int?>("FromLocationId");
-
-                    b.Property<int?>("LoanAgreementId");
 
                     b.Property<int>("MuseumId");
 
@@ -435,8 +431,6 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.HasIndex("FromLocationId");
 
-                    b.HasIndex("LoanAgreementId");
-
                     b.HasIndex("MuseumId");
 
                     b.HasIndex("ToLocationId");
@@ -444,7 +438,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Loan");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.LoanPiece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.LoanPiece", b =>
                 {
                     b.Property<int>("LoanId");
 
@@ -461,7 +455,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("LoanPiece");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Location", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -492,7 +486,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.LocationTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.LocationTag", b =>
                 {
                     b.Property<int>("LocationId");
 
@@ -509,7 +503,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("LocationTag");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Medium", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Medium", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -526,7 +520,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Media");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Museum", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Museum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -538,8 +532,6 @@ namespace CoraCorpCM.Data.Migrations
                     b.Property<string>("City");
 
                     b.Property<int?>("CountryId");
-
-                    b.Property<int?>("LogoId");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -557,12 +549,10 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("LogoId");
-
                     b.ToTable("Museums");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Piece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Piece", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -570,6 +560,8 @@ namespace CoraCorpCM.Data.Migrations
                     b.Property<string>("AccessionNumber");
 
                     b.Property<int?>("AcquisitionId");
+
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<int?>("ArtistId");
 
@@ -614,15 +606,11 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<string>("LastModifiedById");
-
                     b.Property<int?>("MediumId");
 
                     b.Property<int>("MuseumId");
 
                     b.Property<int?>("PermanentLocationId");
-
-                    b.Property<int?>("PhotoId");
 
                     b.Property<int>("RecordNumber");
 
@@ -655,15 +643,11 @@ namespace CoraCorpCM.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.HasIndex("LastModifiedById");
-
                     b.HasIndex("MediumId");
 
                     b.HasIndex("MuseumId");
 
                     b.HasIndex("PermanentLocationId");
-
-                    b.HasIndex("PhotoId");
 
                     b.HasIndex("SubgenreId");
 
@@ -674,7 +658,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Pieces");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.PieceSource", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.PieceSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -690,7 +674,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("PieceSources");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.PieceTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.PieceTag", b =>
                 {
                     b.Property<int>("PieceId");
 
@@ -707,7 +691,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("PieceTag");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Subgenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Subgenre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -724,7 +708,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Subgenres");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.SubjectMatter", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.SubjectMatter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -741,7 +725,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("SubjectMatters");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Tag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -758,7 +742,7 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("Tag");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.UnitOfMeasure", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.UnitOfMeasure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -766,31 +750,12 @@ namespace CoraCorpCM.Data.Migrations
                     b.Property<string>("Abbreviation")
                         .IsRequired();
 
-                    b.Property<string>("UnitOfMeasurement")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnitsOfMeasure");
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Domain.Upload", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("Data");
-
-                    b.Property<int>("MuseumId");
-
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MuseumId");
-
-                    b.ToTable("Upload");
+                    b.ToTable("UnitsOfMeasure");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -901,431 +866,404 @@ namespace CoraCorpCM.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Acquisition", b =>
+            modelBuilder.Entity("CoraCorpCM.App.Membership.ApplicationUser", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.FundingSource", "FundingSource")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
+                        .HasForeignKey("MuseumId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Acquisition", b =>
+                {
+                    b.HasOne("CoraCorpCM.Domain.Entities.FundingSource", "FundingSource")
                         .WithMany("Acquisitions")
                         .HasForeignKey("FundingSourceId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Acquisitions")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.PieceSource", "PieceSource")
+                    b.HasOne("CoraCorpCM.Domain.Entities.PieceSource", "PieceSource")
                         .WithMany("Acquisitions")
                         .HasForeignKey("PieceSourceId");
-
-                    b.HasOne("CoraCorpCM.Domain.Upload", "PurchaseReceipt")
-                        .WithMany()
-                        .HasForeignKey("PurchaseReceiptId");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ApplicationUser", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Artist", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Users")
-                        .HasForeignKey("MuseumId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Domain.Artist", b =>
-                {
-                    b.HasOne("CoraCorpCM.Domain.Country", "CountryOfOrigin")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Country", "CountryOfOrigin")
                         .WithMany()
                         .HasForeignKey("CountryOfOriginId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Artists")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistGenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistGenre", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("ArtistGenres")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Genre", "Genre")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Genre", "Genre")
                         .WithMany("ArtistGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistMedium", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistMedium", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("ArtistMedia")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Medium", "Medium")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Medium", "Medium")
                         .WithMany("ArtistMedia")
                         .HasForeignKey("MediumId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistSubgenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistSubgenre", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("ArtistSubgenres")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Subgenre", "Subgenre")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Subgenre", "Subgenre")
                         .WithMany("ArtistSubgenres")
                         .HasForeignKey("SubgenreId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistSubjectMatter", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistSubjectMatter", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("ArtistSubjectMatters")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.SubjectMatter", "SubjectMatter")
+                    b.HasOne("CoraCorpCM.Domain.Entities.SubjectMatter", "SubjectMatter")
                         .WithMany("ArtistSubjectMatters")
                         .HasForeignKey("SubjectMatterId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ArtistTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ArtistTag", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("ArtistTags")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Tag", "Tag")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Tag", "Tag")
                         .WithMany("ArtistTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Collection", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Collection", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Collections")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Condition", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Condition", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Conditions")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Exhibition", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Exhibition", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Location", "Location")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Exhibitions")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.ExhibitionPiece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.ExhibitionPiece", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Exhibition", "Exhibition")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Exhibition", "Exhibition")
                         .WithMany("ExhibitionPieces")
                         .HasForeignKey("ExhibitionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Piece", "Piece")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Piece", "Piece")
                         .WithMany("ExhibitionPieces")
                         .HasForeignKey("PieceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.FundingSource", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.FundingSource", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("FundingSources")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Genre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Genre", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Genres")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Inspection", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Inspection", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Condition", "Condition")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Condition", "Condition")
                         .WithMany("Inspections")
                         .HasForeignKey("ConditionId");
 
-                    b.HasOne("CoraCorpCM.Domain.Inspector", "Inspector")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Inspector", "Inspector")
                         .WithMany()
                         .HasForeignKey("InspectorId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Inspections")
-                        .HasForeignKey("MuseumId");
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
+                        .HasForeignKey("MuseumId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Piece", "Piece")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Piece", "Piece")
                         .WithMany("Inspections")
                         .HasForeignKey("PieceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Inspector", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Inspector", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Inspectors")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Loan", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Loan", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Exhibition", "Exhibition")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Exhibition", "Exhibition")
                         .WithMany()
                         .HasForeignKey("ExhibitionId");
 
-                    b.HasOne("CoraCorpCM.Domain.Location", "FromLocation")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "FromLocation")
                         .WithMany()
                         .HasForeignKey("FromLocationId");
 
-                    b.HasOne("CoraCorpCM.Domain.Upload", "LoanAgreement")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
-                        .HasForeignKey("LoanAgreementId");
-
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Loans")
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Location", "ToLocation")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "ToLocation")
                         .WithMany()
                         .HasForeignKey("ToLocationId");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.LoanPiece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.LoanPiece", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Loan", "Loan")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Loan", "Loan")
                         .WithMany("LoanPieces")
                         .HasForeignKey("LoanId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Piece", "Piece")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Piece", "Piece")
                         .WithMany("LoanPieces")
                         .HasForeignKey("PieceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Location", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Location", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Country", "Country")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Locations")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.LocationTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.LocationTag", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Location", "Location")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "Location")
                         .WithMany("LocationTags")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Tag", "Tag")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Tag", "Tag")
                         .WithMany("LocationTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Medium", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Medium", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Media")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Museum", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Museum", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Country", "Country")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
-
-                    b.HasOne("CoraCorpCM.Domain.Upload", "Logo")
-                        .WithMany()
-                        .HasForeignKey("LogoId");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Piece", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Piece", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Acquisition", "Acquisition")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Acquisition", "Acquisition")
                         .WithMany("Pieces")
                         .HasForeignKey("AcquisitionId");
 
-                    b.HasOne("CoraCorpCM.Domain.Artist", "Artist")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Artist", "Artist")
                         .WithMany("Pieces")
                         .HasForeignKey("ArtistId");
 
-                    b.HasOne("CoraCorpCM.Domain.Collection", "Collection")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Collection", "Collection")
                         .WithMany("Pieces")
                         .HasForeignKey("CollectionId");
 
-                    b.HasOne("CoraCorpCM.Domain.Country", "CountryOfOrigin")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Country", "CountryOfOrigin")
                         .WithMany()
                         .HasForeignKey("CountryOfOriginId");
 
-                    b.HasOne("CoraCorpCM.Domain.Location", "CurrentLocation")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "CurrentLocation")
                         .WithMany()
                         .HasForeignKey("CurrentLocationId");
 
-                    b.HasOne("CoraCorpCM.Domain.Genre", "Genre")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Genre", "Genre")
                         .WithMany("Pieces")
                         .HasForeignKey("GenreId");
 
-                    b.HasOne("CoraCorpCM.Domain.ApplicationUser", "LastModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedById");
-
-                    b.HasOne("CoraCorpCM.Domain.Medium", "Medium")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Medium", "Medium")
                         .WithMany()
                         .HasForeignKey("MediumId");
 
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Pieces")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Location", "PermanentLocation")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Location", "PermanentLocation")
                         .WithMany()
                         .HasForeignKey("PermanentLocationId");
 
-                    b.HasOne("CoraCorpCM.Domain.Upload", "Photo")
-                        .WithMany()
-                        .HasForeignKey("PhotoId");
-
-                    b.HasOne("CoraCorpCM.Domain.Subgenre", "Subgenre")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Subgenre", "Subgenre")
                         .WithMany()
                         .HasForeignKey("SubgenreId");
 
-                    b.HasOne("CoraCorpCM.Domain.SubjectMatter", "SubjectMatter")
+                    b.HasOne("CoraCorpCM.Domain.Entities.SubjectMatter", "SubjectMatter")
                         .WithMany("Pieces")
                         .HasForeignKey("SubjectMatterId");
 
-                    b.HasOne("CoraCorpCM.Domain.UnitOfMeasure", "UnitOfMeasure")
+                    b.HasOne("CoraCorpCM.Domain.Entities.UnitOfMeasure", "UnitOfMeasure")
                         .WithMany()
                         .HasForeignKey("UnitOfMeasureId");
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.PieceSource", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.PieceSource", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.PieceTag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.PieceTag", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.Piece", "Piece")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Piece", "Piece")
                         .WithMany("PieceTags")
                         .HasForeignKey("PieceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoraCorpCM.Domain.Tag", "Tag")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Tag", "Tag")
                         .WithMany("PieceTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Subgenre", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Subgenre", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Subgenres")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.SubjectMatter", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.SubjectMatter", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("SubjectMatters")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoraCorpCM.Domain.Tag", b =>
+            modelBuilder.Entity("CoraCorpCM.Domain.Entities.Tag", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Tags")
-                        .HasForeignKey("MuseumId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CoraCorpCM.Domain.Upload", b =>
-                {
-                    b.HasOne("CoraCorpCM.Domain.Museum", "Museum")
-                        .WithMany("Uploads")
+                    b.HasOne("CoraCorpCM.Domain.Entities.Museum", "Museum")
+                        .WithMany()
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -1340,7 +1278,7 @@ namespace CoraCorpCM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.ApplicationUser")
+                    b.HasOne("CoraCorpCM.App.Membership.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1348,7 +1286,7 @@ namespace CoraCorpCM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.ApplicationUser")
+                    b.HasOne("CoraCorpCM.App.Membership.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1361,7 +1299,7 @@ namespace CoraCorpCM.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CoraCorpCM.Domain.ApplicationUser")
+                    b.HasOne("CoraCorpCM.App.Membership.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1369,7 +1307,7 @@ namespace CoraCorpCM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CoraCorpCM.Domain.ApplicationUser")
+                    b.HasOne("CoraCorpCM.App.Membership.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
