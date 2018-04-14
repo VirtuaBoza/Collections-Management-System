@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Entities
 {
-    public class PieceTag : IMuseumEntity
+    public class PieceTag
     {
         public int PieceId { get; set; }
         public virtual Piece Piece { get; set; }

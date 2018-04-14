@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Entities
 {
-    public class LocationTag : IMuseumEntity
+    public class LocationTag
     {
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }

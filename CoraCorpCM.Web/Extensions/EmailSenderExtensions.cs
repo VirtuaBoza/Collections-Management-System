@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CoraCorpCM.App.Interfaces.Infrastructure;
 
 namespace CoraCorpCM.Web.Services
 {

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.Extensions.Logging;
 using CoraCorpCM.App.Membership;
+using CoraCorpCM.App.Interfaces.Infrastructure;
 using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
 

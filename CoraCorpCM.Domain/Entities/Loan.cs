@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CoraCorpCM.Domain.Entities
 {
-    public class Loan : IEntity<int>, IMuseumEntity
+    public class Loan : IEntity<int>
     {
         public Loan()
         {

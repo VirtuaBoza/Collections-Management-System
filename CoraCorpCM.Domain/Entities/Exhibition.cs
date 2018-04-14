@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CoraCorpCM.Domain.Entities
 {
-    public class Exhibition : IEntity<int>, IMuseumEntity, INamedEntity
+    public class Exhibition : IEntity<int>
     {
         public Exhibition()
         {

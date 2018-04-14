@@ -7,6 +7,7 @@ using CoraCorpCM.App.Membership;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.App.Pieces.Queries;
 using CoraCorpCM.App.Pieces.Commands.CreatePiece;
+using System.Threading.Tasks;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -36,11 +37,11 @@ namespace CoraCorpCM.Web.Controllers
             this.createPieceViewModelValidator = createPieceViewModelValidator;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
-            var museumId = user.MuseumId;
-            var pieces = getPieceListQuery.Execute(museumId);
+            var user = await userManager.GetUserAsync(User);
+            var pieces = getPieceListQuery.Execute(user.MuseumId);
+
             return View(pieces);
         }
 
@@ -56,13 +57,13 @@ namespace CoraCorpCM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Role.Contributor)]
-        public IActionResult Create(CreatePieceViewModel viewModel)
+        public async Task<IActionResult> Create(CreatePieceViewModel viewModel)
         {
             createPieceViewModelValidator.Validate(viewModel, ModelState);
 
             if (ModelState.IsValid)
             {
-                var user = userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)).Result;
+                var user = await userManager.GetUserAsync(User);
                 viewModel.Piece.MuseumId = user.MuseumId;
                 createPieceCommand.Execute(viewModel.Piece);
 

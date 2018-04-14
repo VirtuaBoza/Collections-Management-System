@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Entities
 {
-    public class LoanPiece : IMuseumEntity
+    public class LoanPiece
     {
         public int LoanId { get; set; }
         public virtual Loan Loan { get; set; }

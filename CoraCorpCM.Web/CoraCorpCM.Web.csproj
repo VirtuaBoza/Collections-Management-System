@@ -9,7 +9,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
-    <PackageReference Include="Sendgrid" Version="9.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Shared\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
@@ -27,6 +27,7 @@
     <ProjectReference Include="..\CoraCorpCM.App\CoraCorpCM.App.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Data\CoraCorpCM.Data.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Domain\CoraCorpCM.Domain.csproj" />
+    <ProjectReference Include="..\CoraCorpCM.Infrastructure\CoraCorpCM.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

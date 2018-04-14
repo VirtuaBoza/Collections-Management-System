@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Entities
 {
-    public class ArtistSubgenre : IMuseumEntity
+    public class ArtistSubgenre
     {
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }

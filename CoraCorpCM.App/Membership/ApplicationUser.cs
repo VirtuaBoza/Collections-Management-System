@@ -5,7 +5,7 @@ using CoraCorpCM.Domain.Entities;
 namespace CoraCorpCM.App.Membership
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser, IEntity<string>, IMuseumEntity
+    public class ApplicationUser : IdentityUser, IEntity<string>
     {
         public ApplicationUser() : base()
         {

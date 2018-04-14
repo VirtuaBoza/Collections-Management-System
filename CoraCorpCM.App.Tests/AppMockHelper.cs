@@ -8,10 +8,9 @@ namespace CoraCorpCM.App.Tests
     {
         public static Mock<UserManager<ApplicationUser>> GetMockUserManager()
         {
-            var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
+            var mockUserStore = new Mock<IUserStore<ApplicationUser>>();
             return new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
+                mockUserStore.Object, null, null, null, null, null, null, null, null);
         }
-
     }
 }

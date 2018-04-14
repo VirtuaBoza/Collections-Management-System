@@ -22,7 +22,7 @@ namespace CoraCorpCM.Web.Tests
     [TestClass]
     public class CollectionControllerTests
     {
-        private CollectionController collectionController;
+        private CollectionController controller;
 
         Mock<UserManager<ApplicationUser>> mockUserManager;
         Mock<ICreatePieceViewModelFactory> mockCreatePieceViewModelFactory;
@@ -36,6 +36,7 @@ namespace CoraCorpCM.Web.Tests
         {
             mockUserManager = AppMockHelper.GetMockUserManager();
             mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockUserManager.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
 
             mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
             mockCreatePieceViewModelFactory.Setup(c => c.Create(It.IsAny<string>()))
@@ -53,7 +54,7 @@ namespace CoraCorpCM.Web.Tests
 
             mockValidator = new Mock<ICreatePieceViewModelValidator>();
 
-            collectionController = new CollectionController(
+            controller = new CollectionController(
                 mockUserManager.Object,
                 mockCreatePieceViewModelFactory.Object,
                 mockPieceListQuery.Object,
@@ -61,31 +62,31 @@ namespace CoraCorpCM.Web.Tests
                 mockCreatePieceCommand.Object,
                 mockValidator.Object);
 
-            collectionController.ControllerContext = new ControllerContext()
+            controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = new ClaimsPrincipal() }
             };
         }
 
         [TestMethod]
-        public void GetIndex_ReturnsViewResult()
+        public async Task GetIndex_ReturnsViewResult()
         {
             // Arrange
 
             // Act
-            var result = collectionController.Index();
+            var result = await controller.Index();
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
         [TestMethod]
-        public void GetIndex_ReturnsViewResultWithListOfPieceModel()
+        public async Task GetIndex_ReturnsViewResultWithListOfPieceModel()
         {
             // Arrange
 
             // Act
-            var result = collectionController.Index() as ViewResult;
+            var result = await controller.Index() as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(List<PieceModel>));
@@ -97,7 +98,7 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
 
             // Act
-            var result = collectionController.Create();
+            var result = controller.Create();
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
@@ -109,90 +110,90 @@ namespace CoraCorpCM.Web.Tests
             // Arrange
 
             // Act
-            var result = collectionController.Create() as ViewResult;
+            var result = controller.Create() as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
-        public void PostCreate_WithValidViewModel_ReturnsRedirectToActionResult()
+        public async Task PostCreate_WithValidViewModel_ReturnsRedirectToActionResult()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
 
             // Act
-            var result = collectionController.Create(viewModel);
+            var result = await controller.Create(viewModel);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
         }
 
         [TestMethod]
-        public void PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResult()
+        public async Task PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResult()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-            collectionController.ModelState.AddModelError("key", "error");
+            controller.ModelState.AddModelError("key", "error");
 
             // Act
-            var result = collectionController.Create(viewModel);
+            var result = await controller.Create(viewModel);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
         [TestMethod]
-        public void PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResultWithCreatePieceViewModel()
+        public async Task PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResultWithCreatePieceViewModel()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-            collectionController.ModelState.AddModelError("key", "error");
+            controller.ModelState.AddModelError("key", "error");
 
             // Act
-            var result = collectionController.Create(viewModel) as ViewResult;
+            var result = await controller.Create(viewModel) as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
-        public void PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResult()
+        public async Task PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResult()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
-            collectionController.ModelState.AddModelError("ErrorKey", "Error Message");
+            controller.ModelState.AddModelError("ErrorKey", "Error Message");
 
             // Act
-            var result = collectionController.Create(viewModel) as ViewResult;
+            var result = await controller.Create(viewModel) as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
         [TestMethod]
-        public void PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResultWithCreatePieceViewModel()
+        public async Task PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResultWithCreatePieceViewModel()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
-            collectionController.ModelState.AddModelError("ErrorKey", "Error Message");
+            controller.ModelState.AddModelError("ErrorKey", "Error Message");
 
             // Act
-            var result = collectionController.Create(viewModel) as ViewResult;
+            var result = await controller.Create(viewModel) as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
-        public void PostCreate_WithValidCreatePieceViewModel_CallsCreatePieceCommand()
+        public async Task PostCreate_WithValidCreatePieceViewModel_CallsCreatePieceCommand()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
             mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
 
             // Act
-            var result = collectionController.Create(viewModel);
+            var result = await controller.Create(viewModel);
 
             // Assert
             mockCreatePieceCommand.Verify(c => c.Execute(viewModel.Piece));

@@ -1,6 +1,6 @@
 ﻿namespace CoraCorpCM.Domain.Entities
 {
-    public class ExhibitionPiece : IMuseumEntity
+    public class ExhibitionPiece
     {
         public int ExhibitionId { get; set; }
         public virtual Exhibition Exhibition { get; set; }

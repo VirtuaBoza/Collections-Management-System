@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CoraCorpCM.Web.Services
+namespace CoraCorpCM.App.Interfaces.Infrastructure
 {
     public interface IEmailSender
     {

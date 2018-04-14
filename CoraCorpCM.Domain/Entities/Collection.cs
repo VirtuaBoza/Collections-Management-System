@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoraCorpCM.Domain.Entities
 {
-    public class Collection : IEntity<int>, INamedEntity, IMuseumEntity
+    public class Collection : IEntity<int>
     {
         public Collection()
         {

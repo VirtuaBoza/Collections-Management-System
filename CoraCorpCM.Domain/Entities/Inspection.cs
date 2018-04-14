@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoraCorpCM.Domain.Entities
 {
-    public class Inspection : IEntity<int>, IMuseumEntity
+    public class Inspection : IEntity<int>
     {
         public int Id { get; set; }
 

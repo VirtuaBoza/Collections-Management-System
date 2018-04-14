@@ -2,7 +2,7 @@
 
 namespace CoraCorpCM.Domain.Entities
 {
-    public class Inspector : IEntity<int>, IMuseumEntity, INamedEntity
+    public class Inspector : IEntity<int>
     {
         public int Id { get; set; }
 

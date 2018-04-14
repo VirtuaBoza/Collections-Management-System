@@ -2,11 +2,13 @@
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using CoraCorpCM.App.Interfaces.Infrastructure;
 
-namespace CoraCorpCM.Web.Services
+namespace CoraCorpCM.Infrastructure.Email
 {
-    // This class is used by the application to send email for account confirmation and password reset.
-    // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
+    /// <summary>
+    /// This class is used by the application to send email for account confirmation and password reset.
+    /// </summary>
     public class SendGridEmailSender : IEmailSender
     {
         public SendGridEmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)

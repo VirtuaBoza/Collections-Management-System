@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
-using CoraCorpCM.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using CoraCorpCM.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using CoraCorpCM.App.Membership;
 using CoraCorpCM.App.Museums.Queries;
+using CoraCorpCM.App.Interfaces.Infrastructure;
 using System.Security.Claims;
 
 namespace CoraCorpCM.Web.Controllers

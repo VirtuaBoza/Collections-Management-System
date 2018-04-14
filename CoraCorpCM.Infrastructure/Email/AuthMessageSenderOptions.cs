@@ -1,4 +1,4 @@
-﻿namespace CoraCorpCM.Web.Services
+﻿namespace CoraCorpCM.Infrastructure.Email
 {
     public class AuthMessageSenderOptions
     {
