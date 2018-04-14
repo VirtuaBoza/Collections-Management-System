@@ -31,6 +31,7 @@ namespace CoraCorpCM.Web.Controllers
         private readonly IRegisterViewModelFactory registerViewModelFactory;
         private readonly IGetCountryQuery getCountryQuery;
         private readonly IRemoveMuseumCommand removeMuseumCommand;
+        private readonly ICallbackUrlCreator callbackUrlCreator;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -41,7 +42,8 @@ namespace CoraCorpCM.Web.Controllers
             IMuseumFactory museumFactory,
             IRegisterViewModelFactory registerViewModelFactory,
             IGetCountryQuery getCountryQuery,
-            IRemoveMuseumCommand removeMuseumCommand)
+            IRemoveMuseumCommand removeMuseumCommand,
+            ICallbackUrlCreator callbackUrlCreator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -52,6 +54,7 @@ namespace CoraCorpCM.Web.Controllers
             this.registerViewModelFactory = registerViewModelFactory;
             this.getCountryQuery = getCountryQuery;
             this.removeMuseumCommand = removeMuseumCommand;
+            this.callbackUrlCreator = callbackUrlCreator;
         }
 
         [TempData]
@@ -250,7 +253,7 @@ namespace CoraCorpCM.Web.Controllers
                     await userManager.AddToRoleAsync(user, Role.Contributor);
 
                     var confirmationCode = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, confirmationCode, Request.Scheme);
+                    var callbackUrl = callbackUrlCreator.CreateEmailConfirmationLink(Url, user.Id, confirmationCode, Request.Scheme);
                     await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     // Uncomment the following line to login users automatically after registration
@@ -404,7 +407,7 @@ namespace CoraCorpCM.Web.Controllers
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
+                var callbackUrl = callbackUrlCreator.CreateResetPasswordCallbackLink(Url, user.Id, code, Request.Scheme);
                 await emailSender.SendEmailAsync(model.Email, "Reset Password",
                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));

@@ -1,10 +1,11 @@
 ﻿using CoraCorpCM.Web.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace CoraCorpCM.Web.Services.Account
 {
-    public static class UrlHelperExtensions
+    public class CallbackUrlCreator : ICallbackUrlCreator
     {
-        public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        public string CreateEmailConfirmationLink(IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Action(
                 action: nameof(AccountController.ConfirmEmail),
@@ -13,7 +14,7 @@ namespace Microsoft.AspNetCore.Mvc
                 protocol: scheme);
         }
 
-        public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        public string CreateResetPasswordCallbackLink(IUrlHelper urlHelper, string userId, string code, string scheme)
         {
             return urlHelper.Action(
                 action: nameof(AccountController.ResetPassword),

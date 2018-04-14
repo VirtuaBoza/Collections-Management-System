@@ -23,6 +23,12 @@ namespace CoraCorpCM.Infrastructure.Email
             return Execute(Options.SendGridKey, subject, message, email);
         }
 
+        public Task SendEmailConfirmationAsync(string email, string link)
+        {
+            return SendEmailAsync(email, "Confirm your email",
+                $"Please confirm your account by clicking this link: <a href='{link}'>link</a>");
+        }
+
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
@@ -36,5 +42,6 @@ namespace CoraCorpCM.Infrastructure.Email
             msg.AddTo(new EmailAddress(email));
             return client.SendEmailAsync(msg);
         }
+
     }
 }

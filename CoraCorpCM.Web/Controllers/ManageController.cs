@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoraCorpCM.App.Membership;
 using CoraCorpCM.App.Interfaces.Infrastructure;
-using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
+using CoraCorpCM.Web.Services.Account;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -24,7 +24,7 @@ namespace CoraCorpCM.Web.Controllers
         private readonly IEmailSender emailSender;
         private readonly ILogger logger;
         private readonly UrlEncoder urlEncoder;
-
+        private readonly ICallbackUrlCreator callbackUrlCreator;
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ManageController(
@@ -32,13 +32,15 @@ namespace CoraCorpCM.Web.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ICallbackUrlCreator callbackUrlCreator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.logger = logger;
             this.urlEncoder = urlEncoder;
+            this.callbackUrlCreator = callbackUrlCreator;
         }
 
         [TempData]
@@ -120,9 +122,10 @@ namespace CoraCorpCM.Web.Controllers
             }
 
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+            var callbackUrl = callbackUrlCreator.CreateEmailConfirmationLink(Url, user.Id, code, Request.Scheme);
             var email = user.Email;
-            await emailSender.SendEmailConfirmationAsync(email, callbackUrl);
+            var link = HtmlEncoder.Default.Encode(callbackUrl);
+            await emailSender.SendEmailConfirmationAsync(email, link);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));

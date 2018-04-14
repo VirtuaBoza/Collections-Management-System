@@ -12,6 +12,8 @@ using Moq;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CoraCorpCM.Web.Services.Account;
+using System;
 
 namespace CoraCorpCM.Web.Tests
 {
@@ -25,12 +27,16 @@ namespace CoraCorpCM.Web.Tests
         Mock<IEmailSender> mockEmailSender;
         Mock<ILogger<ManageController>> mockLogger;
         Mock<UrlEncoder> mockUrlEncoder;
+        Mock<ICallbackUrlCreator> mockCallbackUrlCreator;
+
+        ApplicationUser user;
 
         [TestInitialize]
         public void SetUp()
         {
+            user = new ApplicationUser { Id = "1" };
             mockUserManager = AppMockHelper.GetMockUserManager();
-            mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new ApplicationUser { Id = "1" });
+            mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
 
             mockSignInManager = WebMockHelper.GetMockSignInManager();
 
@@ -40,7 +46,18 @@ namespace CoraCorpCM.Web.Tests
 
             mockUrlEncoder = new Mock<UrlEncoder>();
 
-            controller = new ManageController(mockUserManager.Object, mockSignInManager.Object, mockEmailSender.Object, mockLogger.Object, mockUrlEncoder.Object);
+            mockCallbackUrlCreator = new Mock<ICallbackUrlCreator>();
+            mockCallbackUrlCreator
+                .Setup(c => c.CreateEmailConfirmationLink(It.IsAny<IUrlHelper>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns("callbackUrl");
+
+            controller = new ManageController(
+                mockUserManager.Object, 
+                mockSignInManager.Object, 
+                mockEmailSender.Object, 
+                mockLogger.Object, 
+                mockUrlEncoder.Object,
+                mockCallbackUrlCreator.Object);
 
             var mockRequest = new Mock<HttpRequest>();
             mockRequest.Setup(r => r.Scheme).Returns("scheme");
@@ -74,6 +91,18 @@ namespace CoraCorpCM.Web.Tests
 
             // Assert
             Assert.IsInstanceOfType(result.Model, typeof(IndexViewModel));
+        }
+
+        [TestMethod]
+        public async Task GetIndex_WhenUnableToLoadUser_ThrowsApplicationException()
+        {
+            // Arrange
+            user = null;
+            mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
+            // Act
+            // Assert
+            await Assert.ThrowsExceptionAsync<ApplicationException>(() => controller.Index());
         }
 
         [TestMethod]
@@ -130,43 +159,109 @@ namespace CoraCorpCM.Web.Tests
             Assert.AreSame(viewModel, result.Model);
         }
 
-        //[TestMethod]
-        //public async Task PostSendVerificationEmail_WithValidModel_ReturnsRedirectToActionResult()
-        //{
-        //    // Arrange
-        //    var viewModel = new IndexViewModel();
+        [TestMethod]
+        public async Task PostIndex_WhenUnableToLoadUser_ThrowsApplicationException()
+        {
+            // Arrange
+            user = null;
+            mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+            var viewModel = new IndexViewModel();
 
-        //    // Act
-        //    var result = await controller.SendVerificationEmail(viewModel);
+            // Act
+            // Assert
+            await Assert.ThrowsExceptionAsync<ApplicationException>(() => controller.Index(viewModel));
+        }
 
-        //    // Assert
-        //    Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-        //}
+        [TestMethod]
+        public async Task PostIndex_WhenUnableToSetUserEmail_ThrowsApplicationException()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+            viewModel.Email = "someEmail";
+            mockUserManager.Setup(um => um.SetEmailAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
 
-        //[TestMethod]
-        //public async Task PostSendVerificationEmail_WithValidModel_SetsStatusMessage()
-        //{
-        //    // Arrange
-        //    var viewModel = new IndexViewModel();
+            // Act
+            // Assert
+            await Assert.ThrowsExceptionAsync<ApplicationException>(() => controller.Index(viewModel));
+        }
 
-        //    // Act
-        //    var result = await controller.SendVerificationEmail(viewModel);
+        [TestMethod]
+        public async Task PostIndex_WhenUnableToSetUserPhoneNumber_ThrowsApplicationException()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+            viewModel.PhoneNumber = "somePhoneNumber";
+            mockUserManager.Setup(um => um.SetPhoneNumberAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
 
-        //    // Assert
-        //    Assert.IsNotNull(controller.StatusMessage);
-        //}
+            // Act
+            // Assert
+            await Assert.ThrowsExceptionAsync<ApplicationException>(() => controller.Index(viewModel));
+        }
 
-        //[TestMethod]
-        //public async Task PostSendVerificationEmail_WithValidModel_SendsEmailConfirmation()
-        //{
-        //    // Arrange
-        //    var viewModel = new IndexViewModel();
+        [TestMethod]
+        public async Task PostSendVerificationEmail_WithValidModel_ReturnsRedirectToActionResult()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
 
-        //    // Act
-        //    var result = await controller.SendVerificationEmail(viewModel);
+            // Act
+            var result = await controller.SendVerificationEmail(viewModel);
 
-        //    // Assert
-        //    mockEmailSender.Verify(e => e.SendEmailConfirmationAsync(It.IsAny<string>(), It.IsAny<string>()));
-        //}
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+        }
+
+        [TestMethod]
+        public async Task PostSendVerificationEmail_WithValidModel_SetsStatusMessage()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+
+            // Act
+            var result = await controller.SendVerificationEmail(viewModel);
+
+            // Assert
+            Assert.IsNotNull(controller.StatusMessage);
+        }
+
+        [TestMethod]
+        public async Task PostSendVerificationEmail_WithValidModel_SendsEmailConfirmation()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+
+            // Act
+            var result = await controller.SendVerificationEmail(viewModel);
+
+            // Assert
+            mockEmailSender.Verify(e => e.SendEmailConfirmationAsync(It.IsAny<string>(), It.IsAny<string>()));
+        }
+
+        [TestMethod]
+        public async Task PostSendVerificationEmail_WithInvalidValidModel_ReturnsViewResult()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+            controller.ModelState.AddModelError("error", "error");
+
+            // Act
+            var result = await controller.SendVerificationEmail(viewModel);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public async Task PostSendVerificationEmail_WhenUnableToLoadUser_ThrowsApplicationException()
+        {
+            // Arrange
+            var viewModel = new IndexViewModel();
+            user = null;
+            mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
+            // Act
+            // Assert
+            await Assert.ThrowsExceptionAsync<ApplicationException>(() => controller.SendVerificationEmail(viewModel));
+        }
     }
 }
