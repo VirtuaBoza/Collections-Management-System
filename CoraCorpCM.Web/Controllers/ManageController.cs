@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +10,8 @@ using CoraCorpCM.App.Membership;
 using CoraCorpCM.App.Interfaces.Infrastructure;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
 using CoraCorpCM.Web.Services.Account;
+using CoraCorpCM.Web.ExtensionWrappers;
+using CoraCorpCM.Web.Services.Manage;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -23,24 +23,32 @@ namespace CoraCorpCM.Web.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
         private readonly ILogger logger;
-        private readonly UrlEncoder urlEncoder;
         private readonly ICallbackUrlCreator callbackUrlCreator;
-        private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+        private readonly IAuthenticationHttpContextExtensionsWrapper httpContextExtensionsWrapper;
+        private readonly IUrlHelperExtensionsWrapper urlHelperExtensionsWrapper;
+        private readonly ITwoFactorAuthenticationViewModelFactory twoFactorAuthenticationViewModelFactory;
+        private readonly IEnableAuthenticatorViewModelFactory enableAuthenticatorViewModelFactory;
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder,
-          ICallbackUrlCreator callbackUrlCreator)
+          ICallbackUrlCreator callbackUrlCreator,
+          IAuthenticationHttpContextExtensionsWrapper httpContextExtensionsWrapper,
+          IUrlHelperExtensionsWrapper urlHelperExtensionsWrapper,
+          ITwoFactorAuthenticationViewModelFactory twoFactorAuthenticationViewModelFactory,
+          IEnableAuthenticatorViewModelFactory enableAuthenticatorViewModelFactory)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
             this.logger = logger;
-            this.urlEncoder = urlEncoder;
             this.callbackUrlCreator = callbackUrlCreator;
+            this.httpContextExtensionsWrapper = httpContextExtensionsWrapper;
+            this.urlHelperExtensionsWrapper = urlHelperExtensionsWrapper;
+            this.twoFactorAuthenticationViewModelFactory = twoFactorAuthenticationViewModelFactory;
+            this.enableAuthenticatorViewModelFactory = enableAuthenticatorViewModelFactory;
         }
 
         [TempData]
@@ -251,10 +259,10 @@ namespace CoraCorpCM.Web.Controllers
         public async Task<IActionResult> LinkLogin(string provider)
         {
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await httpContextExtensionsWrapper.SignOutAsync(HttpContext, IdentityConstants.ExternalScheme);
 
             // Request a redirect to the external login provider to link a login for the current user
-            var redirectUrl = Url.Action(nameof(LinkLoginCallback));
+            var redirectUrl = urlHelperExtensionsWrapper.Action(Url, nameof(LinkLoginCallback));
             var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userManager.GetUserId(User));
             return new ChallengeResult(provider, properties);
         }
@@ -281,7 +289,7 @@ namespace CoraCorpCM.Web.Controllers
             }
 
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await httpContextExtensionsWrapper.SignOutAsync(HttpContext, IdentityConstants.ExternalScheme);
 
             StatusMessage = "The external login was added.";
             return RedirectToAction(nameof(ExternalLogins));
@@ -317,12 +325,7 @@ namespace CoraCorpCM.Web.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            var model = new TwoFactorAuthenticationViewModel
-            {
-                HasAuthenticator = await userManager.GetAuthenticatorKeyAsync(user) != null,
-                Is2faEnabled = user.TwoFactorEnabled,
-                RecoveryCodesLeft = await userManager.CountRecoveryCodesAsync(user),
-            };
+            var model = await twoFactorAuthenticationViewModelFactory.Create(user);
 
             return View(model);
         }
@@ -380,11 +383,7 @@ namespace CoraCorpCM.Web.Controllers
                 unformattedKey = await userManager.GetAuthenticatorKeyAsync(user);
             }
 
-            var model = new EnableAuthenticatorViewModel
-            {
-                SharedKey = FormatKey(unformattedKey),
-                AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey)
-            };
+            var model = enableAuthenticatorViewModelFactory.Create(user.Email, unformattedKey);
 
             return View(model);
         }
@@ -474,32 +473,6 @@ namespace CoraCorpCM.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-        }
-
-        private string FormatKey(string unformattedKey)
-        {
-            var result = new StringBuilder();
-            int currentPosition = 0;
-            while (currentPosition + 4 < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
-                currentPosition += 4;
-            }
-            if (currentPosition < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition));
-            }
-
-            return result.ToString().ToLowerInvariant();
-        }
-
-        private string GenerateQrCodeUri(string email, string unformattedKey)
-        {
-            return string.Format(
-                AuthenicatorUriFormat,
-                urlEncoder.Encode("CoraCorpCM"),
-                urlEncoder.Encode(email),
-                unformattedKey);
         }
 
         #endregion
