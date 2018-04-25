@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using CoraCorpCM.App.Pieces.Commands.CreatePiece;
+using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 
 namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
 {

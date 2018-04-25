@@ -1,21 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using CoraCorpCM.App.Interfaces;
 using CoraCorpCM.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System.Threading.Tasks;
-using CoraCorpCM.Web.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using CoraCorpCM.App.Tests;
+using CoraCorpCM.Application.Tests;
 using CoraCorpCM.Web.Services.Collection;
-using CoraCorpCM.App.Pieces.Queries;
-using CoraCorpCM.App.Pieces.Commands.CreatePiece;
-using CoraCorpCM.App.Membership;
+using CoraCorpCM.Application.Pieces.Queries;
+using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
+using CoraCorpCM.Common.Membership;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CoraCorpCM.Web.Tests
 {

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using CoraCorpCM.App.Membership;
+using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Web.Services.Collection;
-using CoraCorpCM.App.Pieces.Queries;
-using CoraCorpCM.App.Pieces.Commands.CreatePiece;
+using CoraCorpCM.Application.Pieces.Queries;
+using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 using System.Threading.Tasks;
 
 namespace CoraCorpCM.Web.Controllers

@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.App.Countries.Queries;
+﻿using CoraCorpCM.Application.Countries.Queries;
 using CoraCorpCM.Web.Services.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

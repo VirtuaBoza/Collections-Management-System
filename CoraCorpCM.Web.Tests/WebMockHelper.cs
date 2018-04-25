@@ -1,5 +1,5 @@
-﻿using CoraCorpCM.App.Membership;
-using CoraCorpCM.App.Tests;
+﻿using CoraCorpCM.Common.Membership;
+using CoraCorpCM.Application.Tests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Moq;
