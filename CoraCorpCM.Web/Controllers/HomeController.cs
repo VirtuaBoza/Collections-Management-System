@@ -6,6 +6,7 @@ using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Application.Museums.Queries;
 using CoraCorpCM.Application.Interfaces.Infrastructure;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace CoraCorpCM.Web.Controllers
 {
@@ -47,11 +48,11 @@ namespace CoraCorpCM.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contact(ContactViewModel model)
+        public async Task<IActionResult> Contact(ContactViewModel model)
         {
             if (ModelState.IsValid)
             {
-                emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
+                await emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
                 ModelState.Clear();
             }
             return View();

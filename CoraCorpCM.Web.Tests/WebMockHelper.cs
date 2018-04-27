@@ -1,5 +1,5 @@
 ﻿using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Application.Tests;
+using CoraCorpCM.Common.Tests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Moq;
@@ -10,7 +10,7 @@ namespace CoraCorpCM.Web.Tests
     {
         public static Mock<SignInManager<ApplicationUser>> GetMockSignInManager()
         {
-            var mockUserManager = AppMockHelper.GetMockUserManager();
+            var mockUserManager = CommonMockHelper.GetMockUserManager();
 
             var mockContextAccessor = new Mock<IHttpContextAccessor>();
 

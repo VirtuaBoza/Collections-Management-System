@@ -18,18 +18,18 @@ namespace CoraCorpCM.Infrastructure.Email
 
         public AuthMessageSenderOptions Options { get; }
 
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            await ExecuteAsync(Options.SendGridKey, subject, message, email);
         }
 
-        public Task SendEmailConfirmationAsync(string email, string link)
+        public async Task SendEmailConfirmationAsync(string email, string link)
         {
-            return SendEmailAsync(email, "Confirm your email",
+            await SendEmailAsync(email, "Confirm your email",
                 $"Please confirm your account by clicking this link: <a href='{link}'>link</a>");
         }
 
-        public Task Execute(string apiKey, string subject, string message, string email)
+        public async Task ExecuteAsync(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage
@@ -40,7 +40,7 @@ namespace CoraCorpCM.Infrastructure.Email
                 HtmlContent = message
             };
             msg.AddTo(new EmailAddress(email));
-            return client.SendEmailAsync(msg);
+            await client.SendEmailAsync(msg);
         }
 
     }

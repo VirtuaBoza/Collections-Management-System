@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8975A432-47C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{63322C4B-62E4-451C-90CD-2AA82216F681}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoraCorpCM.Common.Tests", "CoraCorpCM.Common.Tests\CoraCorpCM.Common.Tests.csproj", "{A71FA086-7352-4F21-BA94-8BB9233EDF30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{37EDA99D-0DD6-4520-9697-70A1D4D37961}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37EDA99D-0DD6-4520-9697-70A1D4D37961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37EDA99D-0DD6-4520-9697-70A1D4D37961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A71FA086-7352-4F21-BA94-8BB9233EDF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71FA086-7352-4F21-BA94-8BB9233EDF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71FA086-7352-4F21-BA94-8BB9233EDF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71FA086-7352-4F21-BA94-8BB9233EDF30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{1BBF46F2-E866-44F8-9271-0517ADD66ABA} = {8975A432-47CE-40B7-9D1E-142A203A2F4B}
 		{AF1C2F4C-2D80-4AAE-96D0-8799D52F9A01} = {8975A432-47CE-40B7-9D1E-142A203A2F4B}
 		{37EDA99D-0DD6-4520-9697-70A1D4D37961} = {8975A432-47CE-40B7-9D1E-142A203A2F4B}
+		{A71FA086-7352-4F21-BA94-8BB9233EDF30} = {63322C4B-62E4-451C-90CD-2AA82216F681}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4170EC35-DAB1-4EB2-A7BB-E91D0645121A}

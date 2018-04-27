@@ -7,7 +7,7 @@ using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using CoraCorpCM.Application.Tests;
+using CoraCorpCM.Common.Tests;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.Application.Pieces.Queries;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
@@ -31,7 +31,7 @@ namespace CoraCorpCM.Web.Tests
         [TestInitialize]
         public void SetUp()
         {
-            mockUserManager = AppMockHelper.GetMockUserManager();
+            mockUserManager = CommonMockHelper.GetMockUserManager();
             mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
             mockUserManager.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
 
@@ -127,7 +127,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResult()
+        public async Task PostCreate_WithInvalidModel_ReturnsViewResult()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
@@ -141,39 +141,11 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostCreate_WithInvalidModelStateFromBinding_ReturnsViewResultWithCreatePieceViewModel()
+        public async Task PostCreate_WithInvalidModel_ReturnsViewResultWithCreatePieceViewModel()
         {
             // Arrange
             var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
             controller.ModelState.AddModelError("key", "error");
-
-            // Act
-            var result = await controller.Create(viewModel) as ViewResult;
-
-            // Assert
-            Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
-        }
-
-        [TestMethod]
-        public async Task PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResult()
-        {
-            // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
-            controller.ModelState.AddModelError("ErrorKey", "Error Message");
-
-            // Act
-            var result = await controller.Create(viewModel) as ViewResult;
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        [TestMethod]
-        public async Task PostCreate_WithInvalidCreatePieceViewModel_ReturnsViewResultWithCreatePieceViewModel()
-        {
-            // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel() };
-            controller.ModelState.AddModelError("ErrorKey", "Error Message");
 
             // Act
             var result = await controller.Create(viewModel) as ViewResult;

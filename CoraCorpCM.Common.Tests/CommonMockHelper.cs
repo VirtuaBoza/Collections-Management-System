@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Moq;
 
-namespace CoraCorpCM.Application.Tests
+namespace CoraCorpCM.Common.Tests
 {
-    public class AppMockHelper
+    public class CommonMockHelper
     {
         public static Mock<UserManager<ApplicationUser>> GetMockUserManager()
         {

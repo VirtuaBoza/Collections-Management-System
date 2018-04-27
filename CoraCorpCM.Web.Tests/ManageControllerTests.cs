@@ -1,5 +1,5 @@
 ﻿using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Application.Tests;
+using CoraCorpCM.Common.Tests;
 using CoraCorpCM.Web.Controllers;
 using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
@@ -42,7 +42,7 @@ namespace CoraCorpCM.Web.Tests
         public void SetUp()
         {
             user = new ApplicationUser { Id = "1" };
-            mockUserManager = AppMockHelper.GetMockUserManager();
+            mockUserManager = CommonMockHelper.GetMockUserManager();
             mockUserManager.Setup(um => um.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
 
             mockSignInManager = WebMockHelper.GetMockSignInManager();
