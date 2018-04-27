@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.App.Membership;
+﻿using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;

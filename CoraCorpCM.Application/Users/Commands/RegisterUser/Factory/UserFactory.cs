@@ -1,0 +1,29 @@
+﻿using CoraCorpCM.Common.Membership;
+using Microsoft.AspNetCore.Identity;
+
+namespace CoraCorpCM.Application.Users.Commands.RegisterUser.Factory
+{
+    public class UserFactory : IUserFactory
+    {
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public UserFactory(UserManager<ApplicationUser> userManager)
+        {
+            this.userManager = userManager;
+        }
+
+        public ApplicationUser Create(int museumId, string email, string firstName, string lastName)
+        {
+            var user = new ApplicationUser
+            {
+                MuseumId = museumId,
+                UserName = email,
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName
+            };
+
+            return user;
+        }
+    }
+}

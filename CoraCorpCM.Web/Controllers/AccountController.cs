@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CoraCorpCM.Web.Services;
 using CoraCorpCM.Web.ViewModels.AccountViewModels;
-using CoraCorpCM.App.Users.Commands.RegisterUser.Factory;
-using CoraCorpCM.App.Museums.Commands.RegisterMuseum.Factory;
-using CoraCorpCM.App.Countries.Queries.GetCountry;
-using CoraCorpCM.App.Membership;
-using CoraCorpCM.App.Museums.Commands.RemoveMuseum;
-using CoraCorpCM.App.Interfaces.Infrastructure;
+using CoraCorpCM.Application.Users.Commands.RegisterUser.Factory;
+using CoraCorpCM.Application.Museums.Commands.RegisterMuseum.Factory;
+using CoraCorpCM.Application.Countries.Queries.GetCountry;
+using CoraCorpCM.Common.Membership;
+using CoraCorpCM.Application.Museums.Commands.RemoveMuseum;
+using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Web.Services.Account;
 
 namespace CoraCorpCM.Web.Controllers
@@ -243,9 +242,12 @@ namespace CoraCorpCM.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                // TODO should not be creating an actual Museum from Domain.Entities
                 var museum = museumFactory.Create(model.MuseumName, model.MuseumShortName, model.Address1, model.Address2, model.City, model.State, model.ZipCode, model.CountryId);
 
-                var user = userFactory.Create(museum, model.Email, model.FirstName, model.LastName);
+                // TODO add museum to database
+
+                var user = userFactory.Create(museum.Id, model.Email, model.FirstName, model.LastName);
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

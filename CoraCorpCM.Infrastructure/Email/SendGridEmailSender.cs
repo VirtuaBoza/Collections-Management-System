@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using CoraCorpCM.App.Interfaces.Infrastructure;
+using CoraCorpCM.Application.Interfaces.Infrastructure;
 
 namespace CoraCorpCM.Infrastructure.Email
 {

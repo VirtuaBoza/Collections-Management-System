@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using CoraCorpCM.App.Countries.Queries;
+using CoraCorpCM.Application.Countries.Queries;
 using CoraCorpCM.Web.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

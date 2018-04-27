@@ -1,7 +1,7 @@
-﻿using CoraCorpCM.App.Membership;
-using CoraCorpCM.App.Tests;
+﻿using CoraCorpCM.Common.Membership;
+using CoraCorpCM.Application.Tests;
 using CoraCorpCM.Web.Controllers;
-using CoraCorpCM.App.Interfaces.Infrastructure;
+using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CoraCorpCM.Web.Services.Account;
 using System;

@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.App.Pieces.Commands.CreatePiece;
+﻿using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoraCorpCM.App.Tests\CoraCorpCM.App.Tests.csproj" />
-    <ProjectReference Include="..\CoraCorpCM.App\CoraCorpCM.App.csproj" />
+    <ProjectReference Include="..\CoraCorpCM.Application.Tests\CoraCorpCM.Application.Tests.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Web\CoraCorpCM.Web.csproj" />
   </ItemGroup>
 
