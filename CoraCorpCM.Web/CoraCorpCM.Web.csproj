@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-CoraCorpCM-70299E71-9398-47EA-AB35-3FAD25CF44E5</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="client\site.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />

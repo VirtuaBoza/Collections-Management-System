@@ -53,6 +53,17 @@ using CoraCorpCM.Web.Services.Account;
 using CoraCorpCM.Web.Services.Collection;
 using Microsoft.Extensions.DependencyInjection;
 using CoraCorpCM.Web.Services.Shared;
+using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition;
+using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition.Repository;
+using CoraCorpCM.Application.Artists.Commands.CreateArtist;
+using CoraCorpCM.Application.Collections.Commands.CreateCollection;
+using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource;
+using CoraCorpCM.Application.Genres.Commands.CreateGenre;
+using CoraCorpCM.Application.Locations.Commands.CreateLocation;
+using CoraCorpCM.Application.Media.Commands.CreateMedium;
+using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource;
+using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre;
+using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter;
 
 namespace CoraCorpCM.Web
 {
@@ -62,6 +73,17 @@ namespace CoraCorpCM.Web
         {
             // Implemented by Application
             services.AddScoped<IMuseumFactory, MuseumFactory>();
+            services.AddScoped<ICreateAcquisitionCommand, CreateAcquisitionCommand>();
+            services.AddScoped<IAcquisitionRepositoryFacade, AcquisitionRepositoryFacade>();
+            services.AddScoped<ICreateArtistCommand, CreateArtistCommand>();
+            services.AddScoped<ICreateCollectionCommand, CreateCollectionCommand>();
+            services.AddScoped<ICreateFundingSourceCommand, CreateFundingSourceCommand>();
+            services.AddScoped<ICreateGenreCommand, CreateGenreCommand>();
+            services.AddScoped<ICreateLocationCommand, CreateLocationCommand>();
+            services.AddScoped<ICreateMediumCommand, CreateMediumCommand>();
+            services.AddScoped<ICreatePieceSourceCommand, CreatePieceSourceCommand>();
+            services.AddScoped<ICreateSubgenreCommand, CreateSubgenreCommand>();
+            services.AddScoped<ICreateSubjectMatterCommand, CreateSubjectMatterCommand>();
 
             // Implemented by Web
             services.AddScoped<ICreatePieceViewModelFactory, CreatePieceViewModelFactory>();
@@ -100,6 +122,7 @@ namespace CoraCorpCM.Web
             services.AddScoped<ICollectionFactory, CollectionFactory>();
             services.AddScoped<ICallbackUrlCreator, CallbackUrlCreator>();
             services.AddScoped<ICreatePieceViewModelMapper, CreatePieceViewModelMapper>();
+            services.AddScoped<ICreatePieceCommandFacade, CreatePieceCommandFacade>();
 
             // Implemented by Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();

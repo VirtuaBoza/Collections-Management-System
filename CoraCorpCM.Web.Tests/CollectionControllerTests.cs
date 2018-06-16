@@ -245,26 +245,5 @@ namespace CoraCorpCM.Web.Tests
             // Assert
             mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateLocationModel>()), Times.Once);
         }
-
-        [TestMethod]
-        public async Task Create_OnPost_WithCreateCurrentLocationSameAsPermanentFlag_SetsCurrentLocationEqualToPermanentLocation()
-        {
-            // Arrange
-            var viewModel = new CreatePieceViewModel();
-            viewModel.PieceCurrentLocationId = 5;
-            viewModel.PiecePermanentLocationId = -2;
-            var museumId = 1;
-            var userId = "2";
-            var createPieceModel = new CreatePieceModel();
-            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { Id = userId, MuseumId = museumId });
-            mockMapper.Setup(m => m.MapToCreatePieceModel(viewModel, museumId, userId)).Returns(createPieceModel);
-            mockMapper.SetReturnsDefault(new CreatePieceModel());
-
-            // Act
-            var result = await controller.Create(viewModel);
-
-            // Assert
-            Assert.AreEqual(viewModel.PieceCurrentLocationId, createPieceModel.PermanentLocationId);
-        }
     }
 }
