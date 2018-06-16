@@ -12,7 +12,7 @@ namespace CoraCorpCM.Domain.Entities
 
         public int Id { get; set; }
 
-        public virtual Museum Museum { get; set; }
+        public Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Required]
@@ -22,8 +22,8 @@ namespace CoraCorpCM.Domain.Entities
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public virtual Country Country { get; set; }
+        public Country Country { get; set; }
 
-        public virtual ICollection<LocationTag> LocationTags { get; set; }
+        public ICollection<LocationTag> LocationTags { get; set; }
     }
 }

@@ -8,12 +8,12 @@ using CoraCorpCM.Application.Locations.Queries.GetLocationList;
 using CoraCorpCM.Application.Media.Queries;
 using CoraCorpCM.Application.Media.Queries.GetMediumList;
 using CoraCorpCM.Application.Museums.Queries;
-using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 using CoraCorpCM.Application.PieceSources.Queries.GetPieceSourceList;
 using CoraCorpCM.Application.Subgenres.Queries.GetSubgenreList;
 using CoraCorpCM.Application.SubjectMatters.Queries.GetSubjectMatterList;
 using CoraCorpCM.Application.UnitsOfMeasure.Queries.GetUnitsOfMeasureList;
 using CoraCorpCM.Web.Services.Collection;
+using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -54,7 +54,7 @@ namespace CoraCorpCM.Web.Tests
         FundingSourceModel fundingSource;
         CollectionModel collection;
 
-        string userId;
+        int museumId;
 
         [TestInitialize]
         public void SetUp()
@@ -139,19 +139,19 @@ namespace CoraCorpCM.Web.Tests
                 mockFundingSourceListQuery.Object,
                 mockCollectionListQuery.Object);
 
-            userId = "userId";
+            museumId = 1;
         }
 
         [TestMethod]
-        public void Create_ReturnsWithCreatePieceModel()
+        public void Create_ReturnsWithCreatePieceViewModel()
         {
             // Arrange
 
             // Act
-            var result = factory.Create(userId).Piece;
+            var result = factory.Create(museumId);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(CreatePieceModel));
+            Assert.IsInstanceOfType(result, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = country.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Countries.Single().Value;
             var actualText = result.Countries.Single().Text;
 
@@ -179,7 +179,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = medium.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Media.Single().Value;
             var actualText = result.Media.Single().Text;
 
@@ -196,7 +196,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = genre.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Genres.Single().Value;
             var actualText = result.Genres.Single().Text;
 
@@ -213,7 +213,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = subgenre.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Subgenres.Single().Value;
             var actualText = result.Subgenres.Single().Text;
 
@@ -230,7 +230,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = subjectMatter.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.SubjectMatters.Single().Value;
             var actualText = result.SubjectMatters.Single().Text;
 
@@ -247,7 +247,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = location.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Locations.Single().Value;
             var actualText = result.Locations.Single().Text;
 
@@ -264,7 +264,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = unitOfMeasure.Abbreviation;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.UnitsOfMeasure.Single().Value;
             var actualText = result.UnitsOfMeasure.Single().Text;
 
@@ -281,7 +281,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = artist.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Artists.Single().Value;
             var actualText = result.Artists.Single().Text;
 
@@ -291,7 +291,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void Create_WithDateOnlyAcquisition_SetsAcquisitions()
+        public void Create_GivenDateOnlyAcquisition_SetsAcquisitions()
         {
             // Arrange
             var expectedValue = acquisition.Id.ToString();
@@ -299,7 +299,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = acquisition.Date?.ToString("MM/dd/yyyy") + " ";
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Acquisitions.Single().Value;
             var actualText = result.Acquisitions.Single().Text;
 
@@ -309,7 +309,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void Create_WithSourceOnlyAcquisition_SetsAcquisitions()
+        public void Create_GivenSourceOnlyAcquisition_SetsAcquisitions()
         {
             // Arrange
             var expectedValue = acquisition.Id.ToString();
@@ -317,7 +317,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = " " + acquisition.PieceSource;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Acquisitions.Single().Value;
             var actualText = result.Acquisitions.Single().Text;
 
@@ -336,7 +336,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = acquisition.Date?.ToString("MM/dd/yyyy") + " " + acquisition.PieceSource;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Acquisitions.Single().Value;
             var actualText = result.Acquisitions.Single().Text;
 
@@ -353,7 +353,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = pieceSource.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.PieceSources.Single().Value;
             var actualText = result.PieceSources.Single().Text;
 
@@ -370,7 +370,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = fundingSource.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.FundingSources.Single().Value;
             var actualText = result.FundingSources.Single().Text;
 
@@ -387,7 +387,7 @@ namespace CoraCorpCM.Web.Tests
             var expectedText = collection.Name;
 
             // Act
-            var result = factory.Create(userId);
+            var result = factory.Create(museumId);
             var actualValue = result.Collections.Single().Value;
             var actualText = result.Collections.Single().Text;
 

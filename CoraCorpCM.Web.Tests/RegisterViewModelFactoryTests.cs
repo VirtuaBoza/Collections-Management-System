@@ -41,10 +41,10 @@ namespace CoraCorpCM.Web.Tests
 
             // Act
             var result = factory.Create();
-            var actualValue = result.Countries.Single().Value;
-            var actualText = result.Countries.Single().Text;
 
             // Assert
+            var actualValue = result.Countries.Single().Value;
+            var actualText = result.Countries.Single().Text;
             Assert.AreEqual(expectedValue, actualValue);
             Assert.AreEqual(expectedText, actualText);
         }

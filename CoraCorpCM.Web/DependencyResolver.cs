@@ -16,7 +16,7 @@ using CoraCorpCM.Application.Locations.Commands.CreateLocation.Factory;
 using CoraCorpCM.Application.Locations.Queries.GetLocationList;
 using CoraCorpCM.Application.Media.Commands.CreateMedium.Factory;
 using CoraCorpCM.Application.Media.Queries.GetMediumList;
-using CoraCorpCM.Application.Museums.Commands.RegisterMuseum.Factory;
+using CoraCorpCM.Application.Museums.Commands.CreateMuseum.Factory;
 using CoraCorpCM.Application.Museums.Commands.RemoveMuseum;
 using CoraCorpCM.Application.Museums.Queries;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
@@ -28,10 +28,10 @@ using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource.Factory;
 using CoraCorpCM.Application.PieceSources.Queries.GetPieceSourceList;
 using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre.Factory;
 using CoraCorpCM.Application.Subgenres.Queries.GetSubgenreList;
-using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatters.Factory;
+using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory;
 using CoraCorpCM.Application.SubjectMatters.Queries.GetSubjectMatterList;
 using CoraCorpCM.Application.UnitsOfMeasure.Queries.GetUnitsOfMeasureList;
-using CoraCorpCM.Application.Users.Commands.RegisterUser.Factory;
+using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Common;
 using CoraCorpCM.Persistence.Acquisitions;
 using CoraCorpCM.Persistence.Artists;
@@ -52,6 +52,7 @@ using CoraCorpCM.Infrastructure.Email;
 using CoraCorpCM.Web.Services.Account;
 using CoraCorpCM.Web.Services.Collection;
 using Microsoft.Extensions.DependencyInjection;
+using CoraCorpCM.Web.Services.Shared;
 
 namespace CoraCorpCM.Web
 {
@@ -59,10 +60,10 @@ namespace CoraCorpCM.Web
     {
         public static void Resolve(IServiceCollection services)
         {
-            services.AddTransient<ICreatePieceViewModelValidator, CreatePieceViewModelValidator>();
-
+            // Implemented by Application
             services.AddScoped<IMuseumFactory, MuseumFactory>();
 
+            // Implemented by Web
             services.AddScoped<ICreatePieceViewModelFactory, CreatePieceViewModelFactory>();
             services.AddScoped<IRegisterViewModelFactory, RegisterViewModelFactory>();
             services.AddScoped<IGetCountryListQuery, GetCountryListQuery>();
@@ -97,8 +98,10 @@ namespace CoraCorpCM.Web
             services.AddScoped<IPieceSourceFactory, PieceSourceFactory>();
             services.AddScoped<ILocationFactory, LocationFactory>();
             services.AddScoped<ICollectionFactory, CollectionFactory>();
+            services.AddScoped<ICallbackUrlCreator, CallbackUrlCreator>();
+            services.AddScoped<ICreatePieceViewModelMapper, CreatePieceViewModelMapper>();
 
-            // Persistence
+            // Implemented by Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUnitOfMeasureRepository, UnitOfMeasureRepository>();
             services.AddScoped<ISubjectMatterRepository, SubjectMatterRepository>();
@@ -115,7 +118,10 @@ namespace CoraCorpCM.Web
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IAcquisitionRepository, AcquisitionRepository>();
 
+            // Implemented by Infrastructure
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
+
+            // Implemented by Common
             services.AddSingleton<IDateService, DateService>();
         }
     }

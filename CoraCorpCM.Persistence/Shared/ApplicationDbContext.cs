@@ -58,6 +58,11 @@ namespace CoraCorpCM.Persistence
                 .HasKey(pieceTag => new { pieceTag.PieceId, pieceTag.TagId });
 
             // Explicitly define one-to-many relationships where necessary
+            builder.Entity<ApplicationUser>()
+                .HasOne<Museum>()
+                .WithMany()
+                .HasForeignKey(applicationUser => applicationUser.MuseumId);
+
             builder.Entity<ArtistGenre>()
                 .HasOne(artistGenre => artistGenre.Artist)
                 .WithMany(artist => artist.ArtistGenres)

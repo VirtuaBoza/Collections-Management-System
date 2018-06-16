@@ -2,6 +2,6 @@
 {
     public interface ICreatePieceCommand
     {
-        void Execute(CreatePieceModel model);
+        int Execute(CreatePieceModel model);
     }
 }

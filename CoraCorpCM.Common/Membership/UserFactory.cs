@@ -1,7 +1,6 @@
-﻿using CoraCorpCM.Common.Membership;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace CoraCorpCM.Application.Users.Commands.RegisterUser.Factory
+namespace CoraCorpCM.Common.Membership
 {
     public class UserFactory : IUserFactory
     {

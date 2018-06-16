@@ -17,7 +17,7 @@ namespace CoraCorpCM.Domain.Entities
 
         public int Id { get; set; }
 
-        public virtual Museum Museum { get; set; }
+        public Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Required]
@@ -28,13 +28,13 @@ namespace CoraCorpCM.Domain.Entities
         public int? CreationDay { get; set; }
         public int? CreationMonth { get; set; }
         public int? CreationYear { get; set; }
-        public virtual Country CountryOfOrigin { get; set; }
+        public Country CountryOfOrigin { get; set; }
         public string StateOfOrigin { get; set; }
         public string CityOfOrigin { get; set; }
         public double? Height { get; set; }
         public double? Width { get; set; }
         public double? Depth { get; set; }
-        public virtual UnitOfMeasure UnitOfMeasure { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
         public decimal? EstimatedValue { get; set; }
         public string Subject { get; set; }
         public int? CopyrightYear { get; set; }
@@ -48,25 +48,25 @@ namespace CoraCorpCM.Domain.Entities
         public bool IsArchived { get; set; }
         public DateTime LastModified { get; set; }
 
-        public virtual Artist Artist { get; set; }
-        public virtual Medium Medium { get; set; }
-        public virtual Genre Genre { get; set; }
-        public virtual Subgenre Subgenre { get; set; }
-        public virtual SubjectMatter SubjectMatter { get; set; }
-        public virtual Acquisition Acquisition { get; set; }
-        public virtual Location CurrentLocation { get; set; }
-        public virtual Location PermanentLocation { get; set; }
-        public virtual Collection Collection { get; set; }
+        public Artist Artist { get; set; }
+        public Medium Medium { get; set; }
+        public Genre Genre { get; set; }
+        public Subgenre Subgenre { get; set; }
+        public SubjectMatter SubjectMatter { get; set; }
+        public Acquisition Acquisition { get; set; }
+        public Location CurrentLocation { get; set; }
+        public Location PermanentLocation { get; set; }
+        public Collection Collection { get; set; }
 
         /// <summary>  
         ///  The ID of the user who last modified the Piece  
         /// </summary> 
         public string ApplicationUserId { get; set; }
 
-        public virtual ICollection<Inspection> Inspections { get; set; }
+        public ICollection<Inspection> Inspections { get; set; }
 
-        public virtual ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
-        public virtual ICollection<LoanPiece> LoanPieces { get; set; }
-        public virtual ICollection<PieceTag> PieceTags { get; set; }
+        public ICollection<ExhibitionPiece> ExhibitionPieces { get; set; }
+        public ICollection<LoanPiece> LoanPieces { get; set; }
+        public ICollection<PieceTag> PieceTags { get; set; }
     }
 }

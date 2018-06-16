@@ -1,4 +1,4 @@
-﻿namespace CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatters
+﻿namespace CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter
 {
     public class CreateSubjectMatterModel
     {

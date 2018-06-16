@@ -1,6 +1,6 @@
 ﻿using CoraCorpCM.Domain.Entities;
 
-namespace CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatters.Factory
+namespace CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory
 {
     public interface ISubjectMatterFactory
     {

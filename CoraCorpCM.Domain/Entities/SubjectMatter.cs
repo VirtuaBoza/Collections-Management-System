@@ -14,14 +14,14 @@ namespace CoraCorpCM.Domain.Entities
 
         public int Id { get; set; }
 
-        public virtual Museum Museum { get; set; }
+        public Museum Museum { get; set; }
         public int MuseumId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Piece> Pieces { get; set; }
+        public ICollection<Piece> Pieces { get; set; }
 
-        public virtual ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
+        public ICollection<ArtistSubjectMatter> ArtistSubjectMatters { get; set; }
     }
 }

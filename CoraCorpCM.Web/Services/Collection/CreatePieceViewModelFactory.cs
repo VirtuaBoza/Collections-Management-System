@@ -7,13 +7,13 @@ using CoraCorpCM.Application.Genres.Queries.GetGenreList;
 using CoraCorpCM.Application.Locations.Queries.GetLocationList;
 using CoraCorpCM.Application.Media.Queries.GetMediumList;
 using CoraCorpCM.Application.Museums.Queries;
-using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 using CoraCorpCM.Application.PieceSources.Queries.GetPieceSourceList;
 using CoraCorpCM.Application.Subgenres.Queries.GetSubgenreList;
 using CoraCorpCM.Application.SubjectMatters.Queries.GetSubjectMatterList;
 using CoraCorpCM.Application.UnitsOfMeasure.Queries.GetUnitsOfMeasureList;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Linq;
 
 namespace CoraCorpCM.Web.Services.Collection
@@ -64,16 +64,23 @@ namespace CoraCorpCM.Web.Services.Collection
             this.collectionListQuery = collectionListQuery;
         }
 
-        public CreatePieceViewModel Create(string userId)
+        public CreatePieceViewModel Create(int museumId)
         {
-            var museum = museumQuery.Execute(userId);
+            var viewModel = new CreatePieceViewModel();
+            SetSelectLists(viewModel, museumId);
+            return viewModel;
+        }
 
-            var viewModel = new CreatePieceViewModel
-            {
-                Piece = new CreatePieceModel()
-            };
+        public CreatePieceViewModel Create(int museumId, CreatePieceViewModel createPieceViewModel)
+        {
+            SetSelectLists(createPieceViewModel, museumId);
+            return createPieceViewModel;
+        }
 
-            var media = mediumListQuery.Execute(museum.Id);
+
+        private void SetSelectLists(CreatePieceViewModel viewModel, int museumId)
+        {
+            var media = mediumListQuery.Execute(museumId);
             viewModel.Media = media
                 .Select(m => new SelectListItem
                 {
@@ -81,7 +88,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = m.Name
                 });
 
-            var genres = genreListQuery.Execute(museum.Id);
+            var genres = genreListQuery.Execute(museumId);
             viewModel.Genres = genres
                 .Select(g => new SelectListItem
                 {
@@ -89,7 +96,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = g.Name
                 });
 
-            var subgenres = subgenreListQuery.Execute(museum.Id);
+            var subgenres = subgenreListQuery.Execute(museumId);
             viewModel.Subgenres = subgenres
                 .Select(s => new SelectListItem
                 {
@@ -97,7 +104,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = s.Name
                 });
 
-            var subjectMatters = subjectMatterListQuery.Execute(museum.Id);
+            var subjectMatters = subjectMatterListQuery.Execute(museumId);
             viewModel.SubjectMatters = subjectMatters
                 .Select(s => new SelectListItem
                 {
@@ -105,7 +112,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = s.Name
                 });
 
-            var locations = locationListQuery.Execute(museum.Id);
+            var locations = locationListQuery.Execute(museumId);
             viewModel.Locations = locations
                 .Select(l => new SelectListItem
                 {
@@ -129,15 +136,15 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = u.Abbreviation
                 });
 
-            var artists = artistListQuery.Execute(museum.Id);
+            var artists = artistListQuery.Execute(museumId);
             viewModel.Artists = artists
                 .Select(a => new SelectListItem
                 {
                     Value = a.Id.ToString(),
-                    Text = string.IsNullOrWhiteSpace(a.AlsoKnownAs) ? a.Name : string.Format("{0} aka \"{1}\"",a.Name, a.AlsoKnownAs)
+                    Text = string.IsNullOrWhiteSpace(a.AlsoKnownAs) ? a.Name : string.Format("{0} aka \"{1}\"", a.Name, a.AlsoKnownAs)
                 });
 
-            var acquisitions = acquisitionListQuery.Execute(museum.Id);
+            var acquisitions = acquisitionListQuery.Execute(museumId);
             viewModel.Acquisitions = acquisitions
                 .Select(a => new SelectListItem
                 {
@@ -145,7 +152,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = a.Date?.ToString("MM/dd/yyyy") + " " + a.PieceSource
                 });
 
-            var pieceSources = pieceSourceListQuery.Execute(museum.Id);
+            var pieceSources = pieceSourceListQuery.Execute(museumId);
             viewModel.PieceSources = pieceSources
                 .Select(p => new SelectListItem
                 {
@@ -153,7 +160,7 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = p.Name
                 });
 
-            var fundingSources = fundingSourceListQuery.Execute(museum.Id);
+            var fundingSources = fundingSourceListQuery.Execute(museumId);
             viewModel.FundingSources = fundingSources
                 .Select(f => new SelectListItem
                 {
@@ -161,15 +168,13 @@ namespace CoraCorpCM.Web.Services.Collection
                     Text = f.Name
                 });
 
-            var collections = collectionListQuery.Execute(museum.Id);
+            var collections = collectionListQuery.Execute(museumId);
             viewModel.Collections = collections
                 .Select(c => new SelectListItem
                 {
                     Value = c.Id.ToString(),
                     Text = c.Name
                 });
-
-            return viewModel;
         }
     }
 }

@@ -11,7 +11,7 @@ using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Factory;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository;
 using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource.Factory;
 using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre.Factory;
-using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatters.Factory;
+using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory;
 using CoraCorpCM.Common;
 using CoraCorpCM.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -48,7 +48,10 @@ namespace CoraCorpCM.Application.Tests
             mockRepo.Setup(r => r.GetMuseum(It.IsAny<int>())).Returns(new Museum { Id = 1 });
 
             mockDateService = new Mock<IDateService>();
+
             mockPieceFactory = new Mock<IPieceFactory>();
+            mockPieceFactory.SetReturnsDefault(new Piece());
+
             mockArtistFactory = new Mock<IArtistFactory>();
             mockMediumFactory = new Mock<IMediumFactory>();
             mockGenreFactory = new Mock<IGenreFactory>();
@@ -84,7 +87,6 @@ namespace CoraCorpCM.Application.Tests
         public void Execute_AddsPieceToRepository()
         {
             // Arrange
-
             // Act
             createPieceCommand.Execute(createPieceModel);
 
@@ -96,7 +98,6 @@ namespace CoraCorpCM.Application.Tests
         public void Execute_SavesChangesToTheDatabase()
         {
             // Arrange
-
             // Act
             createPieceCommand.Execute(createPieceModel);
 

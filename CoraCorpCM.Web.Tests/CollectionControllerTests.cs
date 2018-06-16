@@ -6,13 +6,19 @@ using System.Collections.Generic;
 using CoraCorpCM.Web.ViewModels.CollectionViewModels;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using CoraCorpCM.Common.Tests;
 using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.Application.Pieces.Queries;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
 using CoraCorpCM.Common.Membership;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition;
+using CoraCorpCM.Application.Artists.Commands.CreateArtist;
+using CoraCorpCM.Application.Collections.Commands.CreateCollection;
+using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource;
+using CoraCorpCM.Application.Genres.Commands.CreateGenre;
+using CoraCorpCM.Application.Locations.Commands.CreateLocation;
 
 namespace CoraCorpCM.Web.Tests
 {
@@ -24,9 +30,8 @@ namespace CoraCorpCM.Web.Tests
         Mock<UserManager<ApplicationUser>> mockUserManager;
         Mock<ICreatePieceViewModelFactory> mockCreatePieceViewModelFactory;
         Mock<IGetPieceListQuery> mockPieceListQuery;
-        Mock<IGetPieceQuery> mockPieceQuery;
-        Mock<ICreatePieceCommand> mockCreatePieceCommand;
-        Mock<ICreatePieceViewModelValidator> mockValidator;
+        Mock<ICreatePieceCommandFacade> mockCreateCommand;
+        Mock<ICreatePieceViewModelMapper> mockMapper;
 
         [TestInitialize]
         public void SetUp()
@@ -36,28 +41,25 @@ namespace CoraCorpCM.Web.Tests
             mockUserManager.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
 
             mockCreatePieceViewModelFactory = new Mock<ICreatePieceViewModelFactory>();
-            mockCreatePieceViewModelFactory.Setup(c => c.Create(It.IsAny<string>()))
+            mockCreatePieceViewModelFactory.Setup(c => c.Create(It.IsAny<int>()))
+                .Returns(new CreatePieceViewModel());
+            mockCreatePieceViewModelFactory.Setup(c => c.Create(It.IsAny<int>(), It.IsAny<CreatePieceViewModel>()))
                 .Returns(new CreatePieceViewModel());
 
             mockPieceListQuery = new Mock<IGetPieceListQuery>();
             mockPieceListQuery.Setup(q => q.Execute(It.IsAny<int>()))
                 .Returns(new List<PieceModel>());
 
-            mockPieceQuery = new Mock<IGetPieceQuery>();
-            mockPieceQuery.Setup(q => q.Execute(It.IsAny<int>()))
-                .Returns(new PieceModel());
+            mockCreateCommand = new Mock<ICreatePieceCommandFacade>();
 
-            mockCreatePieceCommand = new Mock<ICreatePieceCommand>();
-
-            mockValidator = new Mock<ICreatePieceViewModelValidator>();
+            mockMapper = new Mock<ICreatePieceViewModelMapper>();
 
             controller = new CollectionController(
                 mockUserManager.Object,
                 mockCreatePieceViewModelFactory.Object,
                 mockPieceListQuery.Object,
-                mockPieceQuery.Object,
-                mockCreatePieceCommand.Object,
-                mockValidator.Object);
+                mockCreateCommand.Object,
+                mockMapper.Object);
 
             controller.ControllerContext = new ControllerContext()
             {
@@ -66,22 +68,9 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task GetIndex_ReturnsViewResult()
+        public async Task Index_ReturnsViewResultWithListOfPieceModel()
         {
             // Arrange
-
-            // Act
-            var result = await controller.Index();
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        [TestMethod]
-        public async Task GetIndex_ReturnsViewResultWithListOfPieceModel()
-        {
-            // Arrange
-
             // Act
             var result = await controller.Index() as ViewResult;
 
@@ -90,62 +79,23 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetCreate_ReturnsViewResult()
+        public async Task Create_OnGet_ReturnsViewResultWithCreatePieceViewModel()
         {
             // Arrange
 
             // Act
-            var result = controller.Create();
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        [TestMethod]
-        public void GetCreate_ReturnsViewResultWithCreatePieceViewModel()
-        {
-            // Arrange
-
-            // Act
-            var result = controller.Create() as ViewResult;
+            var result = await controller.Create() as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.ViewData.Model, typeof(CreatePieceViewModel));
         }
 
         [TestMethod]
-        public async Task PostCreate_WithValidViewModel_ReturnsRedirectToActionResult()
+        public async Task Create_OnPost_WithInvalidModel_ReturnsViewResultWithCreatePieceViewModel()
         {
             // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-
-            // Act
-            var result = await controller.Create(viewModel);
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-        }
-
-        [TestMethod]
-        public async Task PostCreate_WithInvalidModel_ReturnsViewResult()
-        {
-            // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-            controller.ModelState.AddModelError("key", "error");
-
-            // Act
-            var result = await controller.Create(viewModel);
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        [TestMethod]
-        public async Task PostCreate_WithInvalidModel_ReturnsViewResultWithCreatePieceViewModel()
-        {
-            // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-            controller.ModelState.AddModelError("key", "error");
+            var viewModel = new CreatePieceViewModel();
+            controller.ModelState.AddModelError("error", "error");
 
             // Act
             var result = await controller.Create(viewModel) as ViewResult;
@@ -155,99 +105,166 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostCreate_WithValidCreatePieceViewModel_CallsCreatePieceCommand()
+        public async Task Create_OnPost_ReturnsRedirectToActionResult()
         {
             // Arrange
-            var viewModel = new CreatePieceViewModel { Piece = new CreatePieceModel { Title = "something" } };
-            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            var viewModel = new CreatePieceViewModel();
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
 
             // Act
             var result = await controller.Create(viewModel);
 
             // Assert
-            mockCreatePieceCommand.Verify(c => c.Execute(viewModel.Piece));
+            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
         }
 
-        //[TestMethod]
-        //public void PostCreate_WithValidModelState_AddsPieceToRepository()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IMuseumRepository>();
-        //    var mockUserManager = MockHelper.GetMockUserManager();
-        //    mockUserManager.Setup(um => um.GetUserAsync(null)).Returns(Task.FromResult(new ApplicationUser()));
-        //    var mockModelMapper = new Mock<IModelMapper>();
-        //    var mockModelValidator = new Mock<IModelValidator>();
-        //    var controller = new CollectionController(mockRepo.Object, mockUserManager.Object, mockModelMapper.Object, null, mockModelValidator.Object, null);
-        //    var viewModel = new CreatePieceViewModel();
-        //    var piece = new Piece();
-        //    mockModelMapper.Setup(m => m.ResolveToPieceModel(viewModel, null)).Returns(piece);
+        [TestMethod]
+        public async Task Create_OnPost_CallsCreatePieceCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
 
-        //    // Act
-        //    var result = controller.Create(viewModel);
+            // Act
+            var result = await controller.Create(viewModel);
 
-        //    // Assert
-        //    mockRepo.Verify(r => r.Insert(piece));
-        //}
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreatePieceModel>()), Times.Once);
+        }
 
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateAcquisitionFlag_CallsCreateAcquisitionCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceAcquisitionId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
 
-        //[TestMethod]
-        //public void GetDetails_WithValidId_ReturnsViewResult()
-        //{
-        //    //Arrange
-        //    var mockRepo = new Mock<IMuseumRepository>();
-        //    mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-        //    var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
+            // Act
+            var result = await controller.Create(viewModel);
 
-        //    //Act
-        //    var result = controller.Details(1);
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateAcquisitionModel>()), Times.Once);
+        }
 
-        //    //Assert
-        //    Assert.IsInstanceOfType(result, typeof(ViewResult));
-        //}
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateArtistFlag_CallsCreateArtistCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceArtistId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
 
-        //[TestMethod]
-        //public void GetDetails_WithValidId_ReturnsViewResultWithPieceModel()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IMuseumRepository>();
-        //    mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-        //    var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
+            // Act
+            var result = await controller.Create(viewModel);
 
-        //    // Act
-        //    var result = controller.Details(1) as ViewResult;
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateArtistModel>()), Times.Once);
+        }
 
-        //    // Assert
-        //    Assert.IsInstanceOfType(result.ViewData.Model, typeof(Piece));
-        //}
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateCollectionFlag_CallsCreateCollectionCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceCollectionId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
 
-        //[TestMethod]
-        //public void GetDetails_WithNullId_ReturnsNotFoundResult()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IMuseumRepository>();
-        //    mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns(new Piece());
-        //    var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
+            // Act
+            var result = await controller.Create(viewModel);
 
-        //    // Act
-        //    var result = controller.Details(null);
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateCollectionModel>()), Times.Once);
+        }
 
-        //    // Assert
-        //    Assert.IsInstanceOfType(result, typeof(NotFoundResult));
-        //}
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateFundingSourceFlag_CallsCreateFundingSourceCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.AcquisitionFundingSourceId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
+            mockMapper.SetReturnsDefault(new CreateAcquisitionModel());
 
-        //[TestMethod]
-        //public void GetDetails_WithNonMatchingId_ReturnsNotFoundResult()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IMuseumRepository>();
-        //    mockRepo.Setup(r => r.GetEntity<Piece>(1)).Returns<Piece>(null);
-        //    var controller = new CollectionController(mockRepo.Object, null, null, null, null, null);
+            // Act
+            var result = await controller.Create(viewModel);
 
-        //    // Act
-        //    var result = controller.Details(1);
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateFundingSourceModel>()), Times.Once);
+        }
 
-        //    // Assert
-        //    Assert.IsInstanceOfType(result, typeof(NotFoundResult));
-        //}
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateGenreFlag_CallsCreateGenreCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceGenreId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
+
+            // Act
+            var result = await controller.Create(viewModel);
+
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateGenreModel>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateCurrentLocationFlag_CallsCreateLocationCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceCurrentLocationId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
+
+            // Act
+            var result = await controller.Create(viewModel);
+
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateLocationModel>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Create_OnPost_WithCreatePermanentLocationFlag_CallsCreateLocationCommand()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PiecePermanentLocationId = -1;
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { MuseumId = 1 });
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
+
+            // Act
+            var result = await controller.Create(viewModel);
+
+            // Assert
+            mockCreateCommand.Verify(c => c.Execute(It.IsAny<CreateLocationModel>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Create_OnPost_WithCreateCurrentLocationSameAsPermanentFlag_SetsCurrentLocationEqualToPermanentLocation()
+        {
+            // Arrange
+            var viewModel = new CreatePieceViewModel();
+            viewModel.PieceCurrentLocationId = 5;
+            viewModel.PiecePermanentLocationId = -2;
+            var museumId = 1;
+            var userId = "2";
+            var createPieceModel = new CreatePieceModel();
+            mockUserManager.Setup(u => u.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser { Id = userId, MuseumId = museumId });
+            mockMapper.Setup(m => m.MapToCreatePieceModel(viewModel, museumId, userId)).Returns(createPieceModel);
+            mockMapper.SetReturnsDefault(new CreatePieceModel());
+
+            // Act
+            var result = await controller.Create(viewModel);
+
+            // Assert
+            Assert.AreEqual(viewModel.PieceCurrentLocationId, createPieceModel.PermanentLocationId);
+        }
     }
 }

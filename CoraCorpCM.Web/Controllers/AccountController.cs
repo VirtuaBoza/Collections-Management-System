@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoraCorpCM.Web.ViewModels.AccountViewModels;
-using CoraCorpCM.Application.Users.Commands.RegisterUser.Factory;
-using CoraCorpCM.Application.Museums.Commands.RegisterMuseum.Factory;
+using CoraCorpCM.Application.Museums.Commands.CreateMuseum.Factory;
 using CoraCorpCM.Application.Countries.Queries.GetCountry;
 using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Application.Museums.Commands.RemoveMuseum;
 using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Web.Services.Account;
+using CoraCorpCM.Web.Services.Shared;
 
 namespace CoraCorpCM.Web.Controllers
 {

@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 using CoraCorpCM.Common.Membership;
 using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Web.ViewModels.ManageViewModels;
-using CoraCorpCM.Web.Services.Account;
 using CoraCorpCM.Web.ExtensionWrappers;
 using CoraCorpCM.Web.Services.Manage;
+using CoraCorpCM.Web.Services.Shared;
 
 namespace CoraCorpCM.Web.Controllers
 {

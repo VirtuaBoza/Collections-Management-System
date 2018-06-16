@@ -53,7 +53,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetIndex_ReturnsViewResult()
+        public void Index_ReturnsViewResult()
         {
             // Arrange
 
@@ -65,7 +65,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetIndex_WhenUserIsAuthenticated_SetsTitleToMuseumShortName()
+        public void Index_GivenUserIsAuthenticated_SetsTitleToMuseumShortName()
         {
             // Arrange
             mockClaimsIdentity.Setup(i => i.IsAuthenticated).Returns(true);
@@ -78,7 +78,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetIndex_WhenUserIsAuthenticated_SetsMuseumName()
+        public void Index_GivenUserIsAuthenticated_SetsMuseumName()
         {
             // Arrange
             mockClaimsIdentity.Setup(i => i.IsAuthenticated).Returns(true);
@@ -91,7 +91,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetIndex_WhenUserIsNotAuthenticated_SetsTitleToHome()
+        public void Index_GivenUserIsNotAuthenticated_SetsTitleToHome()
         {
             // Arrange
             mockClaimsIdentity.Setup(i => i.IsAuthenticated).Returns(false);
@@ -104,7 +104,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetContact_ReturnsViewResult()
+        public void Contact_OnGet_ReturnsViewResult()
         {
             // Arrange
 
@@ -116,7 +116,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostContact_ReturnsViewResult()
+        public async Task Contact_OnPost_ReturnsViewResult()
         {
             // Arrange
             var viewModel = new ContactViewModel();
@@ -129,7 +129,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostContact_WithValidModel_ReturnsSendsEmail()
+        public async Task Contact_OnPost_GivenValidModel_ReturnsSendsEmail()
         {
             // Arrange
             var viewModel = new ContactViewModel();
@@ -142,7 +142,7 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public async Task PostContact_WithValidModel_ClearsModelState()
+        public async Task Contact_OnPost_GivenValidModel_ClearsModelState()
         {
             // Arrange
             var viewModel = new ContactViewModel();
@@ -155,22 +155,9 @@ namespace CoraCorpCM.Web.Tests
         }
 
         [TestMethod]
-        public void GetError_ReturnsViewResult()
+        public void Error_ReturnsViewResultWithErrorViewModel()
         {
             // Arrange
-
-            // Act
-            var result = controller.Error();
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        [TestMethod]
-        public void GetError_ReturnsViewResultWithErrorViewModel()
-        {
-            // Arrange
-
             // Act
             var result = controller.Error() as ViewResult;
 

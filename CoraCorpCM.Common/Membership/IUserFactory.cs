@@ -1,6 +1,4 @@
-﻿using CoraCorpCM.Common.Membership;
-
-namespace CoraCorpCM.Application.Users.Commands.RegisterUser.Factory
+﻿namespace CoraCorpCM.Common.Membership
 {
     public interface IUserFactory
     {

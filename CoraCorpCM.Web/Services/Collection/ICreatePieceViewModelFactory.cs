@@ -4,6 +4,7 @@ namespace CoraCorpCM.Web.Services.Collection
 {
     public interface ICreatePieceViewModelFactory
     {
-        CreatePieceViewModel Create(string userId);
+        CreatePieceViewModel Create(int museumId);
+        CreatePieceViewModel Create(int museumId, CreatePieceViewModel createPieceViewModel);
     }
 }

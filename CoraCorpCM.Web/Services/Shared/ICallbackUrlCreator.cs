@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CoraCorpCM.Web.Services.Account
+namespace CoraCorpCM.Web.Services.Shared
 {
     public interface ICallbackUrlCreator
     {

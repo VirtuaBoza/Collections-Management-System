@@ -1,7 +1,7 @@
 ﻿using CoraCorpCM.Application.Countries.Queries.GetCountry;
 using CoraCorpCM.Domain.Entities;
 
-namespace CoraCorpCM.Application.Museums.Commands.RegisterMuseum.Factory
+namespace CoraCorpCM.Application.Museums.Commands.CreateMuseum.Factory
 {
     public class MuseumFactory : IMuseumFactory
     {
