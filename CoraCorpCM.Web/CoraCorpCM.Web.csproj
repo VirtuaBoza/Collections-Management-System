@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="client\site.js" />
+    <Content Include="client\main.js" />
   </ItemGroup>
 
 
@@ -34,4 +34,7 @@
     <ProjectReference Include="..\CoraCorpCM.Persistence\CoraCorpCM.Persistence.csproj" />
   </ItemGroup>
 
+  <Target Name="RunsWebpackBeforeCompile" BeforeTargets="Build">
+    <Exec Command="npm run wbp" />
+  </Target>
 </Project>

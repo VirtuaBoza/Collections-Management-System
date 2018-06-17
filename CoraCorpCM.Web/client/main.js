@@ -1,5 +1,4 @@
-﻿$ = require('jquery');
-require('jquery-mask-plugin');
+﻿require('jquery-mask-plugin');
 
 require('popper.js');
 require('bootstrap');
