@@ -1,8 +1,9 @@
 ﻿require('jquery-mask-plugin');
 
-require('popper.js');
 require('bootstrap');
 require('bootstrap-datepicker');
+
+import './main.scss';
 
 
 // Utilizing bootstrap-datepicker
