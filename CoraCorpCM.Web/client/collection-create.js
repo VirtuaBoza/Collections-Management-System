@@ -1,5 +1,5 @@
-﻿require('jquery-mask-plugin');
-require('bootstrap-datepicker');
+﻿import 'jquery-mask-plugin';
+import 'bootstrap-datepicker';
 
 collectionCreateView();
 
