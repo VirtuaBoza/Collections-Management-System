@@ -26,7 +26,7 @@ function collectionCreateView() {
   $('.day-mask').mask('00');
   $('.money-mask').mask("#,##0.00", { reverse: true });
 
-  var toggles = [
+  const toggles = [
     'medium-toggle',
     'genre-toggle',
     'subgenre-toggle',
@@ -41,15 +41,15 @@ function collectionCreateView() {
   ];
 
   toggles.forEach(function (toggleName) {
-    var toggle = $('#' + toggleName);
-    var toggleTarget = $('.' + toggleName + '-target');
+    let toggle = $('#' + toggleName);
+    let toggleTarget = $('.' + toggleName + '-target');
     if (toggle.val() == "") {
       toggleTarget.hide();
     }
     toggle.change(function () {
       if (toggle.val() == -1) {
         toggleTarget.slideDown();
-        var toggleWithin = toggleTarget.find('.toggle')
+        let toggleWithin = toggleTarget.find('.toggle')
         if (toggleWithin !== 'undefined') {
           toggleWithin.val(-1);
         }

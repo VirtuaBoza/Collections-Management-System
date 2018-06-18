@@ -20,14 +20,26 @@ const commonProvidePlugin = new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default']
 });
 
-const commonModuleRules = [{
-  test: /\.scss$/,
-  use: [
-    MiniCssExtractPlugin.loader,
-    "css-loader",
-    "sass-loader"
-  ]
-}];
+const commonModuleRules = [
+  {
+    test: /\.scss$/,
+    use: [
+      MiniCssExtractPlugin.loader,
+      "css-loader",
+      "sass-loader"
+    ]
+  },
+  {
+    test: /\.js$/,
+    exclude: /(node_modules|bower_components)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env']
+      }
+    }
+  }
+];
 
 module.exports = [
   {
