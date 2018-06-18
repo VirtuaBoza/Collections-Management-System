@@ -7,7 +7,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const commonEntries = {
   vendor: './client/vendor.js',
   main: './client/main.js',
-  //'main-validation': './client/main-validation.js',
+  'main-validation': './client/main-validation.js',
   'collection-create': './client/collection-create.js',
 };
 
@@ -16,10 +16,8 @@ const commonOutputPath = path.resolve(__dirname, 'wwwroot/dist');
 const commonProvidePlugin = new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
+  'window.$': 'jquery',
   'window.jQuery': 'jquery',
-  Popper: ['popper.js', 'default'],
-  $jQval: 'jquery-validation',
-  validate: 'jquery-validation'
 });
 
 const commonModuleRules = [
@@ -48,11 +46,12 @@ const commonModuleRules = [
   {
     test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: 'file-loader'
-  }
+  },
 ];
 
 module.exports = [
   {
+    devtool: 'source-map',
     mode: 'development',
     entry: commonEntries,
     output: {

@@ -43,11 +43,11 @@ function collectionCreateView() {
   toggles.forEach(function (toggleName) {
     let toggle = $('#' + toggleName);
     let toggleTarget = $('.' + toggleName + '-target');
-    if (toggle.val() === "") {
+    if (toggle.val() === '') {
       toggleTarget.hide();
     }
-    toggle.change(function () {
-      if (toggle.val() === -1) {
+    toggle.change(function() {
+      if(toggle.val() === '-1') {
         toggleTarget.slideDown();
         let toggleWithin = toggleTarget.find('.toggle')
         if (toggleWithin !== 'undefined') {
