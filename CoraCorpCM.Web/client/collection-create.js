@@ -1,9 +1,9 @@
 ﻿import 'jquery-mask-plugin';
 import 'bootstrap-datepicker';
 
-collectionCreateView();
+collectionCreateInit();
 
-function collectionCreateView() {
+function collectionCreateInit() {
   // Utilizing bootstrap-datepicker
   $('input.year-picker').datepicker({
     format: "yyyy",
