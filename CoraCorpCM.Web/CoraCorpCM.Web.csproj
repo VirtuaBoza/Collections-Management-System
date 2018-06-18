@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="client\main.js" />
+    <Content Include="client\collection-create.js" />
+    <Content Include="client\vendor.js" />
   </ItemGroup>
 
 
@@ -35,6 +36,6 @@
   </ItemGroup>
 
   <Target Name="RunsWebpackBeforeCompile" BeforeTargets="Build">
-    <Exec Command="npm run wbp" />
+    <Exec Command="npm run webpack" />
   </Target>
 </Project>
