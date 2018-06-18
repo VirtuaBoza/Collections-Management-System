@@ -7,7 +7,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const commonEntries = {
   vendor: './client/vendor.js',
   main: './client/main.js',
-  'main-validation': './client/main-validation.js',
+  //'main-validation': './client/main-validation.js',
   'collection-create': './client/collection-create.js',
 };
 
