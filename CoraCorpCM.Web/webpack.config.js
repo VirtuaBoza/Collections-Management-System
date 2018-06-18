@@ -17,7 +17,9 @@ const commonProvidePlugin = new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
   'window.jQuery': 'jquery',
-  Popper: ['popper.js', 'default']
+  Popper: ['popper.js', 'default'],
+  $jQval: 'jquery-validation',
+  validate: 'jquery-validation'
 });
 
 const commonModuleRules = [
