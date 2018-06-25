@@ -7,29 +7,30 @@ using CoraCorpCM.Web.Services.Collection;
 using CoraCorpCM.Application.Pieces.Queries;
 using System.Threading.Tasks;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
+using CoraCorpCM.Web.Mappers;
 
 namespace CoraCorpCM.Web.Controllers
 {
     [Authorize]
-    public class CollectionController : Controller
+    public class PieceController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IGetPieceListQuery getPieceListQuery;
+        private readonly ICreatePieceCommand createPieceCommand;
         private readonly ICreatePieceViewModelFactory createPieceViewModelFactory;
-        private readonly ICreatePieceCommandFacade createCommand;
-        private readonly ICreatePieceViewModelMapper mapper;
+        private readonly ICreatePieceMapper mapper;
 
-        public CollectionController(
+        public PieceController(
             UserManager<ApplicationUser> userManager,
             ICreatePieceViewModelFactory createPieceViewModelFactory,
             IGetPieceListQuery getPieceListQuery,
-            ICreatePieceCommandFacade createCommand,
-            ICreatePieceViewModelMapper mapper)
+            ICreatePieceCommand createPieceCommand,
+            ICreatePieceMapper mapper)
         {
             this.userManager = userManager;
             this.createPieceViewModelFactory = createPieceViewModelFactory;
             this.getPieceListQuery = getPieceListQuery;
-            this.createCommand = createCommand;
+            this.createPieceCommand = createPieceCommand;
             this.mapper = mapper;
         }
 
@@ -59,9 +60,8 @@ namespace CoraCorpCM.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var piece = ParsePiece(viewModel, user);
+                createPieceCommand.Execute(mapper.Map(viewModel, user.Id, user.MuseumId));
 
-                createCommand.Execute(piece);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -121,76 +121,6 @@ namespace CoraCorpCM.Web.Controllers
         {
             // TODO Delete piece
             return RedirectToAction(nameof(Index));
-        }
-
-        private CreatePieceModel ParsePiece(CreatePieceViewModel viewModel, ApplicationUser user)
-        {
-            var piece = mapper.MapToCreatePieceModel(viewModel, user.MuseumId, user.Id);
-
-            piece.AcquisitionId = ParseAcquisition(viewModel, user);
-
-            if (viewModel.PieceArtistId == -1)
-            {
-                piece.ArtistId = createCommand.Execute(mapper.MapToCreateArtistModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PieceCollectionId == -1)
-            {
-                piece.CollectionId = createCommand.Execute(mapper.MapToCreateCollectionModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PieceCurrentLocationId == -1)
-            {
-                piece.CurrentLocationId = createCommand.Execute(mapper.MapPermanentLocationToCreateLocationModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PiecePermanentLocationId == -1)
-            {
-                piece.PermanentLocationId = createCommand.Execute(mapper.MapCurrentLocationToCreateLocationModel(viewModel, user.MuseumId));
-            }
-            else if (viewModel.PiecePermanentLocationId == -2)
-            {
-                piece.PermanentLocationId = piece.CurrentLocationId;
-            }
-
-            if (viewModel.PieceGenreId == -1)
-            {
-                piece.GenreId = createCommand.Execute(mapper.MapToCreateGenreModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PieceMediumId == -1)
-            {
-                piece.MediumId = createCommand.Execute(mapper.MapToCreateMediumModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PieceSubgenreId == -1)
-            {
-                piece.SubgenreId = createCommand.Execute(mapper.MapToCreateSubgenreModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.PieceSubjectMatterId == -1)
-            {
-                piece.SubjectMatterId = createCommand.Execute(mapper.MapToCreateSubjectMatterModel(viewModel, user.MuseumId));
-            }
-
-            return piece;
-        }
-
-        private int? ParseAcquisition(CreatePieceViewModel viewModel, ApplicationUser user)
-        {
-            var acquisition = mapper.MapToCreateAcquisitionModel(viewModel, user.MuseumId);
-
-            if (viewModel.AcquisitionFundingSourceId == -1)
-            {
-                acquisition.FundingSourceId = createCommand.Execute(mapper.MapToCreateFundingSourceModel(viewModel, user.MuseumId));
-            }
-
-            if (viewModel.AcquisitionPieceSourceId == -1)
-            {
-                acquisition.PieceSourceId = createCommand.Execute(mapper.MapToCreatePieceSourceModel(viewModel, user.MuseumId));
-            }
-
-            return createCommand.Execute(acquisition);
         }
     }
 }

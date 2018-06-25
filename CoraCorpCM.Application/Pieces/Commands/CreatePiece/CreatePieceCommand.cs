@@ -1,17 +1,5 @@
-﻿using System.Linq;
-using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition.Factory;
-using CoraCorpCM.Application.Artists.Commands.CreateArtist.Factory;
-using CoraCorpCM.Application.Collections.Commands.CreateCollection.Factory;
-using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource.Factory;
-using CoraCorpCM.Application.Genres.Commands.CreateGenre.Factory;
-using CoraCorpCM.Application.Interfaces.Persistence;
-using CoraCorpCM.Application.Locations.Commands.CreateLocation.Factory;
-using CoraCorpCM.Application.Media.Commands.CreateMedium.Factory;
-using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Factory;
+﻿using CoraCorpCM.Application.Interfaces.Persistence;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository;
-using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource.Factory;
-using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre.Factory;
-using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory;
 using CoraCorpCM.Common;
 using CoraCorpCM.Domain.Entities;
 
@@ -20,49 +8,16 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
     public class CreatePieceCommand : ICreatePieceCommand
     {
         private readonly IPieceRepositoryFacade repository;
-        private readonly IDateService dateService;
-        private readonly IPieceFactory pieceFactory;
-        private readonly IArtistFactory artistFactory;
-        private readonly IMediumFactory mediumFactory;
-        private readonly IGenreFactory genreFactory;
-        private readonly ISubgenreFactory subgenreFactory;
-        private readonly ISubjectMatterFactory subjectMatterFactory;
-        private readonly IAcquisitionFactory acquisitionFactory;
-        private readonly IFundingSourceFactory fundingSourceFactory;
-        private readonly IPieceSourceFactory pieceSourceFactory;
-        private readonly ILocationFactory locationFactory;
-        private readonly ICollectionFactory collectionFactory;
+        private readonly IDateTimeService dateTimeService;
         private readonly IUnitOfWork unitOfWork;
 
         public CreatePieceCommand(
             IPieceRepositoryFacade repository,
-            IDateService dateService,
-            IPieceFactory pieceFactory,
-            IArtistFactory artistFactory,
-            IMediumFactory mediumFactory,
-            IGenreFactory genreFactory,
-            ISubgenreFactory subgenreFactory,
-            ISubjectMatterFactory subjectMatterFactory,
-            IAcquisitionFactory acquisitionFactory,
-            IFundingSourceFactory fundingSourceFactory,
-            IPieceSourceFactory pieceSourceFactory,
-            ILocationFactory locationFactory,
-            ICollectionFactory collectionFactory,
+            IDateTimeService dateTimeService,
             IUnitOfWork unitOfWork)
         {
             this.repository = repository;
-            this.dateService = dateService;
-            this.pieceFactory = pieceFactory;
-            this.artistFactory = artistFactory;
-            this.mediumFactory = mediumFactory;
-            this.genreFactory = genreFactory;
-            this.subgenreFactory = subgenreFactory;
-            this.subjectMatterFactory = subjectMatterFactory;
-            this.acquisitionFactory = acquisitionFactory;
-            this.fundingSourceFactory = fundingSourceFactory;
-            this.pieceSourceFactory = pieceSourceFactory;
-            this.locationFactory = locationFactory;
-            this.collectionFactory = collectionFactory;
+            this.dateTimeService = dateTimeService;
             this.unitOfWork = unitOfWork;
         }
 
@@ -85,44 +40,45 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
             var currentLocation = GetCurrentLocation(model);
             var permanentLocation = GetPermanentLocation(model);
             var collection = GetCollection(model);
-            var timeStamp = dateService.GetCurrentServerTime();
 
-            var piece = pieceFactory.Create(
-                ++museum.RecordCount,
-                model.Title,
-                model.AccessionNumber,
-                model.CreationDay,
-                model.CreationMonth,
-                model.CreationYear,
-                countryOfOrigin,
-                model.StateOfOrigin,
-                model.CityOfOrigin,
-                model.Height,
-                model.Width,
-                model.Depth,
-                unitOfMeasure,
-                model.EstimatedValue,
-                model.Subject,
-                model.CopyrightYear,
-                model.CopyrightOwner,
-                model.InsurancePolicyNumber,
-                model.InsuranceExpirationDate,
-                model.InsuranceAmount,
-                model.InsuranceCarrier,
-                model.IsFramed,
-                model.IsArchived,
-                artist,
-                medium,
-                genre,
-                subgenre,
-                subjectMatter,
-                acquisition,
-                currentLocation,
-                permanentLocation,
-                collection,
-                model.LastModifiedByUserId,
-                timeStamp,
-                model.MuseumId);
+            var piece = new Piece
+                {
+                    RecordNumber = ++museum.RecordCount,
+                    Title = model.Title,
+                    AccessionNumber = model.AccessionNumber,
+                    CreationDay = model.CreationDay,
+                    CreationMonth = model.CreationMonth,
+                    CreationYear = model.CreationYear,
+                    CountryOfOrigin = countryOfOrigin,
+                    StateOfOrigin = model.StateOfOrigin,
+                    CityOfOrigin = model.CityOfOrigin,
+                    Height = model.Height,
+                    Width = model.Width,
+                    Depth = model.Depth,
+                    UnitOfMeasure = unitOfMeasure,
+                    EstimatedValue = model.EstimatedValue,
+                    Subject = model.Subject,
+                    CopyrightYear = model.CopyrightYear,
+                    CopyrightOwner = model.CopyrightOwner,
+                    InsurancePolicyNumber = model.InsurancePolicyNumber,
+                    InsuranceExpirationDate = model.InsuranceExpirationDate,
+                    InsuranceAmount = model.InsuranceAmount,
+                    InsuranceCarrier = model.InsuranceCarrier,
+                    IsFramed = model.IsFramed,
+                    IsArchived = model.IsArchived,
+                    Artist = artist,
+                    Medium = medium,
+                    Genre = genre,
+                    Subgenre = subgenre,
+                    SubjectMatter = subjectMatter,
+                    Acquisition = acquisition,
+                    CurrentLocation = currentLocation,
+                    PermanentLocation = permanentLocation,
+                    Collection = collection,
+                    ApplicationUserId = model.LastModifiedByUserId,
+                    LastModified = dateTimeService.GetTimeUtc(),
+                    MuseumId = model.MuseumId
+                };
 
             repository.AddPiece(piece);
 
@@ -133,9 +89,28 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Artist GetArtist(CreatePieceModel model)
         {
-            if (model.ArtistId >= 0)
+            if (model.ArtistId.HasValue)
             {
-                return repository.GetArtist(model.ArtistId.Value);
+                if (model.ArtistId >= 0)
+                {
+                    return repository.GetArtist(model.ArtistId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.ArtistName))
+                {
+                    return new Artist
+                    {
+                        Name = model.ArtistName,
+                        AlsoKnownAs = model.ArtistAlsoKnownAs,
+                        StateOfOrigin = model.ArtistStateOfOrigin,
+                        CityOfOrigin = model.ArtistCityOfOrigin,
+                        CountryOfOrigin = model.ArtistCountryOfOriginId.HasValue ? 
+                            repository.GetCountry(model.ArtistCountryOfOriginId.Value) : null,
+                        Birthdate = model.ArtistBirthDate,
+                        Deathdate = model.ArtistDeathDate,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -143,9 +118,21 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Medium GetMedium(CreatePieceModel model)
         {
-            if (model.MediumId >= 0)
+            if (model.MediumId.HasValue)
             {
-                return repository.GetMedium(model.MediumId.Value);
+                if (model.MediumId >= 0)
+                {
+                    return repository.GetMedium(model.MediumId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.MediumName))
+                {
+                    return new Medium
+                    {
+                        Name = model.MediumName,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -153,9 +140,21 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Genre GetGenre(CreatePieceModel model)
         {
-            if (model.GenreId >= 0)
+            if (model.GenreId.HasValue)
             {
-                return repository.GetGenre(model.GenreId.Value);
+                if (model.GenreId >= 0)
+                {
+                    return repository.GetGenre(model.GenreId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.GenreName))
+                {
+                    return new Genre
+                    {
+                        Name = model.GenreName,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -163,9 +162,21 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Subgenre GetSubgenre(CreatePieceModel model)
         {
-            if (model.SubgenreId >= 0)
+            if (model.SubgenreId.HasValue)
             {
-                return repository.GetSubgenre(model.SubgenreId.Value);
+                if (model.SubgenreId >= 0)
+                {
+                    return repository.GetSubgenre(model.SubgenreId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.SubgenreName))
+                {
+                    return new Subgenre
+                    {
+                        Name = model.SubgenreName,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -173,9 +184,21 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private SubjectMatter GetSubjectMatter(CreatePieceModel model)
         {
-            if (model.SubjectMatterId >= 0)
+            if (model.SubjectMatterId.HasValue)
             {
-                return repository.GetSubjectMatter(model.SubjectMatterId.Value);
+                if (model.SubjectMatterId >= 0)
+                {
+                    return repository.GetSubjectMatter(model.SubjectMatterId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.SubjectMatterName))
+                {
+                    return new SubjectMatter
+                    {
+                        Name = model.SubjectMatterName,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -183,9 +206,31 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Acquisition GetAcquisition(CreatePieceModel model)
         {
-            if (model.AcquisitionId >= 0)
+            if (model.AcquisitionId.HasValue)
             {
-                return repository.GetAcquisition(model.AcquisitionId.Value);
+                if (model.AcquisitionId >= 0)
+                {
+                    return repository.GetAcquisition(model.AcquisitionId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.PieceSourceName) || 
+                    model.PieceSourceId >= 0 ||
+                     model.AcquisitionDate.HasValue)
+                {
+                    return new Acquisition
+                    {
+                        Date = model.AcquisitionDate,
+                        PieceSource = model.PieceSourceId.HasValue ? 
+                            repository.GetPieceSource(model.PieceSourceId.Value) : !string.IsNullOrWhiteSpace(model.PieceSourceName) ?
+                                new PieceSource { Name = model.PieceSourceName, MuseumId = model.MuseumId } : null,
+                        Cost = model.AcquisitionCost,
+                        FundingSource = model.FundingSourceId.HasValue ? 
+                            repository.GetFundingSource(model.FundingSourceId.Value) : !string.IsNullOrWhiteSpace(model.FundingSourceName) ?
+                                new FundingSource { Name = model.FundingSourceName, MuseumId = model.MuseumId } : null,
+                        Terms = model.AcquisitionTerms,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -193,9 +238,25 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Location GetCurrentLocation(CreatePieceModel model)
         {
-            if (model.CurrentLocationId >= 0)
+            if (model.CurrentLocationId.HasValue)
             {
-                return repository.GetLocation(model.CurrentLocationId.Value);
+                if (model.CurrentLocationId >= 0)
+                {
+                    return repository.GetLocation(model.CurrentLocationId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.CurrentLocationName))
+                {
+                    return new Location
+                    {
+                        Name = model.CurrentLocationName,
+                        Address1 = model.CurrentLocationAddress1,
+                        Address2 = model.CurrentLocationAddress2,
+                        City = model.CurrentLocationCity,
+                        Country = model.CurrentLocationCountryId.HasValue ? repository.GetCountry(model.CurrentLocationCountryId.Value) : null,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -203,9 +264,25 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Location GetPermanentLocation(CreatePieceModel model)
         {
-            if (model.PermanentLocationId >= 0)
+            if (model.PermanentLocationId.HasValue)
             {
-                return repository.GetLocation(model.PermanentLocationId.Value);
+                if (model.PermanentLocationId >= 0)
+                {
+                    return repository.GetLocation(model.PermanentLocationId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.PermanentLocationName))
+                {
+                    return new Location
+                    {
+                        Name = model.PermanentLocationName,
+                        Address1 = model.PermanentLocationAddress1,
+                        Address2 = model.PermanentLocationAddress2,
+                        City = model.PermanentLocationCity,
+                        Country = model.PermanentLocationCountryId.HasValue ? repository.GetCountry(model.PermanentLocationCountryId.Value) : null,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;
@@ -213,9 +290,21 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
         private Collection GetCollection(CreatePieceModel model)
         {
-            if (model.CollectionId >= 0)
+            if (model.CollectionId.HasValue)
             {
-                return repository.GetCollection(model.CollectionId.Value);
+                if (model.CollectionId >= 0)
+                {
+                    return repository.GetCollection(model.CollectionId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.CollectionName))
+                {
+                    return new Collection
+                    {
+                        Name = model.CollectionName,
+                        MuseumId = model.MuseumId
+                    };
+                }
             }
 
             return null;

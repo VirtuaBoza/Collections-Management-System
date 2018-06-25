@@ -9,44 +9,44 @@ namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
     public class CreatePieceViewModel
     {
         [Required]
-        public string PieceTitle { get; set; }
-        public string PieceAccessionNumber { get; set; }
-        public int? PieceCreationDay { get; set; }
-        public int? PieceCreationMonth { get; set; }
-        public int? PieceCreationYear { get; set; }
-        public int? PieceCountryOfOriginId { get; set; }
-        public string PieceStateOfOrigin { get; set; }
-        public string PieceCityOfOrigin { get; set; }
-        public double? PieceHeight { get; set; }
-        public double? PieceWidth { get; set; }
-        public double? PieceDepth { get; set; }
-        public int PieceUnitOfMeasureId { get; set; }
-        public decimal? PieceEstimatedValue { get; set; }
-        public string PieceSubject { get; set; }
-        public int? PieceCopyrightYear { get; set; }
-        public string PieceCopyrightOwner { get; set; }
-        public string PieceInsurancePolicyNumber { get; set; }
-        public DateTime? PieceInsuranceExpirationDate { get; set; }
-        public decimal? PieceInsuranceAmount { get; set; }
-        public string PieceInsuranceCarrier { get; set; }
-        public bool PieceIsFramed { get; set; }
-        public bool PieceIsArchived { get; set; }
-        public int? PieceArtistId { get; set; }
-        public int? PieceMediumId { get; set; }
-        public int? PieceGenreId { get; set; }
-        public int? PieceSubgenreId { get; set; }
-        public int? PieceSubjectMatterId { get; set; }
-        public int? PieceAcquisitionId { get; set; }
-        public int? PieceCurrentLocationId { get; set; }
-        public int? PiecePermanentLocationId { get; set; }
-        public int? PieceCollectionId { get; set; }
-        public DateTime PieceLastModified { get; set; }
-        public string PieceLastModifiedByUserId { get; set; }
+        public string Title { get; set; }
+        public string AccessionNumber { get; set; }
+        public int? CreationDay { get; set; }
+        public int? CreationMonth { get; set; }
+        public int? CreationYear { get; set; }
+        public int? CountryOfOriginId { get; set; }
+        public string StateOfOrigin { get; set; }
+        public string CityOfOrigin { get; set; }
+        public double? Height { get; set; }
+        public double? Width { get; set; }
+        public double? Depth { get; set; }
+        public int UnitOfMeasureId { get; set; }
+        public decimal? EstimatedValue { get; set; }
+        public string Subject { get; set; }
+        public int? CopyrightYear { get; set; }
+        public string CopyrightOwner { get; set; }
+        public string InsurancePolicyNumber { get; set; }
+        public DateTime? InsuranceExpirationDate { get; set; }
+        public decimal? InsuranceAmount { get; set; }
+        public string InsuranceCarrier { get; set; }
+        public bool IsFramed { get; set; }
+        public bool IsArchived { get; set; }
+        public int? ArtistId { get; set; }
+        public int? MediumId { get; set; }
+        public int? GenreId { get; set; }
+        public int? SubgenreId { get; set; }
+        public int? SubjectMatterId { get; set; }
+        public int? AcquisitionId { get; set; }
+        public int? CurrentLocationId { get; set; }
+        public int? PermanentLocationId { get; set; }
+        public int? CollectionId { get; set; }
 
         public DateTime? AcquisitionDate { get; set; }
-        public int? AcquisitionPieceSourceId { get; set; }
+        public int? PieceSourceId { get; set; }
+        public string PieceSourceName { get; set; }
         public decimal? AcquisitionCost { get; set; }
-        public int? AcquisitionFundingSourceId { get; set; }
+        public int? FundingSourceId { get; set; }
+        public string FundingSourceName { get; set; }
         public string AcquisitionTerms { get; set; }
 
         [CreatePieceViewModelArtistName]
@@ -68,8 +68,6 @@ namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
         public string CurrentLocationZipCode { get; set; }
         public int? CurrentLocationCountryId { get; set; }
 
-        public string FundingSourceName { get; set; }
-
         public string GenreName { get; set; }
 
         public string MediumName { get; set; }
@@ -82,7 +80,6 @@ namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
         public string PermanentLocationZipCode { get; set; }
         public int? PermanentLocationCountryId { get; set; }
 
-        public string PieceSourceName { get; set; }
 
         public string SubgenreName { get; set; }
 
@@ -108,7 +105,7 @@ namespace CoraCorpCM.Web.ViewModels.CollectionViewModels
         {
             var createPieceViewModel = (CreatePieceViewModel)validationContext.ObjectInstance;
 
-            if (createPieceViewModel.PieceArtistId < 0 && string.IsNullOrWhiteSpace(createPieceViewModel.ArtistName) && (
+            if (createPieceViewModel.ArtistId < 0 && string.IsNullOrWhiteSpace(createPieceViewModel.ArtistName) && (
                 !string.IsNullOrWhiteSpace(createPieceViewModel.ArtistAlsoKnownAs) ||
                 createPieceViewModel.ArtistBirthDate == null ||
                 !string.IsNullOrWhiteSpace(createPieceViewModel.ArtistCityOfOrigin) ||

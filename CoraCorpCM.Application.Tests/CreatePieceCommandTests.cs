@@ -27,7 +27,7 @@ namespace CoraCorpCM.Application.Tests
         CreatePieceModel createPieceModel;
 
         Mock<IPieceRepositoryFacade> mockRepo;
-        Mock<IDateService> mockDateService;
+        Mock<IDateTimeService> mockDateService;
         Mock<IPieceFactory> mockPieceFactory;
         Mock<IArtistFactory> mockArtistFactory;
         Mock<IMediumFactory> mockMediumFactory;
@@ -47,7 +47,7 @@ namespace CoraCorpCM.Application.Tests
             mockRepo = new Mock<IPieceRepositoryFacade>();
             mockRepo.Setup(r => r.GetMuseum(It.IsAny<int>())).Returns(new Museum { Id = 1 });
 
-            mockDateService = new Mock<IDateService>();
+            mockDateService = new Mock<IDateTimeService>();
 
             mockPieceFactory = new Mock<IPieceFactory>();
             mockPieceFactory.SetReturnsDefault(new Piece());

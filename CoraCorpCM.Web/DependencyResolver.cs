@@ -1,5 +1,4 @@
-﻿using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition.Factory;
-using CoraCorpCM.Application.Acquisitions.Queries.GetAcquisitionList;
+﻿using CoraCorpCM.Application.Acquisitions.Queries.GetAcquisitionList;
 using CoraCorpCM.Application.Artists.Commands.CreateArtist.Factory;
 using CoraCorpCM.Application.Artists.Queries.GetArtistList;
 using CoraCorpCM.Application.Collections.Commands.CreateCollection.Factory;
@@ -53,8 +52,6 @@ using CoraCorpCM.Web.Services.Account;
 using CoraCorpCM.Web.Services.Collection;
 using Microsoft.Extensions.DependencyInjection;
 using CoraCorpCM.Web.Services.Shared;
-using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition;
-using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition.Repository;
 using CoraCorpCM.Application.Artists.Commands.CreateArtist;
 using CoraCorpCM.Application.Collections.Commands.CreateCollection;
 using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource;
@@ -64,6 +61,7 @@ using CoraCorpCM.Application.Media.Commands.CreateMedium;
 using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource;
 using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre;
 using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter;
+using CoraCorpCM.Web.Mappers;
 
 namespace CoraCorpCM.Web
 {
@@ -73,8 +71,6 @@ namespace CoraCorpCM.Web
         {
             // Implemented by Application
             services.AddScoped<IMuseumFactory, MuseumFactory>();
-            services.AddScoped<ICreateAcquisitionCommand, CreateAcquisitionCommand>();
-            services.AddScoped<IAcquisitionRepositoryFacade, AcquisitionRepositoryFacade>();
             services.AddScoped<ICreateArtistCommand, CreateArtistCommand>();
             services.AddScoped<ICreateCollectionCommand, CreateCollectionCommand>();
             services.AddScoped<ICreateFundingSourceCommand, CreateFundingSourceCommand>();
@@ -115,14 +111,12 @@ namespace CoraCorpCM.Web
             services.AddScoped<IGenreFactory, GenreFactory>();
             services.AddScoped<ISubgenreFactory, SubgenreFactory>();
             services.AddScoped<ISubjectMatterFactory, SubjectMatterFactory>();
-            services.AddScoped<IAcquisitionFactory, AcquisitionFactory>();
             services.AddScoped<IFundingSourceFactory, FundingSourceFactory>();
             services.AddScoped<IPieceSourceFactory, PieceSourceFactory>();
             services.AddScoped<ILocationFactory, LocationFactory>();
             services.AddScoped<ICollectionFactory, CollectionFactory>();
             services.AddScoped<ICallbackUrlCreator, CallbackUrlCreator>();
-            services.AddScoped<ICreatePieceViewModelMapper, CreatePieceViewModelMapper>();
-            services.AddScoped<ICreatePieceCommandFacade, CreatePieceCommandFacade>();
+            services.AddScoped<ICreatePieceMapper, CreatePieceMapper>();
 
             // Implemented by Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -145,7 +139,7 @@ namespace CoraCorpCM.Web
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
 
             // Implemented by Common
-            services.AddSingleton<IDateService, DateService>();
+            services.AddSingleton<IDateTimeService, DateTimeService>();
         }
     }
 }
