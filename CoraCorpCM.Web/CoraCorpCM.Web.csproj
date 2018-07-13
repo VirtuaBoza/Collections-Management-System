@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
 
@@ -33,8 +31,4 @@
     <ProjectReference Include="..\CoraCorpCM.Infrastructure\CoraCorpCM.Infrastructure.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Persistence\CoraCorpCM.Persistence.csproj" />
   </ItemGroup>
-
-  <Target Name="RunsWebpackBeforeCompile" BeforeTargets="Build">
-    <Exec Command="npm run webpack" />
-  </Target>
 </Project>

@@ -1,5 +1,4 @@
-﻿using CoraCorpCM.Application.Acquisitions.Commands.CreateAcquisition.Factory;
-using CoraCorpCM.Application.Artists.Commands.CreateArtist.Factory;
+﻿using CoraCorpCM.Application.Artists.Commands.CreateArtist.Factory;
 using CoraCorpCM.Application.Collections.Commands.CreateCollection.Factory;
 using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource.Factory;
 using CoraCorpCM.Application.Genres.Commands.CreateGenre.Factory;
@@ -28,17 +27,6 @@ namespace CoraCorpCM.Application.Tests
 
         Mock<IPieceRepositoryFacade> mockRepo;
         Mock<IDateTimeService> mockDateService;
-        Mock<IPieceFactory> mockPieceFactory;
-        Mock<IArtistFactory> mockArtistFactory;
-        Mock<IMediumFactory> mockMediumFactory;
-        Mock<IGenreFactory> mockGenreFactory;
-        Mock<ISubgenreFactory> mockSubgenreFactory;
-        Mock<ISubjectMatterFactory> mockSubjectMatterFactory;
-        Mock<IAcquisitionFactory> mockAcquisitionFactory;
-        Mock<IFundingSourceFactory> mockFundingSourceFactory;
-        Mock<IPieceSourceFactory> mockPieceSourceFactory;
-        Mock<ILocationFactory> mockLocationFactory;
-        Mock<ICollectionFactory> mockCollectionFactory;
         Mock<IUnitOfWork> mockUnitOfWork;
 
         [TestInitialize]
@@ -49,19 +37,6 @@ namespace CoraCorpCM.Application.Tests
 
             mockDateService = new Mock<IDateTimeService>();
 
-            mockPieceFactory = new Mock<IPieceFactory>();
-            mockPieceFactory.SetReturnsDefault(new Piece());
-
-            mockArtistFactory = new Mock<IArtistFactory>();
-            mockMediumFactory = new Mock<IMediumFactory>();
-            mockGenreFactory = new Mock<IGenreFactory>();
-            mockSubgenreFactory = new Mock<ISubgenreFactory>();
-            mockSubjectMatterFactory = new Mock<ISubjectMatterFactory>();
-            mockAcquisitionFactory = new Mock<IAcquisitionFactory>();
-            mockFundingSourceFactory = new Mock<IFundingSourceFactory>();
-            mockPieceSourceFactory = new Mock<IPieceSourceFactory>();
-            mockLocationFactory = new Mock<ILocationFactory>();
-            mockCollectionFactory = new Mock<ICollectionFactory>();
             mockUnitOfWork = new Mock<IUnitOfWork>();
 
             createPieceModel = new CreatePieceModel();
@@ -69,17 +44,6 @@ namespace CoraCorpCM.Application.Tests
             createPieceCommand = new CreatePieceCommand(
                 mockRepo.Object,
                 mockDateService.Object,
-                mockPieceFactory.Object,
-                mockArtistFactory.Object,
-                mockMediumFactory.Object,
-                mockGenreFactory.Object,
-                mockSubgenreFactory.Object,
-                mockSubjectMatterFactory.Object,
-                mockAcquisitionFactory.Object,
-                mockFundingSourceFactory.Object,
-                mockPieceSourceFactory.Object,
-                mockLocationFactory.Object,
-                mockCollectionFactory.Object,
                 mockUnitOfWork.Object);
         }
 
