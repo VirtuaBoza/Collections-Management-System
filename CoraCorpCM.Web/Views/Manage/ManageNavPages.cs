@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace CoraCorpCM.Web.Views.Manage
+namespace CoraCorpCM.Views.Manage
 {
     public static class ManageNavPages
     {
