@@ -1,6 +1,6 @@
 ﻿using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Domain.Entities;
 using System;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Application.Pieces.Queries
 {

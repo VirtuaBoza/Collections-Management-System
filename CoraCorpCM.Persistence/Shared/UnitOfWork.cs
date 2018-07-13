@@ -11,7 +11,7 @@ namespace CoraCorpCM.Persistence.Shared
             this.context = context;
         }
 
-        public void Save()
+        public void SaveChanges()
         {
             context.Save();
         }

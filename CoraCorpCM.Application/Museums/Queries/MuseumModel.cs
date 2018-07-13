@@ -1,6 +1,4 @@
-﻿using CoraCorpCM.Domain.Entities;
-
-namespace CoraCorpCM.Application.Museums.Queries
+﻿namespace CoraCorpCM.Application.Museums.Queries
 {
     public class MuseumModel
     {

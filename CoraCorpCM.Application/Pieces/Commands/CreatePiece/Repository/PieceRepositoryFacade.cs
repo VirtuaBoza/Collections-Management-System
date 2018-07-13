@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CoraCorpCM.Application.Interfaces.Persistence;
-using CoraCorpCM.Domain.Entities;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository
 {

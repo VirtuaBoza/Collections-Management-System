@@ -1,7 +1,7 @@
 ﻿using CoraCorpCM.Application.Interfaces.Persistence;
+using CoraCorpCM.Application.Models;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository;
 using CoraCorpCM.Common;
-using CoraCorpCM.Domain.Entities;
 
 namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 {
@@ -82,7 +82,7 @@ namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 
             repository.AddPiece(piece);
 
-            unitOfWork.Save();
+            unitOfWork.SaveChanges();
 
             return piece.Id;
         }

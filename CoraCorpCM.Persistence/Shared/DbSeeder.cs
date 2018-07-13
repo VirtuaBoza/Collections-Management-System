@@ -1,8 +1,8 @@
 ﻿using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Domain.Entities;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Persistence.Shared
 {

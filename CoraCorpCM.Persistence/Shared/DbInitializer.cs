@@ -1,5 +1,4 @@
 ﻿using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Persistence.Shared
 {

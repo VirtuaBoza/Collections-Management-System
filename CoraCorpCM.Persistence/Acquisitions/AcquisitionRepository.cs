@@ -1,6 +1,6 @@
 ﻿using CoraCorpCM.Application.Interfaces.Persistence;
+using CoraCorpCM.Application.Models;
 using CoraCorpCM.Persistence.Shared;
-using CoraCorpCM.Domain.Entities;
 
 namespace CoraCorpCM.Persistence.Acquisitions
 {

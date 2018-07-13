@@ -1,5 +1,5 @@
 ﻿using CoraCorpCM.Application.Interfaces.Persistence;
-using CoraCorpCM.Domain.Entities;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Application.Museums.Commands.RemoveMuseum
 {

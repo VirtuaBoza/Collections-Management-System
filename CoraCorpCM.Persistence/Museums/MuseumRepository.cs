@@ -1,8 +1,8 @@
 ﻿using CoraCorpCM.Application.Interfaces.Persistence;
-using CoraCorpCM.Domain.Entities;
 using CoraCorpCM.Persistence.Shared;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Persistence.Museums
 {

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CoraCorpCM.Application.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CoraCorpCM.Domain.Entities;
 using CoraCorpCM.Common.Membership;
 
 namespace CoraCorpCM.Persistence

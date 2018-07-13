@@ -1,4 +1,4 @@
-﻿using CoraCorpCM.Domain.Entities;
+﻿using CoraCorpCM.Application.Models;
 
 namespace CoraCorpCM.Application.Locations.Commands.CreateLocation.Factory
 {

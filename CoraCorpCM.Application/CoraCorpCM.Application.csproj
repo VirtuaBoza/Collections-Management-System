@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoraCorpCM.Common\CoraCorpCM.Common.csproj" />
-    <ProjectReference Include="..\CoraCorpCM.Domain\CoraCorpCM.Domain.csproj" />
   </ItemGroup>
 
 </Project>
