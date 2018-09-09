@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CoraCorpCM.Persistence.Shared;
-using CoraCorpCM.Infrastructure.Email;
 using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Persistence;
+using CoraCorpCM.Infrastructure.Persistence.Contexts;
+using CoraCorpCM.Infrastructure.Persistence.Data;
+using CoraCorpCM.Infrastructure.Services.Email;
 
 namespace CoraCorpCM.Web
 {

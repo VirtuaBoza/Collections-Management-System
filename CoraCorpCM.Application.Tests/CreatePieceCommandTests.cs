@@ -1,18 +1,8 @@
-﻿using CoraCorpCM.Application.Artists.Commands.CreateArtist.Factory;
-using CoraCorpCM.Application.Collections.Commands.CreateCollection.Factory;
-using CoraCorpCM.Application.FundingSources.Commands.CreateFundingSource.Factory;
-using CoraCorpCM.Application.Genres.Commands.CreateGenre.Factory;
+﻿using CoraCorpCM.Application.Interfaces.Infrastructure;
 using CoraCorpCM.Application.Interfaces.Persistence;
-using CoraCorpCM.Application.Locations.Commands.CreateLocation.Factory;
-using CoraCorpCM.Application.Media.Commands.CreateMedium.Factory;
 using CoraCorpCM.Application.Models;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece;
-using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Factory;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository;
-using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource.Factory;
-using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre.Factory;
-using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory;
-using CoraCorpCM.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

@@ -1,7 +1,7 @@
-﻿using CoraCorpCM.Application.Interfaces.Persistence;
+﻿using CoraCorpCM.Application.Interfaces.Infrastructure;
+using CoraCorpCM.Application.Interfaces.Persistence;
 using CoraCorpCM.Application.Models;
 using CoraCorpCM.Application.Pieces.Commands.CreatePiece.Repository;
-using CoraCorpCM.Common;
 
 namespace CoraCorpCM.Application.Pieces.Commands.CreatePiece
 {

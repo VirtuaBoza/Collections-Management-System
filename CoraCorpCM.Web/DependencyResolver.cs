@@ -31,23 +31,8 @@ using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter.Factory
 using CoraCorpCM.Application.SubjectMatters.Queries.GetSubjectMatterList;
 using CoraCorpCM.Application.UnitsOfMeasure.Queries.GetUnitsOfMeasureList;
 using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Common;
-using CoraCorpCM.Persistence.Acquisitions;
-using CoraCorpCM.Persistence.Artists;
-using CoraCorpCM.Persistence.Collections;
-using CoraCorpCM.Persistence.Countries;
-using CoraCorpCM.Persistence.FundingSources;
-using CoraCorpCM.Persistence.Genres;
-using CoraCorpCM.Persistence.Locations;
-using CoraCorpCM.Persistence.Media;
-using CoraCorpCM.Persistence.Museums;
-using CoraCorpCM.Persistence.Pieces;
-using CoraCorpCM.Persistence.PieceSources;
-using CoraCorpCM.Persistence.Shared;
-using CoraCorpCM.Persistence.Subgenres;
-using CoraCorpCM.Persistence.SubjectMatters;
-using CoraCorpCM.Persistence.UnitsOfMeasure;
-using CoraCorpCM.Infrastructure.Email;
+using CoraCorpCM.Infrastructure.Persistence.Repositories;
+using CoraCorpCM.Infrastructure.Services.Email;
 using CoraCorpCM.Web.Services.Account;
 using CoraCorpCM.Web.Services.Collection;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +46,8 @@ using CoraCorpCM.Application.Media.Commands.CreateMedium;
 using CoraCorpCM.Application.PieceSources.Commands.CreatePieceSource;
 using CoraCorpCM.Application.Subgenres.Commands.CreateSubgenre;
 using CoraCorpCM.Application.SubjectMatters.Commands.CreateSubjectMatter;
+using CoraCorpCM.Infrastructure.Persistence.Contexts;
+using CoraCorpCM.Infrastructure.Services;
 using CoraCorpCM.Web.Mappers;
 
 namespace CoraCorpCM.Web

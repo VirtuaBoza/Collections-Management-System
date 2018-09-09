@@ -28,6 +28,5 @@
     <ProjectReference Include="..\CoraCorpCM.Application\CoraCorpCM.Application.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Common\CoraCorpCM.Common.csproj" />
     <ProjectReference Include="..\CoraCorpCM.Infrastructure\CoraCorpCM.Infrastructure.csproj" />
-    <ProjectReference Include="..\CoraCorpCM.Persistence\CoraCorpCM.Persistence.csproj" />
   </ItemGroup>
 </Project>
