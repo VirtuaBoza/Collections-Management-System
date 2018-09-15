@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CoraCorpCM.Common.Membership;
-using CoraCorpCM.Infrastructure.Persistence.Contexts;
-using CoraCorpCM.Infrastructure.Persistence.Data;
-using CoraCorpCM.Infrastructure.Services.Email;
 
 namespace CoraCorpCM.Web
 {
@@ -23,32 +20,13 @@ namespace CoraCorpCM.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options
-            .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                {
-                    // Password settings
-                    options.Password.RequireDigit = false;
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequiredUniqueChars = 0;
-
-                    options.SignIn.RequireConfirmedEmail = true;
-                })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddMvc();
-
-            services.AddTransient<DbInitializer>();
-            services.AddTransient<DbSeeder>();
-
-            DependencyResolver.Resolve(services);
-
-            services.Configure<AuthMessageSenderOptions>(Configuration);
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,40 +34,34 @@ namespace CoraCorpCM.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseAuthentication();
+            app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
-            using (var scope = app.ApplicationServices.CreateScope())
+            app.UseSpa(spa =>
             {
-                var initializer = scope.ServiceProvider.GetService<DbInitializer>();
-                initializer.Initialize().Wait();
-            }
+                spa.Options.SourcePath = "ClientApp";
 
-            if (env.IsDevelopment())
-            {
-                using (var scope = app.ApplicationServices.CreateScope())
+                if (env.IsDevelopment())
                 {
-                    var seeder = scope.ServiceProvider.GetService<DbSeeder>();
-                    seeder.Seed().Wait();
+                    spa.UseReactDevelopmentServer(npmScript: "start");
                 }
-            }
+            });
         }
     }
 }
