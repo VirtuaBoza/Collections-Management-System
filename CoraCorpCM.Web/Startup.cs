@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +9,8 @@ namespace CoraCorpCM.Web
 {
     public class Startup
     {
+        const string spaServerUrl = "http://localhost:3000";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -60,6 +61,10 @@ namespace CoraCorpCM.Web
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
+                    // The above code is commented out and the below code is in
+                    // its place so that I can run just the ASP.NET code from 
+                    // this project and just the client code from npm start.
+                    //spa.UseProxyToSpaDevelopmentServer(spaServerUrl);
                 }
             });
         }
